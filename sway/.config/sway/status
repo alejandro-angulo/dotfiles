@@ -1,0 +1,15 @@
+volume=$(pamixer --get-volume-human)
+
+connected_network=$(iwctl station wlan0 show | awk '/Connected network/{s=""; for(i=3; i<=NF; i++) s = s $i " "; print s}')
+if [ -z "$connected_network" ]; then
+    connection_string="Not connected to any network"
+else
+    connection_string="Connected to ${connected_network}"
+fi
+
+battery_percent=$(cat /sys/class/power_supply/BAT0/capacity)
+battery_status=$(cat /sys/class/power_supply/BAT0/status)
+
+date_formatted=$(date +'%Y-%m-%d %l:%M:%S %p')
+
+echo "Volume: ${volume} | ${connection_string} | ${battery_percent}% (${battery_status}) | ${date_formatted}"
