@@ -6,7 +6,7 @@
     signingkey = D5EBF3BE556933C3
 [core]
 	pager = less -F -X
-	excludefile = /home/alejandro/.gitignore_global
+	excludefile = ~/.config/git/.gitignore_global
 [commit]
 	gpgsign = true
 [gpg]
