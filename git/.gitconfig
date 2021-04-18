@@ -1,0 +1,13 @@
+[pull]
+	rebase = false
+[user]
+	email = iam@alejandr0angul0.dev
+	name = Alejandro Angulo
+    signingkey = D5EBF3BE556933C3
+[core]
+	pager = less -F -X
+	excludefile = /home/alejandro/.gitignore_global
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg2

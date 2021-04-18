@@ -1,0 +1,15 @@
+if pgrep -x "spotify" > /dev/null
+then
+    info="$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata)"
+    echo -n "$(sed -n '/title/{n;p}' <<< $info | cut -d \" -f 2) "
+
+    # Artist info not provided for podcasts
+    artist=$(sed -n '/artist/{n;n;p}' <<< $info | cut -d \" -f 2)
+    if [ ! -z "$artist" -a "$artist" != " " ]; then
+        echo -n "by $(sed -n '/artist/{n;n;p}' <<< $info | cut -d \" -f 2) "
+    fi
+
+    echo "from $(sed -n '/album\"/{n;p}' <<< $info | cut -d \" -f 2)"
+else
+    echo "No music ;("
+fi

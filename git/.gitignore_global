@@ -1,0 +1,6 @@
+# To use this global ignore file run
+# git config --global core.excludesfile $GLOBAL_IGNORE_FILE_PATH
+
+# PyCharm
+.idea/
+

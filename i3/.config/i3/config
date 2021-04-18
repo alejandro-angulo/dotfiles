@@ -1,0 +1,152 @@
+set $mod Mod4
+
+font xft:"Hack Nerd Font" 9
+
+# workspace setup
+workspace "1: q" output "DisplayPort-0-1"
+workspace "9: o" output "DisplayPort-0-8"
+
+# startup
+# exec dropbox &
+exec ~/.screenlayout/office.sh
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id i3-msg 'workspace 1: q; exec /usr/bin/firefox;workspace 9: o; exec /usr/bin/spotify'
+exec --no-startup-id light-locker
+
+new_window pixel 3
+focus_follows_mouse  no
+
+#don't move to neighbouring screen with hjkl
+force_focus_wrapping yes
+
+set $blue #005588
+set $gray1 #484848
+set $gray2 #333333
+
+client.focused            $gray1   $gray1   #FFFFFF   #333333
+client.focused_inactive   $gray2   $gray2   #FFFFFF   #000000
+client.unfocused          $gray2   $gray2   #FFFFFF   #000000
+
+# use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec termite
+
+# kill focused window
+bindsym $mod+c kill
+
+# start dmenu (a program launcher)
+bindsym $mod+p exec "dmenu_run -nb black -p run"
+
+# screen lock
+bindsym Control+$mod+l exec --no-startup-id light-locker-command -l
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# move focused window to scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Cycle through windows in scratchpad
+bindsym $mod+minus scratchpad show
+
+# split in horizontal orientation
+bindsym $mod+v split h
+
+# split in vertical orientation
+bindsym $mod+g split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (tabbed, toggle split)
+bindsym $mod+n layout tabbed
+bindsym $mod+m layout toggle split
+
+# container navigation
+bindsym $mod+d focus parent
+bindsym $mod+b focus child
+
+# move container between displays
+bindsym $mod+semicolon move workspace to output right
+
+# toggle tiling / floating
+bindsym $mod+Shift+f floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# switch to last workspace
+bindsym $mod+6 workspace back_and_forth
+
+# switch to workspace
+bindsym $mod+q workspace 1: q
+bindsym $mod+w workspace 2: w
+bindsym $mod+e workspace 3: e
+bindsym $mod+r workspace 4: r
+bindsym $mod+t workspace 5: t
+bindsym $mod+y workspace 6: y
+bindsym $mod+u workspace 7: u
+bindsym $mod+i workspace 8: i
+bindsym $mod+o workspace 9: o
+
+# move focused container to workspace
+bindsym $mod+Shift+q move container to workspace 1: q
+bindsym $mod+Shift+w move container to workspace 2: w
+bindsym $mod+Shift+e move container to workspace 3: e
+bindsym $mod+Shift+r move container to workspace 4: r
+bindsym $mod+Shift+t move container to workspace 5: t
+bindsym $mod+Shift+y move container to workspace 6: y
+bindsym $mod+Shift+u move container to workspace 7: u
+bindsym $mod+Shift+i move container to workspace 8: i
+bindsym $mod+Shift+o move container to workspace 9: o
+
+bindsym $mod+z reload
+bindsym $mod+Shift+x restart
+bindsym $mod+Shift+z exit
+
+mode "resize" {
+        bindsym h   resize shrink width 10 px or 10 ppt
+        bindsym j   resize grow height 10 px or 10 ppt
+        bindsym k   resize shrink height 10 px or 10 ppt
+        bindsym l   resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or q or ^[
+        bindsym Return mode "default"
+        bindsym q mode "default"
+        bindsym Escape mode "default"
+        bindcode Control+34 mode "default"
+}
+
+bindsym $mod+s mode "resize"
+
+# multimedia keys
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
+bindsym XF86AudioMute exec "amixer sset Master toggle"
+
+bindsym $mod+Down exec ~/.config/i3/spotify_controller.sh PlayPause
+bindsym $mod+Up exec ~/.config/i3/spotify_controller.sh PlayPause
+bindsym $mod+Right exec ~/.config/i3/spotify_controller.sh Next
+bindsym $mod+Left exec ~/.config/i3/spotify_controller.sh Previous
+
+bar {
+        position top
+        status_command ~/.config/i3/conky
+        colors { 
+                statusline #AAAAAA
+                background #333333
+                focused_workspace $gray2 $gray2 #FFFFFF
+                inactive_workspace $gray1 $gray1 #AAAAAA
+        }
+}
