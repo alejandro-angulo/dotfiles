@@ -16,3 +16,6 @@
 [submodule "zsh/.config/zsh/custom/plugins/zsh-autosuggestions"]
 	path = zsh/.config/zsh/custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "zsh/.config/zsh/antigen"]
+	path = zsh/.config/zsh/antigen
+	url = https://github.com/zsh-users/antigen.git
