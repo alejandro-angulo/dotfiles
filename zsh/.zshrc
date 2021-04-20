@@ -7,6 +7,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/ohmyzsh"
+export ZSH_CUSTOM="${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/custom"
 
 export EDITOR='vim'
 
@@ -25,7 +26,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-source $HOME/.config/zsh/antigen/antigen.zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/antigen/antigen.zsh"
 
 antigen use oh-my-zsh
 
@@ -35,11 +36,12 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen bundle romkatv/powerlevel10k
-
 antigen theme romkatv/powerlevel10k
 
-antigen apply
+for plugin in "${ZSH_CUSTOM}"/customrc/*; do
+    [ -e "$plugin" ] || continue
+    antigen bundle "${ZSH_CUSTOM}/plugins/$(basename $plugin)"
+done
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
+antigen apply
 
