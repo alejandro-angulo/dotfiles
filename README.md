@@ -20,6 +20,8 @@ Optionally stow the following:
 - `stow sway` - Used for my laptop setup
 - `stow termite` - Used on my personal machines
 - `stow xprofile` - Used for my desktop setup
+- `stow direnv` - Use if direnv is installed
+- `stow direnv-poetry` - Use if direnv and poetry are both installed
 
 ### tmux
 

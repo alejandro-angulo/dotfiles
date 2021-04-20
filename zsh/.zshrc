@@ -31,6 +31,7 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/antigen/antigen.zsh"
 antigen use oh-my-zsh
 
 antigen bundle git
+antigen bundle pyenv
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
