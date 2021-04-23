@@ -1,13 +1,24 @@
 [pull]
 	rebase = false
+
 [user]
 	email = iam@alejandr0angul0.dev
 	name = Alejandro Angulo
     signingkey = D5EBF3BE556933C3
+
 [core]
 	pager = less -F -X
-	excludefile = ~/.config/git/.gitignore_global
+	excludesfile = ~/.config/git/global_ignore
+
 [commit]
 	gpgsign = true
+
+[tag]
+	gpgSign = true
+
 [gpg]
 	program = gpg2
+
+[alias]
+    lol = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    pushup = push -u origin HEAD
