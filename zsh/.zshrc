@@ -35,6 +35,7 @@ antigen bundle pyenv
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle vi-mode
 
 antigen bundle romkatv/powerlevel10k
 antigen theme romkatv/powerlevel10k
