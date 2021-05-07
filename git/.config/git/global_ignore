@@ -4,5 +4,8 @@
 # PyCharm
 .idea/
 
+# Vim artifacts
+*.swp
+
 tags
 
