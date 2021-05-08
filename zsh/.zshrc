@@ -47,3 +47,10 @@ done
 
 antigen apply
 
+# Automatically start and stop tmux on ssh connections
+if [ -z "$TMUX" ] && [ -n "$SSH_TTY" ]; then
+    # NOTE: Only works in interactive shells (since .zshrc is used for interactive shells)
+    tmux new-session -A ssh_tmux
+    exit
+fi
+
