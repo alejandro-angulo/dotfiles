@@ -106,15 +106,15 @@ _powerline_init_modes_support() {
 }
 
 _powerline_set_jobnum() {
-	# If you are wondering why I am not using the same code as I use for bash 
+	# If you are wondering why I am not using the same code as I use for bash
 	# ($(jobs|wc -l)): consider the following test:
 	#     echo abc | less
 	#     <C-z>
 	# . This way jobs will print
 	#     [1]  + done       echo abc |
 	#            suspended  less -M
-	# ([ is in first column). You see: any line counting thingie will return 
-	# wrong number of jobs. You need to filter the lines first. Or not use 
+	# ([ is in first column). You see: any line counting thingie will return
+	# wrong number of jobs. You need to filter the lines first. Or not use
 	# jobs built-in at all.
 	integer -g _POWERLINE_JOBNUM=${(%):-%j}
 }
@@ -187,7 +187,7 @@ _powerline_add_widget() {
 			save_widget="${save_widget}_$i"
 			(( i++ ))
 		done
-		# If widget was defined with `zle -N widget` (without `function` 
+		# If widget was defined with `zle -N widget` (without `function`
 		# argument) then this function will be handy.
 		eval "function $save_widget() { emulate -L zsh; $widget \$@ }"
 		eval "${old_widget_command/$widget/$save_widget}"

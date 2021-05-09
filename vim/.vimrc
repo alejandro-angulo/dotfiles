@@ -100,4 +100,3 @@ nnoremap <C-f> :NERDTreeFind<CR>
 
 " Project-specific config
 silent! so .vimlocal
-

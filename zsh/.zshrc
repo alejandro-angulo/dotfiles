@@ -61,4 +61,3 @@ if [ -z "$TMUX" ] && [ -n "$SSH_TTY" ]; then
     esac
     exit
 fi
-

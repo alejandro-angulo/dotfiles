@@ -143,7 +143,7 @@ bindsym $mod+Left exec ~/.config/i3/music_controller.sh Previous
 bar {
         position top
         status_command ~/.config/i3/conky
-        colors { 
+        colors {
                 statusline #AAAAAA
                 background #333333
                 focused_workspace $gray2 $gray2 #FFFFFF

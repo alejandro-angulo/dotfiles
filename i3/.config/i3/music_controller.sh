@@ -40,4 +40,3 @@ if [[ -n "$action" ]]; then
         /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player."$action"
     exit $?
 fi
-
