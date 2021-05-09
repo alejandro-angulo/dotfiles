@@ -135,10 +135,10 @@ bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
 bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
 bindsym XF86AudioMute exec "amixer sset Master toggle"
 
-bindsym $mod+Down exec ~/.config/i3/spotify_controller.sh PlayPause
-bindsym $mod+Up exec ~/.config/i3/spotify_controller.sh PlayPause
-bindsym $mod+Right exec ~/.config/i3/spotify_controller.sh Next
-bindsym $mod+Left exec ~/.config/i3/spotify_controller.sh Previous
+bindsym $mod+Down exec ~/.config/i3/music_controller.sh Pause
+bindsym $mod+Up exec ~/.config/i3/music_controller.sh Play
+bindsym $mod+Right exec ~/.config/i3/music_controller.sh Next
+bindsym $mod+Left exec ~/.config/i3/music_controller.sh Previous
 
 bar {
         position top

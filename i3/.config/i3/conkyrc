@@ -15,7 +15,7 @@ conky.text = [[
 ,[{"full_text": " ❤ $acpitemp°C [$cpu%] ","color": "\#DC322F"},
   {"full_text": " ≣ [$membar] ", "color":"\#B58900"},
   {"full_text": " 直 ${wireless_essid wlan0} ", "color":"\#8F4673"},
-  {"full_text": " ▶ ${exec ~/.config/i3/spotify} ", "color":"\#3F7FBF"},
+  {"full_text": " ▶ ${exec ~/.config/i3/currently_playing.sh} ", "color":"\#3F7FBF"},
   {"full_text": " ${time %a %d %b} ${time %I:%M} "}
 ]
 ]];

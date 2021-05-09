@@ -4,7 +4,7 @@ me=$(basename "$0")
 player='spotifyd'
 
 display_usage() {
-    echo 'This script controls music via dbus'
+    echo 'This script controls Spotify via dbus'
     echo ''
     echo 'USAGE:'
     echo -e "\t$me [-h] [-p player] Play|Pause|PlayPause|Previous|Next"
