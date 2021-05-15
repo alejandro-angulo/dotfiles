@@ -49,8 +49,16 @@ antigen apply
 
 # Automatically start and stop tmux on ssh connections
 if [ -z "$TMUX" ] && [ -n "$SSH_TTY" ]; then
-    # NOTE: Only works in interactive shells (since .zshrc is used for interactive shells)
-    tmux new-session -A ssh_tmux
+    tmux_major=$(tmux -V | sed -e 's/tmux \([0-9]\).*/\1/')
+    case $tmux_major in
+        2)
+            tmux -f ~/.config/tmux/tmux.conf attach-session -t ssh_tmux \
+                || tmux -f ~/.config/tmux/tmux.conf new-session -s ssh_tmux
+            ;;
+        3)
+            tmux new-session -A ssh_tmux
+            ;;
+    esac
     exit
 fi
 
