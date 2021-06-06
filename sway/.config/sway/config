@@ -108,6 +108,9 @@ exec swayidle -w \
     # Reload the configuration file
     bindsym $mod+z reload
 
+    # Screen lock:
+    bindsym Control+$mod+l exec "swaylock -f -c 000000"
+
     # Multimedia keys
     bindsym XF86AudioRaiseVolume exec "pamixer --increase 5"
     bindsym XF86AudioLowerVolume exec "pamixer --decrease 5"
