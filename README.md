@@ -16,8 +16,9 @@ after pulling in case any new submodules were added.
 Optionally stow the following:
 
 - `stow asoundrc` - Used for my desktop setup
-- `stow i3` - Used for my desktop setup
-- `stow sway` - Used for my laptop setup
+- `stow i3` - Used for my desktop setup (not used anymore but kept for
+  reference)
+- `stow sway` - Used on my personal machones
 - `stow termite` - Used on my personal machines
 - `stow xprofile` - Used for my desktop setup
 - `stow direnv` - Use if direnv is installed
@@ -35,3 +36,4 @@ tmux session and hit <kbd>prefix</kbd> then <kbd>Ctrl</kbd> + <kbd>I</kbd>
 Need to install plugins, use `vim +PluginInstall +qall`. May see an error about
 being unable to find a color scheme but this should be resolved after
 installing plugins.
+
