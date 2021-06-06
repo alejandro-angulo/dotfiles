@@ -46,4 +46,3 @@ for plugin in "${ZSH_CUSTOM}"/customrc/*; do
 done
 
 antigen apply
-

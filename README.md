@@ -36,4 +36,3 @@ tmux session and hit <kbd>prefix</kbd> then <kbd>Ctrl</kbd> + <kbd>I</kbd>
 Need to install plugins, use `vim +PluginInstall +qall`. May see an error about
 being unable to find a color scheme but this should be resolved after
 installing plugins.
-

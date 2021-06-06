@@ -82,7 +82,7 @@ exec swayidle -w \
 # Read `man 5 sway-input` for more information about this section.
 
 ### Startup
-# Don't start anything up here but I usually run gammastep and mako 
+# Don't start anything up here but I usually run gammastep and mako
 # systemctl --user enable --now gammastep mako
 
 ### Key bindings
