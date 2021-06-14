@@ -39,6 +39,9 @@ Plugin 'fatih/vim-go'
 
 " tmux Integration
 Plugin 'christoomey/vim-tmux-navigator'
+
+" tag management
+Plugin 'ludovicchabant/vim-gutentags'
 call vundle#end()
 filetype plugin indent on
 
