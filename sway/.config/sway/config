@@ -22,7 +22,6 @@ set $menu bemenu-run --tf '#a16946' --hf '#a1b56c' | xargs swaymsg exec --
 # Colors
 set $gray1 #484848
 set $gray2 #333333
-set $gray3 #AAAAAA
 set $white #FFFFFF
 set $black #000000
 

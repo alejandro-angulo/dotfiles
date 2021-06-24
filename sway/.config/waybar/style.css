@@ -1,7 +1,6 @@
 * {
     border: none;
     border-radius: 0;
-    /* `otf-font-awesome` is required to be installed for icons */
     font-family: "Hack Nerd Font";
     font-size: 12px;
     min-height: 0;
@@ -22,7 +21,7 @@ window#waybar.hidden {
 #workspaces button {
     padding: 0 10px;
     background-color: transparent;
-    color: #ffffff;
+    color: #a8a8a8;
     border-bottom: 3px solid transparent;
 }
 
@@ -34,6 +33,11 @@ window#waybar.hidden {
 }
 
 #workspaces button.focused {
+    color: #ffffff;
+    border-bottom: 3px solid #a8a8a8;
+}
+
+#workspaces button.current_output.focused {
     background-color: #64727D;
     border-bottom: 3px solid #ffffff;
 }
@@ -82,7 +86,6 @@ window#waybar.hidden {
 
 #battery.critical:not(.charging),
 #temperature.critical {
-    /*background-color: #f53c3c;*/
     color: #c36663;
     animation-name: blink;
     animation-duration: 0.5s;
