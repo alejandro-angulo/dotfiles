@@ -42,6 +42,9 @@ Plugin 'christoomey/vim-tmux-navigator'
 
 " tag management
 Plugin 'ludovicchabant/vim-gutentags'
+
+" linting
+Plugin 'dense-analysis/ale'
 call vundle#end()
 filetype plugin indent on
 
