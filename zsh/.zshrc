@@ -54,9 +54,8 @@ antigen bundle vi-mode
 antigen bundle romkatv/powerlevel10k
 antigen theme romkatv/powerlevel10k
 
-for plugin in "${ZSH_CUSTOM}"/customrc/*; do
-    [ -e "$plugin" ] || continue
-    antigen bundle "${ZSH_CUSTOM}/plugins/$(basename $plugin)"
+for plugin in "${ZSH_CUSTOM}"/plugins/*; do
+    antigen bundle "${plugin}"
 done
 
 antigen apply
