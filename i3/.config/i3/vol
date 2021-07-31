@@ -1,1 +1,0 @@
-amixer -D pulse | egrep -m 1 -o 'Front Left.*\[([0-9]{1,3})%' | cut -d "[" -f2

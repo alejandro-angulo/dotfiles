@@ -2,27 +2,25 @@
 
 ## Usage
 
-Make sure you have `stow` installed and run the following
+Make sure you have [`stow`](https://www.gnu.org/software/stow/) installed and
+install the desired configurations using `stow -t ~ <configuration>`
 
-```bash
-git clone --recurse-submodules https://github.com/alejandro-angulo/dotfiles
-cd dotfiles
-stow base16-shell git termite vim tmux zsh
-```
+## Configurations
 
-If this repo is already cloned, remember to run `git submodule update --init`
-after pulling in case any new submodules were added.
-
-Optionally stow the following:
-
-- `stow asoundrc` - Used for my desktop setup
-- `stow i3` - Used for my desktop setup (not used anymore but kept for
-  reference)
-- `stow sway` - Used on my personal machones
-- `stow termite` - Used on my personal machines
-- `stow xprofile` - Used for my desktop setup
-- `stow direnv` - Use if direnv is installed
-- `stow direnv-poetry` - Use if direnv and poetry are both installed
+| Configuration   | Description                                    |
+| --------------- | ---------------------------------------------- |
+| `alacritty`     | terminal                                       |
+| `base16-shell`  | color scheme                                   |
+| `direnv-poetry` | direnv integration with poetry package manager |
+| `direnv-zsh`    | direnv integration with zsh                    |
+| `git`           | git (self-explanatory)                         |
+| `lsd-zsh`       | ls deluxe integration with zsh                 |
+| `mako`          | notification daemon                            |
+| `spotify-tui`   | terminal spotify client                        |
+| `sway`          | window manager                                 |
+| `tmux`          | terminal multiplexer                           |
+| `vim`           | text editor                                    |
+| `zsh`           | z shell                                        |
 
 ### tmux
 
