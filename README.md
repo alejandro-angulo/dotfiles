@@ -5,6 +5,10 @@
 Make sure you have [`stow`](https://www.gnu.org/software/stow/) installed and
 install the desired configurations using `stow -t ~ <configuration>`
 
+**NOTE** Make sure to install submodules. Either pass `--recurse-submodules` to
+your clone command or run `git submodule init && git submodule update` after
+the repo is already cloned.
+
 ## Configurations
 
 | Configuration   | Description                                    |
