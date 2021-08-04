@@ -34,16 +34,16 @@ Plugin 'preservim/nerdcommenter'
 " Navigate Code
 Plugin 'preservim/nerdtree'
 
-" Golang
-Plugin 'fatih/vim-go'
-
 " tmux Integration
 Plugin 'christoomey/vim-tmux-navigator'
 
 " tag management
 Plugin 'ludovicchabant/vim-gutentags'
 
-" linting
+" debugging
+Plugin 'puremourning/vimspector'
+
+" linting/fixing
 Plugin 'dense-analysis/ale'
 call vundle#end()
 filetype plugin indent on
@@ -103,6 +103,26 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+let g:NERDTreeQuitOnOpen = 1
+
+" vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_enable_gadgets = ['debugpy', 'CodeLLDB']
+let g:vimspector_base_dir = expand('$HOME/.vim/bundle/vimspector')
+
+nmap <Leader>di <Plug>VimspectorBalloonEval
+xmap <Leader>di <Plug>VimspectorBalloonEval
+
+" fzf
+nnoremap <C-P> :Files<CR>
+nnoremap <C-G> :Rg<CR>
+
+" ALE
+nnoremap <C-;> :ALEFix<CR>
+
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitepace']}
+let g:ale_fix_on_save = 1
 
 " Project-specific config
 silent! so .vimlocal
