@@ -63,6 +63,7 @@ autocmd Filetype make setlocal noexpandtab
 " airline
 let g:airline_theme='base16_vim'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
 
 " Colorscheme
 if filereadable(expand("~/.vimrc_background"))
@@ -121,7 +122,7 @@ nnoremap <C-G> :Rg<CR>
 " ALE
 nnoremap <C-;> :ALEFix<CR>
 
-let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitepace']}
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_fix_on_save = 1
 
 " Project-specific config
