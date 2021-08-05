@@ -9,9 +9,9 @@ theme:
   hint: Yellow # hint text in errors
   hovered: Red # hovered pane border
   inactive: DarkGray # borders of inactive panes
-  playbar_background: DarkGray # background of progress bar
-  playbar_progress: Yellow # filled-in part of the progress bar
-  playbar_progress_text: Yellow # song length and time played/left indicator in the progress bar
+  playbar_background: Yellow # background of progress bar
+  playbar_progress: DarkGray # filled-in part of the progress bar
+  playbar_progress_text: DarkGray # song length and time played/left indicator in the progress bar
   playbar_text: Reset # artist name in player pane
   selected: White # a) selected pane border, b) hovered item in list, & c) track title in player
   text: Reset # text in panes
