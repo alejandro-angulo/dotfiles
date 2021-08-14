@@ -1,24 +1,39 @@
 [pull]
-	rebase = false
+    rebase = false
 
 [user]
-	email = iam@alejandr0angul0.dev
-	name = Alejandro Angulo
-    signingkey = D5EBF3BE556933C3
+    email = iam@alejandr0angul0.dev
+    name = Alejandro Angulo
+    signingKey = 76FE5C53
 
 [core]
-	pager = less -F -X
-	excludesfile = ~/.config/git/global_ignore
+    pager = less -F -X
+    excludesfile = ~/.config/git/global_ignore
 
 [commit]
-	gpgsign = true
+    gpgsign = true
 
 [tag]
-	gpgSign = true
+    gpgSign = true
 
 [gpg]
-	program = gpg2
+    program = gpg2
 
 [alias]
     lol = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     pushup = push -u origin HEAD
+
+[pager]
+    diff = "pre=$(which delta 2>/dev/null); if [ $? -eq '0' ]; then $pre; else less; fi"
+    log = "pre=$(which delta 2>/dev/null); if [ $? -eq '0' ]; then $pre; else less; fi"
+    reflog = "pre=$(which delta 2>/dev/null); if [ $? -eq '0' ]; then $pre; else less; fi"
+    show = "pre=$(which delta 2>/dev/null); if [ $? -eq '0' ]; then $pre; else less; fi"
+
+[delta]
+    plus-style = "syntax #012800"
+    minus-style = "syntax #340001"
+    syntax-theme = Monokai Extended
+    navigate = true
+
+[interactive]
+    diffFilter = "pre=$(which delta 2>/dev/null); if [ $? -eq '0' ]; then $pre --color-only; else less; fi"
