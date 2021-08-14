@@ -6,5 +6,9 @@
 
 # Vim artifacts
 *.swp
-
 tags
+.vimspector.json
+.vimlocal
+
+# direnv
+.envrc

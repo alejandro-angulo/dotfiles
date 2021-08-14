@@ -1,14 +1,18 @@
 set tabstop=4
 set shiftwidth=4
 set mouse=a
+set ttymouse=sgr
+set mousemodel=popup_setpos
 set updatetime=100
 set expandtab
 set number
 set autoindent
-set tags=tags;/
 set laststatus=2
-filetype plugin on
 syntax on
+
+" ALE (need to happen before ALE loaded)
+let g:ale_completion_autoimport = 1
+let g:ale_set_ballons = 1
 
 " Run :PluginInstall to install plugins
 set nocompatible
@@ -36,9 +40,6 @@ Plugin 'preservim/nerdtree'
 
 " tmux Integration
 Plugin 'christoomey/vim-tmux-navigator'
-
-" tag management
-Plugin 'ludovicchabant/vim-gutentags'
 
 " debugging
 Plugin 'puremourning/vimspector'
@@ -120,10 +121,13 @@ nnoremap <C-P> :Files<CR>
 nnoremap <C-G> :Rg<CR>
 
 " ALE
-nnoremap <C-;> :ALEFix<CR>
+nnoremap <Leader>fix :ALEFix<CR>
+nnoremap <Leader>def :ALEGoToDefinition<CR>
+nnoremap <Leader>ref :ALEFindReferences<CR>
 
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_fix_on_save = 1
+set omnifunc=ale#completion#OmniFunc
 
 " Project-specific config
 silent! so .vimlocal
