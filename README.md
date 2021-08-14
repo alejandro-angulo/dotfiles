@@ -26,6 +26,12 @@ the repo is already cloned.
 | `vim`           | text editor                                    |
 | `zsh`           | z shell                                        |
 
+### git
+
+The git configuration includes integration with
+[delta](https://github.com/dandavison/delta). As long a delta is available in
+`$PATH`, it should just work without any extra configuration.
+
 ### tmux
 
 I had to manually run `tmux source-file ~/.config/tmux/tmux.conf` to get the
