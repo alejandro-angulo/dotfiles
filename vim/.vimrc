@@ -8,6 +8,7 @@ set expandtab
 set number
 set autoindent
 set laststatus=2
+set encoding=utf-8
 syntax on
 
 " ALE (need to happen before ALE loaded)
@@ -23,6 +24,7 @@ call vundle#begin()
 Plugin 'chriskempson/base16-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ryanoasis/vim-devicons'
 
 " Git Integration
 Plugin 'airblade/vim-gitgutter'
