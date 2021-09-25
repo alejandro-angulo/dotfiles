@@ -20,6 +20,7 @@ the repo is already cloned.
 | `git`           | git (self-explanatory)                         |
 | `lsd-zsh`       | ls deluxe integration with zsh                 |
 | `mako`          | notification daemon                            |
+| `ranger`        | terminal file manager                          |
 | `spotify-tui`   | terminal spotify client                        |
 | `sway`          | window manager                                 |
 | `tmux`          | terminal multiplexer                           |
