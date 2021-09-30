@@ -12,6 +12,7 @@ set encoding=utf-8
 syntax on
 
 " ALE (need to happen before ALE loaded)
+let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 let g:ale_set_ballons = 1
 
@@ -21,7 +22,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " Eye Candy
-Plugin 'chriskempson/base16-vim'
+Plugin 'fnune/base16-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ryanoasis/vim-devicons'
@@ -51,13 +52,7 @@ Plugin 'dense-analysis/ale'
 call vundle#end()
 filetype plugin indent on
 
-" Toggle NERDTree
-nmap <silent> <C-D> :NERDTreeToggle<CR>
-
-" Toggle Tagbar
-nnoremap <silent> <leader>b :TagbarToggle<CR>
-
-" Turn of highlighting (until next search)
+" Turn off highlighting (until next search)
 nnoremap <silent> <C-L> :noh<CR><C-L>
 
 " Use tabs for makefile
@@ -70,8 +65,9 @@ let g:airline#extensions#ale#enabled = 1
 
 " Colorscheme
 if filereadable(expand("~/.vimrc_background"))
+  set background=dark
   let base16colorspace=256
-    source ~/.vimrc_background
+  source ~/.vimrc_background
 endif
 
 " Easier split navigation
