@@ -105,6 +105,7 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeShowHidden = 1
 
 " vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
