@@ -49,6 +49,9 @@ Plugin 'puremourning/vimspector'
 
 " linting/fixing
 Plugin 'dense-analysis/ale'
+
+" extra syntax highlighting
+Plugin 'cespare/vim-toml'
 call vundle#end()
 filetype plugin indent on
 
