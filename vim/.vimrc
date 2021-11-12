@@ -26,6 +26,7 @@ Plugin 'fnune/base16-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'edkolev/tmuxline.vim'
 
 " Git Integration
 Plugin 'airblade/vim-gitgutter'
@@ -64,6 +65,7 @@ autocmd Filetype make setlocal noexpandtab
 " airline
 let g:airline_theme='base16_vim'
 let g:airline_powerline_fonts = 1
+let g:airline_base16_monotone = 1
 let g:airline#extensions#ale#enabled = 1
 
 " Colorscheme
