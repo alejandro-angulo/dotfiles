@@ -24,10 +24,10 @@
     pushup = push -u origin HEAD
 
 [pager]
-    diff = "pre=$(which delta 2>/dev/null); if [ $? -eq '0' ]; then $pre; else less; fi"
-    log = "pre=$(which delta 2>/dev/null); if [ $? -eq '0' ]; then $pre; else less; fi"
-    reflog = "pre=$(which delta 2>/dev/null); if [ $? -eq '0' ]; then $pre; else less; fi"
-    show = "pre=$(which delta 2>/dev/null); if [ $? -eq '0' ]; then $pre; else less; fi"
+    diff = "$(which delta 2>/dev/null) | less"
+    log = "$(which delta 2>/dev/null) | less"
+    reflog = "$(which delta 2>/dev/null) | less"
+    show = "$(which delta 2>/dev/null) | less"
 
 [delta]
     plus-style = "syntax #012800"
@@ -36,4 +36,4 @@
     navigate = true
 
 [interactive]
-    diffFilter = "pre=$(which delta 2>/dev/null); if [ $? -eq '0' ]; then $pre --color-only; else less; fi"
+    diffFilter = "$(which delta 2>/dev/null) --color-only | less"
