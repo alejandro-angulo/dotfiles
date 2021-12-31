@@ -23,6 +23,8 @@ the repo is already cloned.
 | `ranger`        | terminal file manager                          |
 | `spotify-tui`   | terminal spotify client                        |
 | `sway`          | window manager                                 |
+| `sway-carbon`   | sway config specific to my desktop's config    |
+| `sway-gospel`   | sway config specific to my laptop's config     |
 | `tmux`          | terminal multiplexer                           |
 | `vim`           | text editor                                    |
 | `zsh`           | z shell                                        |
