@@ -4,3 +4,6 @@
 output "Dell Inc. DELL U2415 CFV9N92A0NWU" transform 90 position 1920 410
 # Left monitor
 output "Dell Inc. DELL U2415 CFV9N92A0P3U" position 0 810
+
+# Override Lock screen
+bindsym $mod+x exec 'hue-cli lights --id 1 --off; swaylock -c 000000; hue-cli lights --id 1 --on'

@@ -248,11 +248,13 @@ bindsym $mod+Shift+z $nag -t warning -m 'You pressed the exit shortcut. Do you r
 
 swaynag_command $nag -R
 
+# Lock screen
+bindsym $mod+x exec swaylock -f -c 000000
+
 #
 # Misc:
 #
 focus_follows_mouse no
-# font pango:"Liberation Serif" Regular 9
 font pango:"Hack Nerd Font" Regular 9
 
 #
