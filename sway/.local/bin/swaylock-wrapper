@@ -6,13 +6,19 @@
 #
 # Set the `DRY_RUN` variable to see the comamnd that will be ran instead of
 # actually running the command (DRY_RUN=1 swaylock).
+#
+# Depends on gammastep: https://gitlab.com/chinstrap/gammastep
 
 HOST=$(cat /etc/hostname)
 CMD="swaylock $*"
 
 if [[ "$HOST" == "gospel" ]]; then
-    # Requires that swaylock was first called with the `-f` flag set.
-    CMD="hue-cli lights --id 1 --off; ${CMD}; hue-cli lights --id 1 --on"
+    # WARNING: Will not work correctly if `-f` flag is set.
+    PERIOD=$(gammastep -p 2>&1 /dev/null | rg Period: | awk '{ print $3 }')
+    if [[ "$PERIOD" != "Daytime" ]]; then
+        # Don't bother toggling the light if it's not dark out.
+        CMD="hue-cli lights --id 1 --off; ${CMD}; hue-cli lights --id 1 --on"
+    fi
 fi
 
 if [[ -z "$DRY_RUN" ]]; then
