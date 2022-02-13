@@ -45,10 +45,10 @@ client.unfocused        $gray1    $gray2    $white    $black
 #
 # Example configuration:
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 300 'swaylock-wrapper -c 000000' \
          timeout 600 'swaymsg "output * dpms off"' \
          resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep 'swaylock-wrapper -c 000000'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -249,7 +249,7 @@ bindsym $mod+Shift+z $nag -t warning -m 'You pressed the exit shortcut. Do you r
 swaynag_command $nag -R
 
 # Lock screen
-bindsym $mod+x exec swaylock -f -c 000000
+bindsym $mod+x exec swaylock-wrapper -c 000000
 
 #
 # Misc:
