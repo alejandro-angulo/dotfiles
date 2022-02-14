@@ -10,19 +10,38 @@
 # Depends on gammastep: https://gitlab.com/chinstrap/gammastep
 
 HOST=$(cat /etc/hostname)
-CMD="swaylock $*"
+LOCK_CMD="swaylock $*"
+
+run_if_not_dry_run () {
+    if [[ -z "$DRY_RUN" ]]; then
+        sh -c "$1"
+    else
+        echo "$1"
+    fi
+}
 
 if [[ "$HOST" == "gospel" ]]; then
     # WARNING: Will not work correctly if `-f` flag is set.
-    PERIOD=$(gammastep -p 2>&1 /dev/null | rg Period: | awk '{ print $3 }')
-    if [[ "$PERIOD" != "Daytime" ]]; then
-        # Don't bother toggling the light if it's not dark out.
-        CMD="hue-cli lights --id 1 --off; ${CMD}; hue-cli lights --id 1 --on"
-    fi
-fi
+    PRE_CMD="hue-cli lights --id 1 --off"
+    POST_CMD="hue-cli lights --id 1 --on"
+    PERIOD=""
 
-if [[ -z "$DRY_RUN" ]]; then
-    sh -c "$CMD"
+    update_period () {
+        PERIOD="$(gammastep -p 2>&1 /dev/null | rg Period: | awk '{ print $3 }')"
+    }
+
+    update_light () {
+        # Expects 1 parameter which should be the command to update the light
+        update_period
+        if [[ "$PERIOD" != "Daytime" ]]; then
+            # Don't bother toggling the light if it's not dark out.
+            run_if_not_dry_run "$1"
+        fi
+    }
+
+    update_light "$PRE_CMD"
+    run_if_not_dry_run "$LOCK_CMD"
+    update_light "$POST_CMD"
 else
-    echo "$CMD"
+    run_if_not_dry_run "$LOCK_CMD"
 fi
