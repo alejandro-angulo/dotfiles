@@ -1,8 +1,18 @@
 {
-    "height": 37, // Waybar height (to be removed for auto height)
-    "modules-left": ["sway/workspaces", "custom/media"],
+    "height": 20, // Waybar height (to be removed for auto height)
+    "modules-left": ["sway/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["idle_inhibitor", "sway/language", "pulseaudio", "backlight", "battery", "network", "tray"],
+    "modules-right": [
+        "idle_inhibitor",
+        "temperature",
+        "cpu",
+        "pulseaudio",
+        "battery",
+        "memory",
+        "backlight",
+        "network",
+        "tray"
+    ],
 
     // Modules configuration
      "sway/workspaces": {
@@ -104,22 +114,4 @@
         "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
         "on-click-middle": "pavucontrol"
     },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": " ",
-            "default": " "
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
-        "on-click": "playerctl play-pause",
-    },
-    "custom/fans": {
-        "format": "{}",
-        "exec": "$HOME/.config/waybar/fans.sh",
-        "escape": true,
-        "restart-interval": 10,
-    }
 }
