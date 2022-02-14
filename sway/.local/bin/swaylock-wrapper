@@ -5,7 +5,7 @@
 # Relies on hostname to differentiate devices.
 #
 # Set the `DRY_RUN` variable to see the comamnd that will be ran instead of
-# actually running the command (DRY_RUN=1 swaylock).
+# actually running the command (DRY_RUN=1 swaylock-wrapper).
 #
 # Depends on gammastep: https://gitlab.com/chinstrap/gammastep
 
