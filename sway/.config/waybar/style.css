@@ -95,20 +95,20 @@ window#waybar.hidden {
 }
 
 @keyframes blink {
-    to {
-        background-color: #1f321c;
-        color: #ffffaf;
-    }
+  to {
+    background-color: #1f321c;
+    color: #ffffaf;
+  }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #afaf00;
-    color: #303030;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: #afaf00;
+  color: #303030;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #pulseaudio {
