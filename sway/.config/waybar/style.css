@@ -1,12 +1,12 @@
 * {
   border: none;
   font-family: Hack Nerd Font, sans-serif;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 window#waybar {
-  background-color: #1d2021;
-  border-bottom: 3px solid #1e222a;
+  background-color: rgba(29, 32, 33, 0.9);
+  border-bottom: 3px solid #1d2021;
   color: #ffffdf;
   transition-property: background-color;
   transition-duration: .5s;
@@ -31,7 +31,7 @@ window#waybar.hidden {
 #tray {
   background-color: #303030;
   padding: 0 10px;
-  margin: 2px 4px 5px 4px;
+  margin: 3px;
   border: 3px solid rgba(0, 0, 0, 0);
   border-radius: 90px;
   background-clip: padding-box;
