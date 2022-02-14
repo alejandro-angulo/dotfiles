@@ -1,4 +1,10 @@
 font=pango:"Hack Nerd Font" Regular 9
-background-color=#484848
-border-color=#000000
-text-color=#FFFFFF
+
+background-color=#1D202196
+border-color=#1C1C1C
+text-color=#FFFFDF
+
+border-radius=10
+padding=10
+
+default-timeout=5000
