@@ -125,7 +125,7 @@ nmap <Leader>di <Plug>VimspectorBalloonEval
 xmap <Leader>di <Plug>VimspectorBalloonEval
 
 " fzf
-nnoremap <C-P> :Files<CR>
+nnoremap <C-P> :GFiles<CR>
 nnoremap <C-G> :Rg<CR>
 
 " ALE
