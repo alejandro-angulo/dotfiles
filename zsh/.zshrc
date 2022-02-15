@@ -14,6 +14,14 @@ export EDITOR='vim'
 # Make git play nice with pinentry
 export GPG_TTY=${TTY}
 
+# Capture hidden files with fzf
+if rg 2>/dev/null; then
+    # Use rg if available
+    export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+else
+    export FZF_DEFAULT_COMMAND='find .'
+fi
+
 alias view="vim -R $1"
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
