@@ -4,3 +4,8 @@
 output "Dell Inc. DELL U2415 CFV9N92A0NWU" transform 90 position 1920 410
 # Left monitor
 output "Dell Inc. DELL U2415 CFV9N92A0P3U" position 0 810
+
+
+# Hue Light Keybindings
+bindsym $mod+bracketleft exec "hue-cli lights --id 1 -b -15"
+bindsym $mod+bracketright exec "hue-cli lights --id 1 -b +15"
