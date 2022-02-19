@@ -41,7 +41,10 @@ if [[ "$HOST" == "gospel" ]]; then
 
     update_light "$PRE_CMD"
     run_if_not_dry_run "$LOCK_CMD"
-    update_light "$POST_CMD"
+    lock_return="$?"
+    if [[ $lock_return -eq 0 ]]; then
+        update_light "$POST_CMD"
+    fi
 else
     run_if_not_dry_run "$LOCK_CMD"
 fi
