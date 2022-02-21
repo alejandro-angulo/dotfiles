@@ -73,6 +73,7 @@ if filereadable(expand("~/.vimrc_background"))
   set background=dark
   let base16colorspace=256
   source ~/.vimrc_background
+  hi Normal ctermbg=NONE guibg=NONE
 endif
 
 " Easier split navigation
