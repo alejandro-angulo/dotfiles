@@ -84,6 +84,9 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+" Toggle relative line numbers
+nmap <leader>num :set invrelativenumber<CR>
+
 " Tab completion
 set wildmode=longest,list,full
 set wildmenu
