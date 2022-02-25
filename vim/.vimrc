@@ -11,6 +11,8 @@ set laststatus=2
 set encoding=utf-8
 syntax on
 
+let mapleader = "'"
+
 " ALE (need to happen before ALE loaded)
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
