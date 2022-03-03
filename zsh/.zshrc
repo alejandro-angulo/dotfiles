@@ -24,6 +24,11 @@ fi
 
 alias view="vim -R $1"
 
+# Use to set SWAYSOCK when running in multiplixer or remotely connected
+if type sway &> /dev/null && [ -n "$TMUX" ]; then
+    export SWAYSOCK=/run/user/$(id -u)/sway-ipc.$(id -u).$(pgrep -x sway).sock
+fi
+
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
