@@ -1,10 +1,11 @@
 # Desktop output configuration
 #
-# Right monitor
-output "Dell Inc. DELL U2415 CFV9N92A0NWU" transform 90 position 1920 410
+# Extra monitor
+output "Unknown ASUS VG24V 0x00007AAC" position 0 740
 # Left monitor
-output "Dell Inc. DELL U2415 CFV9N92A0P3U" position 0 810
-
+output "Dell Inc. DELL S2721QS 47W7M43" transform 270 position 1920 0 scale 1.5
+# Right monitor
+output "Dell Inc. DELL S2721QS 4FR7M43" position 3360 560 scale 1.5
 
 # Hue Light Keybindings
 bindsym $mod+bracketleft exec "hue-cli lights --id 1 -b -15"
