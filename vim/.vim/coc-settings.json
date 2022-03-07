@@ -1,0 +1,19 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": [
+        "*"
+    ],
+    "languageserver": {
+        "terraform": {
+            "command": "terraform-ls",
+            "args": [
+                "serve"
+            ],
+            "filetypes": [
+                "terraform",
+                "tf"
+            ],
+            "initializationOptions": {}
+        }
+    },
+    "python.formatting.provider": "black"
+}

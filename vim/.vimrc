@@ -14,9 +14,9 @@ syntax on
 let mapleader = "'"
 
 " ALE (need to happen before ALE loaded)
-let g:ale_completion_enabled = 1
-let g:ale_completion_autoimport = 1
-let g:ale_set_ballons = 1
+"let g:ale_completion_enabled = 1
+"let g:ale_completion_autoimport = 1
+"let g:ale_set_ballons = 1
 
 " Run :PluginInstall to install plugins
 set nocompatible
@@ -51,10 +51,12 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'puremourning/vimspector'
 
 " linting/fixing
-Plugin 'dense-analysis/ale'
+"Plugin 'dense-analysis/ale'
+Plugin 'neoclide/coc.nvim'
 
 " extra syntax highlighting
-Plugin 'cespare/vim-toml'
+"Plugin 'cespare/vim-toml'
+Plugin 'hashivim/vim-terraform'
 call vundle#end()
 filetype plugin indent on
 
@@ -68,7 +70,7 @@ autocmd Filetype make setlocal noexpandtab
 let g:airline_theme='base16_vim'
 let g:airline_powerline_fonts = 1
 let g:airline_base16_monotone = 1
-let g:airline#extensions#ale#enabled = 1
+"let g:airline#extensions#ale#enabled = 1
 
 " Colorscheme
 if filereadable(expand("~/.vimrc_background"))
@@ -135,13 +137,44 @@ nnoremap <C-P> :GFiles<CR>
 nnoremap <C-G> :Rg<CR>
 
 " ALE
-nnoremap <Leader>fix :ALEFix<CR>
-nnoremap <Leader>def :ALEGoToDefinition<CR>
-nnoremap <Leader>ref :ALEFindReferences<CR>
+"nnoremap <Leader>fix :ALEFix<CR>
+"nnoremap <Leader>def :ALEGoToDefinition<CR>
+"nnoremap <Leader>ref :ALEFindReferences<CR>
 
-let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_fix_on_save = 1
-set omnifunc=ale#completion#OmniFunc
+"let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
+"let g:ale_fix_on_save = 1
+"set omnifunc=ale#completion#OmniFunc
+" coc.nvim
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+" uses tab and shift-tab to navigate completion list
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+nnoremap <Leader>cmd :CocCommand<CR>
+nnoremap <Leader>cfg :CocConfig<CR>
+nnoremap <Leader>def :call CocAction('jumpDefinition')<CR>
+nnoremap <Leader>fmt :call CocActionAsync('format')<CR>
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
+nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
+nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Project-specific config
 silent! so .vimlocal
