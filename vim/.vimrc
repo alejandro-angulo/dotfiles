@@ -33,6 +33,7 @@ Plugin 'edkolev/tmuxline.vim'
 " Git Integration
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 
 " Fuzzy Finder
 Plugin 'junegunn/fzf'
@@ -166,6 +167,7 @@ nnoremap <Leader>cmd :CocCommand<CR>
 nnoremap <Leader>cfg :CocConfig<CR>
 nnoremap <Leader>def :call CocAction('jumpDefinition')<CR>
 nnoremap <Leader>fmt :call CocActionAsync('format')<CR>
+noremap <Leader>bro :GBrowse<CR>
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
