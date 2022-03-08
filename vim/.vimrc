@@ -172,8 +172,8 @@ noremap <Leader>bro :GBrowse<CR>
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
-nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
-nmap <silent> gt :call CocAction('jumpDefinition', 'tabe')<CR>
+nmap <silent> gv :call CocAction('jumpDefinition', 'vsplit')<CR>
+nmap <silent> gn :call CocAction('jumpDefinition', 'tabe')<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
