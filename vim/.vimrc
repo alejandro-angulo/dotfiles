@@ -14,9 +14,7 @@ syntax on
 let mapleader = "'"
 
 " ALE (need to happen before ALE loaded)
-"let g:ale_completion_enabled = 1
-"let g:ale_completion_autoimport = 1
-"let g:ale_set_ballons = 1
+let g:ale_display_lsp = 1
 
 " Run :PluginInstall to install plugins
 set nocompatible
@@ -52,7 +50,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'puremourning/vimspector'
 
 " linting/fixing
-"Plugin 'dense-analysis/ale'
+Plugin 'dense-analysis/ale'
 Plugin 'neoclide/coc.nvim'
 
 " extra syntax highlighting
@@ -67,11 +65,13 @@ nnoremap <silent> <C-L> :noh<CR><C-L>
 " Use tabs for makefile
 autocmd Filetype make setlocal noexpandtab
 
+" Toggle line highlighting based on focus
+autocmd BufEnter * setlocal cursorline
+autocmd BufLeave * setlocal nocursorline
+
 " airline
 let g:airline_theme='base16_vim'
 let g:airline_powerline_fonts = 1
-let g:airline_base16_monotone = 1
-"let g:airline#extensions#ale#enabled = 1
 
 " Colorscheme
 if filereadable(expand("~/.vimrc_background"))
@@ -137,14 +137,6 @@ xmap <Leader>di <Plug>VimspectorBalloonEval
 nnoremap <C-P> :GFiles<CR>
 nnoremap <C-G> :Rg<CR>
 
-" ALE
-"nnoremap <Leader>fix :ALEFix<CR>
-"nnoremap <Leader>def :ALEGoToDefinition<CR>
-"nnoremap <Leader>ref :ALEFindReferences<CR>
-
-"let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
-"let g:ale_fix_on_save = 1
-"set omnifunc=ale#completion#OmniFunc
 " coc.nvim
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
