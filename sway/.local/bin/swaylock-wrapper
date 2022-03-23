@@ -22,8 +22,8 @@ run_if_not_dry_run () {
 
 if [[ "$HOST" == "gospel" ]]; then
     # WARNING: Will not work correctly if `-f` flag is set.
-    PRE_CMD="hue-cli lights --id 1 --off"
-    POST_CMD="hue-cli lights --id 1 --on"
+    PRE_CMD="hue-cli --ip-address 192.168.113.180 --username HiPM8aSf7IIOOFDikEa3hfh1lx5CXXkLun7Dkf8M lights --id 1 --off"
+    POST_CMD="hue-cli --ip-address 192.168.113.180 --username HiPM8aSf7IIOOFDikEa3hfh1lx5CXXkLun7Dkf8M lights --id 1 --on"
     PERIOD=""
 
     update_period () {
