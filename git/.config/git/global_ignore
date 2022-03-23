@@ -9,6 +9,7 @@
 tags
 .vimspector.json
 .vimlocal
+Session.vim
 
 # direnv
 .envrc
