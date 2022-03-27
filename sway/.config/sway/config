@@ -75,6 +75,9 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # Don't start anything up here but I usually run gammastep and mako
 # systemctl --user enable --now gammastep mako
 
+# Prevent screen from locking when firefox is in fullscreen
+for_window [app_id="firefox"] inhibit_idle fullscreen
+
 ### Key bindings
 #
 # Basics:
