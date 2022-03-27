@@ -53,6 +53,9 @@ Plugin 'puremourning/vimspector'
 Plugin 'dense-analysis/ale'
 Plugin 'neoclide/coc.nvim'
 
+" Manage sessions
+Plugin 'tpope/vim-obsession'
+
 " extra syntax highlighting
 "Plugin 'cespare/vim-toml'
 Plugin 'hashivim/vim-terraform'
