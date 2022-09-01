@@ -8,7 +8,7 @@ layout_poetry() {
   fi
 
   local VENV
-  VENV=$(poetry env info | grep Path | awk '{ print $2 }')
+  VENV=$(poetry env info | grep Path | grep pypoetry | awk '{ print $2 }')
   if [[ -z $VENV || ! -d $VENV/bin ]]; then
     # shellcheck disable=SC2016
     log_error 'No created poetry virtual environment found.  Use `poetry install` to create one first.'
