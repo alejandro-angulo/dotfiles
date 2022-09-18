@@ -1,5 +1,5 @@
 #!/bin/sh
-pushd ~/nix-config
+pushd ~/dotfiles
 nix build .#homeManagerConfigurations.alejandro.activationPackage
 ./result/activate
 popd

@@ -28,7 +28,6 @@
     '';
     initExtra = ''
       base16_darktooth
-      source ~/.p10k.zsh
       bindkey -v
       bindkey '^R' history-incremental-search-backward
       alias view="vim -R $1"
@@ -56,6 +55,11 @@
           sha256 = "0fkfh8j7rd8mkpgz6nsx4v7665d375266shl1aasdad8blgqmf0c";
         };
         file = "powerlevel10k.zsh-theme";
+      }
+      {
+        name = "powerlevel10k-config";
+        src = lib.cleanSource ./p10k;
+        file = "p10k.zsh";
       }
       {
         name = "base16-shell";
