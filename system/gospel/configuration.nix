@@ -10,7 +10,13 @@
       ./hardware-configuration.nix ./zfs.nix ./vpn.nix
     ];
 
-  hardware.opengl.enable = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+   nixpkgs.config.allowUnfree = true;
 
   # Make ready for nix flakes
   nix.package = pkgs.nixFlakes;
@@ -70,6 +76,12 @@
     extraPackages = with pkgs; [ swaylock ];
   };
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+
   fonts.fonts = with pkgs; [
     (nerdfonts.override {fonts = ["Hack"];})
   ];
@@ -83,6 +95,7 @@
     killall
     usbutils
     pavucontrol
+    cachix
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
