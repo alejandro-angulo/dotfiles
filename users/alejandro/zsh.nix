@@ -29,6 +29,8 @@
     initExtra = ''
       base16_darktooth
       bindkey -v
+      bindkey '^A' beginning-of-line
+      bindkey '^E' end-of-line
       bindkey '^R' history-incremental-search-backward
       alias view="vim -R $1"
       alias ls=lsd
