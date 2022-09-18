@@ -1,14 +1,17 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix ./zfs.nix ./vpn.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./zfs.nix
+    ./vpn.nix
+  ];
 
   hardware.opengl = {
     enable = true;
@@ -16,7 +19,7 @@
     driSupport32Bit = true;
   };
 
-   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
   # Make ready for nix flakes
   nix.package = pkgs.nixFlakes;
@@ -46,9 +49,6 @@
 
   # Enable the X11 windowing system.
 
-
-  
-
   # Configure keymap in X11
   #   "eurosign:e";
   #   "caps:escape" # map caps to escape.
@@ -73,7 +73,7 @@
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true; # so that gtk works properly
-    extraPackages = with pkgs; [ swaylock ];
+    extraPackages = with pkgs; [swaylock];
   };
 
   programs.steam = {
@@ -109,7 +109,11 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = false;
+    permitRootLogin = "no";
+  };
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -137,6 +141,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
-
 }
-

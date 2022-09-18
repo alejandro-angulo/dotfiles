@@ -53,7 +53,7 @@
           ./system/carbon/configuration.nix
         ];
       };
-     
+
       gospel = lib.nixosSystem {
         inherit system;
 
