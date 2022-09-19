@@ -72,6 +72,7 @@
           nixFlakes
           alejandra
           pre-commit
+          direnv
         ];
 
         shellHook = ''
