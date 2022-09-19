@@ -20,6 +20,8 @@ jobs:
       - name: Calculate build matrix
         id: set-matrix
         run: |
+          # Use `-c` flag with jq for compact output (doesn't keep newlines in
+          # output which was causing issues when setting the output
           matrix=$(nix flake show --json | jq -c '.nixosConfigurations | keys')
           echo "::set-output name=matrix::$matrix"
 
@@ -30,7 +32,7 @@ jobs:
       - calculate-matrix
     strategy:
       fail-fast: false
-      matrix: 
+      matrix:
         target: "${{ fromJson(needs.calculate-matrix.outputs.matrix) }}"
 
 
