@@ -11,6 +11,7 @@
     htop
     ranger
     lsd
+    jq
   ];
 
   programs.direnv = {

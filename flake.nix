@@ -83,7 +83,5 @@
         '';
       };
     };
-
-    formatter = pkgs.alejandra;
   };
 }
