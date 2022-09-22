@@ -20,6 +20,7 @@
   services.playerctld.enable = true;
 
   services.swayidle = {
+    enable = true;
     timeouts = [
       {
         timeout = 300;
@@ -27,8 +28,8 @@
       }
       {
         timeout = 600;
-        command = "${pkgs.swaymsg}/bin/swaymsg 'ouput * dpms off'";
-        resumeCommand = "${pkgs.swaymsg}/bin/swaymsg 'output * dpms on'";
+        command = "${pkgs.sway}/bin/swaymsg 'ouput * dpms off'";
+        resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
       }
     ];
     events = [
