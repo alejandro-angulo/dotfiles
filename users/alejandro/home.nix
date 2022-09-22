@@ -7,6 +7,7 @@
     ./alacritty.nix
     ./git.nix
     ./git.nix
+    ./gpg.nix
     ./mako.nix
     ./rofi.nix
     ./sway/sway.nix
