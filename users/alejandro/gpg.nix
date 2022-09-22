@@ -15,5 +15,7 @@
   services.gpg-agent = {
     enable = true;
     pinentryFlavor = "curses";
+    enableZshIntegration = true;
+    enableSshSupport = true;
   };
 }
