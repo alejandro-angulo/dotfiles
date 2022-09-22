@@ -28,7 +28,7 @@
       }
       {
         timeout = 600;
-        command = "${pkgs.sway}/bin/swaymsg 'ouput * dpms off'";
+        command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
         resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
       }
     ];
