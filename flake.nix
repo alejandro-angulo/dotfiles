@@ -51,6 +51,7 @@
 
         modules = [
           ./system/carbon/configuration.nix
+          ./common/yubikey.nix
         ];
       };
 
@@ -59,6 +60,7 @@
 
         modules = [
           ./system/gospel/configuration.nix
+          ./common/yubikey.nix
         ];
       };
     };

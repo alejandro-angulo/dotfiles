@@ -109,10 +109,6 @@
     wireguard-tools
 
     prusa-slicer
-
-    yubikey-manager
-    yubikey-agent
-    yubico-pam
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -164,19 +160,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
-  services.pcscd.enable = true;
-
-  security.pam.yubico = {
-    enable = true;
-    #debug = true;
-    mode = "challenge-response";
-    # Uncomment below for 2FA
-    #control = "required";
-  };
-  # To set up, need to run (might need to run as root)
-  # ykman otp chalresp --touch --generate 2
-  # ykpamcfg -2 -v
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
