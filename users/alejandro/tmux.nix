@@ -18,11 +18,8 @@
           set -g @resurrect-strategy-vim 'session'
         '';
       }
-      {
-        plugin = vim-tmux-navigator;
-        extraConfig = ''
-        '';
-      }
+
+      vim-tmux-navigator
     ];
 
     extraConfig = ''
