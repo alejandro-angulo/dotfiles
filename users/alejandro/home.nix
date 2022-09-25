@@ -12,7 +12,8 @@
     ./rofi.nix
     ./sway/sway.nix
     ./tmux.nix
-    ./vim/vim.nix
+    #./vim/vim.nix
+    ./neovim.nix
     ./zsh.nix
   ];
 
