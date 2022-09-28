@@ -17,10 +17,27 @@
       # tree-sitter (code parser)
       (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
 
+      # git integration
+      gitgutter
+      fugitive
+      rhubarb
+
+      # coc plugins
+      coc-json
+      coc-yaml
+      coc-pyright
+
+      # tmux integration
+      tmux-navigator
+
+      vim-obsession
+      vim-nix
+
       # Eye candy
       nvim-web-devicons
       # base16-vim
       nvim-base16
+
       {
         plugin = lualine-nvim;
         type = "lua";
@@ -261,23 +278,35 @@
         + "''"
         + ''          )}
 
-          		" Mappings for CoCList
-          		" Show all diagnostics.
-          		nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-          		" Manage extensions.
-          		nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-          		" Show commands.
-          		nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-          		" Find symbol of current document.
-          		nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-          		" Search workspace symbols.
-          		nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-          		" Do default action for next item.
-          		nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-          		" Do default action for previous item.
-          		nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-          		" Resume latest coc list.
-          		nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+          " Mappings for CoCList
+          " Show all diagnostics.
+          nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+          " Manage extensions.
+          nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+          " Show commands.
+          nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+          " Find symbol of current document.
+          nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+          " Search workspace symbols.
+          nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+          " Do default action for next item.
+          nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+          " Do default action for previous item.
+          nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+          " Resume latest coc list.
+          nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+        ''
+        # The below is custom and did not come from coc's README
+        + ''
+          " GoTo code navigation.
+          nmap <silent> gd <Plug>(coc-definition)
+          nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
+          nmap <silent> gv :call CocAction('jumpDefinition', 'vsplit')<CR>
+          nmap <silent> gn :call CocAction('jumpDefinition', 'tabe')<CR>
+          nmap <silent> gy <Plug>(coc-type-definition)
+          nmap <silent> gi <Plug>(coc-implementation)
+          nmap <silent> gr <Plug>(coc-references)
         '';
     };
 
@@ -291,13 +320,17 @@
       syntax on
       let mapleader = "`"
 
-      " Colorscheme
-      if !exists('g:colors_name') || g:colors_name != 'base16-darktooth'
-        set background=dark
-        let base16colorspace=256
-        colorscheme base16-darktooth
-        hi Normal ctermbg=NONE guibg=NONE
-      endif
+      " Eye Candy (selects theme and sets up transparency)
+      colorscheme base16-darktooth
+      hi Normal guibg=none ctermbg=none
+      hi NormalNC guibg=NONE
+      hi LineNr guibg=none ctermbg=none
+      hi Folded guibg=none ctermbg=none
+      hi NonText guibg=none ctermbg=none
+      hi SpecialKey guibg=none ctermbg=none
+      hi VertSplit guibg=none ctermbg=none
+      hi SignColumn guibg=none ctermbg=none
+      hi EndOfBuffer guibg=none ctermbg=none
 
       " Toggle relative line numbers
       nmap <leader>num :set invrelativenumber<CR>
@@ -307,6 +340,19 @@
       nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
       nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
       nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+      " coc
+      nnoremap <Leader>cmd :CocCommand<CR>
+      nnoremap <Leader>cfg :CocConfig<CR>
+      nnoremap <Leader>def :call CocAction('jumpDefinition')<CR>
+      nnoremap <Leader>fmt :call CocActionAsync('format')<CR>
+
+      " rhubarb
+      noremap <Leader>bro :GBrowse<CR>
+
+      " Tab completion
+      set wildmode=longest,list,full
+      set wildmenu
     '';
   };
 }
