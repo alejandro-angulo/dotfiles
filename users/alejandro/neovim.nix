@@ -7,8 +7,6 @@
 
   programs.neovim = {
     enable = true;
-    viAlias = true;
-    vimAlias = true;
     withNodeJs = true;
     withPython3 = true;
     extraPython3Packages = ps: with ps; [black isort flake8 ipdb];
@@ -26,6 +24,8 @@
       coc-json
       coc-yaml
       coc-pyright
+      coc-spell-checker
+      coc-rust-analyzer
 
       # tmux integration
       tmux-navigator
@@ -87,6 +87,7 @@
 
       # tmux integration
       tmux-navigator
+      tmuxline-vim
 
       vim-obsession
       vim-nix
@@ -332,6 +333,10 @@
       hi SignColumn guibg=none ctermbg=none
       hi EndOfBuffer guibg=none ctermbg=none
 
+      " Toggle line highlighting based on focus
+      autocmd BufEnter * setlocal cursorline
+      autocmd BufLeave * setlocal nocursorline
+
       " Toggle relative line numbers
       nmap <leader>num :set invrelativenumber<CR>
 
@@ -346,6 +351,8 @@
       nnoremap <Leader>cfg :CocConfig<CR>
       nnoremap <Leader>def :call CocAction('jumpDefinition')<CR>
       nnoremap <Leader>fmt :call CocActionAsync('format')<CR>
+      vmap <leader>a <Plug>(coc-codeaction-selected)
+      nmap <leader>a <Plug>(coc-codeaction-selected)
 
       " rhubarb
       noremap <Leader>bro :GBrowse<CR>
