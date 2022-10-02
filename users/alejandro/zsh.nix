@@ -35,7 +35,7 @@
       bindkey '^R' history-incremental-search-backward
       alias view="vim -R $1"
       alias ls=lsd
-      alias l=ls
+      alias l='ls -la'
     '';
 
     plugins = with pkgs; [
