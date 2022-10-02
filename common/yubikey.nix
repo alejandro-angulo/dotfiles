@@ -18,7 +18,7 @@
     # Uncomment below for 2FA
     #control = "required";
   };
-  # To set up, need to run (might need to run as root)
+  # To set up, need to run (might need to run first command as root)
   # ykman otp chalresp --touch --generate 2
   # ykpamcfg -2 -v
 }
