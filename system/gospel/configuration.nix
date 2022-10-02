@@ -123,6 +123,13 @@
     pulse.enable = true;
   };
 
+  # Setup printing over the network
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
