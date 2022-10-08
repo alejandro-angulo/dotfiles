@@ -74,6 +74,8 @@
         };
       };
 
+      focus.followMouse = false;
+
       output = {
         "*".bg = "${config.home.homeDirectory}/wallpaper.png fill";
         "eDP-1".scale = "1";
