@@ -26,6 +26,11 @@
       pushup = "push -u origin HEAD";
     };
 
+    signing = {
+      key = "0xE1B13CCEFDEDDFB7";
+      signByDefault = true;
+    };
+
     ignores = [
       # PyCharm
       ".idea/"
