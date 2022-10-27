@@ -5,11 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-22.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    ssbm-nix.url = github:djanatyn/ssbm-nix;
   };
 
   outputs = {
     nixpkgs,
     home-manager,
+    ssbm-nix,
     ...
   }: let
     system = "x86_64-linux";
@@ -59,6 +61,7 @@
         inherit system;
 
         modules = [
+          ssbm-nix.nixosModule
           ./system/gospel/configuration.nix
           ./common/yubikey.nix
         ];

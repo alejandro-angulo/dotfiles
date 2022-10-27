@@ -74,11 +74,20 @@
         };
       };
 
+      window.commands = [
+        {
+          command = "inhibit_idle fullscreen";
+          criterira = {class = ".*";};
+        }
+      ];
+
       focus.followMouse = false;
 
       output = {
         "*".bg = "${config.home.homeDirectory}/wallpaper.png fill";
         "eDP-1".scale = "1";
+
+        "Unknown ASUS VG24V 0x00007AAC".mode = "1920x1080@120Hz";
 
         "Dell Inc. DELL S2721QS 47W7M43" = {
           transform = "270";
