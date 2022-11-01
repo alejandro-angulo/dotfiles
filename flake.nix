@@ -5,12 +5,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nur.url = github:nix-community/NUR;
     ssbm-nix.url = github:djanatyn/ssbm-nix;
   };
 
   outputs = {
     nixpkgs,
     home-manager,
+    nur,
     ssbm-nix,
     ...
   }: let
@@ -73,6 +75,7 @@
 
         modules = [
           ssbm-nix.nixosModule
+          nur.nixosModules.nur
           ./system/gospel/configuration.nix
           ./common/yubikey.nix
         ];

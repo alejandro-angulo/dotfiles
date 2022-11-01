@@ -21,11 +21,13 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # Make ready for nix flakes
-  nix.package = pkgs.nixVersions.stable;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
+  nix = {
+    # Make ready for nix flakes
+    package = pkgs.nixVersions.stable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 
   networking.hostName = "gospel"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -108,6 +110,14 @@
     usbutils
     pavucontrol
     cachix
+    nixos-generators
+    config.nur.repos.mic92.yubikey-touch-detector
+
+    cryptsetup
+    paperkey
+    unzip
+    p7zip
+    nix-index
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
