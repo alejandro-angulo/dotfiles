@@ -8,7 +8,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      window.opacity = 0.6;
+      window.opacity = 0.9;
       font = {
         size = 11.0;
         normal = {
