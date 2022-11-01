@@ -77,7 +77,7 @@
       window.commands = [
         {
           command = "inhibit_idle fullscreen";
-          criterira = {class = ".*";};
+          criteria = {class = ".*";};
         }
       ];
 
