@@ -87,7 +87,10 @@
         "*".bg = "${config.home.homeDirectory}/wallpaper.png fill";
         "eDP-1".scale = "1";
 
-        "Unknown ASUS VG24V 0x00007AAC".mode = "1920x1080@120Hz";
+        "Unknown ASUS VG24V 0x00007AAC" = {
+          mode = "1920x1080@120Hz";
+          position = "0 830";
+        };
 
         "Dell Inc. DELL S2721QS 47W7M43" = {
           transform = "270";
