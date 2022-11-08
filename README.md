@@ -1,5 +1,11 @@
 # dotfiles
 
+## BRANCH UNMAINTAINED
+
+I no longer maintain this branch. I've been experimenting with
+[NixOS](https://nixos.org/) so my current configuration now lives in this
+repo's `nix-config` branch.
+
 ## Usage
 
 Make sure you have [`stow`](https://www.gnu.org/software/stow/) installed and
