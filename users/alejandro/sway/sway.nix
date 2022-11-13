@@ -89,6 +89,11 @@ in {
 
       focus.followMouse = false;
 
+      fonts = {
+        names = ["Hack Nerd Font"];
+        size = 10.0;
+      };
+
       output = {
         "*".bg = "${wallpaper} fill";
         "eDP-1".scale = "1";
