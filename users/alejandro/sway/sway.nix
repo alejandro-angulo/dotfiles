@@ -51,6 +51,7 @@ in {
       modifier = "Mod4";
       terminal = "alacritty"; # TODO: include in packages above?
       menu = "rofi -show run";
+      workspaceAutoBackAndForth = true;
 
       colors = {
         focused = {
