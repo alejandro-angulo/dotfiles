@@ -77,12 +77,15 @@ in {
         };
       };
 
-      window.commands = [
-        {
-          command = "inhibit_idle fullscreen";
-          criteria = {class = ".*";};
-        }
-      ];
+      window = {
+        titlebar = true;
+        commands = [
+          {
+            command = "inhibit_idle fullscreen";
+            criteria = {class = ".*";};
+          }
+        ];
+      };
 
       focus.followMouse = false;
 
