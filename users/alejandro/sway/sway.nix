@@ -2,7 +2,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  wallpaper = "${config.home.homeDirectory}/dotfiles/users/alejandro/sway/wallpaper.png";
+in {
   imports = [
     ./keybindings.nix
     ./waybar.nix
@@ -24,7 +26,7 @@
     timeouts = [
       {
         timeout = 300;
-        command = "${pkgs.swaylock}/bin/swaylock -i ${config.home.homeDirectory}/wallpaper.png";
+        command = "${pkgs.swaylock}/bin/swaylock -i ${wallpaper}";
       }
       {
         timeout = 600;
@@ -84,7 +86,7 @@
       focus.followMouse = false;
 
       output = {
-        "*".bg = "${config.home.homeDirectory}/wallpaper.png fill";
+        "*".bg = "${wallpaper} fill";
         "eDP-1".scale = "1";
 
         "Unknown ASUS VG24V 0x00007AAC" = {

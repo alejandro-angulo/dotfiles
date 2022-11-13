@@ -60,7 +60,7 @@ in {
       "${cfg.modifier}+c" = "kill";
       "${cfg.modifier}+p" = "exec ${cfg.menu}";
       "${cfg.modifier}+z" = "reload";
-      "${cfg.modifier}+x" = "exec swaylock -i ${config.home.homeDirectory}/wallpaper.png";
+      "${cfg.modifier}+x" = "exec swaylock -i ${config.home.homeDirectory}/dotfiles/users/alejandro/sway/wallpaper.png";
 
       # Volume control
       "XF86AudioRaiseVolume" = " exec 'pamixer --increase 5'";
