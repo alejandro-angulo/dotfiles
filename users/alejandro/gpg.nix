@@ -23,7 +23,7 @@
     enableSshSupport = true;
     sshKeys = [
       # run `gpg-connect-agent 'keyinfo --list' /bye` to get these values for existing keys
-      "E274D5078327CB6C8C83CFF102CC12A2D493C77F" # yubikey 19 101 875
+      "E274D5078327CB6C8C83CFF102CC12A2D493C77F"
     ];
   };
 }
