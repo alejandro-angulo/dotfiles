@@ -37,7 +37,7 @@ in {
     events = [
       {
         event = "before-sleep";
-        command = "${pkgs.swaylock}/bin/swaylock";
+        command = "${pkgs.swaylock}/bin/swaylock -i ${wallpaper}";
       }
     ];
   };
