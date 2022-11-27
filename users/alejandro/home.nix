@@ -26,7 +26,7 @@
     #light  # For sway binding to control backlight
     #swaynagmode
     python310
-    gammastep
+    gammastep # Requires `services.geoclue2.enable` set in system config
     super-slicer
 
     firefox

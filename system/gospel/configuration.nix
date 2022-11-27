@@ -142,6 +142,8 @@
     permitRootLogin = "no";
   };
 
+  services.geoclue2.enable = true;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
