@@ -118,6 +118,11 @@
     unzip
     p7zip
     nix-index
+
+    vlc
+    xfce.thunar
+    prusa-slicer
+    esptool
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
