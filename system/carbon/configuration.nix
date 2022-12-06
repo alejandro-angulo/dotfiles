@@ -13,6 +13,8 @@
     ./vpn.nix
   ];
 
+  nixpkgs.config.allowUnfree = true;
+
   # Make ready for nix flakes
   nix.package = pkgs.nixVersions.stable;
   nix.extraOptions = ''
@@ -110,6 +112,10 @@
 
     prusa-slicer
     traceroute
+    gnumake
+    hugo
+    nixos-generators
+    vlc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
