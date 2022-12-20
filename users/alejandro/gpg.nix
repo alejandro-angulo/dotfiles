@@ -16,6 +16,14 @@
     };
   };
 
+  programs.ssh.matchBlocks = [
+    {
+      "github.com" = {
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAbpuKWQFiYhNfKXcYpjWFXsYMh7pyhXdGyV8JPBFzgl";
+      };
+    }
+  ];
+
   services.gpg-agent = {
     enable = true;
     pinentryFlavor = "curses";
