@@ -7,7 +7,10 @@
   # variety of tasks:
   # 1. create the TUN network device
   # 2. setup some IP routes to route through the TUN
-  services.tailscale = {enable = true;};
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client"; # Make sure to pass `--accept-routes` to `tailscale up`
+  };
 
   # Let's open the UDP port with which the network is tunneled through
   networking.firewall.allowedUDPPorts = [41641];
