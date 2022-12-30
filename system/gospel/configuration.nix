@@ -72,15 +72,6 @@
     shell = pkgs.zsh;
   };
 
-  ssbm = {
-    overlay.enable = true;
-    cache.enable = true;
-    gcc = {
-      oc-kmod.enable = true;
-      rules.enable = true;
-    };
-  };
-
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true; # so that gtk works properly
@@ -100,9 +91,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    slippi-netplay
-    slippi-playback
-
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
