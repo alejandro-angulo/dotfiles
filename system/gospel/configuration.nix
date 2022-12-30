@@ -37,6 +37,15 @@
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
+  virtualisation.docker = {
+    # TODO: How to make sure docker systemd service is enabled for user?
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -68,7 +77,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.alejandro = {
     isNormalUser = true;
-    extraGroups = ["wheel" "video" "networkmanager"];
+    extraGroups = ["wheel" "video" "networkmanager" "docker"];
     shell = pkgs.zsh;
   };
 
