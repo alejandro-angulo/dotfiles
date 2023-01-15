@@ -13,6 +13,8 @@
     ./vpn.nix
   ];
 
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -154,6 +156,25 @@
   services.avahi = {
     enable = true;
     nssmdns = true;
+  };
+
+  services.nix-serve = {
+    enable = true;
+    secretKeyFile = "/var/gospelCache";
+  };
+  services.nginx = {
+    enable = true;
+    virtualHosts = {
+      "gospel.kilonull.com" = {
+        serverAliases = ["gospel"];
+        locations."/".extraConfig = ''
+          proxy_pass http://localhost:${toString config.services.nix-serve.port};
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        '';
+      };
+    };
   };
 
   # Open ports in the firewall.
