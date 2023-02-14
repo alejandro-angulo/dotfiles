@@ -13,7 +13,7 @@
     ./vpn.nix
   ];
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
 
   hardware.opengl = {
     enable = true;
@@ -122,6 +122,8 @@
     xfce.thunar
     prusa-slicer
     esptool
+    minicom
+    file
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
