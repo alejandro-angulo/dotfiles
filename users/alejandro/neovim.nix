@@ -27,12 +27,6 @@
       coc-spell-checker
       coc-rust-analyzer
 
-      # tmux integration
-      tmux-navigator
-
-      vim-obsession
-      vim-nix
-
       # Eye candy
       nvim-web-devicons
       # base16-vim
