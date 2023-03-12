@@ -7,7 +7,8 @@
 }:
 with lib; let
   cfg = config.aa.desktop.sway;
-  sway_cfg = config.aa.home.extraOptions.wayland.windowManager.sway;
+  nag = "swaynag";
+  sway_cfg = config.aa.home.extraOptions.wayland.windowManager.sway.config;
 in {
   options.aa.desktop.sway = with types; {
     enable = mkEnableOption "sway";
@@ -36,6 +37,11 @@ in {
           terminal = "alacritty";
           menu = "rofi -show run";
           workspaceAutoBackAndForth = true;
+
+          left = "h";
+          right = "l";
+          up = "j";
+          down = "k";
 
           colors = {
             focused = {
@@ -147,7 +153,8 @@ in {
             "${sway_cfg.modifier}+c" = "kill";
             "${sway_cfg.modifier}+p" = "exec ${sway_cfg.menu}";
             "${sway_cfg.modifier}+z" = "reload";
-            "${sway_cfg.modifier}+x" = "exec swaylock -i ${config.home.homeDirectory}/dotfiles/users/alejandro/sway/wallpaper.png";
+            # TODO: Reintroduce this. Failing because config.home.homeDirectory is not set
+            # "${sway_cfg.modifier}+x" = "exec swaylock -i ${config.home.homeDirectory}/dotfiles/users/alejandro/sway/wallpaper.png";
 
             # Volume control
             "XF86AudioRaiseVolume" = " exec 'pamixer --increase 5'";

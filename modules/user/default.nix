@@ -33,7 +33,7 @@ in {
 
         inherit (cfg) name;
 
-        home = "/home/{$cfg.name}";
+        home = "/home/${cfg.name}";
         group = "users";
 
         shell = pkgs.zsh;
