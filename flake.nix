@@ -3,102 +3,42 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nur.url = github:nix-community/NUR;
+
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+
+    snowfall-lib.url = "github:snowfallorg/lib";
+    snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = {
-    nixpkgs,
-    home-manager,
-    nur,
-    ...
-  }: let
-    system = "x86_64-linux";
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
+      inherit inputs;
+      src = ./.;
+    };
+  in
+    lib.mkFlake {
+      overlay-package-namespace = "aa";
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
+      channels-config.allowUnfree = true;
+
+      systems.modules = with inputs; [
+        home-manager.nixosModules.home-manager
+      ];
+
+      outputs-builder = channels: {
+        devShells = {
+          default = channels.nixpkgs.mkShell {
+            name = "DevShell";
+            buildInputs = with channels.nixpkgs; [
+              alejandra
+              nixpkgs-lint
+            ];
+          };
+        };
       };
     };
-
-    lib = nixpkgs.lib;
-  in {
-    homeManagerConfigurations = {
-      alejandro = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./users/alejandro/home.nix
-          {
-            home = {
-              username = "alejandro";
-              homeDirectory = "/home/alejandro";
-
-              # This value determines the Home Manager release that your
-              # configuration is compatible with. This helps avoid breakage
-              # when a new Home Manager release introduces backwards
-              # incompatible changes.
-              #
-              # You can update Home Manager without changing this value. See
-              # the Home Manager release notes for a list of state version
-              # changes in each release.
-              stateVersion = "22.05";
-            };
-          }
-        ];
-      };
-    };
-
-    nixosConfigurations = {
-      virtual = lib.nixosSystem {
-        inherit system;
-
-        modules = [
-          ./system/virtual/configuration.nix
-        ];
-      };
-
-      carbon = lib.nixosSystem {
-        inherit system;
-
-        modules = [
-          ./system/carbon/configuration.nix
-          ./common/yubikey.nix
-        ];
-      };
-
-      gospel = lib.nixosSystem {
-        inherit system;
-
-        modules = [
-          nur.nixosModules.nur
-          ./system/gospel/configuration.nix
-          ./common/yubikey.nix
-        ];
-      };
-    };
-
-    devShells.${system} = {
-      default = pkgs.mkShell {
-        name = "nixosbuildshell";
-        buildInputs = with pkgs; [
-          git
-          git-crypt
-          nixVersions.stable
-          alejandra
-          pre-commit
-          direnv
-        ];
-
-        shellHook = ''
-          echo "You can apply this flake to your system with nixos-rebuild switch --flake .#"
-
-            PATH=${pkgs.writeShellScriptBin "nix" ''
-            ${pkgs.nixVersions.stable}/bin/nix --experimental-features "nix-command flakes" "$@"
-          ''}/bin:$PATH
-        '';
-      };
-    };
-  };
 }

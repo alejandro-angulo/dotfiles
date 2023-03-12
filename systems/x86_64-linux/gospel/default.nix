@@ -77,11 +77,11 @@
   # Enable touchpad support (enabled default in most desktopManager).
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.alejandro = {
-    isNormalUser = true;
-    extraGroups = ["wheel" "video" "networkmanager" "docker"];
-    shell = pkgs.zsh;
-  };
+  # users.users.alejandro = {
+  #   isNormalUser = true;
+  #   extraGroups = ["wheel" "video" "networkmanager" "docker"];
+  #   shell = pkgs.zsh;
+  # };
 
   programs.sway = {
     enable = true;
@@ -110,7 +110,7 @@
     pavucontrol
     cachix
     nixos-generators
-    config.nur.repos.mic92.yubikey-touch-detector
+    # config.nur.repos.mic92.yubikey-touch-detector
 
     cryptsetup
     paperkey

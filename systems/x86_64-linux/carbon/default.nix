@@ -75,11 +75,11 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.alejandro = {
-    isNormalUser = true;
-    extraGroups = ["wheel" "video" "networkmanager"];
-    shell = pkgs.zsh;
-  };
+  # users.users.alejandro = {
+  #   isNormalUser = true;
+  #   extraGroups = ["wheel" "video" "networkmanager"];
+  #   shell = pkgs.zsh;
+  # };
 
   fonts.fonts = with pkgs; [
     (nerdfonts.override {fonts = ["Hack"];})
