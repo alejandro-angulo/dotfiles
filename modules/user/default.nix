@@ -14,6 +14,16 @@ in {
       default = "alejandro";
       description = "The name to use for the user account.";
     };
+    fullName = mkOption {
+      type = str;
+      default = "Alejandro Angulo";
+      description = "The full name of the user.";
+    };
+    email = mkOption {
+      type = str;
+      default = "iam@alejandr0angul0.dev";
+      description = "The email of the user.";
+    };
     extraGroups = mkOption {
       type = listOf str;
       default = ["video" "networkmanager" "docker"];

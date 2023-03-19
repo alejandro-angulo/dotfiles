@@ -18,6 +18,7 @@ with lib; {
     nix.enable = true;
 
     suites.desktop.enable = true;
+    tools.git.enable = true;
   };
 
   users.users.virt = {
