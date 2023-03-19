@@ -15,6 +15,9 @@ in {
   config = mkIf cfg.enable {
     aa.desktop.addons.fonts.enable = true;
 
+    # alacritty won't start without opengl
+    hardware.opengl.enable = true;
+
     aa.home = {
       extraOptions = {
         programs.alacritty = {

@@ -22,7 +22,7 @@ in {
     configFile = mkOption {
       type = attrs;
       default = {};
-      description = "A set of files to be managed by home-manager's <option>xdf.configFile</option>.";
+      description = "A set of files to be managed by home-manager's <option>xdg.configFile</option>.";
     };
     extraOptions = mkOption {
       type = attrs;

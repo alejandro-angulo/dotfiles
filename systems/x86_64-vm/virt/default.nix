@@ -27,7 +27,9 @@ with lib; {
   };
 
   environment = {
-    systemPackages = with pkgs; [wayland-utils];
+    systemPackages = with pkgs; [
+      wayland-utils
+    ];
     variables = {"WLR_RENDERER_ALLOW_SOFTWARE" = "1";};
   };
 }

@@ -8,7 +8,16 @@
 with lib; let
   cfg = config.aa.desktop.sway;
   nag = "swaynag";
-  sway_cfg = config.aa.home.extraOptions.wayland.windowManager.sway.config;
+  left = "h";
+  right = "l";
+  up = "j";
+  down = "k";
+  modifier = "Mod4";
+
+  # TODO: This assume I'll be using rofi and alacritty. Should make more
+  # generic.
+  menu = "rofi -show run";
+  terminal = "alacritty";
 in {
   options.aa.desktop.sway = with types; {
     enable = mkEnableOption "sway";
@@ -19,6 +28,7 @@ in {
       alacritty.enable = true;
       fonts.enable = true;
       rofi.enable = true;
+      waybar.enable = true;
 
       # TODO
       # playerctl
@@ -33,15 +43,8 @@ in {
         wrapperFeatures.gtk = true; # so that gtk works properly
 
         config = {
-          modifier = "Mod4";
-          terminal = "alacritty";
-          menu = "rofi -show run";
+          inherit (terminal menu left right up down modifier);
           workspaceAutoBackAndForth = true;
-
-          left = "h";
-          right = "l";
-          up = "j";
-          down = "k";
 
           colors = {
             focused = {
@@ -108,10 +111,10 @@ in {
               # right will grow the containers width
               # up will shrink the containers height
               # down will grow the containers height
-              "${sway_cfg.left}" = "resize shrink width 50px";
-              "${sway_cfg.down}" = "resize grow height 50px";
-              "${sway_cfg.up}" = "resize shrink height 50px";
-              "${sway_cfg.right}" = "resize grow width 50px";
+              "${left}" = "resize shrink width 50px";
+              "${down}" = "resize grow height 50px";
+              "${up}" = "resize shrink height 50px";
+              "${right}" = "resize grow width 50px";
 
               # Ditto, with arrow keys
               "Left" = "resize shrink width 50px";
@@ -146,15 +149,15 @@ in {
 
           keybindings = {
             # Activate modes
-            "${sway_cfg.modifier}+s" = "mode resize";
+            "${modifier}+s" = "mode resize";
 
             # Misc
-            "${sway_cfg.modifier}+Return" = "exec ${sway_cfg.terminal}";
-            "${sway_cfg.modifier}+c" = "kill";
-            "${sway_cfg.modifier}+p" = "exec ${sway_cfg.menu}";
-            "${sway_cfg.modifier}+z" = "reload";
+            "${modifier}+Return" = "exec ${terminal}";
+            "${modifier}+c" = "kill";
+            "${modifier}+p" = "exec ${menu}";
+            "${modifier}+z" = "reload";
             # TODO: Reintroduce this. Failing because config.home.homeDirectory is not set
-            # "${sway_cfg.modifier}+x" = "exec swaylock -i ${config.home.homeDirectory}/dotfiles/users/alejandro/sway/wallpaper.png";
+            # "${modifier}+x" = "exec swaylock -i ${config.home.homeDirectory}/dotfiles/users/alejandro/sway/wallpaper.png";
 
             # Volume control
             "XF86AudioRaiseVolume" = " exec 'pamixer --increase 5'";
@@ -165,10 +168,10 @@ in {
             "XF86AudioPrev" = "exec 'playerctl previous'";
             "XF86AudioNext" = "exec 'playerctl next'";
             "XF86AudioPlay" = "exec 'playerctl play-pause'";
-            "${sway_cfg.modifier}+Down" = "exec 'playerctl pause'";
-            "${sway_cfg.modifier}+Up" = "exec 'playerctl play'";
-            "${sway_cfg.modifier}+Right" = "exec 'playerctl next'";
-            "${sway_cfg.modifier}+Left" = "exec 'playerctl previous'";
+            "${modifier}+Down" = "exec 'playerctl pause'";
+            "${modifier}+Up" = "exec 'playerctl play'";
+            "${modifier}+Right" = "exec 'playerctl next'";
+            "${modifier}+Left" = "exec 'playerctl previous'";
 
             # Backlight keys
             "XF86MonBrightnessDown" = "exec 'light -U 5'";
@@ -179,76 +182,76 @@ in {
             ## Focus
 
             ### Move your focus around
-            "${sway_cfg.modifier}+${sway_cfg.left}" = "focus left";
-            "${sway_cfg.modifier}+${sway_cfg.down}" = "focus down";
-            "${sway_cfg.modifier}+${sway_cfg.up}" = "focus up";
-            "${sway_cfg.modifier}+${sway_cfg.right}" = "focus right";
+            "${modifier}+${left}" = "focus left";
+            "${modifier}+${down}" = "focus down";
+            "${modifier}+${up}" = "focus up";
+            "${modifier}+${right}" = "focus right";
 
             ### Move the focused window with the same, but add Shift
-            "${sway_cfg.modifier}+Shift+${sway_cfg.left}" = "move left";
-            "${sway_cfg.modifier}+Shift+${sway_cfg.down}" = "move down";
-            "${sway_cfg.modifier}+Shift+${sway_cfg.up}" = "move up";
-            "${sway_cfg.modifier}+Shift+${sway_cfg.right}" = "move right";
+            "${modifier}+Shift+${left}" = "move left";
+            "${modifier}+Shift+${down}" = "move down";
+            "${modifier}+Shift+${up}" = "move up";
+            "${modifier}+Shift+${right}" = "move right";
 
             ## Workspaces
 
             ### Switch to a workspace
-            "${sway_cfg.modifier}+q" = "workspace number 1";
-            "${sway_cfg.modifier}+w" = "workspace number 2";
-            "${sway_cfg.modifier}+e" = "workspace number 3";
-            "${sway_cfg.modifier}+r" = "workspace number 4";
-            "${sway_cfg.modifier}+t" = "workspace number 5";
-            "${sway_cfg.modifier}+y" = "workspace number 6";
-            "${sway_cfg.modifier}+u" = "workspace number 7";
-            "${sway_cfg.modifier}+i" = "workspace number 8";
-            "${sway_cfg.modifier}+o" = "workspace number 9";
+            "${modifier}+q" = "workspace number 1";
+            "${modifier}+w" = "workspace number 2";
+            "${modifier}+e" = "workspace number 3";
+            "${modifier}+r" = "workspace number 4";
+            "${modifier}+t" = "workspace number 5";
+            "${modifier}+y" = "workspace number 6";
+            "${modifier}+u" = "workspace number 7";
+            "${modifier}+i" = "workspace number 8";
+            "${modifier}+o" = "workspace number 9";
 
             ### Move focused container to workspace
-            "${sway_cfg.modifier}+Shift+q" = "move container to workspace number 1";
-            "${sway_cfg.modifier}+Shift+w" = "move container to workspace number 2";
-            "${sway_cfg.modifier}+Shift+e" = "move container to workspace number 3";
-            "${sway_cfg.modifier}+Shift+r" = "move container to workspace number 4";
-            "${sway_cfg.modifier}+Shift+t" = "move container to workspace number 5";
-            "${sway_cfg.modifier}+Shift+y" = "move container to workspace number 6";
-            "${sway_cfg.modifier}+Shift+u" = "move container to workspace number 7";
-            "${sway_cfg.modifier}+Shift+i" = "move container to workspace number 8";
-            "${sway_cfg.modifier}+Shift+o" = "move container to workspace number 9";
+            "${modifier}+Shift+q" = "move container to workspace number 1";
+            "${modifier}+Shift+w" = "move container to workspace number 2";
+            "${modifier}+Shift+e" = "move container to workspace number 3";
+            "${modifier}+Shift+r" = "move container to workspace number 4";
+            "${modifier}+Shift+t" = "move container to workspace number 5";
+            "${modifier}+Shift+y" = "move container to workspace number 6";
+            "${modifier}+Shift+u" = "move container to workspace number 7";
+            "${modifier}+Shift+i" = "move container to workspace number 8";
+            "${modifier}+Shift+o" = "move container to workspace number 9";
 
             # Layout
 
             ## Split direction
-            "${sway_cfg.modifier}+v" = "splith";
-            "${sway_cfg.modifier}+g" = "splitv";
+            "${modifier}+v" = "splith";
+            "${modifier}+g" = "splitv";
 
             ## Switch the current container between different layout styles
-            "${sway_cfg.modifier}+b" = "layout stacking";
-            "${sway_cfg.modifier}+n" = "layout tabbed";
-            "${sway_cfg.modifier}+m" = "layout toggle split";
+            "${modifier}+b" = "layout stacking";
+            "${modifier}+n" = "layout tabbed";
+            "${modifier}+m" = "layout toggle split";
 
             ## Make the current focus fullscreen
-            "${sway_cfg.modifier}+f" = "fullscreen";
+            "${modifier}+f" = "fullscreen";
 
             ## move container between displays
-            "${sway_cfg.modifier}+semicolon" = "move workspace to output right";
+            "${modifier}+semicolon" = "move workspace to output right";
 
             ## Toggle the current focus between tiling and floating mode
-            "${sway_cfg.modifier}+Shift+f" = "floating toggle";
+            "${modifier}+Shift+f" = "floating toggle";
 
             ## Swap focus between the tiling area and the floating area
-            "${sway_cfg.modifier}+space" = "focus mode_toggle";
+            "${modifier}+space" = "focus mode_toggle";
 
             ## Move focus to the parent container
-            "${sway_cfg.modifier}+a" = "focus parent";
+            "${modifier}+a" = "focus parent";
 
             # Scratchpad
             # Move the currently focused window to the scratchpad
-            "${sway_cfg.modifier}+Shift+minus" = "move scratchpad";
+            "${modifier}+Shift+minus" = "move scratchpad";
             # Show the next scratchpad window or hide the focused scratchpad window.
             # If there are multiple scratchpad windows, this command cycles through them.
-            "${sway_cfg.modifier}+minus" = "scratchpad show";
+            "${modifier}+minus" = "scratchpad show";
 
             # Exit sway (logs you out of your Wayland session)
-            "${sway_cfg.modifier}+Shift+z" = "exec ${nag} -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit' -b 'Reload' 'swaymsg reload'";
+            "${modifier}+Shift+z" = "exec ${nag} -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit' -b 'Reload' 'swaymsg reload'";
           };
         };
       };
