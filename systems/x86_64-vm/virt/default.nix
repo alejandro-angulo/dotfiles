@@ -20,6 +20,7 @@ with lib; {
     suites.desktop.enable = true;
     tools.git.enable = true;
     tools.zsh.enable = true;
+    tools.exa.enable = true;
     apps.neovim.enable = true;
     apps.tmux.enable = true;
   };

@@ -29,7 +29,7 @@ in {
           bindkey '^E' end-of-line
           bindkey '^R' history-incremental-search-backward
           alias view="vim -R $1"
-          alias ls=lsd
+          # alias ls=lsd
           alias l='ls -la'
         '';
 
