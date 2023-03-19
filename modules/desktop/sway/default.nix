@@ -29,6 +29,7 @@ in {
       fonts.enable = true;
       rofi.enable = true;
       waybar.enable = true;
+      mako.enable = true;
 
       # TODO
       # playerctl
