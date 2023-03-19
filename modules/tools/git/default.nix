@@ -7,6 +7,7 @@
 }:
 with lib; let
   cfg = config.aa.tools.git;
+  gpg = config.aa.tools.gpg;
   user = config.aa.user;
 in {
   options.aa.tools.git = with types; {
@@ -52,7 +53,7 @@ in {
 
         signing = {
           key = cfg.signingKey;
-          signByDefault = false; # TODO: Only set if gpg is enabled
+          signByDefault = mkIf gpg.enable true;
         };
 
         ignores = [
