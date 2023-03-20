@@ -18,7 +18,7 @@ in {
     environment.systemPackages = with pkgs; [mako libnotify];
 
     aa.home.extraOptions = {
-      programs.mako = {
+      services.mako = {
         enable = true;
 
         font = "'Hack Nerd Font' Regular 9";
