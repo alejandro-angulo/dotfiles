@@ -13,6 +13,20 @@
     ./vpn.nix
   ];
 
+  aa = {
+    nix.enable = true;
+
+    suites.desktop.enable = true;
+    suites.gaming.enable = true;
+
+    tools.git.enable = true;
+    tools.zsh.enable = true;
+    tools.exa.enable = true;
+
+    apps.neovim.enable = true;
+    apps.tmux.enable = true;
+  };
+
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
 
   hardware.opengl = {
@@ -22,14 +36,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  nix = {
-    # Make ready for nix flakes
-    package = pkgs.nixVersions.stable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
 
   networking.hostName = "gospel"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -87,12 +93,6 @@
     enable = true;
     wrapperFeatures.gtk = true; # so that gtk works properly
     extraPackages = with pkgs; [swaylock];
-  };
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
   };
 
   fonts.fonts = with pkgs; [
