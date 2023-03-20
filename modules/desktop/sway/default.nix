@@ -27,9 +27,11 @@ in {
     aa.desktop.addons = {
       alacritty.enable = true;
       fonts.enable = true;
+      gammastep.enable = true;
+      mako.enable = true;
       rofi.enable = true;
       waybar.enable = true;
-      mako.enable = true;
+
 
       # TODO
       # playerctl
