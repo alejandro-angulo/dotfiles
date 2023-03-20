@@ -25,6 +25,8 @@
 
     apps.neovim.enable = true;
     apps.tmux.enable = true;
+
+    services.openssh.enable = true;
   };
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
@@ -135,15 +137,6 @@
   # };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-    };
-  };
 
   services.geoclue2.enable = true;
 
