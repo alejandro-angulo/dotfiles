@@ -56,50 +56,9 @@
     };
   };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkbOptions in tty.
-  # };
-
-  # Enable the X11 windowing system.
-
-  # Configure keymap in X11
-  #   "eurosign:e";
-  #   "caps:escape" # map caps to escape.
-  # };
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alejandro = {
-  #   isNormalUser = true;
-  #   extraGroups = ["wheel" "video" "networkmanager" "docker"];
-  #   shell = pkgs.zsh;
-  # };
-
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true; # so that gtk works properly
-    extraPackages = with pkgs; [swaylock];
-  };
-
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override {fonts = ["Hack"];})
-  ];
+  # fonts.fonts = with pkgs; [
+  #   (nerdfonts.override {fonts = ["Hack"];})
+  # ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -127,16 +86,6 @@
     minicom
     file
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
 
   services.geoclue2.enable = true;
 
