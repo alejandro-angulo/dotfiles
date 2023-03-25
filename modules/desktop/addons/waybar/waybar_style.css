@@ -1,7 +1,7 @@
 * {
   border: none;
   font-family: Hack Nerd Font, sans-serif;
-  font-size: 10px;
+  font-size: 1em;
 }
 
 window#waybar {
