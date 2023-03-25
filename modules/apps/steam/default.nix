@@ -18,5 +18,11 @@ in {
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
     };
+
+    hardware.opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
   };
 }

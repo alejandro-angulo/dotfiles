@@ -36,12 +36,6 @@
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
   nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "gospel"; # Define your hostname.
