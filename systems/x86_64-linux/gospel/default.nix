@@ -33,6 +33,8 @@
       subdomain_name = "gospel";
     };
     services.printing.enable = true;
+
+    hardware.audio.enable = true;
   };
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
@@ -83,13 +85,6 @@
     file
   ];
 
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

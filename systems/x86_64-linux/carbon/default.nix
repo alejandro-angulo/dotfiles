@@ -27,6 +27,8 @@
     apps.tmux.enable = true;
 
     services.printing.enable = true;
+
+    hardware.audio.enable = true;
   };
 
   networking = {
@@ -161,14 +163,6 @@
     #isSystem = true;
     #users = ["1000"];
     #};
-  };
-
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
   };
 
   # Open ports in the firewall.
