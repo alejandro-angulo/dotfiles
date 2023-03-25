@@ -33,7 +33,7 @@ in {
         enable = true;
         virtualHosts = {
           "${cfg.subdomain_name}.${cfg.domain_name}" = {
-            serverAliases = [${cfg.subdomain_name}];
+            serverAliases = ["${cfg.subdomain_name}"];
             locations."/".extraConfig = ''
               proxy_pass http://localhost:${toString config.services.nix-serve.port};
               proxy_set_header Host $host;
