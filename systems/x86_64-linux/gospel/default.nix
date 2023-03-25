@@ -45,17 +45,10 @@
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
 
-  networking.hostName = "gospel"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.hostName = "gospel";
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
-
-  # fonts.fonts = with pkgs; [
-  #   (nerdfonts.override {fonts = ["Hack"];})
-  # ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -81,12 +74,6 @@
     minicom
     file
   ];
-
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
