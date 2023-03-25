@@ -36,8 +36,6 @@
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
 
-  nixpkgs.config.allowUnfree = true;
-
   networking.hostName = "gospel"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
