@@ -32,6 +32,7 @@
       domain_name = "kilonull.com";
       subdomain_name = "gospel";
     };
+    services.printing.enable = true;
   };
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
@@ -90,13 +91,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  };
-
-  # Setup printing over the network
-  services.printing.enable = true;
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
