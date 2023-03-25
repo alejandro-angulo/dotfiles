@@ -26,7 +26,7 @@ in {
     };
     extraGroups = mkOption {
       type = listOf str;
-      default = ["video" "networkmanager" "docker"];
+      default = ["video" "networkmanager"];
       description = "Groups to for the user to be assigned.";
     };
     extraOptions = mkOption {

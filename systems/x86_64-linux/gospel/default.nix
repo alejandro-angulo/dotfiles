@@ -47,15 +47,6 @@
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
-  virtualisation.docker = {
-    # TODO: How to make sure docker systemd service is enabled for user?
-    enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-  };
-
   # fonts.fonts = with pkgs; [
   #   (nerdfonts.override {fonts = ["Hack"];})
   # ];
