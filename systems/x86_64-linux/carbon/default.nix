@@ -48,8 +48,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    stow
-    zsh
     sanoid
     killall
     usbutils
