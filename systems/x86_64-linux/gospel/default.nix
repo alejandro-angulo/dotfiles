@@ -27,6 +27,11 @@
     apps.tmux.enable = true;
 
     services.openssh.enable = true;
+    services.nix-serve = {
+      enable = true;
+      domain_name = "kilonull.com";
+      subdomain_name = "gospel";
+    };
   };
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
@@ -100,34 +105,6 @@
   services.avahi = {
     enable = true;
     nssmdns = true;
-  };
-
-  services.nix-serve = {
-    enable = true;
-    secretKeyFile = "/var/gospelCache";
-  };
-  services.nginx = {
-    enable = true;
-    virtualHosts = {
-      "gospel.kilonull.com" = {
-        serverAliases = ["gospel"];
-        locations."/".extraConfig = ''
-          proxy_pass http://localhost:${toString config.services.nix-serve.port};
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        '';
-      };
-    };
-  };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-  networking.firewall = {
-    allowedTCPPorts = [80];
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
