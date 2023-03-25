@@ -13,13 +13,21 @@
     ./vpn.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  aa = {
+    nix.enable = true;
 
-  # Make ready for nix flakes
-  nix.package = pkgs.nixVersions.stable;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
+    suites.desktop.enable = true;
+    suites.gaming.enable = true;
+
+    tools.git.enable = true;
+    tools.zsh.enable = true;
+    tools.exa.enable = true;
+
+    apps.neovim.enable = true;
+    apps.tmux.enable = true;
+
+    services.printing.enable = true;
+  };
 
   networking = {
     hostName = "carbon"; # Define your hostname.
@@ -88,15 +96,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    git
-    vim_configurable # Using this instead of vim for python3 support
     wget
-    firefox
     wl-clipboard
     stow
-    tmux
     zsh
-    home-manager
     sanoid
     killall
     usbutils
