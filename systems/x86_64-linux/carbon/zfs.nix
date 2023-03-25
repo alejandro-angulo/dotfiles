@@ -54,9 +54,4 @@
     ];
   };
   users.users.root.initialHashedPassword = "$6$VOzIHqv12iJGQIFl$NQf1GeiGhtdLfZFmtZl4vab.xvtVvI7.5ty9zbMFI2dpmHoFdc6XnGwTlClVe./CbcrsQjtPpt7NKf0dNttcw.";
-
-  services.zfs = {
-    autoScrub.enable = true;
-    autoSnapshot.enable = true;
-  };
 }

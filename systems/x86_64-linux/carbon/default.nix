@@ -32,6 +32,8 @@
     };
 
     hardware.audio.enable = true;
+
+    system.zfs.enable = true;
   };
 
   networking = {

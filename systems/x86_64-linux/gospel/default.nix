@@ -39,6 +39,8 @@
     };
 
     hardware.audio.enable = true;
+
+    system.zfs.enable = true;
   };
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
