@@ -110,9 +110,6 @@
     lzop
     mbuffer
 
-    # Installed for gammastep
-    geoclue2
-
     wireguard-tools
 
     prusa-slicer
