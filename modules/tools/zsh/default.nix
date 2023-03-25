@@ -13,6 +13,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Already set in home-manager below, but without this building fails with
+    # an assertion error that suggests setting this
+    programs.zsh.enable = true;
+
     aa.home.extraOptions = {
       programs.zsh = {
         enable = true;
