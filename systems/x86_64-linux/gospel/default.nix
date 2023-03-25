@@ -10,7 +10,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./zfs.nix
-    ./vpn.nix
   ];
 
   aa = {
@@ -33,6 +32,11 @@
       subdomain_name = "gospel";
     };
     services.printing.enable = true;
+    services.tailscale = {
+      enable = true;
+      configureClientRouting = true;
+      configureServerRouting = true;
+    };
 
     hardware.audio.enable = true;
   };

@@ -10,7 +10,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration-zfs.nix
     ./zfs.nix
-    ./vpn.nix
   ];
 
   aa = {
@@ -27,6 +26,10 @@
     apps.tmux.enable = true;
 
     services.printing.enable = true;
+    services.tailscale = {
+      enable = true;
+      configureClientRouting = true;
+    };
 
     hardware.audio.enable = true;
   };
