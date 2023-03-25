@@ -39,6 +39,8 @@ in {
       # pamixer
     };
 
+    environment.systemPackages = with pkgs; [wl-clipboard];
+
     aa.home.extraOptions = {
       wayland.windowManager.sway = {
         enable = true;

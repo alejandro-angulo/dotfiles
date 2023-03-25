@@ -48,7 +48,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    wl-clipboard
     stow
     zsh
     sanoid
