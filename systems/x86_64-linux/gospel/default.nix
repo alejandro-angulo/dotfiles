@@ -19,11 +19,13 @@
     suites.gaming.enable = true;
 
     tools.git.enable = true;
+    tools.gpg.enable = true;
     tools.zsh.enable = true;
     tools.exa.enable = true;
 
     apps.neovim.enable = true;
     apps.tmux.enable = true;
+    apps.yubikey.enable = true;
 
     services.openssh.enable = true;
     services.nix-serve = {

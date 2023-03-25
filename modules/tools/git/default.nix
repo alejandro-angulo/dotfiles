@@ -53,7 +53,7 @@ in {
 
         signing = {
           key = cfg.signingKey;
-          signByDefault = mkIf gpg.enable true;
+          signByDefault = mkIf config.aa.tools.gpg.enable true;
         };
 
         ignores = [
