@@ -29,12 +29,12 @@ in {
       fonts.enable = true;
       gammastep.enable = true;
       mako.enable = true;
+      playerctl.enable = true;
       rofi.enable = true;
       swaylock.enable = true;
       waybar.enable = true;
 
       # TODO
-      # playerctl
       # light
       # pamixer
     };
