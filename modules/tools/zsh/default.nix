@@ -42,8 +42,8 @@ in {
             src = fetchFromGitHub {
               owner = "zsh-users";
               repo = "zsh-syntax-highlighting";
-              rev = "0.6.0";
-              sha256 = "0zmq66dzasmr5pwribyh4kbkk23jxbpdw4rjxx0i7dx8jjp2lzl4";
+              rev = "0.7.1";
+              sha256 = "sha256-gOG0NLlaJfotJfs+SUhGgLTNOnGLjoqnUp54V9aFJg8=";
             };
             file = "zsh-syntax-highlighting.zsh";
           }
