@@ -52,8 +52,8 @@ in {
             src = fetchFromGitHub {
               owner = "romkatv";
               repo = "powerlevel10k";
-              rev = "v1.16.1";
-              sha256 = "0fkfh8j7rd8mkpgz6nsx4v7665d375266shl1aasdad8blgqmf0c";
+              rev = "v1.17.0";
+              sha256 = "sha256-fgrwbWj6CcPoZ6GbCZ47HRUg8ZSJWOsa7aipEqYuE0Q=";
             };
             file = "powerlevel10k.zsh-theme";
           }
