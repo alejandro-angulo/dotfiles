@@ -75,6 +75,7 @@
     esptool
     minicom
     file
+    signal-desktop
   ];
 
   # This value determines the NixOS release from which the default
