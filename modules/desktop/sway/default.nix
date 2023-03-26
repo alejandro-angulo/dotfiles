@@ -163,6 +163,7 @@ in {
             "${modifier}+z" = "reload";
             # TODO: Reintroduce this. Failing because config.home.homeDirectory is not set
             # "${modifier}+x" = "exec swaylock -i ${config.home.homeDirectory}/dotfiles/users/alejandro/sway/wallpaper.png";
+            "${modifier}+x" = "exec swaylock";
 
             # Volume control
             "XF86AudioRaiseVolume" = " exec 'pamixer --increase 5'";
