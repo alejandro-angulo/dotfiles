@@ -24,7 +24,7 @@ in {
         enableCompletion = true;
         envExtra = ''
           export PATH=~/.local/bin:$PATH
-          export EDITOR=vim
+          export EDITOR=nvim
         '';
         initExtra = ''
           base16_darktooth
@@ -32,7 +32,7 @@ in {
           bindkey '^A' beginning-of-line
           bindkey '^E' end-of-line
           bindkey '^R' history-incremental-search-backward
-          alias view="vim -R $1"
+          alias view="nvim -R $1"
           alias l='ls -la'
         '';
 
