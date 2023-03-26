@@ -67,8 +67,8 @@ in {
             src = fetchFromGitHub {
               owner = "chriskempson";
               repo = "base16-shell";
-              rev = "ce8e1e540367ea83cc3e01eec7b2a11783b3f9e1";
-              sha256 = "1yj36k64zz65lxh28bb5rb5skwlinixxz6qwkwaf845ajvm45j1q";
+              rev = "588691ba71b47e75793ed9edfcfaa058326a6f41";
+              sha256 = "sha256-X89FsG9QICDw3jZvOCB/KsPBVOLUeE7xN3VCtf0DD3E=";
             };
             file = "base16-shell.plugin.zsh";
           }
