@@ -76,6 +76,9 @@
     minicom
     file
     signal-desktop
+    ripgrep
+    bat
+    htop
   ];
 
   # This value determines the NixOS release from which the default
