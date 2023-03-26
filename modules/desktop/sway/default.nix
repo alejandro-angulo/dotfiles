@@ -30,8 +30,8 @@ in {
       gammastep.enable = true;
       mako.enable = true;
       rofi.enable = true;
+      swaylock.enable = true;
       waybar.enable = true;
-
 
       # TODO
       # playerctl
