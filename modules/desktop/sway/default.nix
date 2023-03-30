@@ -31,6 +31,7 @@ in {
       mako.enable = true;
       playerctl.enable = true;
       rofi.enable = true;
+      swayidle.enable = true;
       swaylock.enable = true;
       waybar.enable = true;
 
