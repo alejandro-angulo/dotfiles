@@ -7,6 +7,7 @@
 }:
 with lib; let
   cfg = config.aa.desktop.sway;
+  user_cfg = config.home-manager.users.${config.aa.user.name};
   nag = "swaynag";
   left = "h";
   right = "l";
@@ -21,6 +22,14 @@ with lib; let
 in {
   options.aa.desktop.sway = with types; {
     enable = mkEnableOption "sway";
+
+    wallpaperPath = mkOption {
+      type = str;
+      default = "sway/wallpaper.jpg";
+      description = ''
+        Path to wallpaper, relative to config.home-home-manager.users.<username>.xdg.dataHome
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -42,6 +51,9 @@ in {
 
     environment.systemPackages = with pkgs; [wl-clipboard];
 
+    aa.home.dataFile = {
+      ${cfg.wallpaperPath}.source = ./wallpaper.jpg;
+    };
     aa.home.extraOptions = {
       wayland.windowManager.sway = {
         enable = true;
@@ -97,6 +109,7 @@ in {
           output = {
             # TODO: Set up wallpaper
             # "*".bg = "${wallpaper} fill";
+            "*".bg = "${user_cfg.xdg.dataHome}/${cfg.wallpaperPath} fill";
             "eDP-1".scale = "1";
 
             "Unknown ASUS VG24V 0x00007AAC" = {
