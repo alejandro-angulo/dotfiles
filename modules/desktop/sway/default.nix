@@ -108,7 +108,6 @@ in {
           # TODO: Should this live at the system configuration level?
           output = {
             # TODO: Set up wallpaper
-            # "*".bg = "${wallpaper} fill";
             "*".bg = "${user_cfg.xdg.dataHome}/${cfg.wallpaperPath} fill";
             "eDP-1".scale = "1";
 
@@ -175,8 +174,6 @@ in {
             "${modifier}+c" = "kill";
             "${modifier}+p" = "exec ${menu}";
             "${modifier}+z" = "reload";
-            # TODO: Reintroduce this. Failing because config.home.homeDirectory is not set
-            # "${modifier}+x" = "exec swaylock -i ${config.home.homeDirectory}/dotfiles/users/alejandro/sway/wallpaper.png";
             "${modifier}+x" = "exec swaylock";
 
             # Volume control
