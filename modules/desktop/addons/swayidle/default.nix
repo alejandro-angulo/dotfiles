@@ -17,6 +17,7 @@ in {
 
     aa.home.extraOptions = {
       services.swayidle = {
+        enable = true;
         timeouts = [
           {
             timeout = 300;
