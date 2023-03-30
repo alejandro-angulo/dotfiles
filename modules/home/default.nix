@@ -24,6 +24,11 @@ in {
       default = {};
       description = "A set of files to be managed by home-manager's <option>xdg.configFile</option>.";
     };
+    dataFile = mkOption {
+      type = attrs;
+      default = {};
+      description = "A set of files to be managed by home-manager's <option>xdg.dataFile</option>.";
+    };
     extraOptions = mkOption {
       type = attrs;
       default = {};
@@ -37,6 +42,7 @@ in {
       home.file = mkAliasDefinitions options.aa.home.file;
       xdg.enable = true;
       xdg.configFile = mkAliasDefinitions options.aa.home.configFile;
+      xdg.dataFile = mkAliasDefinitions options.aa.home.dataFile;
     };
 
     home-manager = {
