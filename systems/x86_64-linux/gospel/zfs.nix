@@ -6,7 +6,7 @@
   boot.supportedFilesystems = ["zfs"];
   networking.hostId = "f8616592";
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader.efi.efiSysMountPoint = "/boot/efis/nvme-WDC_WDS100T2B0C-00PXH0_21111Y801086-part1";
   boot.loader.efi.canTouchEfiVariables = false;
   boot.loader.generationsDir.copyKernels = true;
   boot.loader.grub.efiInstallAsRemovable = true;
@@ -24,7 +24,7 @@
   '';
   boot.loader.grub.extraInstallCommands = ''
     ESP_MIRROR=$(mktemp -d)
-    cp -r /boot/efi/EFI $ESP_MIRROR
+    cp -r /boot/efis/nvme-WDC_WDS100T2B0C-00PXH0_21111Y801086-part1/EFI $ESP_MIRROR
     for i in /boot/efis/*; do
      cp -r $ESP_MIRROR/EFI $i
     done
