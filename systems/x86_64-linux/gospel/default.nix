@@ -43,8 +43,7 @@
     hardware.audio.enable = true;
 
     system.zfs.enable = true;
-
-    monitoring.powertop.enable = true;
+    system.monitoring.enable = true;
   };
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
