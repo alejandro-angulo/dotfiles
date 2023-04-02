@@ -15,10 +15,11 @@ in {
   config = mkIf cfg.enable {
     aa = {
       tools = {
+        direnv.enable = true;
+        exa.enable = true;
         git.enable = true;
         gpg.enable = true;
         zsh.enable = true;
-        exa.enable = true;
       };
 
       apps = {
