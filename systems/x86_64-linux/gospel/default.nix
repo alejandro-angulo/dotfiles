@@ -15,7 +15,10 @@
   aa = {
     nix.enable = true;
 
-    suites.desktop.enable = true;
+    archetypes = {
+      workstation.enable = true;
+    };
+
     suites.gaming.enable = true;
 
     tools.git.enable = true;
@@ -56,9 +59,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget
-    killall
-    usbutils
     pavucontrol
     cachix
     nixos-generators
@@ -75,11 +75,7 @@
     prusa-slicer
     esptool
     minicom
-    file
     signal-desktop
-    ripgrep
-    bat
-    htop
   ];
 
   # This value determines the NixOS release from which the default

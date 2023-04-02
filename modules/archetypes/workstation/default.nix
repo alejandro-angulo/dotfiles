@@ -15,6 +15,7 @@ in {
   config = mkIf cfg.enable {
     aa = {
       suites = {
+        utils.enable = true;
         desktop.enable = true;
       };
     };
