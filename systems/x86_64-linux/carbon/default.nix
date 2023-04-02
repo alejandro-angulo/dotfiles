@@ -12,15 +12,7 @@
   aa = {
     nix.enable = true;
 
-    suites.desktop.enable = true;
-    suites.gaming.enable = true;
-
-    tools.git.enable = true;
-    tools.zsh.enable = true;
-    tools.exa.enable = true;
-
-    apps.neovim.enable = true;
-    apps.tmux.enable = true;
+    archetypes.workstation.enable = true;
 
     services.printing.enable = true;
     services.tailscale = {
@@ -47,10 +39,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget
     sanoid
-    killall
-    usbutils
     # Below 3 installed for sanoid
     pv
     lzop
