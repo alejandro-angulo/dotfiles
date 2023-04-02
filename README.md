@@ -1,31 +1,22 @@
 # dotfiles
 
-In the prcess of moving system setup/configration to nix. Still getting the
-hang of nix so there may be some things I'm ding that aren't "the nix way."
+My nix configuration. The name of this repo is a bit of a misnormer since I'm no
+longer managing dotfiles with a tool like stow.
 
 ## Usage
 
-Clone this repo to `~/dotfiles` (scripts depend on the repo living in this
-location but should be updated to not rely on a specific path).
-
-Run `apply-system.sh` to apply the NixOS configuration and `apply-users.sh` to
-apply the home-manager configuration.
-
-**NOTE** `apply-system.sh` depends on the machine's host name matching one of
-the configuration names in `flake.nix`.
-
-Run `update.sh` to (you guessed it) update packages.
+To apply a system configuration, run `nixos-rebuild switch`. See `nixos-rebuild
+--help` for more information.
 
 ## Development
 
-Set up direnv (should be available after applying the user configuration):
+Set up `direnv`
 
 ```bash
-echo 'use flake' > .envrc
+echo 'use flake' > .envrc && direnv allow
 ```
 
-And setup pre-commit hooks (manual step for now but can probably be automated
-with some dev shell wizardry):
+And setup pre-commit hooks
 
 ```bash
 pre-commit install
