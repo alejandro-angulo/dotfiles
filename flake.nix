@@ -35,7 +35,9 @@
             name = "DevShell";
             buildInputs = with channels.nixpkgs; [
               alejandra
-              nixpkgs-lint
+              direnv
+              git
+              pre-commit
             ];
           };
         };
