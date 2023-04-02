@@ -28,7 +28,7 @@ in {
       services.gpg-agent = {
         enable = true;
         pinentryFlavor = "curses";
-        enableZshIntegration = true;  # TODO: Only set if using zsh
+        enableZshIntegration = true; # TODO: Only set if using zsh
         enableSshSupport = true;
         sshKeys = [
           # run `gpg-connect-agent 'keyinfo --list' /bye` to get these values for existing keys
