@@ -17,10 +17,21 @@
   boot.loader.grub.zfsSupport = true;
   boot.loader.grub.extraPrepareConfig = ''
     mkdir -p /boot/efis
-    for i in  /boot/efis/*; do mount $i ; done
+    for i in  /boot/efis/* ; do
+      (mount | grep -q "$i")
+      isDirectoryMounted=$?
+      if (test $isDirectoryMounted -ne 0); then
+        mount "$i"
+      fi
+    done
 
     mkdir -p /boot/efi
-    mount /boot/efi
+    # mount /boot/efi
+    (mount | grep -q /boot/efi)
+    isDirectoryMounted=$?
+    if (test $isDirectoryMounted -ne 0); then
+      mount /boot/efi
+    fi
   '';
   boot.loader.grub.extraInstallCommands = ''
     ESP_MIRROR=$(mktemp -d)
