@@ -332,6 +332,7 @@ in {
           set mouse=a
           set expandtab
           set number
+          set relativenumber
           set autoindent
           syntax on
           let mapleader = "`"
