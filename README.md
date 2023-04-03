@@ -21,3 +21,11 @@ And setup pre-commit hooks
 ```bash
 pre-commit install
 ```
+
+## Inspiration
+
+Heavily inspired by Jake Hamilton's configuration:
+https://github.com/jakehamilton/config
+
+Check out the companion flake tour video as well:
+https://www.youtube.com/watch?v=ARjAsEJ9WVY
