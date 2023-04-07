@@ -34,12 +34,6 @@
     grub.copyKernels = true;
     grub.efiSupport = true;
     grub.zfsSupport = true;
-    # for systemd-autofs
-    grub.extraPrepareConfig = ''
-      mkdir -p /boot/efis /boot/efi
-      for i in  /boot/efis/*; do mount $i ; done
-      mount /boot/efi
-    '';
     grub.extraInstallCommands = ''
       export ESP_MIRROR=$(mktemp -d -p /tmp)
       cp -r /boot/efis/nvme-SAMSUNG_MZVLW256HEHP-000L7_S35ENX1K539085-part1/EFI $ESP_MIRROR
