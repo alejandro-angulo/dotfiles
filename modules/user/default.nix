@@ -37,6 +37,11 @@ in {
   };
 
   config = {
+    # Required when setting shell to zsh
+    # There is a separate module that configures zsh for make
+    # Refer to modules/tools/zsh/default.nix
+    programs.zsh.enable = true;
+
     users.users.${cfg.name} =
       {
         isNormalUser = true;
