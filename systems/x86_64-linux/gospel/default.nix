@@ -39,7 +39,19 @@
   };
 
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
-  networking.hostName = "gospel";
+  networking = {
+    hostName = "gospel";
+    useDHCP = false;
+    defaultGateway = "192.168.113.1";
+    nameservers = ["1.1.1.1"];
+    interfaces.eno1.ipv4.addresses = [
+      {
+        address = "192.168.113.69"; # nice
+        prefixLength = 24;
+      }
+    ];
+  };
+
   time.timeZone = "America/Los_Angeles";
 
   # List packages installed in system profile. To search, run:
