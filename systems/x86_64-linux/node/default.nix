@@ -10,6 +10,7 @@
 
   aa = {
     nix.enable =  true;
+    nix.useSelfhostedCache = true;
 
     services.openssh.enable = true;
     system.zfs.enable = true;

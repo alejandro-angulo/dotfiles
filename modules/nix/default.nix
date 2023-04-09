@@ -7,6 +7,7 @@
 }:
 with lib; let
   cfg = config.aa.nix;
+  selfHostedCacheHost = "192.168.113.69";
 in {
   options.aa.nix = with types; {
     enable = mkEnableOption "manage nix configuration.";
@@ -15,6 +16,8 @@ in {
       default = pkgs.nixVersions.unstable;
       description = "Which nix package to use.";
     };
+
+    useSelfhostedCache = mkEnableOption "use self-hosted nix cache (currently hosted on gospel)";
   };
 
   config = mkIf cfg.enable {
@@ -32,6 +35,19 @@ in {
         experimental-features = "nix-command flakes";
         trusted-users = users;
         allowed-users = users;
+
+        builders-use-substitutes = cfg.useSelfhostedCache;
+        substituters =
+          if cfg.useSelfhostedCache
+          then [
+            selfHostedCacheHost
+            "https://cache.nixos.org"
+          ]
+          else [];
+        trusted-public-keys =
+          if cfg.useSelfhostedCache
+          then ["gospelCache:9cbn8Wm54BbwpPS0TXw+15wrYZBpfOJt4Fzfbfcq/pc="]
+          else [];
       };
 
       gc = {
