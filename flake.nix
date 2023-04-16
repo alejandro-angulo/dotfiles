@@ -12,6 +12,9 @@
 
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
+
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: let
@@ -29,18 +32,16 @@
         home-manager.nixosModules.home-manager
       ];
 
-      outputs-builder = channels: {
-        devShells = {
-          default = channels.nixpkgs.mkShell {
-            name = "DevShell";
-            buildInputs = with channels.nixpkgs; [
-              alejandra
-              direnv
-              git
-              pre-commit
-            ];
-          };
+      deploy.nodes.node = {
+        hostname = "node";
+        profiles.system = {
+          user = "root";
+          sshUser = "alejandro";
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.node;
+          sshOpts = [ "-A" ];
         };
       };
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib;
     };
 }

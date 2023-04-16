@@ -7,7 +7,7 @@
 }:
 with lib; let
   cfg = config.aa.nix;
-  selfHostedCacheHost = "192.168.113.69";
+  selfHostedCacheHost = "http://192.168.113.69/";
 in {
   options.aa.nix = with types; {
     enable = mkEnableOption "manage nix configuration.";
@@ -41,7 +41,7 @@ in {
           if cfg.useSelfhostedCache
           then [
             selfHostedCacheHost
-            "https://cache.nixos.org"
+            "https://cache.nixos.org/"
           ]
           else [];
         trusted-public-keys =

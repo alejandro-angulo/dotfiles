@@ -32,7 +32,7 @@ in {
     extraOptions = mkOption {
       type = attrs;
       default = {};
-      description = "Extra options passed to <option>users.user.<name></option>.";
+      description = "Extra options passed to <option>users.users.<name></option>.";
     };
   };
 

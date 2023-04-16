@@ -15,9 +15,23 @@
     services.openssh.enable = true;
     system.zfs.enable = true;
     system.monitoring.enable = true;
+
+    suites.utils.enable = true;
+
+    tools.zsh.enable = true;
+    tools.gpg.enable = true;
+    apps.yubikey.enable = true;
   };
 
+  security.pam.enableSSHAgentAuth = true;
+  security.pam.services.${config.aa.user.name}.sshAgentAuth = true;
+
   boot.loader.systemd-boot.enable = true;
+
+  security.sudo = {
+    wheelNeedsPassword = false;
+    execWheelOnly = true;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

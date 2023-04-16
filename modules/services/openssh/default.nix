@@ -21,22 +21,23 @@ in {
       default = [default-key];
       description = "The public keys to authorize";
     };
+  };
 
-    config = mkIf config.enable {
-      services.openssh = {
-        enable = true;
-        settings = {
-          PasswordAuthentication = false;
-          PermitRootLogin =
-            if format == "install-iso"
-            then true
-            else false;
-        };
+  config = mkIf cfg.enable {
+    services.openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        PermitRootLogin = mkDefault (
+          if format == "install-iso"
+          then "yes"
+          else "no"
+        );
       };
+    };
 
-      aa.home.extraOptions = {
-        programs.openssh.authorizedKeys.keys = cfg.authorizedKeys;
-      };
+    aa.user.extraOptions = {
+      openssh.authorizedKeys.keys = cfg.authorizedKeys;
     };
   };
 }

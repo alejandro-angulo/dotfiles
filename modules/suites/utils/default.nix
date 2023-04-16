@@ -14,13 +14,16 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      alejandra
       bat
       curl
+      deploy-rs
       fd
       file
       htop
       jq
       killall
+      pre-commit
       ripgrep
       usbutils
       wget

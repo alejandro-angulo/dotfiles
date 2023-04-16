@@ -6,7 +6,7 @@
   ...
 }:
 with lib; let
-  cfg = config.aa.tools.git;
+  cfg = config.aa.tools.gpg;
   user = config.aa.user;
 in {
   options.aa.tools.gpg = with types; {

@@ -22,6 +22,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    nix.settings.allowed-users = ["nix-serve"];
+
     services = {
       nix-serve = {
         enable = true;
