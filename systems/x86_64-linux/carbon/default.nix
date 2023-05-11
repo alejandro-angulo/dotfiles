@@ -23,6 +23,7 @@
     hardware.audio.enable = true;
 
     system.zfs.enable = true;
+    apps.yubikey.enable = true;
   };
 
   networking = {
