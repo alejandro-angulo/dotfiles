@@ -54,6 +54,7 @@
     hugo
     nixos-generators
     vlc
+    signal-desktop
   ];
 
   programs.light.enable = true;
