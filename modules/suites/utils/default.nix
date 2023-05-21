@@ -24,6 +24,7 @@ in {
       jq
       killall
       pre-commit
+      python3
       ripgrep
       usbutils
       wget
