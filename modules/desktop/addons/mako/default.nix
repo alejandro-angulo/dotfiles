@@ -13,7 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    aa.desktop.addons.fonts.enable = true;
+    aa.system.fonts.enable = true;
 
     environment.systemPackages = with pkgs; [mako libnotify];
 

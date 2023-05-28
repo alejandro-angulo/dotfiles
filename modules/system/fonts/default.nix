@@ -6,9 +6,9 @@
   ...
 }:
 with lib; let
-  cfg = config.aa.desktop.addons.fonts;
+  cfg = config.aa.system.fonts;
 in {
-  options.aa.desktop.addons.fonts = with types; {
+  options.aa.system.fonts = with types; {
     enable = mkEnableOption "manage fonts";
   };
 

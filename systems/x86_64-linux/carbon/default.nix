@@ -33,10 +33,6 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override {fonts = ["Hack"];})
-  ];
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

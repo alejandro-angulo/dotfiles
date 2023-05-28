@@ -35,7 +35,6 @@ in {
   config = mkIf cfg.enable {
     aa.desktop.addons = {
       alacritty.enable = true;
-      fonts.enable = true;
       gammastep.enable = true;
       mako.enable = true;
       playerctl.enable = true;
@@ -48,6 +47,8 @@ in {
       # light
       # pamixer
     };
+
+    aa.system.fonts.enable = true;
 
     environment.systemPackages = with pkgs; [wl-clipboard];
 

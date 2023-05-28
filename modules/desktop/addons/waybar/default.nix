@@ -13,7 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    aa.desktop.addons.fonts.enable = true;
+    aa.system.fonts.enable = true;
 
     aa.home = {
       extraOptions = {
@@ -77,7 +77,7 @@ in {
               };
 
               cpu = {
-                format = "{usage}%  ";
+                format = "{usage}%  ";
                 tooltip = false;
               };
 
@@ -129,8 +129,8 @@ in {
               };
 
               network = {
-                format-wifi = "直 ";
-                format-ethernet = "{ifname}: {ipaddr}/{cidr}  ";
+                format-wifi = "  ";
+                format-ethernet = "{ifname}: {ipaddr}/{cidr} 󰈀 ";
                 format-linked = "{ifname} (No IP)  ";
                 format-disconnected = "睊 ";
                 format-alt = "{ifname}: {ipaddr}/{cidr}";
