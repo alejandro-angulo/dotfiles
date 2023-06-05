@@ -111,10 +111,10 @@ in {
                 };
                 format = "{icon} {capacity}%";
                 tooltip-format = "{timeTo}, {capacity}%";
-                format-charging = " {capacity}%";
+                format-charging = "󰂄 {capacity}%";
                 format-plugged = " ";
                 format-alt = "{time} {icon}";
-                format-icons = ["" "" "" "" ""];
+                format-icons = ["" "" "" "" ""];
               };
 
               memory = {
@@ -123,7 +123,7 @@ in {
 
               backlight = {
                 format = "{icon} {percent}%";
-                format-icons = [" " " "];
+                format-icons = ["󰃞` " "󰃚 "];
                 on-scroll-up = "light -A 1";
                 on-scroll-down = "light -U 1";
               };
