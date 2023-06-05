@@ -110,7 +110,7 @@ in {
           output = {
             # TODO: Set up wallpaper
             "*".bg = "${user_cfg.xdg.dataHome}/${cfg.wallpaperPath} fill";
-            "eDP-1".scale = "1";
+            "eDP-1".scale = "1.25";
 
             "ASUSTek COMPUTER INC ASUS VG24V 0x00007AAC" = {
               mode = "1920x1080@120Hz";
