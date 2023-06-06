@@ -38,6 +38,14 @@
     system.monitoring.enable = true;
   };
 
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
   networking = {
     hostName = "gospel";
