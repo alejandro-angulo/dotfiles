@@ -72,12 +72,12 @@ in {
 
               temperature = {
                 critical-threshold = 80;
-                format = "{temperatureC}°C {icon}";
+                format = "{icon}{temperatureC}°C";
                 format-icons = [" " " " " "];
               };
 
               cpu = {
-                format = "{usage}%  ";
+                format = "  {usage}%";
                 tooltip = false;
               };
 
@@ -114,22 +114,22 @@ in {
                 format-charging = "󰂄 {capacity}%";
                 format-plugged = " ";
                 format-alt = "{time} {icon}";
-                format-icons = ["" "" "" "" ""];
+                format-icons = [" " " " " " " " " "];
               };
 
               memory = {
-                format = "{}%  ";
+                format = " {}%";
               };
 
               backlight = {
                 format = "{icon} {percent}%";
-                format-icons = ["󰃞` " "󰃚 "];
+                format-icons = ["󰃞`" "󰃚"];
                 on-scroll-up = "light -A 1";
                 on-scroll-down = "light -U 1";
               };
 
               network = {
-                format-wifi = "  ";
+                format-wifi = " ";
                 format-ethernet = "{ifname}: {ipaddr}/{cidr} 󰈀 ";
                 format-linked = "{ifname} (No IP)  ";
                 format-disconnected = "睊 ";
