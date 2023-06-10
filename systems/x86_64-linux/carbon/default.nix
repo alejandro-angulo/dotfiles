@@ -21,6 +21,7 @@
     };
 
     hardware.audio.enable = true;
+    hardware.tlp.enable = true;
 
     system.zfs.enable = true;
     apps.yubikey.enable = true;
