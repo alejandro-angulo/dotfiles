@@ -30,7 +30,6 @@
     ##for problematic UEFI firmware
     grub.efiInstallAsRemovable = true;
     grub.enable = true;
-    grub.version = 2;
     grub.copyKernels = true;
     grub.efiSupport = true;
     grub.zfsSupport = true;
