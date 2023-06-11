@@ -147,14 +147,10 @@ in {
 
         coc = {
           enable = true;
-          settings = ''
-            {
-              coc.preferences.formatOnSaveFiletypes": [
-                "*"
-              ],
-              python.formatting.provider": "black"
-            }
-          '';
+          settings = {
+            "coc.preferences.formatOnSave" = true;
+            "python.formatting.provider" = "black";
+          };
 
           # Copied the below from coc's README
           pluginConfig =
