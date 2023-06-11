@@ -21,5 +21,7 @@ in {
     ];
 
     powerManagement.powertop.enable = true;
+
+    aa.apps.btop.enable = true;
   };
 }
