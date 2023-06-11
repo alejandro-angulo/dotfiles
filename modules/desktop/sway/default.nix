@@ -50,7 +50,20 @@ in {
 
     aa.system.fonts.enable = true;
 
-    environment.systemPackages = with pkgs; [wl-clipboard];
+    environment.systemPackages = with pkgs; [
+      wl-clipboard
+      grim
+      slurp
+      xdg-utils
+      xdg-desktop-portal-wlr
+    ];
+
+    # For screen sharing to work
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+      wlr.enable = true;
+    };
 
     aa.home.dataFile = {
       ${cfg.wallpaperPath}.source = ./wallpaper.jpg;
@@ -60,6 +73,7 @@ in {
         enable = true;
         swaynag.enable = true;
         wrapperFeatures.gtk = true; # so that gtk works properly
+        systemdIntegration = true;  # needed this for screen sharing to work
 
         config = {
           inherit (terminal menu left right up down modifier);
