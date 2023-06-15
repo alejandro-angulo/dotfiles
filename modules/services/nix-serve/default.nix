@@ -22,7 +22,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    nix.settings.allowed-users = ["nix-serve"];
+    nix.settings = {
+      allowed-users = ["nix-serve"];
+      trusted-users = ["nix-serve"];
+    };
+
+    environment.systemPackages = [pkgs.nix-serve];
 
     services = {
       nix-serve = {
