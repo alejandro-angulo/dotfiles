@@ -13,9 +13,9 @@ in {
   };
 
   config = mkIf cfg.enable {
+    aa.apps.bat.enable = true;
     environment.systemPackages = with pkgs; [
       alejandra
-      bat
       curl
       deploy-rs
       fd
