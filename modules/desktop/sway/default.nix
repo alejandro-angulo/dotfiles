@@ -11,8 +11,8 @@ with lib; let
   nag = "swaynag";
   left = "h";
   right = "l";
-  up = "j";
-  down = "k";
+  up = "k";
+  down = "j";
   modifier = "Mod4";
 
   # TODO: This assume I'll be using rofi and alacritty. Should make more
