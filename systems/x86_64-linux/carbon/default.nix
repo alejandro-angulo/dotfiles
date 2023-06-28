@@ -11,6 +11,7 @@
 
   aa = {
     nix.enable = true;
+    nix.useSelfhostedCache = true;
 
     archetypes.workstation.enable = true;
 
