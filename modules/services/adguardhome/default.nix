@@ -7,7 +7,7 @@
   ...
 }:
 with lib; let
-  cfg = config.aa.services.openssh;
+  cfg = config.aa.services.adguardhome;
 in {
   options.aa.services.adguardhome = with types; {
     enable = mkEnableOption "adguardhome";
