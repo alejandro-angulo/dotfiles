@@ -19,6 +19,7 @@
     };
     services.openssh.enable = true;
     services.adguardhome.enable = true;
+    services.nextcloud.enable = true;
 
     system.zfs.enable = true;
     system.monitoring.enable = true;

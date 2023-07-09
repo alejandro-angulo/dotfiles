@@ -60,6 +60,8 @@ in {
     };
 
     networking.firewall = {
+      # TODO: Remove this here and leave it up to systems to decide to enable
+      # the firewall
       enable = true;
       allowedTCPPorts = [
         # Plain DNS

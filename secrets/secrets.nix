@@ -5,4 +5,5 @@ let
   machines.node = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIETLBnc8kJokmFiA28BaSYpeE7flY1W0SM5C1pWv/tOv";
 in {
   "cf_dns_kilonull.age".publicKeys = [users.me machines.node];
+  "nextcloud_admin.age".publicKeys = [users.me machines.node];
 }
