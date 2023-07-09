@@ -26,8 +26,10 @@ in {
       hostName = "nextcloud.kilonull.com";
       https = true;
       database.createLocally = true;
+      datadir = "/tank/nextcloud";
       # Arbitrary large size
       maxUploadSize = "16G";
+      configureRedis = true;
       config = {
         dbtype = "pgsql";
         adminuser = "alejandro";

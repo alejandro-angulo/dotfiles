@@ -33,6 +33,7 @@ in {
       lsof
       bind # for dig
       tcpdump
+      progress
     ];
   };
 }
