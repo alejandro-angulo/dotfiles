@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib; let
@@ -15,6 +16,7 @@ in {
   config = mkIf cfg.enable {
     aa.apps.bat.enable = true;
     environment.systemPackages = with pkgs; [
+      inputs.agenix.packages.x86_64-linux.default
       alejandra
       curl
       deploy-rs
@@ -28,6 +30,9 @@ in {
       ripgrep
       usbutils
       wget
+      lsof
+      bind # for dig
+      tcpdump
     ];
   };
 }

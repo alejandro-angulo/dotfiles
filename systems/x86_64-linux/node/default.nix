@@ -9,10 +9,17 @@
   ];
 
   aa = {
-    nix.enable =  true;
+    nix.enable = true;
     nix.useSelfhostedCache = true;
 
+    services.tailscale = {
+      enable = true;
+      configureClientRouting = true;
+      configureServerRouting = true;
+    };
     services.openssh.enable = true;
+    services.adguardhome.enable = true;
+
     system.zfs.enable = true;
     system.monitoring.enable = true;
 
@@ -31,6 +38,19 @@
   security.sudo = {
     wheelNeedsPassword = false;
     execWheelOnly = true;
+  };
+
+  networking = {
+    hostName = "node";
+    useDHCP = false;
+    defaultGateway = "192.168.113.1";
+    nameservers = ["127.0.0.1" "1.1.1.1"];
+    interfaces.enp7s0.ipv4.addresses = [
+      {
+        address = "192.168.113.13";
+        prefixLength = 24;
+      }
+    ];
   };
 
   # List packages installed in system profile. To search, run:

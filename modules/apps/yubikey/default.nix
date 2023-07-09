@@ -17,6 +17,8 @@ in {
       yubikey-manager
       yubikey-agent
       yubico-pam
+      age-plugin-yubikey
+      rage
     ];
 
     services.pcscd.enable = true;
