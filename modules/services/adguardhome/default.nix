@@ -49,6 +49,10 @@ in {
       # Wildcard cert
       certs."kilonull.com" = {
         dnsProvider = "cloudflare";
+        # Private network resolves *.kilonull.com to private servers but `lego`
+        # (acme client under the hood) needs to find the cloudflare nameservers
+        # to determine the correct zone to apply changes in. Use cloudflare's
+        # own DNS to make `lego` happy (will resolve names to a public IP).
         dnsResolver = "1.1.1.1:53";
         credentialsFile = config.age.secrets.cf_dns_kilonull.path;
         extraDomainNames = ["*.kilonull.com"];
