@@ -73,7 +73,7 @@ in {
         enable = true;
         swaynag.enable = true;
         wrapperFeatures.gtk = true; # so that gtk works properly
-        systemd.enable = true;  # needed this for screen sharing to work
+        systemd.enable = true; # needed this for screen sharing to work
 
         config = {
           inherit (terminal menu left right up down modifier);
