@@ -33,6 +33,7 @@
     };
 
     hardware.audio.enable = true;
+    hardware.logitech.enable = true;
 
     system.zfs.enable = true;
     system.monitoring.enable = true;

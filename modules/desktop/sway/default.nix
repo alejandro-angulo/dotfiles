@@ -45,7 +45,6 @@ in {
 
       # TODO
       # light
-      # pamixer
     };
 
     aa.system.fonts.enable = true;
