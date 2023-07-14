@@ -30,6 +30,15 @@ in {
       # Arbitrary large size
       maxUploadSize = "16G";
       configureRedis = true;
+      logType = "file";
+      poolSettings = {
+        pm = "dynamic";
+        "pm.max_children" = "64";
+        "pm.max_requests" = "500";
+        "pm.max_spare_servers" = "25";
+        "pm.min_spare_servers" = "10";
+        "pm.start_servers" = "15";
+      };
       config = {
         dbtype = "pgsql";
         adminuser = "alejandro";
