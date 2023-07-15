@@ -22,6 +22,7 @@
     };
 
     hardware.audio.enable = true;
+    hardware.bluetooth.enable = true;
     hardware.tlp.enable = true;
 
     system.zfs.enable = true;
