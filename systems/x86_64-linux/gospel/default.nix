@@ -8,6 +8,8 @@
     ./zfs.nix
   ];
 
+  age.secrets.cf_dns_kilonull.file = ../../../secrets/cf_dns_kilonull.age;
+
   aa = {
     nix.enable = true;
 
@@ -19,11 +21,19 @@
 
     apps.yubikey.enable = true;
 
+    security.acme = {
+      enable = true;
+      # useStaging = true;
+      domainName = "kilonull.com";
+      dnsCredentialsFile = config.age.secrets.cf_dns_kilonull.path;
+    };
+
     services.openssh.enable = true;
     services.nix-serve = {
       enable = true;
       domain_name = "kilonull.com";
-      subdomain_name = "gospel";
+      subdomain_name = "cache";
+      acmeCertName = "kilonull.com";
     };
     services.printing.enable = true;
     services.tailscale = {

@@ -7,7 +7,7 @@
 }:
 with lib; let
   cfg = config.aa.nix;
-  selfHostedCacheHost = "http://192.168.113.69/";
+  selfHostedCacheHost = "https://cache.kilonull.com/";
 in {
   options.aa.nix = with types; {
     enable = mkEnableOption "manage nix configuration.";

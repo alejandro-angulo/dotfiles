@@ -8,6 +8,8 @@
     ./zfs.nix
   ];
 
+  age.secrets.cf_dns_kilonull.file = ../../../secrets/cf_dns_kilonull.age;
+
   aa = {
     nix.enable = true;
     nix.useSelfhostedCache = true;
@@ -18,8 +20,20 @@
       configureServerRouting = true;
     };
     services.openssh.enable = true;
-    services.adguardhome.enable = true;
-    services.nextcloud.enable = true;
+    services.adguardhome = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+    };
+    services.nextcloud = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+    };
+
+    security.acme = {
+      enable = true;
+      domainName = "kilonull.com";
+      dnsCredentialsFile = config.age.secrets.cf_dns_kilonull.path;
+    };
 
     system.zfs.enable = true;
     system.monitoring.enable = true;
