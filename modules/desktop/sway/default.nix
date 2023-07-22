@@ -55,6 +55,8 @@ in {
       slurp
       xdg-utils
       xdg-desktop-portal-wlr
+      sway-contrib.grimshot
+      wev
     ];
 
     # For screen sharing to work
@@ -273,6 +275,20 @@ in {
 
             ## Move focus to the parent container
             "${modifier}+a" = "focus parent";
+
+            # Screenshots
+
+            ## Current window
+            "${modifier}+period" = "exec grimshot --notify save active ~/screenshots";
+
+            ## Area selection
+            "${modifier}+Shift+period" = "exec grimshot --notify save area ~/screenshots";
+
+            ## Current output
+            "${modifier}+Alt+period" = "exec grimshot --notify save output ~/screenshots";
+
+            ## Window selection
+            "${modifier}+Ctrl+period" = "exec grimshot --notify save window ~/screenshots";
 
             # Scratchpad
             # Move the currently focused window to the scratchpad
