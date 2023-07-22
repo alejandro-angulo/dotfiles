@@ -19,7 +19,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [fzf fd];
+    environment.systemPackages = with pkgs; [fzf fd nixd];
 
     aa.home.dataFile = {
       ${cfg.tmuxThemePath}.source = ./tmux_theme;
@@ -150,6 +150,13 @@ in {
           settings = {
             "coc.preferences.formatOnSave" = true;
             "python.formatting.provider" = "black";
+            "languageserver" = {
+              "nixd" = {
+                "command" = "nixd";
+                "rootPatterns" = [".nixd.json"];
+                "filetypes" = ["nix"];
+              };
+            };
           };
 
           # Copied the below from coc's README
