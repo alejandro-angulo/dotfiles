@@ -34,6 +34,7 @@ in {
       bind # for dig
       tcpdump
       progress
+      sqlite
     ];
   };
 }
