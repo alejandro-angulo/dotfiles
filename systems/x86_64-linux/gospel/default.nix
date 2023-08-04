@@ -41,6 +41,21 @@
       configureClientRouting = true;
       configureServerRouting = true;
     };
+    services.syncoid = {
+      enable = true;
+      commands = {
+        "bpool" = {
+          target = "backups@192.168.113.13:tank/backups/gospel/bpool";
+          recursive = true;
+          sshKey = "/var/lib/syncoid/.ssh/id_ed25519";
+        };
+        "rpool" = {
+          target = "backups@192.168.113.13:tank/backups/gospel/rpool";
+          recursive = true;
+          sshKey = "/var/lib/syncoid/.ssh/id_ed25519";
+        };
+      };
+    };
 
     hardware.audio.enable = true;
     hardware.bluetooth.enable = true;

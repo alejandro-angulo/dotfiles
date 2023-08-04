@@ -16,7 +16,12 @@ in {
   config = mkIf cfg.enable {
     services.zfs = {
       autoScrub.enable = true;
-      autoSnapshot.enable = true;
+      # Still need to set `com.sun:auto-snapshot` to `true` on datasets
+      # zfs set com.sun:auto-snapshot=true pool/dataset
+      autoSnapshot = {
+        enable = true;
+        flags = "-k -p --utc";
+      };
     };
   };
 }
