@@ -18,23 +18,24 @@ in {
     environment.systemPackages = with pkgs; [
       inputs.agenix.packages.x86_64-linux.default
       alejandra
+      bind # for dig
       curl
       deploy-rs
+      du-dust
       fd
       file
       htop
       jq
       killall
+      lsof
       pre-commit
+      progress
       python3
       ripgrep
+      sqlite
+      tcpdump
       usbutils
       wget
-      lsof
-      bind # for dig
-      tcpdump
-      progress
-      sqlite
     ];
   };
 }
