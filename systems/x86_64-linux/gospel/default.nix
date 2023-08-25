@@ -78,7 +78,7 @@
     hostName = "gospel";
     useDHCP = false;
     defaultGateway = "192.168.113.1";
-    nameservers = ["192.168.113.13"];
+    nameservers = ["192.168.113.13" "1.1.1.1"];
     interfaces.eno1.ipv4.addresses = [
       {
         address = "192.168.113.69"; # nice
