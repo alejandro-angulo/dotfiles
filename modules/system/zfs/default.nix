@@ -14,6 +14,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = [pkgs.zfs-prune-snapshots];
+
     services.zfs = {
       autoScrub.enable = true;
       # Still need to set `com.sun:auto-snapshot` to `true` on datasets
