@@ -35,13 +35,23 @@ in {
   config = mkIf cfg.enable {
     services.syncoid = {
       enable = true;
+      localSourceAllow =
+        options.services.syncoid.localSourceAllow.default
+        ++ [
+          "mount"
+        ];
+      localTargetAllow =
+        options.services.syncoid.localTargetAllow.default
+        ++ [
+          "destroy"
+        ];
       commands = mkAliasDefinitions options.aa.services.syncoid.commands;
     };
 
-    environment.systemPackages = mkIf (cfg.remoteTargetUser != "") [
-      pkgs.lzop
-      pkgs.mbuffer
-    ];
+    environment.systemPackages = mkIf (cfg.remoteTargetUser != "") (with pkgs; [
+      lzop
+      mbuffer
+    ]);
 
     users = mkIf (cfg.remoteTargetUser != "") {
       users."${cfg.remoteTargetUser}" = {
