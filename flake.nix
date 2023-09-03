@@ -25,6 +25,8 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.home-manager.follows = "home-manager";
     agenix.inputs.darwin.follows = "";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = inputs: let
@@ -39,20 +41,48 @@
       channels-config.allowUnfree = true;
 
       systems.modules = with inputs; [
-        home-manager.nixosModules.home-manager
         agenix.nixosModules.default
+        home-manager.nixosModules.home-manager
       ];
 
-      deploy.nodes.node = {
-        hostname = "node";
-        profiles.system = {
-          user = "root";
-          sshUser = "alejandro";
-          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.node;
-          sshOpts = ["-A"];
+      deploy.nodes = {
+        node = {
+          hostname = "node";
+          profiles.system = {
+            user = "root";
+            sshUser = "alejandro";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.node;
+            sshOpts = ["-A"];
+          };
+        };
+
+        pi4 = let
+          system = "aarch64-linux";
+          pkgs = import inputs.nixpkgs {inherit system;};
+          deployPkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [
+              inputs.deploy-rs.overlay
+              (self: super: {
+                deploy-rs = {
+                  inherit (pkgs) deploy-rs;
+                  lib = inputs.deploy-rs.lib;
+                };
+              })
+            ];
+          };
+        in {
+          hostname = "pi4";
+          profiles.system = {
+            user = "root";
+            sshUser = "alejandro";
+            path = deployPkgs.deploy-rs.lib.aarch64-linux.activate.nixos inputs.self.nixosConfigurations.pi4;
+          };
         };
       };
 
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib;
+      # TODO: Re-enable this when I figure out how to prevent needing to build
+      # dependencies for architectures other than the host machine
+      # checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib;
     };
 }

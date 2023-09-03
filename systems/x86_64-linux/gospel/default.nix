@@ -73,7 +73,7 @@
     };
   };
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
+  # boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
   networking = {
     hostName = "gospel";
     useDHCP = false;
