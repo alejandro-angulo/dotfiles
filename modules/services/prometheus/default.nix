@@ -7,6 +7,7 @@
 }:
 with lib; let
   cfg = config.aa.services.prometheus;
+  exporters = config.services.prometheus.exporters;
 in {
   options.aa.services.prometheus = with types; {
     enable = mkEnableOption "prometheus";
@@ -21,7 +22,26 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.prometheus.enable = true;
+    services.prometheus = {
+      enable = true;
+      exporters = {
+        node = {
+          enable = true;
+          enabledCollectors = ["systemd"];
+          port = 9002;
+        };
+      };
+      scrapeConfigs = [
+        {
+          job_name = "foo";
+          static_configs = [
+            {
+              targets = ["127.0.0.1:${toString exporters.node.port}"];
+            }
+          ];
+        }
+      ];
+    };
 
     services.nginx = {
       enable = true;
