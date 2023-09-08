@@ -14,6 +14,8 @@
     nix.enable = true;
     nix.useSelfhostedCache = true;
 
+    apps.tmux.enable = true;
+
     services.tailscale = {
       enable = true;
       configureClientRouting = true;
@@ -25,6 +27,10 @@
       acmeCertName = "kilonull.com";
     };
     services.nextcloud = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+    };
+    services.grafana = {
       enable = true;
       acmeCertName = "kilonull.com";
     };
