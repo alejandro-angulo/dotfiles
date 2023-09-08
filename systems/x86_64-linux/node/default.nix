@@ -34,6 +34,10 @@
       enable = true;
       acmeCertName = "kilonull.com";
     };
+    services.prometheus = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+    };
     services.syncoid = {
       #  sudo -u backups zfs create -o mountpoint=/tank/backups/gospel tank/backups/gospel
       enable = true;
