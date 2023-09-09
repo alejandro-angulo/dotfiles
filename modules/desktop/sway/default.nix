@@ -19,6 +19,8 @@ with lib; let
   # generic.
   menu = "rofi -show run";
   terminal = "alacritty";
+
+  generate_grimshot_command = target: ''exec mkdir -p ~/screenshots && ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify save ${target} ~/screenshots/"$(date -u --iso-8601=seconds)".png'';
 in {
   options.aa.desktop.sway = with types; {
     enable = mkEnableOption "sway";
@@ -279,16 +281,16 @@ in {
             # Screenshots
 
             ## Current window
-            "${modifier}+period" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify save active ~/screenshots";
+            "${modifier}+period" = generate_grimshot_command "active";
 
             ## Area selection
-            "${modifier}+Shift+period" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify save area ~/screenshots";
+            "${modifier}+Shift+period" = generate_grimshot_command "area";
 
             ## Current output
-            "${modifier}+Alt+period" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify save output ~/screenshots";
+            "${modifier}+Alt+period" = generate_grimshot_command "output";
 
             ## Window selection
-            "${modifier}+Ctrl+period" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify save window ~/screenshots";
+            "${modifier}+Ctrl+period" = generate_grimshot_command "window";
 
             # Scratchpad
             # Move the currently focused window to the scratchpad
