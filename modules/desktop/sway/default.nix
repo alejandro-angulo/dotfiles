@@ -279,16 +279,16 @@ in {
             # Screenshots
 
             ## Current window
-            "${modifier}+period" = "exec grimshot --notify save active ~/screenshots";
+            "${modifier}+period" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify save active ~/screenshots";
 
             ## Area selection
-            "${modifier}+Shift+period" = "exec grimshot --notify save area ~/screenshots";
+            "${modifier}+Shift+period" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify save area ~/screenshots";
 
             ## Current output
-            "${modifier}+Alt+period" = "exec grimshot --notify save output ~/screenshots";
+            "${modifier}+Alt+period" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify save output ~/screenshots";
 
             ## Window selection
-            "${modifier}+Ctrl+period" = "exec grimshot --notify save window ~/screenshots";
+            "${modifier}+Ctrl+period" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify save window ~/screenshots";
 
             # Scratchpad
             # Move the currently focused window to the scratchpad
