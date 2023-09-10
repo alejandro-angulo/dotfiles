@@ -77,6 +77,9 @@
             user = "root";
             sshUser = "alejandro";
             path = deployPkgs.deploy-rs.lib.aarch64-linux.activate.nixos inputs.self.nixosConfigurations.pi4;
+            # Usually deploy from an x86_64 machine and don't want to bother
+            # trying to build an aarch64 derivation
+            remoteBuild = true;
           };
         };
       };

@@ -11,54 +11,49 @@ with lib; let
 in {
   options.aa.services.prometheus = with types; {
     enable = mkEnableOption "prometheus";
-    acmeCertName = mkOption {
-      type = str;
-      default = "";
-      description = ''
-        If set to a non-empty string, forces SSL with the supplied acme
-        certificate.
-      '';
+    enableServer = mkOption {
+      type = bool;
+      default = false;
+      description = "Whether or not to enable the prometheus server";
+    };
+    enableNodeExporter = mkOption {
+      type = bool;
+      default = true;
+      description = "Whether or not to enable the node exporter";
     };
   };
 
   config = mkIf cfg.enable {
     services.prometheus = {
-      enable = true;
+      enable = cfg.enableServer;
       exporters = {
         node = {
-          enable = true;
+          enable = cfg.enableNodeExporter;
           enabledCollectors = ["systemd"];
           port = 9002;
+          openFirewall = true;
         };
       };
-      scrapeConfigs = [
+      scrapeConfigs = mkIf cfg.enableServer [
         {
-          job_name = "foo";
+          job_name = "node";
           static_configs = [
             {
-              targets = ["127.0.0.1:${toString exporters.node.port}"];
+              # TODO: How to automatically generate this whenever an exporter
+              # is configured
+              targets = [
+                "node:${toString exporters.node.port}"
+                "gospel:${toString exporters.node.port}"
+                "pi4:${toString exporters.node.port}"
+              ];
             }
           ];
         }
       ];
     };
 
-    services.nginx = {
-      enable = true;
-      virtualHosts."prometheus.${cfg.acmeCertName}" =
-        {
-          locations."/" = {
-            proxyPass = "http://${config.services.prometheus.listenAddress}:${toString config.services.prometheus.port}";
-          };
-        }
-        // lib.optionalAttrs (cfg.acmeCertName != "") {
-          forceSSL = true;
-          useACMEHost = cfg.acmeCertName;
-        };
-    };
-
-    networking.firewall = {
-      allowedTCPPorts = [80 443];
+    networking.firewall = mkIf cfg.enableServer {
+      allowedTCPPorts = [config.services.prometheus.port];
     };
   };
 }

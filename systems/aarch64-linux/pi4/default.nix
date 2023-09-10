@@ -41,6 +41,7 @@
       enable = true;
       acmeCertName = "kilonull.com";
     };
+    services.prometheus.enable = true;
 
     security.acme = {
       enable = true;

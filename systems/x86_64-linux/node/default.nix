@@ -36,7 +36,7 @@
     };
     services.prometheus = {
       enable = true;
-      acmeCertName = "kilonull.com";
+      enableServer = true;
     };
     services.loki = {
       enable = true;

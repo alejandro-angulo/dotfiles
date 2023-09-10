@@ -56,6 +56,7 @@
         };
       };
     };
+    services.prometheus.enable = true;
 
     hardware.audio.enable = true;
     hardware.bluetooth.enable = true;
