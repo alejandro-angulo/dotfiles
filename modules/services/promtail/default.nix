@@ -11,14 +11,6 @@ with lib; let
 in {
   options.aa.services.promtail = with types; {
     enable = mkEnableOption "promtail";
-    acmeCertName = mkOption {
-      type = str;
-      default = "";
-      description = ''
-        If set to a non-empty string, forces SSL with the supplied acme
-        certificate.
-      '';
-    };
   };
 
   config = mkIf cfg.enable {
@@ -34,7 +26,8 @@ in {
         };
         clients = [
           {
-            url = "http://127.0.0.1:${toString loki.configuration.server.http_listen_port}/loki/api/v1/push";
+            # TODO: Don't hardcode this?
+            url = "http://node:3030/loki/api/v1/push";
           }
         ];
         scrape_configs = [
@@ -44,7 +37,7 @@ in {
               max_age = "12h";
               labels = {
                 job = "systemd-journal";
-                host = "node";
+                host = config.networking.hostName;
               };
             };
             relabel_configs = [
@@ -58,20 +51,8 @@ in {
       };
     };
 
-    services.nginx = mkIf (cfg.acmeCertName != "") {
-      enable = true;
-      # Confirm with /loki/api/v1/status/buildinfo
-      virtualHosts."promtail.${cfg.acmeCertName}" = {
-        locations."/" = {
-          proxyPass = "http://localhost:${toString config.services.promtail.configuration.server.http_listen_port}";
-        };
-        forceSSL = true;
-        useACMEHost = cfg.acmeCertName;
-      };
-    };
-
-    networking.firewall = {
-      allowedTCPPorts = [80 443];
-    };
+    # networking.firewall = {
+    #   allowedTCPPorts = [80 443];
+    # };
   };
 }

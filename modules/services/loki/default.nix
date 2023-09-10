@@ -11,14 +11,6 @@ with lib; let
 in {
   options.aa.services.loki = with types; {
     enable = mkEnableOption "loki";
-    acmeCertName = mkOption {
-      type = str;
-      default = "";
-      description = ''
-        If set to a non-empty string, forces SSL with the supplied acme
-        certificate.
-      '';
-    };
   };
 
   config = mkIf cfg.enable {
@@ -103,20 +95,8 @@ in {
       };
     };
 
-    services.nginx = mkIf (cfg.acmeCertName != "") {
-      enable = true;
-      # Confirm with /loki/api/v1/status/buildinfo
-      virtualHosts."loki.${cfg.acmeCertName}" = {
-        locations."/" = {
-          proxyPass = "http://localhost:${toString loki.configuration.server.http_listen_port}";
-        };
-        forceSSL = true;
-        useACMEHost = cfg.acmeCertName;
-      };
-    };
-
     networking.firewall = {
-      allowedTCPPorts = [80 443];
+      allowedTCPPorts = [loki.configuration.server.http_listen_port];
     };
   };
 }

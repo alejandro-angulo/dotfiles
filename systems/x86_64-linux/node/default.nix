@@ -38,14 +38,8 @@
       enable = true;
       enableServer = true;
     };
-    services.loki = {
-      enable = true;
-      acmeCertName = "kilonull.com";
-    };
-    services.promtail = {
-      enable = true;
-      acmeCertName = "kilonull.com";
-    };
+    services.loki.enable = true;
+    services.promtail.enable = true;
     services.syncoid = {
       #  sudo -u backups zfs create -o mountpoint=/tank/backups/gospel tank/backups/gospel
       enable = true;
