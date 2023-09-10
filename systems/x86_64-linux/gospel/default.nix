@@ -17,6 +17,8 @@
       workstation.enable = true;
     };
 
+    desktop.addons.waybar.thermal-zone = 1;
+
     suites.gaming.enable = true;
 
     apps.yubikey.enable = true;

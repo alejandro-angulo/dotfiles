@@ -10,6 +10,12 @@ with lib; let
 in {
   options.aa.desktop.addons.waybar = with types; {
     enable = mkEnableOption "waybar";
+
+    thermal-zone = mkOption {
+      type = int;
+      default = 0;
+      description = "The thermal zone, as in `/sys/class/thermal/`.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -74,6 +80,7 @@ in {
                 critical-threshold = 80;
                 format = "{icon}{temperatureC}°C";
                 format-icons = [" " " " " "];
+                thermal-zone = cfg.thermal-zone;
               };
 
               cpu = {
