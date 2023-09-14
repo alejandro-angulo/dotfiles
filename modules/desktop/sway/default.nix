@@ -32,6 +32,14 @@ in {
         Path to wallpaper, relative to config.home-home-manager.users.<username>.xdg.dataHome
       '';
     };
+
+    verticalWallpaperPath = mkOption {
+      type = str;
+      default = "sway/skull.png";
+      description = ''
+        Path to vertical wallpaper, relative to config.home-home-manager.users.<username>.xdg.dataHome
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -70,6 +78,7 @@ in {
 
     aa.home.dataFile = {
       ${cfg.wallpaperPath}.source = ./wallpaper.jpg;
+      ${cfg.verticalWallpaperPath}.source = ./vertical.png;
     };
     aa.home.extraOptions = {
       wayland.windowManager.sway = {
@@ -137,6 +146,7 @@ in {
             "Dell Inc. DELL S2721QS 47W7M43" = {
               transform = "270";
               position = "1920 0";
+              bg = "${user_cfg.xdg.dataHome}/${cfg.verticalWallpaperPath} fill";
             };
             "Dell Inc. DELL S2721QS 4FR7M43".position = "4080 830";
           };
