@@ -6,15 +6,15 @@
   ...
 }:
 with lib; let
-  cfg = config.aa.tools.exa;
+  cfg = config.aa.tools.eza;
 in {
-  options.aa.tools.exa = with types; {
-    enable = mkEnableOption "exa";
+  options.aa.tools.eza = with types; {
+    enable = mkEnableOption "eza";
   };
 
   config = mkIf cfg.enable {
     aa.home.extraOptions = {
-      programs.exa = {
+      programs.eza = {
         enable = true;
         icons = true;
         git = true;

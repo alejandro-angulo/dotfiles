@@ -16,7 +16,7 @@ in {
     aa = {
       tools = {
         direnv.enable = true;
-        exa.enable = true;
+        eza.enable = true;
         git.enable = true;
         gpg.enable = true;
         zsh.enable = true;
