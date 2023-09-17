@@ -14,7 +14,7 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
-    snowfall-lib.url = "github:snowfallorg/lib";
+    snowfall-lib.url = "github:snowfallorg/lib/1aae2b325fc0c5839283a0af5c247fcb596c097f";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
     snowfall-lib.inputs.flake-utils-plus.follows = "flake-utils-plus";
 
@@ -29,14 +29,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = inputs: let
-    lib = inputs.snowfall-lib.mkLib {
+  outputs = inputs:
+    inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.;
-    };
-  in
-    lib.mkFlake {
+
       overlay-package-namespace = "aa";
+      # snowfall.namespace = "aa";
 
       channels-config.allowUnfree = true;
 
