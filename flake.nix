@@ -4,10 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # Fixes #133
-    # See: https://github.com/gytis-ivaskevicius/flake-utils-plus/issues/133
-    flake-utils-plus.url = github:ravensiris/flake-utils-plus?ref=ravensiris/fix-devshell-legacy-packages;
-
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -16,7 +12,6 @@
 
     snowfall-lib.url = "github:snowfallorg/lib/1aae2b325fc0c5839283a0af5c247fcb596c097f";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
-    snowfall-lib.inputs.flake-utils-plus.follows = "flake-utils-plus";
 
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
