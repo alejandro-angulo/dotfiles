@@ -10,7 +10,7 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
-    snowfall-lib.url = "github:snowfallorg/lib/1aae2b325fc0c5839283a0af5c247fcb596c097f";
+    snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -29,12 +29,12 @@
       inherit inputs;
       src = ./.;
 
-      overlay-package-namespace = "aa";
-      # snowfall.namespace = "aa";
+      # overlay-package-namespace = "aa";
+      snowfall.namespace = "aa";
 
       channels-config.allowUnfree = true;
 
-      systems.modules = with inputs; [
+      systems.modules.nixos = with inputs; [
         agenix.nixosModules.default
         home-manager.nixosModules.home-manager
       ];

@@ -52,6 +52,8 @@ in {
           # base16-vim
           nvim-base16
 
+          markdown-preview-nvim
+
           {
             plugin = lualine-nvim;
             type = "lua";

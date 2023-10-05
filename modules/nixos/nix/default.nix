@@ -50,6 +50,8 @@ in {
           else [];
       };
 
+      # TODO: Configure distributedBuilds and buildMachines?
+
       gc = {
         automatic = true;
         dates = "weekly";
