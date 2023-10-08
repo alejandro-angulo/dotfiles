@@ -26,6 +26,7 @@ in {
     services.nginx = {
       enable = true;
       recommendedProxySettings = true;
+      clientMaxBodySize = "32m";
       virtualHosts."octoprint.kilonull.com" =
         {
           locations."/" = {
