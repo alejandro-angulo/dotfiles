@@ -26,12 +26,14 @@ in {
     services.nginx = {
       enable = true;
       recommendedProxySettings = true;
-      clientMaxBodySize = "32m";
       virtualHosts."octoprint.kilonull.com" =
         {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${toString config.services.octoprint.port}";
             proxyWebsockets = true;
+            extraConfig = ''
+              client_max_body_size 32m;
+            '';
           };
         }
         // lib.optionalAttrs (cfg.acmeCertName != "") {
