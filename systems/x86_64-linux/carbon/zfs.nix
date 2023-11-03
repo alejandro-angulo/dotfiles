@@ -34,12 +34,12 @@
     grub.efiSupport = true;
     grub.zfsSupport = true;
     grub.extraInstallCommands = ''
-      export ESP_MIRROR=$(mktemp -d -p /tmp)
-      cp -r /boot/efis/nvme-SAMSUNG_MZVLW256HEHP-000L7_S35ENX1K539085-part1/EFI $ESP_MIRROR
+      export ESP_MIRROR=$(${pkgs.coreutils}/bin/mktemp -d -p /tmp)
+      ${pkgs.coreutils}/bin/cp -r /boot/efis/nvme-SAMSUNG_MZVLW256HEHP-000L7_S35ENX1K539085-part1/EFI $ESP_MIRROR
       for i in /boot/efis/*; do
-       cp -r $ESP_MIRROR/EFI $i
+       ${pkgs.coreutils}/bin/cp -r $ESP_MIRROR/EFI $i
       done
-      rm -rf $ESP_MIRROR
+      ${pkgs.coreutils}/bin/rm -rf $ESP_MIRROR
     '';
     grub.devices = [
       "/dev/disk/by-id/nvme-SAMSUNG_MZVLW256HEHP-000L7_S35ENX1K539085"

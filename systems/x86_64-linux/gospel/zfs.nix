@@ -15,12 +15,12 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.zfsSupport = true;
   boot.loader.grub.extraInstallCommands = ''
-    ESP_MIRROR=$(mktemp -d)
-    cp -r /boot/efis/nvme-WDC_WDS100T2B0C-00PXH0_21111Y801086-part1/EFI $ESP_MIRROR
+    ESP_MIRROR=$(${pkgs.coreutils}/bin/mktemp -d)
+    ${pkgs.coreutils}/bin/cp -r /boot/efis/nvme-WDC_WDS100T2B0C-00PXH0_21111Y801086-part1/EFI $ESP_MIRROR
     for i in /boot/efis/*; do
-     cp -r $ESP_MIRROR/EFI $i
+     ${pkgs.coreutils}/bin/cp -r $ESP_MIRROR/EFI $i
     done
-    rm -rf $ESP_MIRROR
+    ${pkgs.coreutils}/bin/rm -rf $ESP_MIRROR
   '';
   boot.loader.grub.devices = [
     "/dev/disk/by-id/nvme-WDC_WDS100T2B0C-00PXH0_21111Y801086"
