@@ -23,7 +23,7 @@ in {
 
   config = mkIf cfg.enable {
     age.secrets.nextcloud_admin = {
-      file = ../../../secrets/nextcloud_admin.age;
+      file = ../../../../secrets/nextcloud_admin.age;
       owner = "nextcloud";
       group = "nextcloud";
     };
