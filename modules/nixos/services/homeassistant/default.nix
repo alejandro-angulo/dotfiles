@@ -29,15 +29,10 @@ in {
         with python3packages; [
           # postgresql support
           psycopg2
-
-          # video support
-          ha-ffmpeg
-
-          # tuya needed for default config
-          tuya-iot-py-sdk
         ];
       extraComponents = [
         "hue"
+        "tuya"
       ];
       config = {
         default_config = {};
