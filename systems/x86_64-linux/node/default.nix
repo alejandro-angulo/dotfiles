@@ -47,6 +47,10 @@
       remoteTargetDatasets = ["tank/backups"];
       remoteTargetPublicKeys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAhA+9O2OBMDH1Xnj6isu36df5TOdZG8aEA4JpN2K60e syncoid@gospel"];
     };
+    services.homeassistant = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+    };
 
     security.acme = {
       enable = true;
