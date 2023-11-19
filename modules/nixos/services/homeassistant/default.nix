@@ -36,6 +36,9 @@ in {
           # tuya needed for default config
           tuya-iot-py-sdk
         ];
+      extraComponents = [
+        "hue"
+      ];
       config = {
         default_config = {};
         http = {
