@@ -54,7 +54,7 @@ in {
 
     services.nginx = {
       enable = true;
-      virtualHosts ."${server_settings.domain}" =
+      virtualHosts."${server_settings.domain}" =
         {
           locations."/" = {
             proxyPass = "http://${server_settings.http_addr}:${toString server_settings.http_port}";
