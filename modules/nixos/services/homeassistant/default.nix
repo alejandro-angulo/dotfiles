@@ -33,6 +33,8 @@ in {
       extraComponents = [
         "hue"
         "tuya"
+        "vizio"
+        "zeroconf"
       ];
       config = {
         default_config = {};
