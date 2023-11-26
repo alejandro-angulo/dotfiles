@@ -17,7 +17,6 @@ in {
       htop
       lm_sensors
       powertop
-      zenith
     ];
 
     powerManagement.powertop.enable = true;

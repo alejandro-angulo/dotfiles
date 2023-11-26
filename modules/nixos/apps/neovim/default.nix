@@ -33,7 +33,7 @@ in {
         #extraPackages = with pkgs; [];
         plugins = with pkgs.vimPlugins; [
           # tree-sitter (code parser)
-          (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+          nvim-treesitter.withAllGrammars
 
           # git integration
           gitgutter
