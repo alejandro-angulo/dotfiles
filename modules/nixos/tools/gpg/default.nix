@@ -25,6 +25,11 @@ in {
         };
       };
 
+      programs.ssh.matchBlocks = {
+        # Fix for pinentry showing up in wrong terminal
+        "*".match = "host * exec \"gpg-connect-agent UPDATESTARTUPTTY /bye\"";
+      };
+
       services.gpg-agent = {
         enable = true;
         pinentryFlavor = "curses";
