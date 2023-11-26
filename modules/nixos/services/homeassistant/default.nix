@@ -32,6 +32,7 @@ in {
         ];
       extraComponents = [
         "hue"
+        "met"
         "tuya"
         "vizio"
         "zeroconf"
@@ -44,6 +45,8 @@ in {
         };
 
         recorder.db_url = "postgresql://@/hass";
+
+        "automation ui" = "!include automations.yaml";
       };
     };
 
