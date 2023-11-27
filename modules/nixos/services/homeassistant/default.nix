@@ -33,6 +33,8 @@ in {
       extraComponents = [
         "hue"
         "met"
+        "mqtt"
+        "octoprint"
         "tuya"
         "vizio"
         "zeroconf"

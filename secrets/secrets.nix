@@ -10,4 +10,6 @@ let
 in {
   "cf_dns_kilonull.age".publicKeys = [users.me machines.node machines.gospel machines.pi4];
   "nextcloud_admin.age".publicKeys = [users.me machines.node];
+  "theengs_ble_mqtt.age".publicKeys = [users.me machines.pi4];
+  "hass_mqtt.age".publicKeys = [users.me machines.pi4 machines.node];
 }
