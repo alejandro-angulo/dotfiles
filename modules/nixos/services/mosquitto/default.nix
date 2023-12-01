@@ -26,13 +26,16 @@ in {
           users = {
             hass = {
               acl = [
-                "read home/#"
-                "readwrite homeassistant/status"
+                "readwrite home/#"
+                "readwrite homeassistant/#"
               ];
               passwordFile = config.age.secrets.hass_mqtt.path;
             };
             theengs_ble_gateway = {
-              acl = ["readwrite home/#"];
+              acl = [
+                "readwrite home/#"
+                "readwrite homeassistant/#"
+              ];
               passwordFile = config.age.secrets.theengs_ble_mqtt.path;
             };
           };
