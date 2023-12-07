@@ -40,9 +40,11 @@ in {
     aa.home.extraOptions = {
       home.stateVersion = config.system.stateVersion;
       home.file = mkAliasDefinitions options.aa.home.file;
-      xdg.enable = true;
-      xdg.configFile = mkAliasDefinitions options.aa.home.configFile;
-      xdg.dataFile = mkAliasDefinitions options.aa.home.dataFile;
+      xdg = {
+        enable = true;
+        configFile = mkAliasDefinitions options.aa.home.configFile;
+        dataFile = mkAliasDefinitions options.aa.home.dataFile;
+      };
     };
 
     home-manager = {
