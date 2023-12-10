@@ -42,20 +42,8 @@
   };
 
   fileSystems."/boot" = {
-    device = "bpool/nixos/root";
-    fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
-  };
-
-  fileSystems."/boot/efis/nvme-WDC_WDS100T2B0C-00PXH0_21111Y801086-part1" = {
-    device = "/dev/disk/by-uuid/1443-371C";
+    device = "/dev/disk/by-uuid/3C7C-03C4";
     fsType = "vfat";
-  };
-
-  fileSystems."/boot/efi" = {
-    device = "/boot/efis/nvme-WDC_WDS100T2B0C-00PXH0_21111Y801086-part1";
-    fsType = "none";
-    options = ["bind"];
   };
 
   swapDevices = [];
