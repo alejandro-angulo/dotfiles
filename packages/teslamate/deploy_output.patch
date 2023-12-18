@@ -1,0 +1,13 @@
+diff --git a/scripts/build.js b/scripts/build.js
+index 86a42678..569702b1 100644
+--- a/scripts/build.js
++++ b/scripts/build.js
+@@ -4,7 +4,7 @@ const { sassPlugin } = require("esbuild-sass-plugin");
+ const esbuild = require("esbuild");
+ 
+ const ENTRY_FILE = "app.js";
+-const OUTPUT_DIR = path.resolve(__dirname, "../../priv/static/assets");
++const OUTPUT_DIR = path.resolve(__dirname, "deploy_output");
+ const OUTPUT_FILE = "app.js";
+ const MODE = process.env["NODE_ENV"] || "production";
+ const TARGET = "es2017";
