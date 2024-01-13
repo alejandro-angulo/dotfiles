@@ -30,6 +30,7 @@ in {
           # postgresql support
           psycopg2
         ];
+
       extraComponents = [
         "hue"
         "met"
@@ -39,6 +40,11 @@ in {
         "vizio"
         "zeroconf"
       ];
+
+      customComponents = with pkgs.home-assistant-custom-components; [
+        adaptive_lighting
+      ];
+
       config = {
         default_config = {};
         http = {
@@ -73,9 +79,7 @@ in {
       ensureUsers = [
         {
           name = "hass";
-          ensurePermissions = {
-            "DATABASE hass" = "ALL PRIVILEGES";
-          };
+          ensureDBOwnership = true;
         }
       ];
     };
