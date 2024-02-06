@@ -74,6 +74,7 @@ in {
       enable = true;
       extraPortals = with pkgs; [xdg-desktop-portal-gtk];
       wlr.enable = true;
+      config.common.default = "*";
     };
 
     aa.home.dataFile = {
