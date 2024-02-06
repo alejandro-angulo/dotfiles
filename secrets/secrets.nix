@@ -12,4 +12,7 @@ in {
   "nextcloud_admin.age".publicKeys = [users.me machines.node];
   "theengs_ble_mqtt.age".publicKeys = [users.me machines.pi4];
   "hass_mqtt.age".publicKeys = [users.me machines.pi4 machines.node];
+  "teslamate_db.age".publicKeys = [users.me machines.node];
+  "teslamate_mqtt.age".publicKeys = [users.me machines.pi4 machines.node];
+  "teslamate_encryption.age".publicKeys = [users.me machines.node];
 }

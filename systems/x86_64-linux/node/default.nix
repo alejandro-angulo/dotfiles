@@ -8,7 +8,10 @@
     ./zfs.nix
   ];
 
-  age.secrets.cf_dns_kilonull.file = ../../../secrets/cf_dns_kilonull.age;
+  age.secrets = {
+    cf_dns_kilonull.file = ../../../secrets/cf_dns_kilonull.age;
+    teslamate_db.file = ../../../secrets/teslamate_db.age;
+  };
 
   aa = {
     nix.enable = true;
@@ -46,6 +49,14 @@
       remoteTargetUser = "backups";
       remoteTargetDatasets = ["tank/backups"];
       remoteTargetPublicKeys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAhA+9O2OBMDH1Xnj6isu36df5TOdZG8aEA4JpN2K60e syncoid@gospel"];
+    };
+    services.teslamate = {
+      enable = true;
+      database = {
+        createDatabase = true;
+        passwordFile = config.age.secrets.teslamate_db.path;
+      };
+      acmeCertName = "kilonull.com";
     };
     services.gitea = {
       enable = true;

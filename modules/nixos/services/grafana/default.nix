@@ -21,6 +21,13 @@ in {
     };
   };
   config = mkIf cfg.enable {
+    age.secrets = {
+      teslamate_db_for_grafana = {
+        file = ../../../../secrets/teslamate_db.age;
+        owner = "grafana";
+      };
+    };
+
     services.grafana = {
       enable = true;
       settings.server = {
@@ -46,6 +53,49 @@ in {
               type = "loki";
               access = "proxy";
               url = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}";
+            }
+            {
+              name = "TeslaMate";
+              type = "postgres";
+              access = "proxy";
+              url = "localhost:5432";
+              user = "teslamate";
+              database = "teslamate";
+              secureJsonData = {
+                password = "$__file{${config.age.secrets.teslamate_db_for_grafana.path}}";
+              };
+              jsonData = {
+                # TODO: Automate this somehow?
+                postgresVersion = "1400";
+                sslmode = "disable";
+              };
+            }
+          ];
+        };
+
+        dashboards = {
+          settings.providers = [
+            {
+              name = "teslamate";
+              orgId = 1;
+              folder = "TeslaMate";
+              folderUid = "Nr4ofiDZk";
+              type = "file";
+              disableDeletion = false;
+              editable = true;
+              updateIntervalSeconds = 86400;
+              options.path = "${pkgs.aa.teslamate-grafana-dashboards}/dashboards";
+            }
+            {
+              name = "teslamate_internal";
+              orgId = 1;
+              folder = "TeslaMate/Internal";
+              folderUid = "Nr5ofiDZk";
+              type = "file";
+              disableDeletion = false;
+              editable = true;
+              updateIntervalSeconds = 86400;
+              options.path = "${pkgs.aa.teslamate-grafana-dashboards}/dashboards/internal";
             }
           ];
         };

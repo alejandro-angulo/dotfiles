@@ -6,13 +6,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "teslamate-grafana-dashboards";
-  version = "1.28.2";
+  version = "1.28.3";
 
   src = fetchFromGitHub {
     owner = "teslamate-org";
     repo = "teslamate";
     rev = "v${version}";
-    hash = "sha256-CH3u6ijzvVdjfTVu06UcyW4NhVQKeUKtC/j+UeDELNc=";
+    hash = "sha256-Iky9zWb3m/ex/amZw2dP5ZOpFw3uyg0JG6e9PkV+t4A=";
   };
 
   dontBuild = true;
