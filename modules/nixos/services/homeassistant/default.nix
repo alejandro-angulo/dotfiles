@@ -32,6 +32,7 @@ in {
         ];
 
       extraComponents = [
+        "cast"
         "hue"
         "met"
         "mqtt"
