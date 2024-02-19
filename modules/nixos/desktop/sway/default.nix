@@ -135,21 +135,10 @@ in {
 
           # TODO: Should this live at the system configuration level?
           output = {
-            # TODO: Set up wallpaper
             "*".bg = "${user_cfg.xdg.dataHome}/${cfg.wallpaperPath} fill";
             "eDP-1".scale = "1.25";
-
-            "ASUSTek COMPUTER INC ASUS VG24V 0x00007AAC" = {
-              mode = "1920x1080@120Hz";
-              position = "0 830";
-            };
-
-            "Dell Inc. DELL S2721QS 47W7M43" = {
-              transform = "270";
-              position = "1920 0";
-              bg = "${user_cfg.xdg.dataHome}/${cfg.verticalWallpaperPath} fill";
-            };
-            "Dell Inc. DELL S2721QS 4FR7M43".position = "4080 830";
+            "Dell Inc. DELL S2721QS 4FR7M43".position = "0 0";
+            "Dell Inc. DELL S2721QS 47W7M43".position = "0 2160";
           };
 
           modes = {
@@ -278,7 +267,7 @@ in {
             "${modifier}+f" = "fullscreen";
 
             ## move container between displays
-            "${modifier}+semicolon" = "move workspace to output right";
+            "${modifier}+semicolon" = "move workspace to output up";
 
             ## Toggle the current focus between tiling and floating mode
             "${modifier}+Shift+f" = "floating toggle";
