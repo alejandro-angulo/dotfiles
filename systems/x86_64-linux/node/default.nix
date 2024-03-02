@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -84,7 +85,7 @@
     apps.yubikey.enable = true;
   };
 
-  security.pam.enableSSHAgentAuth = true;
+  security.pam.sshAgentAuth.enable = true;
   security.pam.services.${config.aa.user.name}.sshAgentAuth = true;
 
   boot.loader.systemd-boot.enable = true;
@@ -106,6 +107,20 @@
       }
     ];
   };
+
+  # Running own DNS resolver on same system. This prevents DNS issues with ACME
+  systemd.services = let
+    dependency = ["adguardhome.service"];
+  in
+    lib.mapAttrs'
+    (name: _:
+      lib.nameValuePair "acme-${name}" {
+        after = dependency;
+        preStart = ''
+          sleep 10
+        '';
+      })
+    config.security.acme.certs;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

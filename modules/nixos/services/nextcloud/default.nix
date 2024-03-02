@@ -30,7 +30,7 @@ in {
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud27;
+      package = pkgs.nextcloud28;
       hostName = "nextcloud.kilonull.com";
       https = true;
       database.createLocally = true;
@@ -38,7 +38,7 @@ in {
       # Arbitrary large size
       maxUploadSize = "16G";
       configureRedis = true;
-      logType = "file";
+      settings.log_type = "file";
       poolSettings = {
         pm = "dynamic";
         "pm.max_children" = "64";

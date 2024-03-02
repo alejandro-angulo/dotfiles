@@ -32,14 +32,6 @@ in {
         Path to wallpaper, relative to config.home-home-manager.users.<username>.xdg.dataHome
       '';
     };
-
-    verticalWallpaperPath = mkOption {
-      type = str;
-      default = "sway/skull.png";
-      description = ''
-        Path to vertical wallpaper, relative to config.home-home-manager.users.<username>.xdg.dataHome
-      '';
-    };
   };
 
   config = mkIf cfg.enable {
@@ -79,7 +71,6 @@ in {
 
     aa.home.dataFile = {
       ${cfg.wallpaperPath}.source = ./wallpaper.jpg;
-      ${cfg.verticalWallpaperPath}.source = ./vertical.png;
     };
     aa.home.extraOptions = {
       wayland.windowManager.sway = {

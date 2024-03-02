@@ -49,8 +49,7 @@ in {
 
           # Eye candy
           nvim-web-devicons
-          # base16-vim
-          nvim-base16
+          base16-nvim
 
           markdown-preview-nvim
 
