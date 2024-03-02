@@ -88,5 +88,12 @@
       # TODO: Re-enable this when I figure out how to prevent needing to build
       # dependencies for architectures other than the host machine
       # checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib;
+
+      hydraJobs = {
+        inherit
+          (inputs.self)
+          packages
+          ;
+      };
     };
 }
