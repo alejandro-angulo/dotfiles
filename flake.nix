@@ -94,6 +94,8 @@
           (inputs.self)
           packages
           ;
+
+        node = inputs.self.nixosConfigurations.node.config.system.build.toplevel;
       };
     };
 }
