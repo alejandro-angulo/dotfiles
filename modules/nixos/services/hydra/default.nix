@@ -29,7 +29,10 @@ in {
     };
 
     nix.settings = {
-      allowed-users = ["hydra"];
+      allowed-users = [
+        "hydra"
+        "hydra-www"
+      ];
       allowed-uris = ["github:"];
     };
   };
