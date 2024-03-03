@@ -89,13 +89,22 @@
       # dependencies for architectures other than the host machine
       # checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib;
 
-      hydraJobs = {
+      hydraJobs = let
+        systems_to_build = [
+          "gospel"
+          "node"
+          "carbon"
+        ];
+      in {
         inherit
           (inputs.self)
           packages
           ;
 
-        node = inputs.self.nixosConfigurations.node.config.system.build.toplevel;
+        systems = inputs.nixpkgs.lib.attrsets.genAttrs systems_to_build (
+          name:
+            inputs.self.nixosConfigurations."${name}".config.system.build.toplevel
+        );
       };
     };
 }
