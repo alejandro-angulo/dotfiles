@@ -338,6 +338,7 @@ in {
           set number
           set relativenumber
           set autoindent
+          set termguicolors
           syntax on
           let mapleader = "`"
 
