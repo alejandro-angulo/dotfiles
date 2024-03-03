@@ -96,10 +96,10 @@
           "carbon"
         ];
       in {
-        inherit
-          (inputs.self)
-          packages
-          ;
+        inherit (inputs.self);
+
+        # Only have a builder for x86_64-linux atm
+        packages = inputs.self.packages.x86_64-linux;
 
         systems = inputs.nixpkgs.lib.attrsets.genAttrs systems_to_build (
           name:
