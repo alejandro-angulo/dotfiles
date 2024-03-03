@@ -9,10 +9,10 @@ let
   };
 in {
   "cf_dns_kilonull.age".publicKeys = [users.me machines.node machines.gospel machines.pi4];
-  "nextcloud_admin.age".publicKeys = [users.me machines.node];
-  "theengs_ble_mqtt.age".publicKeys = [users.me machines.pi4];
-  "hass_mqtt.age".publicKeys = [users.me machines.pi4 machines.node];
-  "teslamate_db.age".publicKeys = [users.me machines.node];
-  "teslamate_mqtt.age".publicKeys = [users.me machines.pi4 machines.node];
-  "teslamate_encryption.age".publicKeys = [users.me machines.node];
+  "nextcloud_admin.age".publicKeys = [users.me machines.node machines.gospel];
+  "theengs_ble_mqtt.age".publicKeys = [users.me machines.pi4 machines.gospel];
+  "hass_mqtt.age".publicKeys = [users.me machines.pi4 machines.node machines.gospel];
+  "teslamate_db.age".publicKeys = [users.me machines.node machines.gospel];
+  "teslamate_mqtt.age".publicKeys = [users.me machines.pi4 machines.node machines.gospel];
+  "teslamate_encryption.age".publicKeys = [users.me machines.node machines.gospel];
 }
