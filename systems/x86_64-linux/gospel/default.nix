@@ -55,6 +55,10 @@
     };
     services.prometheus.enable = true;
     services.promtail.enable = true;
+    services.hydra = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+    };
 
     hardware.audio.enable = true;
     hardware.bluetooth.enable = true;

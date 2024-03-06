@@ -10,6 +10,21 @@ with lib; let
 in {
   options.aa.services.hydra = with types; {
     enable = mkEnableOption "hydra";
+    hostname = mkOption {
+      type = str;
+      default = "hydra.kilonull.com";
+      description = ''
+        The hostname for the hydra instance
+      '';
+    };
+    acmeCertName = mkOption {
+      type = str;
+      default = "";
+      description = ''
+        If set to a non-empty string, forces SSL with the supplied acme
+        certificate.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -22,10 +37,25 @@ in {
 
     services.hydra = {
       enable = true;
-      hydraURL = "http://localhost:3000";
+      hydraURL = "https://${cfg.hostname}";
       notificationSender = "hydra@localhost";
       buildMachinesFiles = [];
       useSubstitutes = true;
+    };
+
+    services.nginx = {
+      enable = true;
+      recommendedProxySettings = true;
+      virtualHosts."hydra.kilonull.com" =
+        {
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:${toString config.services.hydra.port}";
+          };
+        }
+        // lib.optionalAttrs (cfg.acmeCertName != "") {
+          forceSSL = true;
+          useACMEHost = cfg.acmeCertName;
+        };
     };
 
     nix.settings = {
