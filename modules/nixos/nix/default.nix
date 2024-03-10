@@ -40,8 +40,9 @@ in {
         substituters =
           if cfg.useSelfhostedCache
           then [
+            # TESTING
+            "https://minio.kilonull.com/nix-store"
             selfHostedCacheHost
-            "https://cache.nixos.org/"
           ]
           else [];
         trusted-public-keys =
