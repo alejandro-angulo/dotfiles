@@ -58,6 +58,9 @@
     services.hydra = {
       enable = true;
       acmeCertName = "kilonull.com";
+      secretKeyPath = "/var/gospelCache";
+      s3Bucket = "nix-store";
+      s3Endpoint = "minio.kilonull.com";
     };
 
     hardware.audio.enable = true;

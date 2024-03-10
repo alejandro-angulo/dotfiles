@@ -69,6 +69,11 @@
       acmeCertName = "kilonull.com";
     };
 
+    services.minio = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+    };
+
     security.acme = {
       enable = true;
       domainName = "kilonull.com";

@@ -25,9 +25,44 @@ in {
         certificate.
       '';
     };
+
+    secretKeyPath = mkOption {
+      type = str;
+      description = ''
+        The secret key used to sign builds uploaded to s3.
+      '';
+    };
+
+    s3Bucket = mkOption {
+      type = str;
+      description = ''
+        The s3 bucket name where build artifacts will be uploaded.
+      '';
+    };
+
+    s3Scheme = mkOption {
+      type = str;
+      default = "https";
+      description = ''
+        The scheme to use when connecting to s3.
+      '';
+    };
+
+    s3Endpoint = mkOption {
+      type = str;
+      description = ''
+        The s3 server endpoint.
+
+        Should use `amazonaws.com` if using amazon AWS.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
+    age.secrets = {
+      hydra-aws-creds.file = ../../../../secrets/hydra-aws-creds.age;
+    };
+
     # NOTE: Need to create user to allow web configuration
     # sudo -u hydra hydra-create-user alice \
     #   --full-name 'Alice Q. User' \
@@ -41,6 +76,13 @@ in {
       notificationSender = "hydra@localhost";
       buildMachinesFiles = [];
       useSubstitutes = true;
+      extraConfig = ''
+        store_uri = s3://${cfg.s3Bucket}?compression=zstd&parallel-compression=true&write-nar-listing=1&ls-compression=br&log-compression=br&scheme=${cfg.s3Scheme}&endpoint=${cfg.s3Endpoint}&secret-key=${cfg.secretKeyPath}
+      '';
+    };
+
+    systemd.services."hydra-queue-runner".serviceConfig = {
+      EnvironmentFile = config.age.secrets.hydra-aws-creds.path;
     };
 
     services.nginx = {

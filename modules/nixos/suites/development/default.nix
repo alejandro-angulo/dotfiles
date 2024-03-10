@@ -30,6 +30,8 @@ in {
 
     environment.systemPackages = with pkgs; [
       pre-commit
+      minio-client
+      awscli2
     ];
   };
 }
