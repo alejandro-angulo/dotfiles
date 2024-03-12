@@ -32,7 +32,7 @@ in {
             proxyPass = "http://127.0.0.1:${toString config.services.octoprint.port}";
             proxyWebsockets = true;
             extraConfig = ''
-              client_max_body_size 32m;
+              client_max_body_size 512m;
             '';
           };
         }
