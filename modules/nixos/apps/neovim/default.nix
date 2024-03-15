@@ -19,7 +19,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [fzf fd nixd];
+    environment.systemPackages = with pkgs; [fzf fd nil];
 
     aa.home.dataFile = {
       ${cfg.tmuxThemePath}.source = ./tmux_theme;
@@ -152,9 +152,9 @@ in {
             "coc.preferences.formatOnSave" = true;
             "python.formatting.provider" = "black";
             "languageserver" = {
-              "nixd" = {
-                "command" = "nixd";
-                "rootPatterns" = [".nixd.json"];
+              "nix" = {
+                "command" = "nil";
+                "rootPatterns" = ["flake.nix"];
                 "filetypes" = ["nix"];
               };
             };
