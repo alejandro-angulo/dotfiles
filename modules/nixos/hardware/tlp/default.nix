@@ -17,7 +17,7 @@ in {
       enable = true;
       settings = {
         START_CHARGE_THRESH_BAT0 = 75;
-        # Run `tlp setcharge` to temporarily allow charging to 100%
+        # Run `tlp fullcharge` to temporarily allow charging to 100%
         STOP_CHARGE_THRESH_BAT0 = 80;
         RESTORE_THRESHOLDS_ON_BAT = 1;
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
