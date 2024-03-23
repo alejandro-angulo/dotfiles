@@ -157,6 +157,16 @@ in {
                 "rootPatterns" = ["flake.nix"];
                 "filetypes" = ["nix"];
               };
+              "ccls" = {
+                "command" = "ccls";
+                "filetypes" = ["c" "cc" "cpp" "c++" "cobjc" "objcpp"];
+                "rootPatterns" = [".ccls" "compile_commands.json" ".git/"];
+                "initializationOptions" = {
+                  "cache" = {
+                    "directory" = "/tmp/ccls";
+                  };
+                };
+              };
             };
           };
 
