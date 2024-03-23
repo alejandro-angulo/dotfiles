@@ -52,13 +52,14 @@ in {
     aa.system.fonts.enable = true;
 
     environment.systemPackages = with pkgs; [
-      wl-clipboard
+      feh
       grim
       slurp
-      xdg-utils
-      xdg-desktop-portal-wlr
       sway-contrib.grimshot
       wev
+      wl-clipboard
+      xdg-desktop-portal-wlr
+      xdg-utils
     ];
 
     # For screen sharing to work
