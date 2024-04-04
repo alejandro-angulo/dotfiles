@@ -1,8 +1,6 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -18,7 +16,6 @@ in {
         enable = true;
         icons = true;
         git = true;
-        enableAliases = true;
       };
     };
   };

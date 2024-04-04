@@ -1,5 +1,4 @@
 {
-  options,
   config,
   pkgs,
   lib,
@@ -7,14 +6,13 @@
 }:
 with lib; let
   cfg = config.aa.tools.gpg;
-  user = config.aa.user;
 in {
   options.aa.tools.gpg = with types; {
     enable = mkEnableOption "gpg";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [gnupg pinentry-curses];
+    environment.systemPackages = [pkgs.gnupg ];
 
     aa.home.extraOptions = {
       programs.gpg = {
@@ -32,7 +30,7 @@ in {
 
       services.gpg-agent = {
         enable = true;
-        pinentryFlavor = "curses";
+        pinentryPackage = pkgs.pinentry-curses;
         enableZshIntegration = true; # TODO: Only set if using zsh
         enableSshSupport = true;
         sshKeys = [

@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -20,7 +19,7 @@ in {
     aa.home.extraOptions = {
       programs.zsh = {
         enable = true;
-        enableAutosuggestions = true;
+        autosuggestion.enable = true;
         enableCompletion = true;
         envExtra = ''
           export PATH=~/.local/bin:$PATH
