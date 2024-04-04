@@ -1,12 +1,11 @@
 {
   stdenv,
-  lib,
   fetchFromGitHub,
   ...
 }:
 stdenv.mkDerivation rec {
   pname = "teslamate-grafana-dashboards";
-  version = "1.28.3";
+  version = "1.28.5";
 
   src = fetchFromGitHub {
     owner = "teslamate-org";
