@@ -1,6 +1,9 @@
+# vim artifacts
 *.swp
+.vim
 
 # VM artifacts
 *.qcow2
 
+# build artifacts
 result
