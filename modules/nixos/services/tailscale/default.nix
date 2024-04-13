@@ -31,7 +31,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [pkgs.tailscale];
+    environment.systemPackages = with pkgs; [
+      tailscale
+      tailscale-systray
+    ];
     networking.firewall.allowedUDPPorts = [config.services.tailscale.port];
     services.tailscale = {
       enable = true;
