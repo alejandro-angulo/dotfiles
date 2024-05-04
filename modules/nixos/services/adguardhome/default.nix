@@ -25,10 +25,8 @@ in {
     services.adguardhome = {
       enable = true;
       mutableSettings = true;
-      settings = {
-        bind_host = "0.0.0.0";
-        bind_port = 3000;
-      };
+      host = "0.0.0.0";
+      port = 3000;
     };
 
     services.nginx = {

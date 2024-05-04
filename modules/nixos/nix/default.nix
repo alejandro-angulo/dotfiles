@@ -13,7 +13,7 @@ in {
     enable = mkEnableOption "manage nix configuration.";
     package = mkOption {
       type = package;
-      default = pkgs.nixVersions.unstable;
+      default = pkgs.nixVersions.git;
       description = "Which nix package to use.";
     };
 
