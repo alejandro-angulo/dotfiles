@@ -23,6 +23,11 @@ in {
       type = str;
       description = "The domain to request a wildcard cert for.";
     };
+    isWildcard = mkOption {
+      type = bool;
+      default = true;
+      description = "Whether or not to request a wildcard cert.";
+    };
     dnsCredentialsFile = mkOption {
       type = path;
       description = "The path to the credentials file for the DNS provider.";
@@ -49,7 +54,7 @@ in {
         # own DNS to make `lego` happy (will resolve names to a public IP).
         dnsResolver = "1.1.1.1:53";
         credentialsFile = cfg.dnsCredentialsFile;
-        extraDomainNames = [("*." + cfg.domainName)];
+        extraDomainNames = mkIf cfg.isWildcard [("*." + cfg.domainName)];
       };
     };
   };
