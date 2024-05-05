@@ -1,8 +1,6 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -38,7 +36,6 @@ in {
           # if chunk_idle_period or max_chunk_age is reached first
           chunk_target_size = 999999;
           chunk_retain_period = "30s";
-          max_transfer_retries = 0;
         };
 
         schema_config = {
@@ -53,6 +50,16 @@ in {
                 period = "24h";
               };
             }
+            {
+              from = "2024-05-05";
+              store = "tsdb";
+              object_store = "filesystem";
+              schema = "v13";
+              index = {
+                prefix = "index_";
+                period = "24h";
+              };
+            }
           ];
         };
 
@@ -61,7 +68,11 @@ in {
             active_index_directory = "/var/lib/loki/boltdb-shipper-active";
             cache_location = "/var/lib/loki/boltdb-shipper-cache";
             cache_ttl = "24h";
-            shared_store = "filesystem";
+          };
+
+          tsdb_shipper = {
+            active_index_directory = "/var/lib/loki/tsdb-shipper-active";
+            cache_location = "/var/lib/loki/tsdb-cache";
           };
 
           filesystem = {
@@ -74,10 +85,6 @@ in {
           reject_old_samples_max_age = "168h";
         };
 
-        chunk_store_config = {
-          max_look_back_period = "0s";
-        };
-
         table_manager = {
           retention_deletes_enabled = false;
           retention_period = "0s";
@@ -85,7 +92,6 @@ in {
 
         compactor = {
           working_directory = "/var/lib/loki";
-          shared_store = "filesystem";
           compactor_ring = {
             kvstore = {
               store = "inmemory";
