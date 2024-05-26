@@ -75,6 +75,9 @@ in {
     };
     aa.home.extraOptions = {
       wayland.windowManager.sway = {
+        # WORKAROUND: https://github.com/nix-community/home-manager/issues/5311
+        checkConfig = false;
+
         enable = true;
         swaynag.enable = true;
         wrapperFeatures.gtk = true; # so that gtk works properly
