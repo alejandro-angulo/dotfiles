@@ -1,9 +1,7 @@
 {
-  options,
   config,
   lib,
   pkgs,
-  format,
   ...
 }:
 with lib; let
@@ -30,7 +28,7 @@ in {
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud28;
+      package = pkgs.nextcloud29;
       hostName = "nextcloud.kilonull.com";
       https = true;
       database.createLocally = true;
