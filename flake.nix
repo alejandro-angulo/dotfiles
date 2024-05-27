@@ -98,8 +98,6 @@
           "carbon"
         ];
       in {
-        inherit (inputs.self);
-
         # Only have a builder for x86_64-linux atm
         packages = inputs.self.packages.x86_64-linux;
 
@@ -107,6 +105,8 @@
           name:
             inputs.self.nixosConfigurations."${name}".config.system.build.toplevel
         );
+
+        droplets.proxy = inputs.self.doConfigurations.proxy;
       };
     };
 }

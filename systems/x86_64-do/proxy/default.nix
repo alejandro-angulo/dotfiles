@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   aa = {
@@ -28,6 +29,11 @@
 
     tools.zsh.enable = true;
   };
+
+  # Workaround for broken digital ocean image builds
+  # See: https://github.com/NixOS/nixpkgs/issues/308404
+  boot.loader.grub.devices = lib.mkForce ["/dev/vda"];
+  boot.loader.grub.device = "/dev/vda";
 
   services.nginx = {
     enable = true;
