@@ -10,7 +10,9 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
-    snowfall-lib.url = "github:snowfallorg/lib";
+    # For some reason updating causes an error saying /nix/store/secrets can't
+    # be access in pure mode (doesn't play nice with agenix)
+    snowfall-lib.url = "github:snowfallorg/lib/92803a029b5314d4436a8d9311d8707b71d9f0b6";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     deploy-rs.url = "github:serokell/deploy-rs";
