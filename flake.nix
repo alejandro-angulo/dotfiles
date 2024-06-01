@@ -24,6 +24,9 @@
     agenix.inputs.darwin.follows = "";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    nixvim.url = "github:alejandro-angulo/nixvim-config";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs:
