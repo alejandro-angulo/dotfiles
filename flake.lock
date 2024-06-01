@@ -463,11 +463,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1717226861,
-        "narHash": "sha256-JjLJCgjx/whThAwO1/+uYaZrIVdQTPF9aXzdwvzoF4w=",
+        "lastModified": 1717263745,
+        "narHash": "sha256-bCiLdqIgi3/YNFfhddx5VJGM69gU2aFar7XsLI1NXaQ=",
         "owner": "alejandro-angulo",
         "repo": "nixvim-config",
-        "rev": "d149b9b70b6cb7ac53d11b54ee6eaf5ef431f530",
+        "rev": "30e01ec5cfe2998c05da0c66d00b9c9a140a3e97",
         "type": "github"
       },
       "original": {
