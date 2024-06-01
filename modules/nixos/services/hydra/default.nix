@@ -1,24 +1,21 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.aa.services.hydra;
 in {
-  options.aa.services.hydra = with types; {
+  options.aa.services.hydra = with lib; {
     enable = mkEnableOption "hydra";
     hostname = mkOption {
-      type = str;
+      type = types.str;
       default = "hydra.kilonull.com";
       description = ''
         The hostname for the hydra instance
       '';
     };
     acmeCertName = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = ''
         If set to a non-empty string, forces SSL with the supplied acme
@@ -27,21 +24,21 @@ in {
     };
 
     secretKeyPath = mkOption {
-      type = str;
+      type = types.str;
       description = ''
         The secret key used to sign builds uploaded to s3.
       '';
     };
 
     s3Bucket = mkOption {
-      type = str;
+      type = types.str;
       description = ''
         The s3 bucket name where build artifacts will be uploaded.
       '';
     };
 
     s3Scheme = mkOption {
-      type = str;
+      type = types.str;
       default = "https";
       description = ''
         The scheme to use when connecting to s3.
@@ -49,7 +46,7 @@ in {
     };
 
     s3Endpoint = mkOption {
-      type = str;
+      type = types.str;
       description = ''
         The s3 server endpoint.
 
@@ -58,7 +55,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     age.secrets = {
       hydra-aws-creds.file = ../../../../secrets/hydra-aws-creds.age;
     };
@@ -105,7 +102,7 @@ in {
         "hydra"
         "hydra-www"
       ];
-      allowed-uris = ["github:"];
+      allowed-uris = ["github:" "https://github.com/"];
     };
   };
 }
