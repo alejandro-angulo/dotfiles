@@ -1,36 +1,28 @@
 {
-  options,
   config,
-  lib,
   pkgs,
+  lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.aa.apps.steam;
 in {
-  options.aa.apps.steam = with types; {
-    enable = mkEnableOption "steam";
+  options.aa.apps.steam = {
+    enable = lib.options.mkEnableOption "steam";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
     };
 
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-    };
-
-    # TODO: This can be removed when/if PR 189398 is merged
-    # https://github.com/NixOS/nixpkgs/pull/189398
-    aa.home.extraOptions = {
-      home.sessionVariables = {
-        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "${pkgs.aa.proton-ge-custom}";
-      };
+      enable32Bit = true;
     };
   };
 }
