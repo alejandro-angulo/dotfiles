@@ -38,11 +38,11 @@ in {
     aa.desktop.addons = {
       alacritty.enable = true;
       gammastep.enable = true;
-      mako.enable = true;
       playerctl.enable = true;
       rofi.enable = true;
       swayidle.enable = true;
       swaylock.enable = true;
+      swaync.enable = true;
       waybar.enable = true;
 
       # TODO
