@@ -16,7 +16,7 @@ in {
     aa.system.fonts.enable = true;
 
     # alacritty won't start without opengl
-    hardware.opengl.enable = true;
+    hardware.graphics.enable = true;
 
     aa.home = {
       extraOptions = {
