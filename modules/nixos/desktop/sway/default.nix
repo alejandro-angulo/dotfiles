@@ -273,6 +273,14 @@ in {
             ## Move focus to the parent container
             "${modifier}+a" = "focus parent";
 
+            # Notifications
+
+            ## Toggle notification center
+            "${modifier}+Shift+n" = "exec '${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw'";
+
+            ## Toggle Do Not Disturb
+            "${modifier}+Shift+d" = "exec '${pkgs.swaynotificationcenter}/bin/swaync-client -d  -sw'";
+
             # Screenshots
 
             ## Current window
