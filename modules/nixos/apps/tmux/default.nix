@@ -1,19 +1,17 @@
 {
-  options,
   config,
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.aa.apps.tmux;
   user_cfg = config.home-manager.users.${config.aa.user.name};
 in {
-  options.aa.apps.tmux = with types; {
-    enable = mkEnableOption "tmux";
+  options.aa.apps.tmux = {
+    enable = lib.options.mkEnableOption "tmux";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     aa.home.extraOptions = {
       programs.tmux = {
         enable = true;
@@ -24,16 +22,48 @@ in {
 
         # TOOD: Check if neovim is enabled before config vim integrations
 
-        plugins = with pkgs.tmuxPlugins; [
+        plugins = [
           {
-            plugin = resurrect;
+            plugin = pkgs.tmuxPlugins.resurrect;
             extraConfig = ''
               set -g @resurrect-capture-pane-contents 'on'
-              set -g @resurrect-strategy-vim 'session'
+              set -g @resurrect-strategy-nvim 'session'
             '';
           }
 
-          vim-tmux-navigator
+          {
+            plugin = pkgs.tmuxPlugins.continuum;
+            extraConfig = ''
+              set -g @continuum-restore 'on'
+            '';
+          }
+
+          {
+            plugin =
+              pkgs.tmuxPlugins.mkTmuxPlugin
+              {
+                pluginName = "tmux-nerd-font-window-name";
+                version = "2.1.1";
+                src = pkgs.fetchFromGitHub {
+                  owner = "joshmedeski";
+                  repo = "tmux-nerd-font-window-name";
+                  rev = "57961cb0a99b76f20e02639d398c973d81971d05";
+                  sha256 = "sha256-8P4jFEkcJn/JbdRAC5PCrLAGTJwFxCknllOjkD+PK9w=";
+                };
+                nativeBuildInputs = [pkgs.makeWrapper];
+                rtpFilePath = "tmux-nerd-font-window-name.tmux";
+                postInstall = ''
+                  wrapProgram $target/bin/tmux-nerd-font-window-name \
+                      --prefix PATH ${lib.makeBinPath [pkgs.yq-go]}
+
+                  # NOTE: I thought the wrapProgram above should make it so this wouldn't be needed
+                  find $target -type f -print0 | xargs -0 sed -i -e 's|yq |${pkgs.yq-go}/bin/yq |g'
+                '';
+              };
+          }
+
+          pkgs.tmuxPlugins.vim-tmux-navigator
+          pkgs.tmuxPlugins.open
         ];
 
         extraConfig =
