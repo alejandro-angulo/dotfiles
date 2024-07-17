@@ -5,7 +5,7 @@
 }:
 stdenv.mkDerivation rec {
   pname = "teslamate-grafana-dashboards";
-  version = "1.28.5";
+  version = "1.30.1";
 
   src = fetchFromGitHub {
     owner = "teslamate-org";
