@@ -71,16 +71,24 @@
     system.monitoring.enable = true;
   };
 
-  virtualisation.docker = {
-    enable = true;
-    storageDriver = "overlay2";
-    rootless = {
+  programs.adb.enable = true;
+
+  virtualisation = {
+    libvirtd.enable = true;
+
+    docker = {
       enable = true;
-      setSocketVariable = true;
+      storageDriver = "overlay2";
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
     };
   };
 
-  # boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
+  programs.virt-manager.enable = true;
+
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
   networking = {
     hostName = "gospel";
     useDHCP = false;
@@ -106,6 +114,9 @@
 
     cryptsetup
     paperkey
+
+    chromium
+
     unzip
     p7zip
     nix-index
@@ -116,6 +127,21 @@
     esptool
     minicom
     signal-desktop
+    ncdu
+
+    cntr
+
+    bundler
+    bundix
+    nix-output-monitor
+
+    iw
+    wpa_supplicant
+
+    mqttui
+    openscad
+
+    zoom-us
   ];
 
   # This value determines the NixOS release from which the default

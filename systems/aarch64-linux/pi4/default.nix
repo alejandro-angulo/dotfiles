@@ -34,7 +34,6 @@
     services.tailscale = {
       enable = true;
       configureClientRouting = true;
-      configureServerRouting = true;
     };
     services.openssh.enable = true;
     services.octoprint = {

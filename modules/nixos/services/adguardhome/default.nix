@@ -27,6 +27,18 @@ in {
       mutableSettings = true;
       host = "0.0.0.0";
       port = 3000;
+      settings = {
+        filtering.rewrites = [
+          {
+            domain = "adguardhome.kilonull.com";
+            answer = "192.168.113.13";
+          }
+          {
+            domain = "*.kilonull.com";
+            answer = "192.168.113.13";
+          }
+        ];
+      };
     };
 
     services.nginx = {
