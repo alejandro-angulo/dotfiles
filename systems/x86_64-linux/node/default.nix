@@ -90,6 +90,27 @@
     apps.yubikey.enable = true;
   };
 
+  # Rewrite specific to this machine (didn't want to put this in my adguardhome
+  # module incase I want to reuse it for something else later)
+  services.adguardhome.settings.filtering.rewrites = [
+    {
+      domain = "octoprint.kilonull.com";
+      answer = "192.168.113.42";
+    }
+    {
+      domain = "hydra.kilonull.com";
+      answer = "192.168.113.69";
+    }
+    {
+      domain = "cache.kilonull.com";
+      answer = "192.168.113.69";
+    }
+    {
+      domain = "*.kilonull.com";
+      answer = "192.168.113.13";
+    }
+  ];
+
   security.pam.sshAgentAuth = {
     enable = true;
     # Addresses issue 31611
