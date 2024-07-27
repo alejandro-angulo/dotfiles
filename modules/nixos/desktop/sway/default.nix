@@ -131,7 +131,7 @@ in {
           # TODO: Should this live at the system configuration level?
           output = {
             "*".bg = "${user_cfg.xdg.dataHome}/${cfg.wallpaperPath} fill";
-            "eDP-1".scale = "1.25";
+            "eDP-1".scale = "1";
             "Dell Inc. DELL S2721QS 4FR7M43".position = "0 0";
             "Dell Inc. DELL S2721QS 47W7M43".position = "0 2160";
           };
