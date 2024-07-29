@@ -83,7 +83,6 @@
 
     suites.utils.enable = true;
 
-    tools.zsh.enable = true;
     tools.gpg.enable = true;
     apps.yubikey.enable = true;
   };
