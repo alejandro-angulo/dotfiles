@@ -18,8 +18,6 @@
     nix.enable = true;
     nix.useSelfhostedCache = true;
 
-    apps.tmux.enable = true;
-
     services.tailscale = {
       enable = true;
       configureClientRouting = true;

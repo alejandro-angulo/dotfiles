@@ -1,14 +1,13 @@
 {
-  options,
   config,
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.aa.suites.development;
 in {
-  options.aa.suites.development = with lib.types; {
+  options.aa.suites.development = {
     enable = mkEnableOption "common configuration";
   };
 
@@ -24,7 +23,6 @@ in {
 
       apps = {
         neovim.enable = true;
-        tmux.enable = true;
       };
     };
 
