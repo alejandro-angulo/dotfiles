@@ -28,7 +28,6 @@
     nix.enable = true;
     nix.useSelfhostedCache = true;
 
-    apps.btop.enable = true;
     apps.tmux.enable = true;
 
     services.tailscale = {

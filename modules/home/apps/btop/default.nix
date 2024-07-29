@@ -1,19 +1,19 @@
 {
-  options,
   config,
-  pkgs,
   lib,
+  namespace,
   ...
-}:
-with lib; let
-  cfg = config.aa.apps.btop;
+}: let
+  inherit (lib) mkIf mkEnableOption;
+
+  cfg = config.${namespace}.apps.btop;
 in {
-  options.aa.apps.btop = with types; {
+  options.${namespace}.apps.btop = {
     enable = mkEnableOption "btop";
   };
 
   config = mkIf cfg.enable {
-    aa.home.extraOptions.programs.btop = {
+    programs.btop = {
       enable = true;
       settings = {
         theme_background = false;

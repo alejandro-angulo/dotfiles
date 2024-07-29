@@ -26,7 +26,6 @@
     hardware.tlp.enable = true;
 
     system.zfs.enable = true;
-    apps.btop.enable = true;
     apps.yubikey.enable = true;
   };
 
