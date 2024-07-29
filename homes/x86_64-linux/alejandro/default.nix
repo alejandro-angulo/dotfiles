@@ -13,6 +13,7 @@
     };
 
     tools = {
+      direnv.enable = true;
       git.enable = true;
     };
   };

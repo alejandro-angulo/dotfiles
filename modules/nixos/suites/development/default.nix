@@ -14,7 +14,6 @@ in {
   config = mkIf cfg.enable {
     aa = {
       tools = {
-        direnv.enable = true;
         eza.enable = true;
         gpg.enable = true;
         zsh.enable = true;
@@ -27,6 +26,7 @@ in {
 
     environment.systemPackages = with pkgs; [
       awscli2
+      direnv
       minio-client
       pre-commit
       git
