@@ -11,5 +11,9 @@
     apps = {
       tmux.enable = true;
     };
+
+    tools = {
+      git.enable = true;
+    };
   };
 }

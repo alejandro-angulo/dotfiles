@@ -16,7 +16,6 @@ in {
       tools = {
         direnv.enable = true;
         eza.enable = true;
-        git.enable = true;
         gpg.enable = true;
         zsh.enable = true;
       };
@@ -27,9 +26,10 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      pre-commit
-      minio-client
       awscli2
+      minio-client
+      pre-commit
+      git
     ];
   };
 }

@@ -18,7 +18,6 @@ with lib; {
     nix.enable = true;
 
     suites.desktop.enable = true;
-    tools.git.enable = true;
     tools.zsh.enable = true;
     tools.eza.enable = true;
     apps.neovim.enable = true;
