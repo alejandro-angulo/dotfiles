@@ -15,6 +15,7 @@
     tools = {
       direnv.enable = true;
       git.enable = true;
+      zsh.enable = true;
     };
   };
 }
