@@ -1,14 +1,13 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkEnableOption mkIf;
+
   cfg = config.aa.suites.desktop;
 in {
-  options.aa.suites.desktop = with lib.types; {
+  options.aa.suites.desktop = {
     enable = mkEnableOption "common desktop configuration";
   };
 

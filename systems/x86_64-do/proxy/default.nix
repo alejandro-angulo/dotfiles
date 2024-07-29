@@ -26,8 +26,6 @@
         configureClientRouting = true;
       };
     };
-
-    tools.zsh.enable = true;
   };
 
   # Workaround for broken digital ocean image builds

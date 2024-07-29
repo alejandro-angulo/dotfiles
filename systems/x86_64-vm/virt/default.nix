@@ -18,10 +18,7 @@ with lib; {
     nix.enable = true;
 
     suites.desktop.enable = true;
-    tools.zsh.enable = true;
-    tools.eza.enable = true;
     apps.neovim.enable = true;
-    apps.tmux.enable = true;
   };
 
   users.users.virt = {

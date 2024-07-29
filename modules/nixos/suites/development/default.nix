@@ -14,9 +14,7 @@ in {
   config = mkIf cfg.enable {
     aa = {
       tools = {
-        eza.enable = true;
         gpg.enable = true;
-        zsh.enable = true;
       };
 
       apps = {
