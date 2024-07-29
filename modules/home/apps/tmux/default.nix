@@ -14,6 +14,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    xdg.dataFile."tmux-theme".source = ./tmux_theme;
+
     programs.tmux = {
       enable = true;
       keyMode = "vi";
@@ -82,6 +84,7 @@ in {
         # Eye Candy
         # set -g @plugin 'mattdavis90/base16-tmux'
         # set -g @colors-base16 'darktooth'
+        source-file ${config.xdg.dataHome}/tmux-theme;
 
         # Smart pane switching with awareness of Vim splits.
         # See: https://github.com/christoomey/vim-tmux-navigator

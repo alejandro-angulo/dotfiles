@@ -1,19 +1,19 @@
 {
   options,
   config,
-  pkgs,
   lib,
   inputs,
+  namespace,
   ...
-}:
-with lib; let
-  cfg = config.aa.home;
+}: let
+  inherit (lib) mkAliasDefinitions mkOption;
+  inherit (lib.types) attrs;
 in {
   imports = with inputs; [
     home-manager.nixosModules.home-manager
   ];
 
-  options.aa.home = with types; {
+  options.${namespace}.home = {
     file = mkOption {
       type = attrs;
       default = {};
@@ -37,7 +37,7 @@ in {
   };
 
   config = {
-    aa.home.extraOptions = {
+    ${namespace}.home.extraOptions = {
       home.stateVersion = config.system.stateVersion;
       home.file = mkAliasDefinitions options.aa.home.file;
       xdg = {
