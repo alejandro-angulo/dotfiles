@@ -9,6 +9,7 @@
 }: {
   aa = {
     apps = {
+      bat.enable = true;
       btop.enable = true;
       tmux.enable = true;
     };
