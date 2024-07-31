@@ -6,7 +6,9 @@
   ...
 }: let
   inherit (lib) mkEnableOption;
+  inherit (pkgs) tmuxPlugins;
 
+  sources = import ../../../../npins;
   cfg = config.${namespace}.apps.tmux;
 in {
   options.${namespace}.apps.tmux = {
@@ -23,11 +25,9 @@ in {
       sensibleOnTop = true;
       terminal = "screen-256color";
 
-      # TOOD: Check if neovim is enabled before config vim integrations
-
       plugins = [
         {
-          plugin = pkgs.tmuxPlugins.resurrect;
+          plugin = tmuxPlugins.resurrect;
           extraConfig = ''
             set -g @resurrect-capture-pane-contents 'on'
             set -g @resurrect-strategy-nvim 'session'
@@ -35,7 +35,7 @@ in {
         }
 
         {
-          plugin = pkgs.tmuxPlugins.continuum;
+          plugin = tmuxPlugins.continuum;
           extraConfig = ''
             set -g @continuum-restore 'on'
           '';
@@ -43,16 +43,11 @@ in {
 
         {
           plugin =
-            pkgs.tmuxPlugins.mkTmuxPlugin
+            tmuxPlugins.mkTmuxPlugin
             {
               pluginName = "tmux-nerd-font-window-name";
               version = "2.1.1";
-              src = pkgs.fetchFromGitHub {
-                owner = "joshmedeski";
-                repo = "tmux-nerd-font-window-name";
-                rev = "57961cb0a99b76f20e02639d398c973d81971d05";
-                sha256 = "sha256-8P4jFEkcJn/JbdRAC5PCrLAGTJwFxCknllOjkD+PK9w=";
-              };
+              src = sources.tmux-nerd-font-window-name;
               nativeBuildInputs = [pkgs.makeWrapper];
               rtpFilePath = "tmux-nerd-font-window-name.tmux";
               postInstall = ''
@@ -65,8 +60,8 @@ in {
             };
         }
 
-        pkgs.tmuxPlugins.vim-tmux-navigator
-        pkgs.tmuxPlugins.open
+        tmuxPlugins.vim-tmux-navigator
+        tmuxPlugins.open
       ];
 
       extraConfig = ''

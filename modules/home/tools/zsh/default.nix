@@ -1,13 +1,12 @@
 {
   config,
   lib,
-  pkgs,
   namespace,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  inherit (pkgs) fetchFromGitHub;
 
+  sources = import ../../../../npins;
   cfg = config.${namespace}.tools.zsh;
 in {
   options.${namespace}.tools.zsh = {
@@ -36,22 +35,12 @@ in {
       plugins = [
         {
           name = "zsh-syntax-highlighting";
-          src = fetchFromGitHub {
-            owner = "zsh-users";
-            repo = "zsh-syntax-highlighting";
-            rev = "0.7.1";
-            sha256 = "sha256-gOG0NLlaJfotJfs+SUhGgLTNOnGLjoqnUp54V9aFJg8=";
-          };
+          src = sources.zsh-syntax-highlighting;
           file = "zsh-syntax-highlighting.zsh";
         }
         {
           name = "powerlevel10k";
-          src = fetchFromGitHub {
-            owner = "romkatv";
-            repo = "powerlevel10k";
-            rev = "v1.17.0";
-            sha256 = "sha256-fgrwbWj6CcPoZ6GbCZ47HRUg8ZSJWOsa7aipEqYuE0Q=";
-          };
+          src = sources.powerlevel10k;
           file = "powerlevel10k.zsh-theme";
         }
         {
@@ -61,12 +50,7 @@ in {
         }
         {
           name = "base16-shell";
-          src = fetchFromGitHub {
-            owner = "chriskempson";
-            repo = "base16-shell";
-            rev = "588691ba71b47e75793ed9edfcfaa058326a6f41";
-            sha256 = "sha256-X89FsG9QICDw3jZvOCB/KsPBVOLUeE7xN3VCtf0DD3E=";
-          };
+          src = sources.base16-shell;
           file = "base16-shell.plugin.zsh";
         }
       ];

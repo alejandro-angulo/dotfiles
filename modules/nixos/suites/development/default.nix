@@ -26,6 +26,7 @@ in {
       awscli2
       direnv
       minio-client
+      npins
       pre-commit
       git
     ];

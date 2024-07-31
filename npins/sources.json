@@ -1,0 +1,62 @@
+{
+  "pins": {
+    "base16-shell": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "chriskempson",
+        "repo": "base16-shell"
+      },
+      "branch": "master",
+      "revision": "588691ba71b47e75793ed9edfcfaa058326a6f41",
+      "url": "https://github.com/chriskempson/base16-shell/archive/588691ba71b47e75793ed9edfcfaa058326a6f41.tar.gz",
+      "hash": "0w8g0gyvahkm6zqlwy6lw9ac3hragwh3hvrnvvq2082hdyq4bksz"
+    },
+    "powerlevel10k": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "romkatv",
+        "repo": "powerlevel10k"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v1.20.0",
+      "revision": "ff0311157d6b24fea21aa70699783f362b0f554f",
+      "url": "https://api.github.com/repos/romkatv/powerlevel10k/tarball/v1.20.0",
+      "hash": "1ha7qb601mk97lxvcj9dmbypwx7z5v0b7mkqahzsq073f4jnybhi"
+    },
+    "tmux-nerd-font-window-name": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "joshmedeski",
+        "repo": "tmux-nerd-font-window-name"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v2.1.1",
+      "revision": "57961cb0a99b76f20e02639d398c973d81971d05",
+      "url": "https://api.github.com/repos/joshmedeski/tmux-nerd-font-window-name/tarball/v2.1.1",
+      "hash": "1p1biwzr18skjqkjki05ki60dc5cqa9hnh6ldp4py9hw94a27zph"
+    },
+    "zsh-syntax-highlighting": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "zsh-users",
+        "repo": "zsh-syntax-highlighting"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "0.8.0",
+      "revision": "b1379f1ee96b1fe25701c9418c75f81eaabdab56",
+      "url": "https://api.github.com/repos/zsh-users/zsh-syntax-highlighting/tarball/0.8.0",
+      "hash": "1yl8zdip1z9inp280sfa5byjbf2vqh2iazsycar987khjsi5d5w8"
+    }
+  },
+  "version": 3
+}
