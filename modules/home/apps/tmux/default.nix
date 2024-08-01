@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  inputs,
   pkgs,
   namespace,
   ...
@@ -8,7 +9,6 @@
   inherit (lib) mkEnableOption;
   inherit (pkgs) tmuxPlugins;
 
-  sources = import ../../../../npins;
   cfg = config.${namespace}.apps.tmux;
 in {
   options.${namespace}.apps.tmux = {
@@ -47,7 +47,7 @@ in {
             {
               pluginName = "tmux-nerd-font-window-name";
               version = "2.1.1";
-              src = sources.tmux-nerd-font-window-name;
+              src = inputs.tmux-nerd-font-window-name;
               nativeBuildInputs = [pkgs.makeWrapper];
               rtpFilePath = "tmux-nerd-font-window-name.tmux";
               postInstall = ''

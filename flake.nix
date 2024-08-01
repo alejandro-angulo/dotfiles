@@ -27,6 +27,18 @@
 
     nixvim.url = "github:alejandro-angulo/nixvim-config";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
+    base16-shell.url = "github:chriskempson/base16-shell/master";
+    base16-shell.flake = false;
+
+    zsh-syntax-highlighting.url = "github:zsh-users/zsh-syntax-highlighting/master";
+    zsh-syntax-highlighting.flake = false;
+
+    powerlevel10k.url = "github:romkatv/powerlevel10k/master";
+    powerlevel10k.flake = false;
+
+    tmux-nerd-font-window-name.url = "github:joshmedeski/tmux-nerd-font-window-name";
+    tmux-nerd-font-window-name.flake = false;
   };
 
   outputs = inputs:

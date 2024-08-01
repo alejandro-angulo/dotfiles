@@ -25,6 +25,23 @@
         "type": "github"
       }
     },
+    "base16-shell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1663053609,
+        "narHash": "sha256-X89FsG9QICDw3jZvOCB/KsPBVOLUeE7xN3VCtf0DD3E=",
+        "owner": "chriskempson",
+        "repo": "base16-shell",
+        "rev": "588691ba71b47e75793ed9edfcfaa058326a6f41",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chriskempson",
+        "ref": "master",
+        "repo": "base16-shell",
+        "type": "github"
+      }
+    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -475,16 +492,37 @@
         "type": "github"
       }
     },
+    "powerlevel10k": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719815653,
+        "narHash": "sha256-jzLWxLLBB1MZZKJgt5R4oueuQIiqCDKRp+W+PXALHRs=",
+        "owner": "romkatv",
+        "repo": "powerlevel10k",
+        "rev": "2b7da93df04acd04d84f5de827e5b14077839a4b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "romkatv",
+        "ref": "master",
+        "repo": "powerlevel10k",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "base16-shell": "base16-shell",
         "deploy-rs": "deploy-rs",
         "home-manager": "home-manager",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
-        "snowfall-lib": "snowfall-lib"
+        "powerlevel10k": "powerlevel10k",
+        "snowfall-lib": "snowfall-lib",
+        "tmux-nerd-font-window-name": "tmux-nerd-font-window-name",
+        "zsh-syntax-highlighting": "zsh-syntax-highlighting"
       }
     },
     "snowfall-lib": {
@@ -569,6 +607,22 @@
         "type": "github"
       }
     },
+    "tmux-nerd-font-window-name": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1711462967,
+        "narHash": "sha256-5BvzuxrYm/qbfbXLBDzZhJUae0JwNqf96otp/m1l26s=",
+        "owner": "joshmedeski",
+        "repo": "tmux-nerd-font-window-name",
+        "rev": "bc43f25e67ed2d87cb04e27983851da359d79df5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "joshmedeski",
+        "repo": "tmux-nerd-font-window-name",
+        "type": "github"
+      }
+    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
@@ -606,6 +660,23 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "zsh-syntax-highlighting": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704566212,
+        "narHash": "sha256-4rW2N+ankAH4sA6Sa5mr9IKsdAg7WTgrmyqJ2V1vygQ=",
+        "owner": "zsh-users",
+        "repo": "zsh-syntax-highlighting",
+        "rev": "e0165eaa730dd0fa321a6a6de74f092fe87630b0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zsh-users",
+        "ref": "master",
+        "repo": "zsh-syntax-highlighting",
         "type": "github"
       }
     }

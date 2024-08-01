@@ -1,12 +1,12 @@
 {
   config,
+  inputs,
   lib,
   namespace,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
 
-  sources = import ../../../../npins;
   cfg = config.${namespace}.tools.zsh;
 in {
   options.${namespace}.tools.zsh = {
@@ -35,12 +35,12 @@ in {
       plugins = [
         {
           name = "zsh-syntax-highlighting";
-          src = sources.zsh-syntax-highlighting;
+          src = inputs.zsh-syntax-highlighting;
           file = "zsh-syntax-highlighting.zsh";
         }
         {
           name = "powerlevel10k";
-          src = sources.powerlevel10k;
+          src = inputs.powerlevel10k;
           file = "powerlevel10k.zsh-theme";
         }
         {
@@ -50,7 +50,7 @@ in {
         }
         {
           name = "base16-shell";
-          src = sources.base16-shell;
+          src = inputs.base16-shell;
           file = "base16-shell.plugin.zsh";
         }
       ];
