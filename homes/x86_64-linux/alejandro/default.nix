@@ -14,6 +14,10 @@
       tmux.enable = true;
     };
 
+    programs = {
+      kitty.enable = true;
+    };
+
     tools = {
       direnv.enable = true;
       eza.enable = true;
