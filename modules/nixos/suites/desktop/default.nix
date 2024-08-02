@@ -16,10 +16,6 @@ in {
       desktop = {
         sway.enable = true;
       };
-
-      apps = {
-        firefox.enable = true;
-      };
     };
   };
 }
