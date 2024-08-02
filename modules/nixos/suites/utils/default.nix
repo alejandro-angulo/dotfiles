@@ -24,6 +24,7 @@ in {
         du-dust
         fd
         file
+        gnupg
         htop
         jq
         killall

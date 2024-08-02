@@ -13,10 +13,6 @@ in {
 
   config = mkIf cfg.enable {
     aa = {
-      tools = {
-        gpg.enable = true;
-      };
-
       apps = {
         neovim.enable = true;
       };

@@ -16,6 +16,7 @@
 
     programs = {
       firefox.enable = true;
+      gpg.enable = true;
       kitty.enable = true;
     };
 
