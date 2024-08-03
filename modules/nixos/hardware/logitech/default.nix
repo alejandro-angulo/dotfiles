@@ -1,14 +1,16 @@
 {
-  options,
   config,
   lib,
   pkgs,
+  namespace,
   ...
-}:
-with lib; let
-  cfg = config.aa.hardware.logitech;
+}: let
+  inherit (lib) mkIf mkEnableOption;
+
+  cfg = config.${namespace}.hardware.logitech;
+  username = config.${namespace}.user.name;
 in {
-  options.aa.hardware.logitech = with types; {
+  options.${namespace}.hardware.logitech = {
     enable = mkEnableOption "logitech devices";
   };
 
@@ -27,6 +29,6 @@ in {
         ExecStart = "${pkgs.solaar}/bin/solaar -w hide";
       };
     };
-    systemd.user.services.solaar.wantedBy = mkIf config.aa.desktop.sway.enable ["sway-session.target"];
+    systemd.user.services.solaar.wantedBy = mkIf config.home-manager.users.${username}.wayland.windowManager.sway.enable ["sway-session.target"];
   };
 }

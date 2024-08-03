@@ -13,12 +13,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    ${namespace} = {
-      desktop = {
-        sway.enable = true;
-      };
-    };
-
     # Required to use gammastep home module without providing lat/long
     services.geoclue2.enable = true;
 

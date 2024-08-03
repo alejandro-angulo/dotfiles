@@ -18,8 +18,6 @@
       firefox.enable = true;
       gpg.enable = true;
       kitty.enable = true;
-      rofi.enable = true;
-      swaylock.enable = true;
     };
 
     tools = {
@@ -29,11 +27,6 @@
       zsh.enable = true;
     };
 
-    services = {
-      gammastep.enable = true;
-      playerctld.enable = true;
-      swayidle.enable = true;
-      swaync.enable = true;
-    };
+    windowManagers.sway.enable = true;
   };
 }
