@@ -20,5 +20,8 @@ in {
     # Workaround for https://github.com/NixOS/nixpkgs/issues/158025
     # This comment specifically: https://github.com/NixOS/nixpkgs/issues/158025#issuecomment-1344766809
     security.pam.services.swaylock = {};
+
+    # Required for GUIs (like sway) to work correctly.
+    hardware.graphics.enable = true;
   };
 }
