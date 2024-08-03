@@ -7,7 +7,7 @@
   namespace,
   ...
 }: {
-  aa = {
+  ${namespace} = {
     apps = {
       bat.enable = true;
       btop.enable = true;
@@ -30,8 +30,9 @@
     };
 
     services = {
-      swaync.enable = true;
       playerctld.enable = true;
+      swayidle.enable = true;
+      swaync.enable = true;
     };
   };
 }

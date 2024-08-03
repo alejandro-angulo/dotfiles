@@ -38,7 +38,6 @@ in {
     aa.desktop.addons = {
       alacritty.enable = true;
       gammastep.enable = true;
-      swayidle.enable = true;
 
       # TODO
       # light
