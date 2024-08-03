@@ -291,11 +291,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722462338,
-        "narHash": "sha256-ss0G8t8RJVDewA3MyqgAlV951cWRK6EtVhVKEZ7J5LU=",
+        "lastModified": 1722630065,
+        "narHash": "sha256-QfM/9BMRkCmgWzrPDK+KbgJOUlSJnfX4OvsUupEUZvA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6e090576c4824b16e8759ebca3958c5b09659ee8",
+        "rev": "afc892db74d65042031a093adb6010c4c3378422",
         "type": "github"
       },
       "original": {
@@ -403,11 +403,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1722185531,
-        "narHash": "sha256-veKR07psFoJjINLC8RK4DiLniGGMgF3QMlS4tb74S6k=",
+        "lastModified": 1722421184,
+        "narHash": "sha256-/DJBI6trCeVnasdjUo9pbnodCLZcFqnVZiLUfqLH4jA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "52ec9ac3b12395ad677e8b62106f0b98c1f8569d",
+        "rev": "9f918d616c5321ad374ae6cb5ea89c9e04bf3e58",
         "type": "github"
       },
       "original": {
@@ -454,11 +454,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1722094502,
-        "narHash": "sha256-Qg4HdgCGF66P15bym123RMw7Qc0e8VVsZFMLiAepT0o=",
+        "lastModified": 1722663575,
+        "narHash": "sha256-YQZssVJZzD/qWkFf2QpXxVErt7Wy9G68uyNYwbMwSKs=",
         "owner": "alejandro-angulo",
         "repo": "nixvim-config",
-        "rev": "f940c33a98974f6e83246624af9579acc9577e33",
+        "rev": "2d07e77c777502b552baf3658f0c1f75f5a842a5",
         "type": "github"
       },
       "original": {
