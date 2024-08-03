@@ -17,7 +17,8 @@
       workstation.enable = true;
     };
 
-    desktop.addons.waybar.thermal-zone = 1;
+    # TODO: How to inform a home manager module about this?
+    # desktop.addons.waybar.thermal-zone = 1;
 
     suites.gaming.enable = true;
 
