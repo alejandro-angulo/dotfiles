@@ -1,23 +1,18 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   format,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf mkEnableOption mkOption mkDefault types;
+
   cfg = config.aa.services.openssh;
-
-  user = config.users.users.${config.aa.user.name};
-  user-id = builtins.toString user.uid;
-
   default-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmPdQcM0KCQ3YunF1gwN+B+i1Q8KrIfiUvNtgFQjTy2";
 in {
-  options.aa.services.openssh = with types; {
+  options.aa.services.openssh = {
     enable = mkEnableOption "ssh";
     authorizedKeys = mkOption {
-      type = listOf str;
+      type = types.listOf types.str;
       default = [default-key];
       description = "The public keys to authorize";
     };

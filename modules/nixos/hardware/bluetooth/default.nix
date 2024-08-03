@@ -1,14 +1,13 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf mkEnableOption;
+
   cfg = config.aa.hardware.bluetooth;
 in {
-  options.aa.hardware.bluetooth = with types; {
+  options.aa.hardware.bluetooth = {
     enable = mkEnableOption "bluetooth";
   };
 
@@ -17,4 +16,3 @@ in {
     services.blueman.enable = true;
   };
 }
-

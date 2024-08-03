@@ -3,14 +3,13 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.aa.services.nextcloud;
 in {
-  options.aa.services.nextcloud = with types; {
+  options.aa.services.nextcloud = with lib; {
     enable = mkEnableOption "nextcloud";
     acmeCertName = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = ''
         If set to a non-empty string, forces SSL with the supplied acme
@@ -19,7 +18,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     age.secrets.nextcloud_admin = {
       file = ../../../../secrets/nextcloud_admin.age;
       owner = "nextcloud";
@@ -53,7 +52,7 @@ in {
     };
 
     # nextcloud module configures nginx, just need to specify SSL stuffs here
-    services.nginx.virtualHosts.${config.services.nextcloud.hostName} = mkIf (cfg.acmeCertName != "") {
+    services.nginx.virtualHosts.${config.services.nextcloud.hostName} = lib.mkIf (cfg.acmeCertName != "") {
       forceSSL = true;
       useACMEHost = cfg.acmeCertName;
     };

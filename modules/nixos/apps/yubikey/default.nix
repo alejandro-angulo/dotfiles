@@ -1,14 +1,14 @@
 {
-  options,
   config,
   pkgs,
   lib,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkEnableOption mkIf;
+
   cfg = config.aa.apps.yubikey;
 in {
-  options.aa.apps.yubikey = with types; {
+  options.aa.apps.yubikey = {
     enable = mkEnableOption "yubikey";
   };
 
@@ -25,7 +25,6 @@ in {
 
     security.pam.yubico = {
       enable = true;
-      #debug = true;
       mode = "challenge-response";
       # Uncomment below for 2FA
       #control = "required";

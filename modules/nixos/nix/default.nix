@@ -1,18 +1,18 @@
 {
-  options,
   config,
   pkgs,
   lib,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf mkEnableOption mkOption types;
+
   cfg = config.aa.nix;
   selfHostedCacheHost = "https://cache.kilonull.com/";
 in {
-  options.aa.nix = with types; {
+  options.aa.nix = {
     enable = mkEnableOption "manage nix configuration.";
     package = mkOption {
-      type = package;
+      type = types.package;
       default = pkgs.nixVersions.git;
       description = "Which nix package to use.";
     };
@@ -46,9 +46,8 @@ in {
           ]
           else [];
         trusted-public-keys =
-          if cfg.useSelfhostedCache
-          then ["gospelCache:9cbn8Wm54BbwpPS0TXw+15wrYZBpfOJt4Fzfbfcq/pc="]
-          else [];
+          mkIf cfg.useSelfhostedCache
+          ["gospelCache:9cbn8Wm54BbwpPS0TXw+15wrYZBpfOJt4Fzfbfcq/pc="];
       };
 
       # TODO: Configure distributedBuilds and buildMachines?
@@ -58,12 +57,6 @@ in {
         dates = "weekly";
         options = "--delete-older-than 30d";
       };
-
-      # TODO: Not sure if I want this
-      # flake-utils-plus
-      # generateRegistryFromInputs = true;
-      # generateNixPathFromInputs = true;
-      # linkInputs = true;
     };
   };
 }

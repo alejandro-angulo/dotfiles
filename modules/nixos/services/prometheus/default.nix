@@ -1,23 +1,22 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf;
+
   cfg = config.aa.services.prometheus;
   exporters = config.services.prometheus.exporters;
 in {
-  options.aa.services.prometheus = with types; {
+  options.aa.services.prometheus = with lib; {
     enable = mkEnableOption "prometheus";
     enableServer = mkOption {
-      type = bool;
+      type = types.bool;
       default = false;
       description = "Whether or not to enable the prometheus server";
     };
     enableNodeExporter = mkOption {
-      type = bool;
+      type = types.bool;
       default = true;
       description = "Whether or not to enable the node exporter";
     };

@@ -1,18 +1,15 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.aa.apps.steam;
 in {
-  options.aa.services.printing = with types; {
+  options.aa.services.printing = with lib; {
     enable = mkEnableOption "printing";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Setup printing over the network
     services.printing.enable = true;
     services.avahi = {

@@ -1,18 +1,15 @@
 {
-  options,
   config,
   lib,
-  pkgs,
+  namespace,
   ...
-}:
-with lib; let
-  cfg = config.aa.services.minio;
-  minio_cfg = config.services.minio;
+}: let
+  cfg = config.${namespace}.services.minio;
 in {
-  options.aa.services.minio = with types; {
+  options.${namespace}.services.minio = with lib; {
     enable = mkEnableOption "minio";
     acmeCertName = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = ''
         If set to a non-empty string, forces SSL with the supplied acme
@@ -21,7 +18,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.minio = {
       enable = true;
     };

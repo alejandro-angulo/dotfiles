@@ -4,29 +4,30 @@
   pkgs,
   lib,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf;
+
   cfg = config.aa.services.syncoid;
 in {
-  options.aa.services.syncoid = with types; {
+  options.aa.services.syncoid = with lib; {
     enable = mkEnableOption "syncoid (ZFS snap replication)";
     commands = mkOption {
-      type = attrs;
+      type = types.attrs;
       default = {};
       description = "Commands to pass directly to syncoid, see `services.syncoid.commands`";
     };
     remoteTargetUser = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = "The user to use on the target machine.";
     };
     remoteTargetDatasets = mkOption {
-      type = listOf str;
+      type = types.listOf types.str;
       default = [];
       description = "Datasets to be used as a remote target (e.g. a NAS's backups dataset)";
     };
     remoteTargetPublicKeys = mkOption {
-      type = listOf str;
+      type = types.listOf types.str;
       default = [];
       description = "SSH public keys that the syncoid service's user should trust";
     };
@@ -45,7 +46,7 @@ in {
         ++ [
           "destroy"
         ];
-      commands = mkAliasDefinitions options.aa.services.syncoid.commands;
+      commands = lib.mkAliasDefinitions options.aa.services.syncoid.commands;
     };
 
     environment.systemPackages = mkIf (cfg.remoteTargetUser != "") (with pkgs; [

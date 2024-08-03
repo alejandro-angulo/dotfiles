@@ -1,14 +1,13 @@
 {
-  options,
   config,
-  pkgs,
   lib,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkEnableOption mkIf;
+
   cfg = config.aa.hardware.tlp;
 in {
-  options.aa.hardware.tlp = with types; {
+  options.aa.hardware.tlp = {
     enable = mkEnableOption "tlp";
   };
 

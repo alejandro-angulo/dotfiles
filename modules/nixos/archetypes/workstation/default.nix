@@ -1,14 +1,13 @@
 {
-  options,
   config,
-  pkgs,
   lib,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf mkEnableOption;
+
   cfg = config.aa.archetypes.workstation;
 in {
-  options.aa.archetypes.workstation = with types; {
+  options.aa.archetypes.workstation = {
     enable = mkEnableOption "workstation archetype";
   };
 

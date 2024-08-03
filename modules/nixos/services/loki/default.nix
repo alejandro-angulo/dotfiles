@@ -1,17 +1,17 @@
 {
   config,
   lib,
+  namespace,
   ...
-}:
-with lib; let
-  cfg = config.aa.services.loki;
+}: let
+  cfg = config.${namespace}.services.loki;
   loki = config.services.loki;
 in {
-  options.aa.services.loki = with types; {
+  options.${namespace}.services.loki = with lib; {
     enable = mkEnableOption "loki";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.loki = {
       enable = true;
       configuration = {

@@ -1,19 +1,18 @@
 {
-  options,
   config,
   lib,
-  pkgs,
-  format,
+  namespace,
   ...
-}:
-with lib; let
-  cfg = config.aa.services.gitea;
+}: let
+  inherit (lib) mkIf mkEnableOption mkOption types;
+
+  cfg = config.${namespace}.services.gitea;
   gitea_cfg = config.services.gitea;
 in {
-  options.aa.services.gitea = with types; {
+  options.${namespace}.services.gitea = {
     enable = mkEnableOption "gitea";
     acmeCertName = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = ''
         If set to a non-empty string, forces SSL with the supplied acme

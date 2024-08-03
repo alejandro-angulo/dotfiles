@@ -1,19 +1,19 @@
 {
-  options,
   config,
   lib,
   pkgs,
-  format,
+  namespace,
   ...
-}:
-with lib; let
-  cfg = config.aa.services.homeassistant;
+}: let
+  inherit (lib) mkIf mkEnableOption mkOption types;
+
+  cfg = config.${namespace}.services.homeassistant;
   hass_cfg = config.services.home-assistant;
 in {
-  options.aa.services.homeassistant = with types; {
+  options.${namespace}.services.homeassistant = {
     enable = mkEnableOption "home assistant";
     acmeCertName = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = ''
         If set to a non-empty string, forces SSL with the supplied acme

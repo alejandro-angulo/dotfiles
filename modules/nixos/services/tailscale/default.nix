@@ -1,17 +1,17 @@
 {
-  options,
   config,
   pkgs,
   lib,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkIf;
+
   cfg = config.aa.services.tailscale;
 in {
-  options.aa.services.tailscale = with types; {
+  options.aa.services.tailscale = with lib; {
     enable = mkEnableOption "tailscale";
     configureClientRouting = mkOption {
-      type = bool;
+      type = types.bool;
       default = false;
       description = mdDoc ''
         Configures tailscale as a client.
@@ -20,7 +20,7 @@ in {
       '';
     };
     configureServerRouting = mkOption {
-      type = bool;
+      type = types.bool;
       default = false;
       description = mdDoc ''
         Configures tailscale as a server.

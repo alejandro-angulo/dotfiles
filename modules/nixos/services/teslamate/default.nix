@@ -1,18 +1,15 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.aa.services.teslamate;
 in {
-  options.aa.services.teslamate = with types; {
+  options.aa.services.teslamate = with lib; {
     enable = mkEnableOption "teslamate";
 
     acmeCertName = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = ''
         If set to a non-empty string, forces SSL with the supplied acme
@@ -21,7 +18,7 @@ in {
     };
 
     user = mkOption {
-      type = str;
+      type = types.str;
       default = "teslamate";
       description = ''
         The user that should run teslamate
@@ -29,7 +26,7 @@ in {
     };
 
     group = mkOption {
-      type = str;
+      type = types.str;
       default = "teslamate";
       description = ''
         The group that should be assigned to the user running teslamate
@@ -38,7 +35,7 @@ in {
 
     database = {
       host = mkOption {
-        type = str;
+        type = types.str;
         default = "127.0.0.1";
         description = ''
           Database host address
@@ -46,7 +43,7 @@ in {
       };
 
       name = mkOption {
-        type = str;
+        type = types.str;
         default = "teslamate";
         description = ''
           The database name
@@ -54,7 +51,7 @@ in {
       };
 
       user = mkOption {
-        type = str;
+        type = types.str;
         default = "teslamate";
         description = ''
           The user that should have access to the database
@@ -62,15 +59,15 @@ in {
       };
 
       passwordFile = mkOption {
-        type = path;
-        description = lib.mdDoc ''
+        type = types.path;
+        description = mdDoc ''
           A file containing the password corresponding to
           {option}`database.user`
         '';
       };
 
       createDatabase = mkOption {
-        type = bool;
+        type = types.bool;
         default = false;
         description = ''
           Whether to create a local database automatically.
@@ -79,7 +76,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     age.secrets = {
       teslamate_encryption.file = ../../../../secrets/teslamate_encryption.age;
       teslamate_mqtt.file = ../../../../secrets/teslamate_mqtt.age;
@@ -131,8 +128,8 @@ in {
     };
     users.groups.${cfg.group} = {};
 
-    services.postgresql = optionalAttrs cfg.database.createDatabase {
-      enable = mkDefault true;
+    services.postgresql = lib.optionalAttrs cfg.database.createDatabase {
+      enable = lib.mkDefault true;
 
       ensureDatabases = [cfg.database.name];
       ensureUsers = [

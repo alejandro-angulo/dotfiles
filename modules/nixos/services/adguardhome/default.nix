@@ -1,18 +1,17 @@
 {
-  options,
   config,
   lib,
-  pkgs,
-  format,
+  namespace,
   ...
-}:
-with lib; let
-  cfg = config.aa.services.adguardhome;
+}: let
+  inherit (lib) mkIf mkEnableOption mkOption types;
+
+  cfg = config.${namespace}.services.adguardhome;
 in {
-  options.aa.services.adguardhome = with types; {
+  options.${namespace}.services.adguardhome = {
     enable = mkEnableOption "adguardhome";
     acmeCertName = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = ''
         If set to a non-empty string, forces SSL with the supplied acme

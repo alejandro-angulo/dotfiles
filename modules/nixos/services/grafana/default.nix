@@ -1,18 +1,20 @@
 {
-  options,
   config,
   lib,
   pkgs,
+  namespace,
   ...
-}:
-with lib; let
-  cfg = config.aa.services.grafana;
+}: let
+  inherit (lib) mkIf mkEnableOption mkOption types;
+
+  cfg = config.${namespace}.services.grafana;
   server_settings = config.services.grafana.settings.server;
+  grafana_dashboards = pkgs.${namespace}.teslamate-grafana-dashboards;
 in {
-  options.aa.services.grafana = with types; {
+  options.${namespace}.services.grafana = {
     enable = mkEnableOption "grafana";
     acmeCertName = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = ''
         If set to a non-empty string, forces SSL with the supplied acme
@@ -84,7 +86,7 @@ in {
               disableDeletion = false;
               editable = true;
               updateIntervalSeconds = 86400;
-              options.path = "${pkgs.aa.teslamate-grafana-dashboards}/dashboards";
+              options.path = "${grafana_dashboards}/dashboards";
             }
             {
               name = "teslamate_internal";
@@ -95,7 +97,7 @@ in {
               disableDeletion = false;
               editable = true;
               updateIntervalSeconds = 86400;
-              options.path = "${pkgs.aa.teslamate-grafana-dashboards}/dashboards/internal";
+              options.path = "${grafana_dashboards}/dashboards/internal";
             }
           ];
         };

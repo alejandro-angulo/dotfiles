@@ -1,18 +1,17 @@
 {
-  options,
   config,
   lib,
-  pkgs,
-  format,
+  namespace,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkOption mkEnableOption mkIf types;
+
   cfg = config.aa.security.acme;
 in {
-  options.aa.security.acme = with types; {
+  options.aa.security.acme = {
     enable = mkEnableOption "Automatic Certificate Management Environment (ACME)";
     useStaging = mkOption {
-      type = bool;
+      type = types.bool;
       description = ''
         Use the staging environment (use when configuring for the first time to
         avoid being locked out).
@@ -20,16 +19,16 @@ in {
       default = false;
     };
     domainName = mkOption {
-      type = str;
+      type = types.str;
       description = "The domain to request a wildcard cert for.";
     };
     isWildcard = mkOption {
-      type = bool;
+      type = types.bool;
       default = true;
       description = "Whether or not to request a wildcard cert.";
     };
     dnsCredentialsFile = mkOption {
-      type = path;
+      type = types.path;
       description = "The path to the credentials file for the DNS provider.";
     };
   };

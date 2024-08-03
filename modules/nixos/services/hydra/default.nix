@@ -1,11 +1,12 @@
 {
   config,
   lib,
+  namespace,
   ...
 }: let
-  cfg = config.aa.services.hydra;
+  cfg = config.${namespace}.services.hydra;
 in {
-  options.aa.services.hydra = with lib; {
+  options.${namespace}.services.hydra = with lib; {
     enable = mkEnableOption "hydra";
     hostname = mkOption {
       type = types.str;

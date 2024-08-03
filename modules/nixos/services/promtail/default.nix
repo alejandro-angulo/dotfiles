@@ -1,19 +1,15 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.aa.services.promtail;
-  loki = config.services.loki;
 in {
-  options.aa.services.promtail = with types; {
+  options.aa.services.promtail = with lib; {
     enable = mkEnableOption "promtail";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.promtail = {
       enable = true;
       configuration = {

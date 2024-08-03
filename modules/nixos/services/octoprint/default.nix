@@ -1,17 +1,14 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.aa.services.octoprint;
 in {
-  options.aa.services.octoprint = with types; {
+  options.aa.services.octoprint = with lib; {
     enable = mkEnableOption "octoprint";
     acmeCertName = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = ''
         If set to a non-empty string, foces SSL with the supplied acme
@@ -20,7 +17,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.octoprint.enable = true;
 
     services.nginx = {

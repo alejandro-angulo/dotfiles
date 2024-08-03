@@ -1,14 +1,14 @@
 {
-  options,
   config,
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkEnableOption mkIf;
+
   cfg = config.aa.hardware.audio;
 in {
-  options.aa.hardware.audio = with types; {
+  options.aa.hardware.audio = {
     enable = mkEnableOption "audio";
   };
 

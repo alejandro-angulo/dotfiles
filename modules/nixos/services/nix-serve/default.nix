@@ -1,26 +1,23 @@
 {
-  options,
   config,
   lib,
   pkgs,
-  format,
   ...
-}:
-with lib; let
+}: let
   cfg = config.aa.services.nix-serve;
 in {
-  options.aa.services.nix-serve = with types; {
+  options.aa.services.nix-serve = with lib; {
     enable = mkEnableOption "nix-serve";
     domain_name = mkOption {
-      type = str;
+      type = types.str;
       description = "The domain to use.";
     };
     subdomain_name = mkOption {
-      type = str;
+      type = types.str;
       description = "The subdomain to use.";
     };
     acmeCertName = mkOption {
-      type = str;
+      type = types.str;
       default = "";
       description = ''
         If set to a non-empty string, forces SSL with the supplied acme
@@ -29,7 +26,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     nix.settings = {
       allowed-users = ["nix-serve"];
       trusted-users = ["nix-serve"];

@@ -1,19 +1,14 @@
 {
-  options,
   config,
   lib,
-  pkgs,
-  format,
   ...
-}:
-with lib; let
+}: let
   cfg = config.aa.services.mosquitto;
-  mosquitto_cfg = config.services.mosquitto;
 in {
-  options.aa.services.mosquitto = with types; {
+  options.aa.services.mosquitto = with lib; {
     enable = mkEnableOption "home assistant";
   };
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     age.secrets = {
       hass_mqtt.file = ../../../../secrets/hass_mqtt.age;
       theengs_ble_mqtt.file = ../../../../secrets/theengs_ble_mqtt.age;
