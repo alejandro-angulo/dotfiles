@@ -31,6 +31,7 @@
 
     services = {
       swaync.enable = true;
+      playerctld.enable = true;
     };
   };
 }
