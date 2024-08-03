@@ -39,6 +39,7 @@ in {
 
   config = mkIf cfg.enable {
     ${namespace} = {
+      fonts.enable = true;
       programs = {
         kitty.enable = true;
         rofi.enable = true;
