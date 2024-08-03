@@ -18,6 +18,7 @@
       firefox.enable = true;
       gpg.enable = true;
       kitty.enable = true;
+      rofi.enable = true;
     };
 
     tools = {
