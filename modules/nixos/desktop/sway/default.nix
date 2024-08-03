@@ -37,7 +37,6 @@ in {
   config = mkIf cfg.enable {
     aa.desktop.addons = {
       alacritty.enable = true;
-      gammastep.enable = true;
 
       # TODO
       # light

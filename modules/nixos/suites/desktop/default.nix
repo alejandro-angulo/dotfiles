@@ -1,22 +1,26 @@
 {
   config,
   lib,
+  namespace,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.aa.suites.desktop;
+  cfg = config.${namespace}.suites.desktop;
 in {
-  options.aa.suites.desktop = {
+  options.${namespace}.suites.desktop = {
     enable = mkEnableOption "common desktop configuration";
   };
 
   config = mkIf cfg.enable {
-    aa = {
+    ${namespace} = {
       desktop = {
         sway.enable = true;
       };
     };
+
+    # Required to use gammastep home module without providing lat/long
+    services.geoclue2.enable = true;
 
     # The following fixes an issue with using swaylcock as a home module
     # Workaround for https://github.com/NixOS/nixpkgs/issues/158025
