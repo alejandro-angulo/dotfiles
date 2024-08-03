@@ -19,6 +19,7 @@
       gpg.enable = true;
       kitty.enable = true;
       rofi.enable = true;
+      swaylock.enable = true;
     };
 
     tools = {

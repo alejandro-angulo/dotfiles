@@ -40,7 +40,6 @@ in {
       gammastep.enable = true;
       playerctl.enable = true;
       swayidle.enable = true;
-      swaylock.enable = true;
 
       # TODO
       # light

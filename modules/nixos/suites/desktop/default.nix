@@ -17,5 +17,10 @@ in {
         sway.enable = true;
       };
     };
+
+    # The following fixes an issue with using swaylcock as a home module
+    # Workaround for https://github.com/NixOS/nixpkgs/issues/158025
+    # This comment specifically: https://github.com/NixOS/nixpkgs/issues/158025#issuecomment-1344766809
+    security.pam.services.swaylock = {};
   };
 }
