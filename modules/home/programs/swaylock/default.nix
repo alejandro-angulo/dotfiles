@@ -16,8 +16,7 @@ in {
     programs.swaylock = {
       enable = true;
       settings = {
-        # TODO: Set wallpaper
-        # image = "${config.xdg.dataHome}/${config.${namespace}.desktop.sway.wallpaperPath}";
+        image = "${config.xdg.dataHome}/${config.${namespace}.windowManagers.sway.wallpaperPath}";
       };
     };
   };
