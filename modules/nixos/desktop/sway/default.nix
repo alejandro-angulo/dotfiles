@@ -42,7 +42,6 @@ in {
       rofi.enable = true;
       swayidle.enable = true;
       swaylock.enable = true;
-      swaync.enable = true;
       waybar.enable = true;
 
       # TODO
