@@ -65,9 +65,6 @@ in {
       ];
 
       extraConfig = ''
-        # Color fix
-        # set-option -ga terminal-overrides ",alacritty:Tc,xterm-256color:Tc"
-
         # Scrolling with mouse wheel scrolls output instead of previous commands
         setw -g mouse on
 
