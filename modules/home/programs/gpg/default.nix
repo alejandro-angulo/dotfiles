@@ -32,7 +32,10 @@ in {
     # see here: https://github.com/nix-community/home-manager/issues/3864
     services.gpg-agent = mkIf (system == "x86_64-linux") {
       enable = true;
-      pinentryPackage = pkgs.pinentry-curses;
+      pinentryPackage =
+        if config.${namespace}.windowManagers.sway.enable
+        then pkgs.pinentry-qt
+        else pkgs.pinentry-curses;
       enableZshIntegration = true;
       enableSshSupport = true;
       sshKeys = [
