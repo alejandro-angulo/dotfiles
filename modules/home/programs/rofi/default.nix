@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   namespace,
   ...
 }: let
@@ -18,8 +19,10 @@ in {
       # TODO: How to ensure this font is installed?
       font = "Hack Nerd Font 10";
       theme = "gruvbox-dark-hard";
+      plugins = [pkgs.rofi-emoji];
       extraConfig = {
         show-icons = true;
+        modi = "window,run,ssh,emoji";
       };
     };
   };

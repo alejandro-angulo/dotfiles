@@ -17,6 +17,7 @@
 
   # TODO: This assumes I'll be using rofi and kitty. Should make more generic.
   menu = "rofi -show run";
+  emoji_picker = "rofi -show emoji";
   terminal = "kitty";
 
   generate_grimshot_command = target: ''
@@ -185,6 +186,7 @@ in {
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+c" = "kill";
           "${modifier}+p" = "exec ${menu}";
+          "${modifier}+d" = "exec ${emoji_picker}";
           "${modifier}+z" = "reload";
           "${modifier}+x" = "exec swaylock";
 
