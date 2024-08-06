@@ -1,16 +1,14 @@
 {
   config,
   pkgs,
-  lib,
   inputs,
-  nixpkgs,
   modulesPath,
   ...
 }: {
-  imports = with inputs; [
+  imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
-    nixos-hardware.nixosModules.raspberry-pi-4
+    inputs.nixos-hardware.nixosModules.raspberry-pi-4
   ];
 
   # Workaround for issue 109280
@@ -27,8 +25,6 @@
   aa = {
     nix.enable = true;
     nix.useSelfhostedCache = true;
-
-    apps.tmux.enable = true;
 
     services.tailscale = {
       enable = true;
@@ -50,7 +46,6 @@
     };
 
     suites.utils.enable = true;
-    tools.zsh.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
