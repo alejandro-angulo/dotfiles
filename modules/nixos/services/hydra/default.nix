@@ -103,7 +103,7 @@ in {
         "hydra"
         "hydra-www"
       ];
-      allowed-uris = ["github:" "https://github.com/" "https://api.github.com/"];
+      allowed-uris = ["github:" "https://github.com/" "https://gitea.kilonull.com/"];
     };
   };
 }

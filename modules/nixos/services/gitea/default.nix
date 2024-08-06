@@ -40,6 +40,8 @@ in {
 
         session.COOKIE_SECURE = true;
         service.DISABLE_REGISTRATION = true;
+
+        webhook.ALLOWED_HOST_LIST = "hydra.kilonull.com";
       };
     };
 
