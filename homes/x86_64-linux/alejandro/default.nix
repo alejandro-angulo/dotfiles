@@ -29,4 +29,10 @@
 
     windowManagers.sway.enable = true;
   };
+
+  # misc utils without custom config
+  programs = {
+    fzf.enable = true;
+    zoxide.enable = true;
+  };
 }
