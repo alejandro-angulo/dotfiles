@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  namespace,
   ...
 }: {
   aa = {
@@ -96,7 +97,7 @@
     22
 
     # HTTP(S)
-    80
+    # 80
     443
   ];
 
