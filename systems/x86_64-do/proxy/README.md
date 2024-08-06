@@ -1,5 +1,0 @@
-- Log in (SSH key should already be configured)
-- Change password with `passwd`
-- Set up tailscale with `sudo tailscale up --accept-routes --ssh`
-- Write cloudflare creds to `/var/acme/creds`
-  - Ensure permissions `sudo chmod -R 700 /var/acme/creds`
