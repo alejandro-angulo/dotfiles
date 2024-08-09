@@ -120,8 +120,6 @@
           name:
             inputs.self.nixosConfigurations."${name}".config.system.build.toplevel
         );
-
-        droplets.proxy = inputs.self.doConfigurations.proxy;
       };
     };
 }
