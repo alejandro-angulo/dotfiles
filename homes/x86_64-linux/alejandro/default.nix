@@ -18,6 +18,7 @@
       firefox.enable = true;
       gpg.enable = true;
       kitty.enable = true;
+      zoxide.enable = true;
     };
 
     tools = {
@@ -33,6 +34,5 @@
   # misc utils without custom config
   programs = {
     fzf.enable = true;
-    zoxide.enable = true;
   };
 }
