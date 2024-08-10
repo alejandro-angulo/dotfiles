@@ -7,9 +7,7 @@
     };
 
     programs = {
-      firefox.enable = true;
       gpg.enable = true;
-      kitty.enable = true;
       zoxide.enable = true;
     };
 
@@ -19,8 +17,6 @@
       git.enable = true;
       zsh.enable = true;
     };
-
-    windowManagers.sway.enable = true;
   };
 
   # misc utils without custom config
