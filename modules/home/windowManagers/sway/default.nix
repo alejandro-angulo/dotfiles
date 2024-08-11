@@ -65,6 +65,13 @@ in {
       xdg-utils
     ];
 
+    home.pointerCursor = {
+      package = pkgs.catppuccin-cursors.mochaDark;
+      name = "catppuccin-mocha-dark-cursors";
+      gtk.enable = true;
+      x11.enable = true;
+    };
+
     # For screen sharing to work
     xdg.portal = {
       enable = true;
