@@ -8,6 +8,7 @@
 
     programs = {
       firefox.enable = true;
+      fzf.enable = true;
       gpg.enable = true;
       kitty.enable = true;
       zoxide.enable = true;
@@ -22,10 +23,5 @@
     };
 
     windowManagers.sway.enable = true;
-  };
-
-  # misc utils without custom config
-  programs = {
-    fzf.enable = true;
   };
 }
