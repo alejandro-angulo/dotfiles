@@ -59,8 +59,9 @@ in {
             };
         }
 
-        tmuxPlugins.vim-tmux-navigator
         tmuxPlugins.open
+        tmuxPlugins.tmux-fzf
+        tmuxPlugins.vim-tmux-navigator
       ];
 
       extraConfig = ''
