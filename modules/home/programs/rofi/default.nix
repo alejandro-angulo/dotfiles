@@ -18,7 +18,7 @@ in {
       enable = true;
       # TODO: How to ensure this font is installed?
       font = "Hack Nerd Font 10";
-      theme = "gruvbox-dark-hard";
+      catppuccin.enable = true;
       plugins = [pkgs.rofi-emoji];
       extraConfig = {
         show-icons = true;

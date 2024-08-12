@@ -7,6 +7,8 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    catppuccin.url = "github:catppuccin/nix";
+
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -27,9 +29,6 @@
 
     nixvim.url = "github:alejandro-angulo/nixvim-config";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
-
-    base16-shell.url = "github:chriskempson/base16-shell/master";
-    base16-shell.flake = false;
 
     zsh-syntax-highlighting.url = "github:zsh-users/zsh-syntax-highlighting/master";
     zsh-syntax-highlighting.flake = false;
@@ -62,6 +61,8 @@
         agenix.nixosModules.default
         home-manager.nixosModules.home-manager
       ];
+
+      homes.modules = with inputs; [catppuccin.homeManagerModules.catppuccin];
 
       deploy.nodes = {
         node = {

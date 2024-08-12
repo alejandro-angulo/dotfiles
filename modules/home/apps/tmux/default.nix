@@ -16,10 +16,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    xdg.dataFile."tmux-theme".source = ./tmux_theme;
-
     programs.tmux = {
       enable = true;
+      catppuccin.enable = true;
       keyMode = "vi";
       newSession = true;
       sensibleOnTop = true;
@@ -72,11 +71,6 @@ in {
         bind c new-window -c "#{pane_current_path}"
         bind '"' split-window -c "#{pane_current_path}"
         bind % split-window -h -c "#{pane_current_path}"
-
-        # Eye Candy
-        # set -g @plugin 'mattdavis90/base16-tmux'
-        # set -g @colors-base16 'darktooth'
-        source-file ${config.xdg.dataHome}/tmux-theme;
 
         # Smart pane switching with awareness of Vim splits.
         # See: https://github.com/christoomey/vim-tmux-navigator

@@ -25,20 +25,18 @@
         "type": "github"
       }
     },
-    "base16-shell": {
-      "flake": false,
+    "catppuccin": {
       "locked": {
-        "lastModified": 1663053609,
-        "narHash": "sha256-X89FsG9QICDw3jZvOCB/KsPBVOLUeE7xN3VCtf0DD3E=",
-        "owner": "chriskempson",
-        "repo": "base16-shell",
-        "rev": "588691ba71b47e75793ed9edfcfaa058326a6f41",
+        "lastModified": 1722997334,
+        "narHash": "sha256-vE5FcKVQ3E0txJKt5w3vOlfcN1XoTAlxK9PnQ/CJavA=",
+        "owner": "catppuccin",
+        "repo": "nix",
+        "rev": "66f4ea170093b62f319f41cebd2337a51b225c5a",
         "type": "github"
       },
       "original": {
-        "owner": "chriskempson",
-        "ref": "master",
-        "repo": "base16-shell",
+        "owner": "catppuccin",
+        "repo": "nix",
         "type": "github"
       }
     },
@@ -453,11 +451,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1722962845,
-        "narHash": "sha256-5LVqc7VzjUyHNPg+s4h7+hpI3+PyxmTVxBHh0ZZlVdY=",
+        "lastModified": 1723417027,
+        "narHash": "sha256-7nHu9z9nl74cQxsKc/MqVJxP55Tp6st0BqQBRD0rcdw=",
         "owner": "alejandro-angulo",
         "repo": "nixvim-config",
-        "rev": "5b0724b2f9ac3ad19cdb7b0a40ffc80f5449094b",
+        "rev": "c2019dad461435c6e4f3c518355d9bf244f45ab2",
         "type": "github"
       },
       "original": {
@@ -535,7 +533,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "base16-shell": "base16-shell",
+        "catppuccin": "catppuccin",
         "deploy-rs": "deploy-rs",
         "home-manager": "home-manager",
         "nixos-generators": "nixos-generators",

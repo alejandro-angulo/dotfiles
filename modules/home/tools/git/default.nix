@@ -36,6 +36,7 @@ in {
     programs.git = {
       delta = {
         enable = true;
+        catppuccin.enable = true;
         options = {
           line-numbers = true;
           navigate = true;
@@ -86,6 +87,7 @@ in {
 
     programs.lazygit = {
       enable = true;
+      catppuccin.enable = true;
       settings = {
         quitOnTopLevelReturn = true;
         gui.nerdFontsVersion = "3";

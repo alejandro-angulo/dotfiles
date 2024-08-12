@@ -23,7 +23,6 @@ in {
         export EDITOR=nvim
       '';
       initExtra = ''
-        base16_darktooth
         bindkey -v
         bindkey '^A' beginning-of-line
         bindkey '^E' end-of-line
@@ -47,11 +46,6 @@ in {
           name = "powerlevel10k-config";
           src = lib.cleanSource ./.;
           file = "p10k.zsh";
-        }
-        {
-          name = "base16-shell";
-          src = inputs.base16-shell;
-          file = "base16-shell.plugin.zsh";
         }
       ];
     };

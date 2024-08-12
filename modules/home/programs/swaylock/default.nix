@@ -15,9 +15,7 @@ in {
   config = mkIf cfg.enable {
     programs.swaylock = {
       enable = true;
-      settings = {
-        image = "${config.xdg.dataHome}/${config.${namespace}.windowManagers.sway.wallpaperPath}";
-      };
+      catppuccin.enable = true;
     };
   };
 }

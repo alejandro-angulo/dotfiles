@@ -15,7 +15,7 @@ in {
   config = mkIf cfg.enable {
     programs.bat = {
       enable = true;
-      config.theme = "gruvbox-dark";
+      catppuccin.enable = true;
     };
   };
 }

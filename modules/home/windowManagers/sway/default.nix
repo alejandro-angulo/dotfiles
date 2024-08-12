@@ -65,11 +65,17 @@ in {
       xdg-utils
     ];
 
-    home.pointerCursor = {
-      package = pkgs.catppuccin-cursors.mochaDark;
-      name = "catppuccin-mocha-dark-cursors";
-      gtk.enable = true;
-      x11.enable = true;
+    catppuccin.pointerCursor = {
+      enable = true;
+      accent = "dark";
+    };
+    gtk.catppuccin = {
+      enable = true;
+      icon.enable = true;
+    };
+    qt.style.catppuccin = {
+      enable = true;
+      apply = true;
     };
 
     # For screen sharing to work
@@ -86,6 +92,7 @@ in {
       checkConfig = false;
 
       enable = true;
+      catppuccin.enable = true;
       swaynag.enable = true;
       wrapperFeatures.gtk = true; # so that gtk works properly
       systemd.enable = true; # needed this for screen sharing to work
@@ -94,27 +101,43 @@ in {
         inherit terminal menu left right up down modifier;
         workspaceAutoBackAndForth = true;
 
+        # Use catppuccin colors
         colors = {
+          background = "$base";
           focused = {
-            border = "#2B3C44";
-            background = "#4E3D45";
-            text = "#FFFFFF";
-            indicator = "#333333";
-            childBorder = "#000000";
+            border = "$lavender";
+            background = "$base";
+            text = "$text";
+            indicator = "$rosewater";
+            childBorder = "$lavender";
           };
           focusedInactive = {
-            border = "#484848";
-            background = "#333333";
-            text = "#FFFFFF";
-            indicator = "#000000";
-            childBorder = "#000000";
+            border = "$overlay0";
+            background = "$base";
+            text = "$text";
+            indicator = "$rosewater";
+            childBorder = "$overlay0";
           };
           unfocused = {
-            border = "#484848";
-            background = "#333333";
-            text = "#FFFFFF";
-            indicator = "#000000";
-            childBorder = "#000000";
+            border = "$overlay0";
+            background = "$base";
+            text = "$text";
+            indicator = "$rosewater";
+            childBorder = "$overlay0";
+          };
+          urgent = {
+            border = "$peach";
+            background = "$base";
+            text = "$peach";
+            indicator = "$overlay0";
+            childBorder = "$peach";
+          };
+          placeholder = {
+            border = "$overlay0";
+            background = "$base";
+            text = "$text";
+            indicator = "$overlay0";
+            childBorder = "$overlay0";
           };
         };
 

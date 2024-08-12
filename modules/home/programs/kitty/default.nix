@@ -16,6 +16,7 @@ in {
   config = mkIf cfg.enable {
     programs.kitty = {
       enable = true;
+      catppuccin.enable = true;
       font = {
         size = 12;
         package = pkgs.nerdfonts.override {fonts = ["Hack"];};
