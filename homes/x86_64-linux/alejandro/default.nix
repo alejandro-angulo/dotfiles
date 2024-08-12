@@ -11,6 +11,7 @@
       gpg.enable = true;
       kitty.enable = true;
       zoxide.enable = true;
+      yazi.enable = true;
     };
 
     tools = {
