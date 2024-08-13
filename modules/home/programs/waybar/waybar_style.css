@@ -5,9 +5,8 @@
 }
 
 window#waybar {
-    background-color: rgba(29, 32, 33, 0.9);
-    border-bottom: 3px solid #1d2021;
-    color: #ffffdf;
+    background-color: @base;
+    color: @text;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -30,10 +29,10 @@ window#waybar.hidden {
 #network,
 #tray,
 #custom-notification {
-    background-color: #303030;
+    background-color: @crust;
     padding: 0 10px;
     margin: 3px;
-    border: 3px solid rgba(0, 0, 0, 0);
+    /* border: 3px solid rgba(0, 0, 0, 0); */
     border-radius: 90px;
     background-clip: padding-box;
 }
@@ -41,7 +40,7 @@ window#waybar.hidden {
 #workspaces button {
     padding: 0 5px;
     min-width: 20px;
-    color: #87afaf;
+    color: @blue;
 }
 
 #workspaces button:hover {
@@ -49,63 +48,58 @@ window#waybar.hidden {
 }
 
 #workspaces button.focused {
-    color: #ffaf00;
+    color: @yellow;
 }
 
 #workspaces button.urgent {
-    color: #e06c75;
+    color: @red;
 }
 
 #clock {
-    color: #61afef;
+    color: @sky;
 }
 
 #idle_inhibitor {
-    color: #abb2bf;
+    color: @sky;
 }
 
 #idle_inhibitor.activated {
-    background-color: #abb2bf;
-    color: #1e222a;
+    background-color: @overlay0;
 }
 
 #temperature {
-    color: #fb4934;
+    color: @red;
 }
 
 #temperature.critical {
-    color: #1d2021;
-    background-color: #9d0006;
+    background-color: @overlay0;
 }
 
 #cpu {
-    color: #ff8700;
+    color: @peach;
 }
 
 #memory {
-    color: #87af87;
+    color: @sky;
 }
 
 #battery {
-    color: #b8bb26;
+    color: @green;
 }
 
 #battery.charging,
 #battery.plugged {
-    background-color: #1f321c;
-    color: #ffffaf;
+    background-color: @overlay0;
 }
 
 @keyframes blink {
     to {
-        background-color: #1f321c;
-        color: #ffffaf;
+        background-color: @overlay0;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #afaf00;
-    color: #303030;
+    background-color: @overlay0;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -114,25 +108,25 @@ window#waybar.hidden {
 }
 
 #pulseaudio {
-    color: #fabd2f;
+    color: @yellow;
 }
 
 #pulseaudio.muted {
-    color: #b57614;
+    color: @peach;
 }
 
 #backlight {
-    color: #17ccd5;
+    color: @blue;
 }
 
 #network {
-    color: #d787af;
+    color: @mauve;
 }
 
 #network.disconnected {
-    color: #875f87;
+    color: @rosewater;
 }
 
 #custom\/notification {
-    color: red;
+    color: @red;
 }
