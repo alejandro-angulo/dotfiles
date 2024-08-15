@@ -15,10 +15,10 @@
   down = "j";
   modifier = "Mod4";
 
-  # TODO: This assumes I'll be using rofi and kitty. Should make more generic.
-  menu = "rofi -show run";
-  emoji_picker = "rofi -show emoji";
-  terminal = "kitty";
+  # TODO: This assumes I'll be using fuzzel and kitty. Should make more generic.
+  menu = "${pkgs.fuzzel}/bin/fuzzel";
+  emoji_picker = "${pkgs.bemoji}/bin/bemoji -t";
+  terminal = "${pkgs.kitty}/bin/kitty";
 
   generate_grimshot_command = target: ''
     exec mkdir -p ~/screenshots \
@@ -43,7 +43,7 @@ in {
       fonts.enable = true;
       programs = {
         kitty.enable = true;
-        rofi.enable = true;
+        fuzzel.enable = true;
         swaylock.enable = true;
         waybar.enable = true;
       };
@@ -62,6 +62,7 @@ in {
       sway-contrib.grimshot
       wev
       wl-clipboard
+      wtype
       xdg-utils
     ];
 
