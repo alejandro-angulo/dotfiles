@@ -15,7 +15,6 @@
   down = "j";
   modifier = "Mod4";
 
-  # TODO: This assumes I'll be using fuzzel and kitty. Should make more generic.
   menu = "${pkgs.fuzzel}/bin/fuzzel";
   emoji_picker = "${pkgs.bemoji}/bin/bemoji -t";
   terminal = "${pkgs.kitty}/bin/kitty";
