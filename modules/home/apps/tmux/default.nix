@@ -40,25 +40,6 @@ in {
           '';
         }
 
-        {
-          plugin =
-            tmuxPlugins.mkTmuxPlugin
-            {
-              pluginName = "tmux-nerd-font-window-name";
-              version = "2.1.1";
-              src = inputs.tmux-nerd-font-window-name;
-              nativeBuildInputs = [pkgs.makeWrapper];
-              rtpFilePath = "tmux-nerd-font-window-name.tmux";
-              postInstall = ''
-                wrapProgram $target/bin/tmux-nerd-font-window-name \
-                    --prefix PATH ${lib.makeBinPath [pkgs.yq-go]}
-
-                # NOTE: I thought the wrapProgram above should make it so this wouldn't be needed
-                find $target -type f -print0 | xargs -0 sed -i -e 's|yq |${pkgs.yq-go}/bin/yq |g'
-              '';
-            };
-        }
-
         tmuxPlugins.open
         tmuxPlugins.tmux-fzf
         tmuxPlugins.vim-tmux-navigator
