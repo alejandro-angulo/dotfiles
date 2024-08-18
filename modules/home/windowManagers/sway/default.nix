@@ -162,8 +162,10 @@ in {
         output = {
           "*".bg = "${config.xdg.dataHome}/${cfg.wallpaperPath} fill";
           "eDP-1".scale = "1";
+          "Dell Inc. DELL S2721QS 4FR7M43".scale = "1.5";
+          "Dell Inc. DELL S2721QS 47W7M43".scale = "1.5";
           "Dell Inc. DELL S2721QS 4FR7M43".position = "0 0";
-          "Dell Inc. DELL S2721QS 47W7M43".position = "0 2160";
+          "Dell Inc. DELL S2721QS 47W7M43".position = "0 1440";
         };
 
         modes = {
