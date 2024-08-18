@@ -16,6 +16,9 @@ in {
       (nerdfonts.override {fonts = ["Hack"];})
       noto-fonts
       noto-fonts-color-emoji
+      noto-fonts-lgc-plus
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
     ];
 
     fonts.fontconfig = {
