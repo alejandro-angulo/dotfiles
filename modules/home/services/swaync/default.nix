@@ -21,7 +21,7 @@ in {
       settings = {
         widgets = ["title" "dnd" "notifications" "mpris"];
       };
-      style = builtins.readFile "${pkgs.aa.catppuccin-swaync}/catppuccin.css";
+      style = "${pkgs.aa.catppuccin-swaync}/catppuccin.css";
     };
   };
 }

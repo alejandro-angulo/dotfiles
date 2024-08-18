@@ -20,13 +20,13 @@ in {
   };
 
   config = mkIf cfg.enable {
+    xdg.configFile."waybar/catppuccin.css".source = "${pkgs.aa.catppuccin-waybar}/catppuccin.css";
+
     programs.waybar = {
       enable = true;
       systemd.enable = true;
 
-      style =
-        builtins.readFile "${pkgs.aa.catppuccin-waybar}/catppuccin.css"
-        + builtins.readFile ./waybar_style.css;
+      style = builtins.readFile ./waybar_style.css;
 
       settings = [
         {
