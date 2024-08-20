@@ -29,6 +29,18 @@ in {
       settings = {
         background_opacity = "0.95";
       };
+      keybindings = lib.mkMerge [
+        (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+          "cmd+=" = "change_font_size current +2.0";
+          "cmd+minus" = "change_font_size current -2.0";
+          "cmd+0" = "change_font_size current 0";
+        })
+        (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+          "ctrl+=" = "change_font_size current +2.0";
+          "ctrl+minus" = "change_font_size current -2.0";
+          "ctrl+0" = "change_font_size current 0";
+        })
+      ];
     };
   };
 }
