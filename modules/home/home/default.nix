@@ -40,8 +40,9 @@
           fzf.enable = true;
           gpg.enable = true;
           kitty.enable = true;
-          zoxide.enable = true;
+          neovim.enable = true;
           yazi.enable = true;
+          zoxide.enable = true;
         };
 
         tools = {

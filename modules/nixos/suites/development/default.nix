@@ -12,18 +12,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    aa = {
-      apps = {
-        neovim.enable = true;
-      };
-    };
-
     environment.systemPackages = with pkgs; [
       awscli2
       direnv
+      git
       minio-client
       pre-commit
-      git
+      vim
     ];
   };
 }
