@@ -12,8 +12,6 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
-    # For some reason updating causes an error saying /nix/store/secrets can't
-    # be access in pure mode (doesn't play nice with agenix)
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
