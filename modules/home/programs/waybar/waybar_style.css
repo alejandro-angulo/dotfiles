@@ -115,7 +115,7 @@ window#waybar.hidden {
 }
 
 #pulseaudio.muted {
-    color: @peach;
+    background-color: @overlay0;
 }
 
 #backlight {
