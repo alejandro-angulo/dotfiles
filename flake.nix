@@ -47,13 +47,6 @@
       snowfall.namespace = "aa";
 
       channels-config.allowUnfree = true;
-      # TODO: This should be temporary.
-      # See here:
-      # https://github.com/NixOS/nixpkgs/issues/269713
-      # https://github.com/project-chip/connectedhomeip/issues/25688
-      channels-config.permittedInsecurePackages = [
-        "openssl-1.1.1w"
-      ];
 
       systems.modules.nixos = with inputs; [
         agenix.nixosModules.default
