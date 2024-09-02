@@ -451,11 +451,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1725084615,
-        "narHash": "sha256-TcPov/uWlJR6hmIM7vg2041uD8JJW9KF0Ymttadj0w4=",
+        "lastModified": 1725256396,
+        "narHash": "sha256-B9VLyCd7BqyQM9Orn8EXoCnhiP3eRMpw5ocW9mxNwYA=",
         "owner": "alejandro-angulo",
         "repo": "nixvim-config",
-        "rev": "26baabd822fb0d6bcaf33b27b86973c8a9e68a71",
+        "rev": "68028745ba11a4ebef715c7bdbe246f72091cbee",
         "type": "github"
       },
       "original": {
