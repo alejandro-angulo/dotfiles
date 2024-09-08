@@ -33,9 +33,6 @@
 
     powerlevel10k.url = "github:romkatv/powerlevel10k/master";
     powerlevel10k.flake = false;
-
-    tmux-nerd-font-window-name.url = "github:joshmedeski/tmux-nerd-font-window-name";
-    tmux-nerd-font-window-name.flake = false;
   };
 
   outputs = inputs:
