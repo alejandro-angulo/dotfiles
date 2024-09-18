@@ -44,16 +44,6 @@
       configureClientRouting = true;
       configureServerRouting = true;
     };
-    services.syncoid = {
-      enable = true;
-      commands = {
-        "rpool" = {
-          target = "backups@192.168.113.13:tank/backups/gospel/rpool";
-          recursive = true;
-          sshKey = "/var/lib/syncoid/.ssh/id_ed25519";
-        };
-      };
-    };
     services.prometheus.enable = true;
     services.promtail.enable = true;
     services.hydra = {

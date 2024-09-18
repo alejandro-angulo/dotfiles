@@ -42,13 +42,6 @@
     };
     services.loki.enable = true;
     services.promtail.enable = true;
-    services.syncoid = {
-      #  sudo -u backups zfs create -o mountpoint=/tank/backups/gospel tank/backups/gospel
-      enable = true;
-      remoteTargetUser = "backups";
-      remoteTargetDatasets = ["tank/backups"];
-      remoteTargetPublicKeys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAhA+9O2OBMDH1Xnj6isu36df5TOdZG8aEA4JpN2K60e syncoid@gospel"];
-    };
     services.teslamate = {
       enable = true;
       database = {
