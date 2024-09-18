@@ -44,9 +44,22 @@ in {
       enable = true;
       catppuccin.enable = true;
       settings = {
-        format = ''
-          $all$fill$time$line_break$character
-        '';
+        format = lib.concatStrings [
+          "$os"
+          "$username"
+          "$hostname"
+          "$directory"
+          "$git_branch"
+          "$git_commit"
+          "$git_state"
+          "$git_metrics"
+          "$git_status"
+          "$fill"
+          "$all"
+          "$time"
+          "$line_break"
+          "$character"
+        ];
 
         os.disabled = false;
         status.disabled = false;
