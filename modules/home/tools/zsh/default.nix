@@ -37,17 +37,13 @@ in {
           src = inputs.zsh-syntax-highlighting;
           file = "zsh-syntax-highlighting.zsh";
         }
-        {
-          name = "powerlevel10k";
-          src = inputs.powerlevel10k;
-          file = "powerlevel10k.zsh-theme";
-        }
-        {
-          name = "powerlevel10k-config";
-          src = lib.cleanSource ./.;
-          file = "p10k.zsh";
-        }
       ];
+    };
+
+    programs.starship = {
+      enable = true;
+      enableTransience = true;
+      catppuccin.enable = true;
     };
   };
 }
