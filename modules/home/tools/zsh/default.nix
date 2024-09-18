@@ -42,7 +42,6 @@ in {
 
     programs.starship = {
       enable = true;
-      enableTransience = true;
       catppuccin.enable = true;
     };
   };
