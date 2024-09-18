@@ -43,6 +43,15 @@ in {
     programs.starship = {
       enable = true;
       catppuccin.enable = true;
+      settings = {
+        format = ''
+          $all$fill$time$line_break$character
+        '';
+
+        os.disabled = false;
+        status.disabled = false;
+        time.disabled = false;
+      };
     };
   };
 }
