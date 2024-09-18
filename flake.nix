@@ -43,6 +43,7 @@
       # overlay-package-namespace = "aa";
       snowfall.namespace = "aa";
 
+      channels-config.android_sdk.accept_license = true;
       channels-config.allowUnfree = true;
 
       systems.modules.nixos = with inputs; [

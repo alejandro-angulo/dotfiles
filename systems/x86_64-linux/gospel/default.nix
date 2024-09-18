@@ -72,8 +72,6 @@
     system.monitoring.enable = true;
   };
 
-  programs.adb.enable = true;
-
   virtualisation = {
     libvirtd.enable = true;
 
