@@ -41,34 +41,24 @@ in {
           src = inputs.zsh-syntax-highlighting;
           file = "zsh-syntax-highlighting.zsh";
         }
+        {
+          name = "powerlevel10k";
+          src = inputs.powerlevel10k;
+          file = "powerlevel10k.zsh-theme";
+        }
+        # To reconfigure p10k:
+        # - Comment out the attrset below
+        # - Run nixos-rebuild
+        # - Run `p10k configure` (or start a new terminal session)
+        # - Run `mv ~/.p10k.zsh ./p10k.zsh`
+        # - Uncomment the attrset below
+        # - Run nixos-rebuid
+        {
+          name = "powerlevel10k-config";
+          src = ./plugins;
+          file = "p10k.zsh";
+        }
       ];
-    };
-
-    programs.starship = {
-      enable = true;
-      catppuccin.enable = true;
-      settings = {
-        format = lib.concatStrings [
-          "$os"
-          "$username"
-          "$hostname"
-          "$directory"
-          "$git_branch"
-          "$git_commit"
-          "$git_state"
-          "$git_metrics"
-          "$git_status"
-          "$fill"
-          "$all"
-          "$time"
-          "$line_break"
-          "$character"
-        ];
-
-        os.disabled = false;
-        status.disabled = false;
-        time.disabled = false;
-      };
     };
   };
 }
