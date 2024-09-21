@@ -48,7 +48,15 @@ in {
       userEmail = cfg.userEmail;
 
       aliases = {
+        # Prettier log
         lol = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+        # Find log and grab its hash
+        lof = ''
+          !${pkgs.git}/bin/git log --pretty=oneline \
+          | ${pkgs.fzf}/bin/fzf --scheme history \
+          | ${pkgs.gawk}/bin/awk '{print $1}'
+        '';
+        # Push up a new branch with the same as local
         pushup = "push -u origin HEAD";
       };
 

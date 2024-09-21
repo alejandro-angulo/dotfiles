@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   namespace,
   ...
 }: let
@@ -27,9 +28,12 @@ in {
         bindkey '^A' beginning-of-line
         bindkey '^E' end-of-line
         bindkey '^R' history-incremental-search-backward
-        alias view="nvim -R $1"
-        alias l='ls -la'
       '';
+
+      shellAliases = {
+        view = "${pkgs.neovim}/bin/nvim -R $1";
+        l = "ls -la";
+      };
 
       plugins = [
         {
