@@ -37,7 +37,6 @@ in {
         "met"
         "mqtt"
         "octoprint"
-        "tuya"
         "vizio"
         "zeroconf"
       ];
