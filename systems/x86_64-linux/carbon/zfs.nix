@@ -1,12 +1,7 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   boot.supportedFilesystems = ["zfs"];
   networking.hostId = "b2d25606";
   boot.zfs.devNodes = "/dev/disk/by-id";
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   swapDevices = [
     {
       device = "/dev/disk/by-id/nvme-SAMSUNG_MZVLW256HEHP-000L7_S35ENX1K539085-part4";
