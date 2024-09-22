@@ -16,11 +16,11 @@ in {
   config = mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      # Set theme with `extraConfig` instead of `theme` to avoid IFD.
-      # See here: https://github.com/nix-community/home-manager/issues/5110
-      extraConfig = ''
-        include ${pkgs.kitty-themes}/share/kitty-themes/themes/Catppuccin-Mocha.conf
-      '';
+      # Set theme explicity instead of using catppuccin flake until relevant PR
+      # is merged.
+      #
+      # https://github.com/catppuccin/nix/pull/337
+      themeFile = "Catppuccin-Mocha";
       font = {
         size = 12;
         package = pkgs.nerdfonts.override {fonts = ["Hack"];};
