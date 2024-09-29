@@ -17,4 +17,5 @@ in {
   "teslamate_mqtt.age".publicKeys = [users.me machines.pi4 machines.node machines.gospel];
   "teslamate_encryption.age".publicKeys = [users.me machines.node machines.gospel];
   "hydra-aws-creds.age".publicKeys = [users.me machines.gospel];
+  "gitea-runner-gospel.age".publicKeys = [users.me machines.gospel];
 }

@@ -9,6 +9,7 @@
   ];
 
   age.secrets.cf_dns_kilonull.file = ../../../secrets/cf_dns_kilonull.age;
+  age.secrets.gitea-runner-gospel.file = ../../../secrets/gitea-runner-gospel.age;
 
   aa = {
     nix.enable = true;
@@ -62,6 +63,20 @@
     system.monitoring.enable = true;
   };
 
+  services.gitea-actions-runner.instances = {
+    gospel = {
+      enable = true;
+      name = config.networking.hostName;
+      url = "https://gitea.kilonull.com";
+      tokenFile = config.age.secrets.gitea-runner-gospel.path;
+      labels = [
+        "ubuntu-latest:docker://node:16-bullseye"
+        "ubuntu-22.04:docker://node:16-bullseye"
+        "ubuntu-20.04:docker://node:16-bullseye"
+        "ubuntu-18.04:docker://node:16-buster"
+      ];
+    };
+  };
   virtualisation = {
     libvirtd.enable = true;
 
