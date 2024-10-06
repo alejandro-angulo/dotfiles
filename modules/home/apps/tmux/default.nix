@@ -40,6 +40,7 @@ in {
         }
 
         tmuxPlugins.open
+        tmuxPlugins.pain-control
         tmuxPlugins.tmux-fzf
         tmuxPlugins.vim-tmux-navigator
       ];
