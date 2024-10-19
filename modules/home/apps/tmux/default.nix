@@ -30,6 +30,8 @@ in {
 
     programs.tmux = {
       enable = true;
+
+      baseIndex = 1;
       catppuccin.enable = true;
       keyMode = "vi";
       newSession = true;
