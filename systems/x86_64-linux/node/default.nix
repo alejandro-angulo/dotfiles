@@ -50,7 +50,7 @@
       };
       acmeCertName = "kilonull.com";
     };
-    services.gitea = {
+    services.forgejo = {
       enable = true;
       acmeCertName = "kilonull.com";
     };
