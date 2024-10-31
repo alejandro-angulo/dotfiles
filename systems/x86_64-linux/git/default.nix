@@ -4,8 +4,11 @@
   ...
 }: let
   domain = "git.alejandr0angul0.dev";
+  secrets = config.age.secrets;
 in {
   imports = ["${inputs.nixpkgs}/nixos/modules/virtualisation/digital-ocean-config.nix"];
+
+  age.secrets.authKeyFile.file = ../../../secrets/tailscale_git_server.age;
 
   aa = {
     nix.enable = true;
@@ -17,12 +20,21 @@ in {
 
     services = {
       openssh.enable = true;
+      tailscale = {
+        enable = true;
+        configureClientRouting = true;
+      };
     };
   };
 
   services.nginx.virtualHosts."${domain}" = {
     forceSSL = true;
     enableACME = true;
+  };
+
+  services.tailscale = {
+    authKeyFile = secrets.authKeyFile.path;
+    extraUpFlags = ["--ssh"];
   };
 
   security.acme = {
