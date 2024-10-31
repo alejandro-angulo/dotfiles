@@ -50,10 +50,6 @@
       };
       acmeCertName = "kilonull.com";
     };
-    services.forgejo = {
-      enable = true;
-      acmeCertName = "kilonull.com";
-    };
 
     services.homeassistant = {
       enable = true;

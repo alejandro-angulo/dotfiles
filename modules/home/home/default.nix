@@ -24,6 +24,7 @@
       lib.mkIf (!config.${namespace}.isHeadless) {
         ${namespace} = {
           programs.firefox.enable = true;
+          programs.kitty.enable = true;
           windowManagers.sway.enable = true;
         };
       }
@@ -39,7 +40,6 @@
         programs = {
           fzf.enable = true;
           gpg.enable = true;
-          kitty.enable = true;
           neovim.enable = true;
           yazi.enable = true;
           zoxide.enable = true;

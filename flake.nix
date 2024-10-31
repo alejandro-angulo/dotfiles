@@ -64,6 +64,16 @@
           };
         };
 
+        git = {
+          hostname = "git.alejandr0angul0.dev";
+          profiles.system = {
+            user = "root";
+            sshUser = "alejandro";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.git;
+            sshOpts = ["-A"];
+          };
+        };
+
         pi4 = let
           system = "aarch64-linux";
           pkgs = import inputs.nixpkgs {inherit system;};
