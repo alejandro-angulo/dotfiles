@@ -61,6 +61,8 @@
 
     system.zfs.enable = true;
     system.monitoring.enable = true;
+
+    user.extraGroups = ["dialout" "libvirtd"];
   };
 
   services.udev.packages = [
@@ -162,6 +164,8 @@
     openscad
 
     zoom-us
+
+    tridactyl-native
   ];
 
   # This value determines the NixOS release from which the default
