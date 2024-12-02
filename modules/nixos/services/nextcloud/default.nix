@@ -5,6 +5,16 @@
   ...
 }: let
   cfg = config.aa.services.nextcloud;
+  secrets = config.age.secrets;
+
+  mkNextcloudSecret = attrs: {
+    name = attrs.name;
+    value = {
+      file = attrs.path;
+      owner = "nextcloud";
+      group = "nextcloud";
+    };
+  };
 in {
   options.aa.services.nextcloud = with lib; {
     enable = mkEnableOption "nextcloud";
@@ -19,11 +29,24 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    age.secrets.nextcloud_admin = {
-      file = ../../../../secrets/nextcloud_admin.age;
-      owner = "nextcloud";
-      group = "nextcloud";
-    };
+    age.secrets = builtins.listToAttrs (builtins.map (attrs: mkNextcloudSecret attrs) [
+      {
+        name = "restic/password";
+        path = ../../../../secrets/nextcloud_restic_password.age;
+      }
+      {
+        name = "restic/env";
+        path = ../../../../secrets/nextcloud_restic_env.age;
+      }
+      {
+        name = "restic/repo";
+        path = ../../../../secrets/nextcloud_restic_repo.age;
+      }
+      {
+        name = "nextcloud_admin";
+        path = ../../../../secrets/nextcloud_admin.age;
+      }
+    ]);
 
     services.nextcloud = {
       enable = true;
@@ -47,7 +70,7 @@ in {
       config = {
         dbtype = "pgsql";
         adminuser = "alejandro";
-        adminpassFile = config.age.secrets.nextcloud_admin.path;
+        adminpassFile = secrets.nextcloud_admin.path;
       };
     };
 
@@ -55,6 +78,23 @@ in {
     services.nginx.virtualHosts.${config.services.nextcloud.hostName} = lib.mkIf (cfg.acmeCertName != "") {
       forceSSL = true;
       useACMEHost = cfg.acmeCertName;
+    };
+
+    services.restic.backups = {
+      nextcloud = {
+        user = "nextcloud";
+        initialize = true;
+        paths = [config.services.nextcloud.datadir];
+        environmentFile = secrets."restic/env".path;
+        repositoryFile = secrets."restic/repo".path;
+        passwordFile = secrets."restic/password".path;
+        timerConfig = {
+          OnCalendar = "00:05";
+          Persistent = true;
+          RandomizedDelaySec = "5h";
+        };
+        pruneOpts = ["--keep-daily 7" "--keep-weekly 5" "--keep-monthly 12" "--keep-yearly 9001"];
+      };
     };
 
     networking.firewall.allowedTCPPorts = [80 443];

@@ -15,6 +15,9 @@ in {
   "hass_mqtt.age".publicKeys = [users.me machines.pi4 machines.node machines.gospel];
   "hydra-aws-creds.age".publicKeys = [users.me machines.gospel];
   "nextcloud_admin.age".publicKeys = [users.me machines.node machines.gospel];
+  "nextcloud_restic_env.age".publicKeys = [users.me machines.node];
+  "nextcloud_restic_password.age".publicKeys = [users.me machines.node];
+  "nextcloud_restic_repo.age".publicKeys = [users.me machines.node];
   "tailscale_git_server.age".publicKeys = [users.me machines.git]; # This key expires, might have to update
   "teslamate_db.age".publicKeys = [users.me machines.node machines.gospel];
   "teslamate_encryption.age".publicKeys = [users.me machines.node machines.gospel];
