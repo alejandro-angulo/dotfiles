@@ -23,7 +23,7 @@ in {
       themeFile = "Catppuccin-Mocha";
       font = {
         size = 12;
-        package = pkgs.nerdfonts.override {fonts = ["Hack"];};
+        package = pkgs.nerd-fonts.hack;
         name = "Hack Nerd Font";
       };
       settings = {

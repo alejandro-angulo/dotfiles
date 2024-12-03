@@ -13,7 +13,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      (nerdfonts.override {fonts = ["Hack"];})
+      nerd-fonts.hack
       noto-fonts
       noto-fonts-color-emoji
       noto-fonts-lgc-plus
