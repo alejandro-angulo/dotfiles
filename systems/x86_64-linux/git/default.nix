@@ -27,6 +27,10 @@ in {
     };
   };
 
+  nix.settings.auto-optimise-store = true;
+  nix.gc.dates = "03:15";
+  nix.gc.options = "-d";
+
   services.nginx.virtualHosts."${domain}" = {
     forceSSL = true;
     enableACME = true;
