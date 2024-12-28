@@ -16,7 +16,6 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages =
       (with pkgs; [
-        alejandra
         bat
         bind # for dig
         curl
@@ -29,6 +28,7 @@ in {
         jq
         killall
         lsof
+        nixfmt-rfc-style
         pre-commit
         progress
         python3

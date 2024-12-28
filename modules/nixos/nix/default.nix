@@ -22,8 +22,8 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      alejandra
       nix-prefetch
+      nixfmt-rfc-style
     ];
 
     nix = let
