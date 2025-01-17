@@ -65,15 +65,15 @@ in {
       xdg-utils
     ];
 
-    catppuccin.pointerCursor = {
+    catppuccin.cursors = {
       enable = true;
       accent = "dark";
     };
-    gtk.catppuccin = {
+    catppuccin.gtk = {
       enable = true;
       icon.enable = true;
     };
-    qt.style.catppuccin = {
+    catppuccin.kvantum = {
       enable = true;
       apply = true;
     };
@@ -87,12 +87,12 @@ in {
 
     xdg.dataFile.${cfg.wallpaperPath}.source = ./wallpaper.jpg;
 
+    catppuccin.sway.enable = true;
     wayland.windowManager.sway = {
       # WORKAROUND: https://github.com/nix-community/home-manager/issues/5311
       checkConfig = false;
 
       enable = true;
-      catppuccin.enable = true;
       swaynag.enable = true;
       wrapperFeatures.gtk = true; # so that gtk works properly
       systemd.enable = true; # needed this for screen sharing to work

@@ -33,10 +33,10 @@ in {
       "gco" = "${pkgs.git}/bin/git checkout $(${pkgs.git}/bin/git branch | ${pkgs.fzf}/bin/fzf)";
     };
 
+    catppuccin.delta.enable = true;
     programs.git = {
       delta = {
         enable = true;
-        catppuccin.enable = true;
         options = {
           line-numbers = true;
           navigate = true;
@@ -93,9 +93,9 @@ in {
       };
     };
 
+    catppuccin.lazygit.enable = true;
     programs.lazygit = {
       enable = true;
-      catppuccin.enable = true;
       settings = {
         quitOnTopLevelReturn = true;
         gui.nerdFontsVersion = "3";

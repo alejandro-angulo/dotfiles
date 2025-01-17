@@ -14,9 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [pkgs.bemoji];
 
-    programs.fuzzel = {
-      enable = true;
-      catppuccin.enable = true;
-    };
+    catppuccin.fuzzel.enable = true;
+    programs.fuzzel.enable = true;
   };
 }

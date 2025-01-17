@@ -13,9 +13,9 @@ in {
   };
 
   config = mkIf cfg.enable {
+    catppuccin.btop.enable = true;
     programs.btop = {
       enable = true;
-      catppuccin.enable = true;
       settings = {
         theme_background = false;
         vim_keys = true;

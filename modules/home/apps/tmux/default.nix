@@ -28,23 +28,24 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [pkgs.tmux-sessionizer];
 
+    catppuccin.tmux = {
+      enable = true;
+      extraConfig = ''
+        set -g @catppuccin_window_status_style "rounded"
+
+        set -g status-right-length 100
+        set -g status-left-length 100
+        set -g status-left ""
+        set -g status-right "#{E:@catppuccin_status_application}"
+        set -ag status-right "#{E:@catppuccin_status_session}"
+        set -ag status-right "#{E:@catppuccin_status_host}"
+      '';
+    };
+
     programs.tmux = {
       enable = true;
 
       baseIndex = 1;
-      catppuccin = {
-        enable = true;
-        extraConfig = ''
-          set -g @catppuccin_window_status_style "rounded"
-
-          set -g status-right-length 100
-          set -g status-left-length 100
-          set -g status-left ""
-          set -g status-right "#{E:@catppuccin_status_application}"
-          set -ag status-right "#{E:@catppuccin_status_session}"
-          set -ag status-right "#{E:@catppuccin_status_host}"
-        '';
-      };
       keyMode = "vi";
       newSession = true;
       sensibleOnTop = true;
