@@ -636,15 +636,16 @@
       "locked": {
         "lastModified": 1737218143,
         "narHash": "sha256-HK4WUK3rP0i0N64UM8leZ5Y79D6cdurwfIxsSc3QG6E=",
-        "owner": "alejandro-angulo",
-        "repo": "nixvim-config",
+        "ref": "main",
         "rev": "2816e7ff551ed51e4df90070570f59deefdf3d11",
-        "type": "github"
+        "revCount": 44,
+        "type": "git",
+        "url": "https://git.alejandr0angul0.dev/alejandro-angulo/nixvim-config"
       },
       "original": {
-        "owner": "alejandro-angulo",
-        "repo": "nixvim-config",
-        "type": "github"
+        "ref": "main",
+        "type": "git",
+        "url": "https://git.alejandr0angul0.dev/alejandro-angulo/nixvim-config"
       }
     },
     "nixvim_2": {

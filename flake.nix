@@ -25,7 +25,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    nixvim.url = "github:alejandro-angulo/nixvim-config";
+    nixvim.url = "git+https://git.alejandr0angul0.dev/alejandro-angulo/nixvim-config?ref=main";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     zsh-syntax-highlighting.url = "github:zsh-users/zsh-syntax-highlighting/master";

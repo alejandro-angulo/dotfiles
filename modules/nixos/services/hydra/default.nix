@@ -103,7 +103,7 @@ in {
         "hydra"
         "hydra-www"
       ];
-      allowed-uris = ["github:" "https://git.alejandr0angul0.dev/"];
+      allowed-uris = ["github:" "git+https://git.alejandr0angul0.dev/"];
     };
   };
 }
