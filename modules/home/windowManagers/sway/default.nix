@@ -4,8 +4,14 @@
   lib,
   namespace,
   ...
-}: let
-  inherit (lib) mkEnableOption mkOption mkIf types;
+}:
+let
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    mkIf
+    types
+    ;
 
   cfg = config.${namespace}.windowManagers.sway;
   nag = "swaynag";
@@ -24,7 +30,18 @@
     && ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify save ${target} \
     ~/screenshots/"$(date -u --iso-8601=seconds)".png
   '';
-in {
+
+  clamshell_script = pkgs.writeShellScriptBin "clamshell" ''
+    read -r LS < ${cfg.clamshell.state_file}
+
+    case "$LS" in
+    *open)   ${pkgs.sway}/bin/swaymsg output ${cfg.clamshell.output} enable ;;
+    *closed) ${pkgs.sway}/bin/swaymsg output ${cfg.clamshell.output} disable ;;
+    *)       echo "Could not get lid state" >&2 ; exit 1 ;;
+    esac
+  '';
+in
+{
   options.${namespace}.windowManagers.sway = {
     enable = mkEnableOption "sway";
 
@@ -34,6 +51,32 @@ in {
       description = ''
         Path to wallpaper, relative to xdg.dataHome
       '';
+    };
+
+    clamshell = {
+      enable = mkEnableOption "clamshell mode";
+      output = mkOption {
+        type = types.str;
+        default = "eDP-1";
+        description = ''
+          The output that should be toggled on and off when the lid is closed
+          (applies only to laptops).
+        '';
+      };
+      state_file = mkOption {
+        type = types.str;
+        default = "/proc/acpi/button/lid/LID/state";
+        description = ''
+          The file containing lid state information. Assumes that file contents
+          look like:
+
+            state:      closed
+
+          or
+
+            state:      open
+        '';
+      };
     };
   };
 
@@ -81,7 +124,10 @@ in {
     # For screen sharing to work
     xdg.portal = {
       enable = true;
-      extraPortals = with pkgs; [xdg-desktop-portal-wlr xdg-desktop-portal-gtk];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
       config.common.default = "*";
     };
 
@@ -97,9 +143,28 @@ in {
       wrapperFeatures.gtk = true; # so that gtk works properly
       systemd.enable = true; # needed this for screen sharing to work
 
+      extraConfig = mkIf cfg.clamshell.enable ''
+        bindswitch --reload --locked lid:on output eDP-1 disable
+        bindswitch --reload --locked lid:off output eDP-1 enable
+      '';
       config = {
-        inherit terminal menu left right up down modifier;
+        inherit
+          terminal
+          menu
+          left
+          right
+          up
+          down
+          modifier
+          ;
         workspaceAutoBackAndForth = true;
+
+        startup = mkIf cfg.clamshell.enable [
+          {
+            command = "${clamshell_script}/bin/clamshell";
+            always = true;
+          }
+        ];
 
         # Use catppuccin colors
         colors = {
@@ -146,7 +211,9 @@ in {
           commands = [
             {
               command = "inhibit_idle fullscreen";
-              criteria = {class = ".*";};
+              criteria = {
+                class = ".*";
+              };
             }
           ];
         };
@@ -154,7 +221,7 @@ in {
         focus.followMouse = false;
 
         fonts = {
-          names = ["Hack Nerd Font"];
+          names = [ "Hack Nerd Font" ];
           size = 10.0;
         };
 
