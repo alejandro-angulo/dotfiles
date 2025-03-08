@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration-zfs.nix
@@ -7,7 +8,7 @@
 
   aa = {
     nix.enable = true;
-    nix.useSelfhostedCache = true;
+    nix.useSelfhostedCache = false;
 
     archetypes.workstation.enable = true;
 
@@ -33,6 +34,12 @@
   # This service is problematic
   # See: https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = false;
+
+  services.tlp.settings = {
+    USB_DENYLIST = "0000:1111 2222:3333 4444:5555";
+  };
+  # Still need to run `nix run nixpkgs#bolt -- enroll DEVICE_UUID`
+  services.hardware.bolt.enable = true;
 
   time.timeZone = "America/Los_Angeles";
 
