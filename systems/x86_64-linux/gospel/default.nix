@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./zfs.nix
@@ -62,7 +63,10 @@
     system.zfs.enable = true;
     system.monitoring.enable = true;
 
-    user.extraGroups = ["dialout" "libvirtd"];
+    user.extraGroups = [
+      "dialout"
+      "libvirtd"
+    ];
   };
 
   services.udev.packages = [
@@ -110,12 +114,18 @@
 
   programs.virt-manager.enable = true;
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+    "armv6l-linux"
+  ];
   networking = {
     hostName = "gospel";
-    useDHCP = false;
     defaultGateway = "192.168.113.1";
-    nameservers = ["192.168.113.13" "1.1.1.1"];
+    networkmanager.enable = true;
+    nameservers = [
+      "192.168.113.1"
+      "1.1.1.1"
+    ];
     interfaces.eno1.ipv4.addresses = [
       {
         address = "192.168.113.69"; # nice
@@ -123,6 +133,11 @@
       }
     ];
   };
+  programs.winbox = {
+    enable = true;
+    openFirewall = true;
+  };
+  programs.nm-applet.enable = true;
 
   time.timeZone = "America/Los_Angeles";
 

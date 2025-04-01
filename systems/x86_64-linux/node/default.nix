@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./zfs.nix
@@ -24,10 +25,6 @@
       configureServerRouting = true;
     };
     services.openssh.enable = true;
-    services.adguardhome = {
-      enable = true;
-      acmeCertName = "kilonull.com";
-    };
     services.nextcloud = {
       enable = true;
       acmeCertName = "kilonull.com";
@@ -75,32 +72,16 @@
     apps.yubikey.enable = true;
   };
 
-  # Rewrite specific to this machine (didn't want to put this in my adguardhome
-  # module incase I want to reuse it for something else later)
-  services.adguardhome.settings.filtering.rewrites = [
-    {
-      domain = "octoprint.kilonull.com";
-      answer = "192.168.113.42";
-    }
-    {
-      domain = "hydra.kilonull.com";
-      answer = "192.168.113.69";
-    }
-    {
-      domain = "cache.kilonull.com";
-      answer = "192.168.113.69";
-    }
-    {
-      domain = "*.kilonull.com";
-      answer = "192.168.113.13";
-    }
-  ];
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+  };
 
   security.pam.sshAgentAuth = {
     enable = true;
     # Addresses issue 31611
     # See: https://github.com/NixOS/nixpkgs/issues/31611
-    authorizedKeysFiles = lib.mkForce ["/etc/ssh/authorized_keys.d/%u"];
+    authorizedKeysFiles = lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ];
   };
   security.pam.services.${config.aa.user.name}.sshAgentAuth = true;
 
@@ -115,7 +96,10 @@
     hostName = "node";
     useDHCP = false;
     defaultGateway = "192.168.113.1";
-    nameservers = ["127.0.0.1" "1.1.1.1"];
+    nameservers = [
+      "192.168.113.1"
+      "1.1.1.1"
+    ];
     interfaces.enp7s0.ipv4.addresses = [
       {
         address = "192.168.113.13";
@@ -123,20 +107,6 @@
       }
     ];
   };
-
-  # Running own DNS resolver on same system. This prevents DNS issues with ACME
-  systemd.services = let
-    dependency = ["adguardhome.service"];
-  in
-    lib.mapAttrs'
-    (name: _:
-      lib.nameValuePair "acme-${name}" {
-        after = dependency;
-        preStart = ''
-          sleep 10
-        '';
-      })
-    config.security.acme.certs;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

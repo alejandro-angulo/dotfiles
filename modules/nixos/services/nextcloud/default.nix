@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.aa.services.nextcloud;
   secrets = config.age.secrets;
 
@@ -15,7 +16,8 @@
       group = "nextcloud";
     };
   };
-in {
+in
+{
   options.aa.services.nextcloud = with lib; {
     enable = mkEnableOption "nextcloud";
     acmeCertName = mkOption {
@@ -29,28 +31,30 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    age.secrets = builtins.listToAttrs (builtins.map (attrs: mkNextcloudSecret attrs) [
-      {
-        name = "restic/password";
-        path = ../../../../secrets/nextcloud_restic_password.age;
-      }
-      {
-        name = "restic/env";
-        path = ../../../../secrets/nextcloud_restic_env.age;
-      }
-      {
-        name = "restic/repo";
-        path = ../../../../secrets/nextcloud_restic_repo.age;
-      }
-      {
-        name = "nextcloud_admin";
-        path = ../../../../secrets/nextcloud_admin.age;
-      }
-    ]);
+    age.secrets = builtins.listToAttrs (
+      builtins.map (attrs: mkNextcloudSecret attrs) [
+        {
+          name = "restic/password";
+          path = ../../../../secrets/nextcloud_restic_password.age;
+        }
+        {
+          name = "restic/env";
+          path = ../../../../secrets/nextcloud_restic_env.age;
+        }
+        {
+          name = "restic/repo";
+          path = ../../../../secrets/nextcloud_restic_repo.age;
+        }
+        {
+          name = "nextcloud_admin";
+          path = ../../../../secrets/nextcloud_admin.age;
+        }
+      ]
+    );
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud30;
+      package = pkgs.nextcloud31;
       hostName = "nextcloud.kilonull.com";
       https = true;
       database.createLocally = true;
@@ -75,16 +79,18 @@ in {
     };
 
     # nextcloud module configures nginx, just need to specify SSL stuffs here
-    services.nginx.virtualHosts.${config.services.nextcloud.hostName} = lib.mkIf (cfg.acmeCertName != "") {
-      forceSSL = true;
-      useACMEHost = cfg.acmeCertName;
-    };
+    services.nginx.virtualHosts.${config.services.nextcloud.hostName} =
+      lib.mkIf (cfg.acmeCertName != "")
+        {
+          forceSSL = true;
+          useACMEHost = cfg.acmeCertName;
+        };
 
     services.restic.backups = {
       nextcloud = {
         user = "nextcloud";
         initialize = true;
-        paths = [config.services.nextcloud.datadir];
+        paths = [ config.services.nextcloud.datadir ];
         environmentFile = secrets."restic/env".path;
         repositoryFile = secrets."restic/repo".path;
         passwordFile = secrets."restic/password".path;
@@ -93,10 +99,18 @@ in {
           Persistent = true;
           RandomizedDelaySec = "5h";
         };
-        pruneOpts = ["--keep-daily 7" "--keep-weekly 5" "--keep-monthly 12" "--keep-yearly 9001"];
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 5"
+          "--keep-monthly 12"
+          "--keep-yearly 9001"
+        ];
       };
     };
 
-    networking.firewall.allowedTCPPorts = [80 443];
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
   };
 }

@@ -4,12 +4,19 @@
   pkgs,
   namespace,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    ;
 
   cfg = config.${namespace}.services.homeassistant;
   hass_cfg = config.services.home-assistant;
-in {
+in
+{
   options.${namespace}.services.homeassistant = {
     enable = mkEnableOption "home assistant";
     acmeCertName = mkOption {
@@ -25,14 +32,24 @@ in {
   config = mkIf cfg.enable {
     services.home-assistant = {
       enable = true;
-      extraPackages = python3packages:
-        with python3packages; [
+      extraPackages =
+        python3packages: with python3packages; [
           # postgresql support
           psycopg2
+
+          # homekit support
+          hap-python
         ];
 
       extraComponents = [
+        "3_day_blinds"
+        "motion_blinds"
+
+        "opower"
+        "smud"
+
         "cast"
+        "homekit_controller"
         "hue"
         "met"
         "mqtt"
@@ -46,10 +63,10 @@ in {
       ];
 
       config = {
-        default_config = {};
+        default_config = { };
         http = {
           use_x_forwarded_for = true;
-          trusted_proxies = ["127.0.0.1"];
+          trusted_proxies = [ "127.0.0.1" ];
         };
 
         recorder.db_url = "postgresql://@/hass";
@@ -75,7 +92,7 @@ in {
     };
 
     services.postgresql = {
-      ensureDatabases = ["hass"];
+      ensureDatabases = [ "hass" ];
       ensureUsers = [
         {
           name = "hass";
