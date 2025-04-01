@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   aa.isHeadless = false;
   services.spotifyd = {
     enable = true;

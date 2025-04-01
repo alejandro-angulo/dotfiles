@@ -4,11 +4,18 @@
   lib,
   namespace,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    ;
 
   cfg = config.${namespace}.programs.waybar;
-in {
+in
+{
   options.aa.programs.waybar = {
     enable = mkEnableOption "waybar";
 
@@ -33,8 +40,8 @@ in {
           layer = "top";
           position = "bottom";
           height = 20;
-          modules-left = ["sway/workspaces"];
-          modules-center = ["clock"];
+          modules-left = [ "sway/workspaces" ];
+          modules-center = [ "clock" ];
           modules-right = [
             "idle_inhibitor"
             "temperature"
@@ -76,7 +83,11 @@ in {
           temperature = {
             critical-threshold = 80;
             format = "{icon}{temperatureC}°C";
-            format-icons = [" " " " " "];
+            format-icons = [
+              " "
+              " "
+              " "
+            ];
             thermal-zone = cfg.thermal-zone;
           };
 
@@ -99,7 +110,11 @@ in {
               phone = " ";
               portable = " ";
               car = " ";
-              default = [" " " " " "];
+              default = [
+                " "
+                " "
+                " "
+              ];
             };
             tooltip-format = "{desc}, {volume}%";
             # TODO: Figure out how to get pactl binary?
@@ -118,7 +133,13 @@ in {
             format-charging = "󰂄 {capacity}%";
             format-plugged = " ";
             format-alt = "{time} {icon}";
-            format-icons = [" " " " " " " " " "];
+            format-icons = [
+              " "
+              " "
+              " "
+              " "
+              " "
+            ];
           };
 
           memory = {
@@ -127,7 +148,10 @@ in {
 
           backlight = {
             format = "{icon} {percent}%";
-            format-icons = ["󰃞`" "󰃚"];
+            format-icons = [
+              "󰃞`"
+              "󰃚"
+            ];
             on-scroll-up = "light -A 1";
             on-scroll-down = "light -U 1";
           };
@@ -168,6 +192,6 @@ in {
       ];
     };
 
-    wayland.windowManager.sway.config.bars = [];
+    wayland.windowManager.sway.config.bars = [ ];
   };
 }

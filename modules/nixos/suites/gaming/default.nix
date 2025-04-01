@@ -5,9 +5,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.aa.suites.gaming;
-in {
+in
+{
   options.aa.suites.gaming = with lib.types; {
     enable = mkEnableOption "gaming configuration";
   };

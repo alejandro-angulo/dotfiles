@@ -5,11 +5,13 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.${namespace}.tools.zsh;
-in {
+in
+{
   options.${namespace}.tools.zsh = {
     enable = mkEnableOption "zsh";
   };

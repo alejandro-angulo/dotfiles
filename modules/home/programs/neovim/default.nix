@@ -4,9 +4,11 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.programs.neovim;
-in {
+in
+{
   options.${namespace}.programs.neovim = {
     enable = lib.mkEnableOption "neovim";
     lazygit.enable = lib.mkOption {
@@ -21,19 +23,21 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    {home.packages = [pkgs.neovim];}
-    (lib.mkIf cfg.lazygit.enable {
-      programs.zsh.shellAliases = {
-        nvim = "${pkgs.neovim}/bin/nvim --listen /tmp/nvim-server.pipe";
-      };
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      { home.packages = [ pkgs.neovim ]; }
+      (lib.mkIf cfg.lazygit.enable {
+        programs.zsh.shellAliases = {
+          nvim = "${pkgs.neovim}/bin/nvim --listen /tmp/nvim-server.pipe";
+        };
 
-      programs.lazygit.settings.os = {
-        editCommand = "nvim";
-        editCommandTemplate = ''
-          {{editor}} --server /tmp/nvim-server.pipe --remote-tab {{filename}}
-        '';
-      };
-    })
-  ]);
+        programs.lazygit.settings.os = {
+          editCommand = "nvim";
+          editCommandTemplate = ''
+            {{editor}} --server /tmp/nvim-server.pipe --remote-tab {{filename}}
+          '';
+        };
+      })
+    ]
+  );
 }

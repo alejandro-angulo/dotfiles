@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.aa.apps.steam;
-in {
+in
+{
   options.aa.services.printing = with lib; {
     enable = mkEnableOption "printing";
   };

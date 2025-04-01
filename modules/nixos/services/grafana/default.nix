@@ -4,13 +4,20 @@
   pkgs,
   namespace,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    ;
 
   cfg = config.${namespace}.services.grafana;
   server_settings = config.services.grafana.settings.server;
   grafana_dashboards = pkgs.${namespace}.teslamate-grafana-dashboards;
-in {
+in
+{
   options.${namespace}.services.grafana = {
     enable = mkEnableOption "grafana";
     acmeCertName = mkOption {
@@ -120,7 +127,10 @@ in {
     };
 
     networking.firewall = {
-      allowedTCPPorts = [80 443];
+      allowedTCPPorts = [
+        80
+        443
+      ];
     };
   };
 }

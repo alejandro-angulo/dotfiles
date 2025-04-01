@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.aa.services.octoprint;
-in {
+in
+{
   options.aa.services.octoprint = with lib; {
     enable = mkEnableOption "octoprint";
     acmeCertName = mkOption {
@@ -39,6 +41,9 @@ in {
         };
     };
 
-    networking.firewall.allowedTCPPorts = [80 443];
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
   };
 }

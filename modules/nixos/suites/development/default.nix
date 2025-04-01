@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.aa.suites.development;
-in {
+in
+{
   options.aa.suites.development = {
     enable = mkEnableOption "common configuration";
   };

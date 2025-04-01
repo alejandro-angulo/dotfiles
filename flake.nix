@@ -35,7 +35,8 @@
     powerlevel10k.flake = false;
   };
 
-  outputs = inputs:
+  outputs =
+    inputs:
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.;
@@ -51,7 +52,7 @@
         home-manager.nixosModules.home-manager
       ];
 
-      homes.modules = with inputs; [catppuccin.homeManagerModules.catppuccin];
+      homes.modules = with inputs; [ catppuccin.homeManagerModules.catppuccin ];
 
       deploy.nodes = {
         node = {
@@ -60,7 +61,7 @@
             user = "root";
             sshUser = "alejandro";
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.node;
-            sshOpts = ["-A"];
+            sshOpts = [ "-A" ];
           };
         };
 
@@ -70,56 +71,59 @@
             user = "root";
             sshUser = "alejandro";
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.git;
-            sshOpts = ["-A"];
+            sshOpts = [ "-A" ];
           };
         };
 
-        pi4 = let
-          system = "aarch64-linux";
-          pkgs = import inputs.nixpkgs {inherit system;};
-          deployPkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [
-              inputs.deploy-rs.overlay
-              (self: super: {
-                deploy-rs = {
-                  inherit (pkgs) deploy-rs;
-                  lib = inputs.deploy-rs.lib;
-                };
-              })
-            ];
+        pi4 =
+          let
+            system = "aarch64-linux";
+            pkgs = import inputs.nixpkgs { inherit system; };
+            deployPkgs = import inputs.nixpkgs {
+              inherit system;
+              overlays = [
+                inputs.deploy-rs.overlay
+                (self: super: {
+                  deploy-rs = {
+                    inherit (pkgs) deploy-rs;
+                    lib = inputs.deploy-rs.lib;
+                  };
+                })
+              ];
+            };
+          in
+          {
+            hostname = "pi4";
+            profiles.system = {
+              user = "root";
+              sshUser = "alejandro";
+              path = deployPkgs.deploy-rs.lib.aarch64-linux.activate.nixos inputs.self.nixosConfigurations.pi4;
+              # Usually deploy from an x86_64 machine and don't want to bother
+              # trying to build an aarch64 derivation
+              remoteBuild = true;
+            };
           };
-        in {
-          hostname = "pi4";
-          profiles.system = {
-            user = "root";
-            sshUser = "alejandro";
-            path = deployPkgs.deploy-rs.lib.aarch64-linux.activate.nixos inputs.self.nixosConfigurations.pi4;
-            # Usually deploy from an x86_64 machine and don't want to bother
-            # trying to build an aarch64 derivation
-            remoteBuild = true;
-          };
-        };
       };
 
       # TODO: Re-enable this when I figure out how to prevent needing to build
       # dependencies for architectures other than the host machine
       # checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib;
 
-      hydraJobs = let
-        systems_to_build = [
-          "gospel"
-          "node"
-          "carbon"
-        ];
-      in {
-        # Only have a builder for x86_64-linux atm
-        packages = inputs.self.packages.x86_64-linux;
+      hydraJobs =
+        let
+          systems_to_build = [
+            "gospel"
+            "node"
+            "carbon"
+          ];
+        in
+        {
+          # Only have a builder for x86_64-linux atm
+          packages = inputs.self.packages.x86_64-linux;
 
-        systems = inputs.nixpkgs.lib.attrsets.genAttrs systems_to_build (
-          name:
-            inputs.self.nixosConfigurations."${name}".config.system.build.toplevel
-        );
-      };
+          systems = inputs.nixpkgs.lib.attrsets.genAttrs systems_to_build (
+            name: inputs.self.nixosConfigurations."${name}".config.system.build.toplevel
+          );
+        };
     };
 }

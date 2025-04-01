@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.aa.services.nix-serve;
-in {
+in
+{
   options.aa.services.nix-serve = with lib; {
     enable = mkEnableOption "nix-serve";
     domain_name = mkOption {
@@ -28,11 +30,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     nix.settings = {
-      allowed-users = ["nix-serve"];
-      trusted-users = ["nix-serve"];
+      allowed-users = [ "nix-serve" ];
+      trusted-users = [ "nix-serve" ];
     };
 
-    environment.systemPackages = [pkgs.nix-serve];
+    environment.systemPackages = [ pkgs.nix-serve ];
 
     services = {
       nix-serve = {
@@ -45,7 +47,7 @@ in {
         enable = true;
         virtualHosts."${cfg.subdomain_name}.${cfg.domain_name}" =
           {
-            serverAliases = ["${cfg.subdomain_name}"];
+            serverAliases = [ "${cfg.subdomain_name}" ];
             locations."/".extraConfig = ''
               proxy_pass http://localhost:${toString config.services.nix-serve.port};
               proxy_set_header Host $host;
@@ -61,7 +63,10 @@ in {
     };
 
     networking.firewall = {
-      allowedTCPPorts = [80 443];
+      allowedTCPPorts = [
+        80
+        443
+      ];
     };
   };
 }

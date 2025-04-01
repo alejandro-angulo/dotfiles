@@ -3,10 +3,12 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.services.loki;
   loki = config.services.loki;
-in {
+in
+{
   options.${namespace}.services.loki = with lib; {
     enable = mkEnableOption "loki";
   };
@@ -102,7 +104,7 @@ in {
     };
 
     networking.firewall = {
-      allowedTCPPorts = [loki.configuration.server.http_listen_port];
+      allowedTCPPorts = [ loki.configuration.server.http_listen_port ];
     };
   };
 }

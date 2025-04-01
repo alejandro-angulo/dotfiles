@@ -3,11 +3,13 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.aa.apps.yubikey;
-in {
+in
+{
   options.aa.apps.yubikey = {
     enable = mkEnableOption "yubikey";
   };

@@ -6,37 +6,57 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
 
   fileSystems."/" = {
     device = "rpool/nixos/root";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/home" = {
     device = "rpool/nixos/home";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/var/lib" = {
     device = "rpool/nixos/var/lib";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/var/log" = {
     device = "rpool/nixos/var/log";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/boot" = {
@@ -44,7 +64,7 @@
     fsType = "vfat";
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

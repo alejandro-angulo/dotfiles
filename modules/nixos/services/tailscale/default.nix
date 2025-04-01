@@ -3,11 +3,13 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
 
   cfg = config.aa.services.tailscale;
-in {
+in
+{
   options.aa.services.tailscale = with lib; {
     enable = mkEnableOption "tailscale";
     configureClientRouting = mkOption {
@@ -35,18 +37,14 @@ in {
       tailscale
       tailscale-systray
     ];
-    networking.firewall.allowedUDPPorts = [config.services.tailscale.port];
+    networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
     services.tailscale = {
       enable = true;
       useRoutingFeatures = mkIf (cfg.configureClientRouting || cfg.configureServerRouting) (
-        if (cfg.configureClientRouting && cfg.configureServerRouting)
-        then "both"
+        if (cfg.configureClientRouting && cfg.configureServerRouting) then
+          "both"
         else
-          (
-            if cfg.configureClientRouting
-            then "client"
-            else "server"
-          )
+          (if cfg.configureClientRouting then "client" else "server")
       );
     };
   };

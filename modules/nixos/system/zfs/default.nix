@@ -5,16 +5,18 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.aa.system.zfs;
-in {
+in
+{
   options.aa.system.zfs = with types; {
     enable = mkEnableOption "zfs";
     # TODO: Introduce a zfsOnRoot option
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [pkgs.zfs-prune-snapshots];
+    environment.systemPackages = [ pkgs.zfs-prune-snapshots ];
 
     services.zfs = {
       autoScrub.enable = true;

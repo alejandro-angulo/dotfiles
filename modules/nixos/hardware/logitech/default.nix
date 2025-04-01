@@ -4,12 +4,14 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.${namespace}.hardware.logitech;
   username = config.${namespace}.user.name;
-in {
+in
+{
   options.${namespace}.hardware.logitech = {
     enable = mkEnableOption "logitech devices";
   };
@@ -22,13 +24,15 @@ in {
 
     systemd.user.services.solaar = {
       description = "Linux device manager for Logitech devices";
-      documentation = ["https://pwr-solaar.github.io/Solaar/"];
-      partOf = ["graphical-session.target"];
+      documentation = [ "https://pwr-solaar.github.io/Solaar/" ];
+      partOf = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.solaar}/bin/solaar -w hide";
       };
     };
-    systemd.user.services.solaar.wantedBy = mkIf config.home-manager.users.${username}.wayland.windowManager.sway.enable ["sway-session.target"];
+    systemd.user.services.solaar.wantedBy =
+      mkIf config.home-manager.users.${username}.wayland.windowManager.sway.enable
+        [ "sway-session.target" ];
   };
 }

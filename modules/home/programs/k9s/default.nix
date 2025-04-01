@@ -3,9 +3,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.programs.k9s;
-in {
+in
+{
   options.${namespace}.programs.k9s = {
     enable = lib.mkEnableOption "k9s";
   };

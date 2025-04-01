@@ -4,9 +4,11 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.fonts;
-in {
+in
+{
   options.${namespace}.fonts = {
     enable = lib.mkEnableOption "font config";
   };
@@ -24,10 +26,10 @@ in {
     fonts.fontconfig = {
       enable = true;
       defaultFonts = {
-        monospace = ["Hack Nerd Font"];
-        emoji = ["Noto Color Emoji"];
-        serif = ["Noto Serif"];
-        sansSerif = ["Noto Sans"];
+        monospace = [ "Hack Nerd Font" ];
+        emoji = [ "Noto Color Emoji" ];
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Noto Sans" ];
       };
     };
   };

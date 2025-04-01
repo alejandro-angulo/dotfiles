@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.aa.services.mosquitto;
-in {
+in
+{
   options.aa.services.mosquitto = with lib; {
     enable = mkEnableOption "home assistant";
   };
@@ -36,7 +38,7 @@ in {
               passwordFile = config.age.secrets.theengs_ble_mqtt.path;
             };
             teslamate = {
-              acl = ["readwrite teslamate/#"];
+              acl = [ "readwrite teslamate/#" ];
               passwordFile = config.age.secrets.teslamate_mqtt.path;
             };
           };
@@ -44,6 +46,6 @@ in {
       ];
     };
 
-    networking.firewall.allowedTCPPorts = [1883];
+    networking.firewall.allowedTCPPorts = [ 1883 ];
   };
 }

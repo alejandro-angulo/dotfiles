@@ -4,22 +4,29 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.${namespace}.services.swaync;
-in {
+in
+{
   options.${namespace}.services.swaync = {
     enable = mkEnableOption "sway notification center";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [pkgs.libnotify];
+    home.packages = [ pkgs.libnotify ];
 
     services.swaync = {
       enable = true;
       settings = {
-        widgets = ["title" "dnd" "notifications" "mpris"];
+        widgets = [
+          "title"
+          "dnd"
+          "notifications"
+          "mpris"
+        ];
       };
     };
 

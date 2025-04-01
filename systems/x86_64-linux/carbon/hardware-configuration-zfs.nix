@@ -7,104 +7,151 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "rpool_/nixos/ROOT/default";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/boot" = {
     device = "bpool_/nixos/BOOT/default";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/home" = {
     device = "rpool_/nixos/DATA/default/home";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/root" = {
     device = "rpool_/nixos/DATA/default/root";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/srv" = {
     device = "rpool_/nixos/DATA/default/srv";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/usr/local" = {
     device = "rpool_/nixos/DATA/default/usr/local";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/var/log" = {
     device = "rpool_/nixos/DATA/default/var/log";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/var/spool" = {
     device = "rpool_/nixos/DATA/default/var/spool";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/nix" = {
     device = "rpool_/nixos/DATA/local/nix";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/state" = {
     device = "rpool_/nixos/DATA/default/state";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   fileSystems."/etc/nixos" = {
     device = "/state/etc/nixos";
     fsType = "none";
-    options = ["bind"];
+    options = [ "bind" ];
   };
 
   fileSystems."/etc/cryptkey.d" = {
     device = "/state/etc/cryptkey.d";
     fsType = "none";
-    options = ["bind"];
+    options = [ "bind" ];
   };
 
   fileSystems."/boot/efis/nvme-SAMSUNG_MZVLW256HEHP-000L7_S35ENX1K539085-part1" = {
     device = "/dev/disk/by-uuid/F429-235F";
     fsType = "vfat";
-    options = ["x-systemd.idle-timeout=1min" "x-systemd.automount" "noauto"];
+    options = [
+      "x-systemd.idle-timeout=1min"
+      "x-systemd.automount"
+      "noauto"
+    ];
   };
 
   fileSystems."/boot/efis/nvme-WDC_PC_SN520_SDAPTUW-512G_182747800010-part1" = {
     device = "/dev/disk/by-uuid/F429-AB41";
     fsType = "vfat";
-    options = ["x-systemd.idle-timeout=1min" "x-systemd.automount" "noauto"];
+    options = [
+      "x-systemd.idle-timeout=1min"
+      "x-systemd.automount"
+      "noauto"
+    ];
   };
 
   fileSystems."/var/lib/docker" = {
     device = "rpool_/nixos/DATA/default/var/lib/docker";
     fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    options = [
+      "zfsutil"
+      "X-mount.mkdir"
+    ];
   };
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

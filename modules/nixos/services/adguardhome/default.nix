@@ -3,11 +3,18 @@
   lib,
   namespace,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    ;
 
   cfg = config.${namespace}.services.adguardhome;
-in {
+in
+{
   options.${namespace}.services.adguardhome = {
     enable = mkEnableOption "adguardhome";
     acmeCertName = mkOption {

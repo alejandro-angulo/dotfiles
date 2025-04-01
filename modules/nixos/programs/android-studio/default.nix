@@ -4,18 +4,20 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.programs.android-studio;
-in {
+in
+{
   options.${namespace}.programs.android-studio = {
     enable = lib.mkEnableOption "Android Studio";
   };
 
   config = lib.mkIf cfg.enable {
-    ${namespace}.user.extraGroups = ["kvm"];
+    ${namespace}.user.extraGroups = [ "kvm" ];
 
     programs.adb.enable = true;
 
-    environment.systemPackages = [pkgs.android-studio];
+    environment.systemPackages = [ pkgs.android-studio ];
   };
 }

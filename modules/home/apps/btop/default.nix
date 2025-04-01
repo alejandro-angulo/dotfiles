@@ -3,11 +3,13 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.${namespace}.apps.btop;
-in {
+in
+{
   options.${namespace}.apps.btop = {
     enable = mkEnableOption "btop";
   };

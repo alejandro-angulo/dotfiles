@@ -3,11 +3,13 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.${namespace}.tools.direnv;
-in {
+in
+{
   options.${namespace}.tools.direnv = {
     enable = mkEnableOption "direnv";
   };

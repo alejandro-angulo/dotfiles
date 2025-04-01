@@ -3,9 +3,11 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.aa.apps.steam;
-in {
+in
+{
   options.aa.apps.steam = {
     enable = lib.options.mkEnableOption "steam";
   };

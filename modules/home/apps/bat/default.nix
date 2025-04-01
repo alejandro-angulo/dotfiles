@@ -3,11 +3,13 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.${namespace}.apps.bat;
-in {
+in
+{
   options.${namespace}.apps.bat = {
     enable = mkEnableOption "bat";
   };

@@ -5,9 +5,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.aa.system.fonts;
-in {
+in
+{
   options.aa.system.fonts = with types; {
     enable = mkEnableOption "manage fonts";
   };

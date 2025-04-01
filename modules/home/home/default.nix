@@ -1,10 +1,11 @@
 {
   config,
   lib,
-  osConfig ? {},
+  osConfig ? { },
   namespace,
   ...
-}: {
+}:
+{
   options.${namespace} = {
     isHeadless = lib.mkOption {
       type = lib.types.bool;
@@ -20,15 +21,13 @@
   };
 
   config = lib.mkMerge [
-    (
-      lib.mkIf (!config.${namespace}.isHeadless) {
-        ${namespace} = {
-          programs.firefox.enable = true;
-          programs.kitty.enable = true;
-          windowManagers.sway.enable = true;
-        };
-      }
-    )
+    (lib.mkIf (!config.${namespace}.isHeadless) {
+      ${namespace} = {
+        programs.firefox.enable = true;
+        programs.kitty.enable = true;
+        windowManagers.sway.enable = true;
+      };
+    })
     (lib.mkIf (config.${namespace}.installDefaults) {
       ${namespace} = {
         apps = {

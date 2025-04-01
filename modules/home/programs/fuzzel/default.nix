@@ -4,15 +4,17 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.programs.fuzzel;
-in {
+in
+{
   options.${namespace}.programs.fuzzel = {
     enable = lib.mkEnableOption "fuzzel";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [pkgs.bemoji];
+    home.packages = [ pkgs.bemoji ];
 
     catppuccin.fuzzel.enable = true;
     programs.fuzzel.enable = true;

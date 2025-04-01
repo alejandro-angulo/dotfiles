@@ -5,9 +5,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.aa.user;
-in {
+in
+{
   options.aa.user = with types; {
     name = mkOption {
       type = str;
@@ -26,12 +28,15 @@ in {
     };
     extraGroups = mkOption {
       type = listOf str;
-      default = ["video" "networkmanager"];
+      default = [
+        "video"
+        "networkmanager"
+      ];
       description = "Groups to for the user to be assigned.";
     };
     extraOptions = mkOption {
       type = attrs;
-      default = {};
+      default = { };
       description = "Extra options passed to <option>users.users.<name></option>.";
     };
   };
@@ -42,19 +47,17 @@ in {
     # Refer to modules/tools/zsh/default.nix
     programs.zsh.enable = true;
 
-    users.users.${cfg.name} =
-      {
-        isNormalUser = true;
+    users.users.${cfg.name} = {
+      isNormalUser = true;
 
-        inherit (cfg) name;
+      inherit (cfg) name;
 
-        home = "/home/${cfg.name}";
-        group = "users";
+      home = "/home/${cfg.name}";
+      group = "users";
 
-        shell = pkgs.zsh;
+      shell = pkgs.zsh;
 
-        extraGroups = ["wheel"] ++ cfg.extraGroups;
-      }
-      // cfg.extraOptions;
+      extraGroups = [ "wheel" ] ++ cfg.extraGroups;
+    } // cfg.extraOptions;
   };
 }

@@ -4,12 +4,19 @@
   pkgs,
   namespace,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    ;
 
   cfg = config.${namespace}.services.forgejo;
   forgejo_cfg = config.services.forgejo;
-in {
+in
+{
   options.${namespace}.services.forgejo = {
     enable = mkEnableOption "forgejo";
     domain = mkOption {

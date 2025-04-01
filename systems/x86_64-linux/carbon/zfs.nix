@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  boot.supportedFilesystems = ["zfs"];
+{ pkgs, ... }:
+{
+  boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "b2d25606";
   boot.zfs.devNodes = "/dev/disk/by-id";
   swapDevices = [

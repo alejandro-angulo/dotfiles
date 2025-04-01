@@ -4,7 +4,8 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption;
   inherit (pkgs) tmuxPlugins;
 
@@ -20,13 +21,14 @@
       }
     ];
   };
-in {
+in
+{
   options.${namespace}.apps.tmux = {
     enable = mkEnableOption "tmux";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [pkgs.tmux-sessionizer];
+    home.packages = [ pkgs.tmux-sessionizer ];
 
     catppuccin.tmux = {
       enable = true;
@@ -102,6 +104,6 @@ in {
         '';
     };
 
-    xdg.configFile."tms/config.toml".source = (pkgs.formats.toml {}).generate "tms-config" tmsConfig;
+    xdg.configFile."tms/config.toml".source = (pkgs.formats.toml { }).generate "tms-config" tmsConfig;
   };
 }

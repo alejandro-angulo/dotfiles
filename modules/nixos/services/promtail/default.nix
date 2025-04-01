@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.aa.services.promtail;
-in {
+in
+{
   options.aa.services.promtail = with lib; {
     enable = mkEnableOption "promtail";
   };
@@ -38,7 +40,7 @@ in {
             };
             relabel_configs = [
               {
-                source_labels = ["__journal__systemd_unit"];
+                source_labels = [ "__journal__systemd_unit" ];
                 target_label = "unit";
               }
             ];

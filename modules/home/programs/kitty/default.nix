@@ -4,11 +4,13 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.${namespace}.programs.kitty;
-in {
+in
+{
   options.${namespace}.programs.kitty = {
     enable = mkEnableOption "kitty";
   };

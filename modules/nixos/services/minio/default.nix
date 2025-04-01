@@ -3,9 +3,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.services.minio;
-in {
+in
+{
   options.${namespace}.services.minio = with lib; {
     enable = mkEnableOption "minio";
     acmeCertName = mkOption {

@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.aa.hardware.tlp;
-in {
+in
+{
   options.aa.hardware.tlp = {
     enable = mkEnableOption "tlp";
   };

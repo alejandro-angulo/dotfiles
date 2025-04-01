@@ -4,17 +4,19 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.${namespace}.services.swayidle;
-in {
+in
+{
   options.${namespace}.services.swayidle = {
     enable = mkEnableOption "swayidle";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [pkgs.swayidle];
+    home.packages = [ pkgs.swayidle ];
 
     services.swayidle = {
       enable = true;

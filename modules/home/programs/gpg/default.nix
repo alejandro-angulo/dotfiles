@@ -5,11 +5,13 @@
   namespace,
   system,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.${namespace}.programs.gpg;
-in {
+in
+{
   options.${namespace}.programs.gpg = {
     enable = mkEnableOption "gpg";
   };
@@ -33,9 +35,7 @@ in {
     services.gpg-agent = mkIf (system == "x86_64-linux") {
       enable = true;
       pinentryPackage =
-        if config.${namespace}.windowManagers.sway.enable
-        then pkgs.pinentry-qt
-        else pkgs.pinentry-curses;
+        if config.${namespace}.windowManagers.sway.enable then pkgs.pinentry-qt else pkgs.pinentry-curses;
       enableZshIntegration = true;
       enableSshSupport = true;
       sshKeys = [

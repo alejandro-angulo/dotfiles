@@ -5,10 +5,12 @@
   inputs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkAliasDefinitions mkOption;
   inherit (lib.types) attrs;
-in {
+in
+{
   imports = with inputs; [
     home-manager.nixosModules.home-manager
   ];
@@ -16,22 +18,22 @@ in {
   options.${namespace}.home = {
     file = mkOption {
       type = attrs;
-      default = {};
+      default = { };
       description = "A set of files to be manged by home-manager's <option>home.file</option> option.";
     };
     configFile = mkOption {
       type = attrs;
-      default = {};
+      default = { };
       description = "A set of files to be managed by home-manager's <option>xdg.configFile</option>.";
     };
     dataFile = mkOption {
       type = attrs;
-      default = {};
+      default = { };
       description = "A set of files to be managed by home-manager's <option>xdg.dataFile</option>.";
     };
     extraOptions = mkOption {
       type = attrs;
-      default = {};
+      default = { };
       description = "Options to pass directly to home-manager.";
     };
   };
@@ -50,8 +52,7 @@ in {
     home-manager = {
       useUserPackages = true;
 
-      users.${config.aa.user.name} =
-        mkAliasDefinitions options.aa.home.extraOptions;
+      users.${config.aa.user.name} = mkAliasDefinitions options.aa.home.extraOptions;
     };
   };
 }

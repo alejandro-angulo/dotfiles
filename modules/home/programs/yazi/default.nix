@@ -3,9 +3,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.programs.yazi;
-in {
+in
+{
   options.${namespace}.programs.yazi = {
     enable = lib.mkEnableOption "yazi";
   };

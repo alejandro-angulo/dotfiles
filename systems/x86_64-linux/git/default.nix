@@ -2,11 +2,13 @@
   inputs,
   config,
   ...
-}: let
+}:
+let
   domain = "git.alejandr0angul0.dev";
   secrets = config.age.secrets;
-in {
-  imports = ["${inputs.nixpkgs}/nixos/modules/virtualisation/digital-ocean-config.nix"];
+in
+{
+  imports = [ "${inputs.nixpkgs}/nixos/modules/virtualisation/digital-ocean-config.nix" ];
 
   age.secrets.authKeyFile.file = ../../../secrets/tailscale_git_server.age;
 
@@ -38,7 +40,7 @@ in {
 
   services.tailscale = {
     authKeyFile = secrets.authKeyFile.path;
-    extraUpFlags = ["--ssh"];
+    extraUpFlags = [ "--ssh" ];
   };
 
   security.acme = {

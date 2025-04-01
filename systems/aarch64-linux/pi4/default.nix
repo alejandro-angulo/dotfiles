@@ -4,7 +4,8 @@
   inputs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
@@ -15,8 +16,7 @@
   # See here: https://github.com/NixOS/nixpkgs/issues/109280#issuecomment-973636212
   nixpkgs.overlays = [
     (final: super: {
-      makeModulesClosure = x:
-        super.makeModulesClosure (x // {allowMissing = true;});
+      makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
     })
   ];
 
@@ -57,7 +57,10 @@
     hostName = "pi4";
     useDHCP = false;
     defaultGateway = "192.168.113.1";
-    nameservers = ["192.168.113.13" "1.1.1.1"];
+    nameservers = [
+      "192.168.113.13"
+      "1.1.1.1"
+    ];
     interfaces.end0.ipv4.addresses = [
       {
         address = "192.168.113.42";

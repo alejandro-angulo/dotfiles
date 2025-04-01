@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.aa.services.teslamate;
-in {
+in
+{
   options.aa.services.teslamate = with lib; {
     enable = mkEnableOption "teslamate";
 
@@ -104,7 +106,7 @@ in {
       backend = "docker";
       containers."teslamate" = {
         image = "teslamate/teslamate:1.32";
-        environmentFiles = ["/var/lib/teslamate/env"];
+        environmentFiles = [ "/var/lib/teslamate/env" ];
         environment = {
           # TODO: Make this configurable
           PORT = "4000";
@@ -116,9 +118,12 @@ in {
           MQTT_USERNAME = "teslamate";
           TZ = "America/Los_Angeles";
         };
-        extraOptions = ["--cap-drop=all" "--network=host"];
+        extraOptions = [
+          "--cap-drop=all"
+          "--network=host"
+        ];
         # TODO: Make this configurable
-        ports = ["4000:4000"];
+        ports = [ "4000:4000" ];
       };
     };
 
@@ -126,12 +131,12 @@ in {
       isSystemUser = true;
       group = cfg.group;
     };
-    users.groups.${cfg.group} = {};
+    users.groups.${cfg.group} = { };
 
     services.postgresql = lib.optionalAttrs cfg.database.createDatabase {
       enable = lib.mkDefault true;
 
-      ensureDatabases = [cfg.database.name];
+      ensureDatabases = [ cfg.database.name ];
       ensureUsers = [
         {
           name = cfg.database.user;
@@ -157,6 +162,6 @@ in {
         };
     };
 
-    networking.firewall.allowedTCPPorts = [4000];
+    networking.firewall.allowedTCPPorts = [ 4000 ];
   };
 }

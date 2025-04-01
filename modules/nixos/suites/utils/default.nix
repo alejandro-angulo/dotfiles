@@ -4,11 +4,13 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.aa.suites.utils;
-in {
+in
+{
   options.aa.suites.utils = {
     enable = mkEnableOption "common configuration";
   };
@@ -38,6 +40,6 @@ in {
         usbutils
         wget
       ])
-      ++ [inputs.agenix.packages.x86_64-linux.default];
+      ++ [ inputs.agenix.packages.x86_64-linux.default ];
   };
 }

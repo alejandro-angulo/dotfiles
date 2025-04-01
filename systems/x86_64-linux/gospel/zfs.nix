@@ -1,5 +1,6 @@
-{...}: {
-  boot.supportedFilesystems = ["zfs"];
+{ ... }:
+{
+  boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "f8616592";
   boot.loader.efi.canTouchEfiVariables = false;
   boot.loader.systemd-boot.enable = true;

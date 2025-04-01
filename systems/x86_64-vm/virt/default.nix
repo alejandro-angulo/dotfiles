@@ -3,8 +3,9 @@
   lib,
   ...
 }:
-with lib; {
-  virtualisation.qemu.options = ["-vga qxl"];
+with lib;
+{
+  virtualisation.qemu.options = [ "-vga qxl" ];
 
   # For sway to work with home manager
   security.polkit.enable = true;
@@ -23,7 +24,7 @@ with lib; {
 
   users.users.virt = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
     hashedPassword = "$6$nOlwKVf1u0Wt//zU$43xhafbe2CAWTjOemAUm1J1Dpw7to0ZTbGhFk7CkVTRB3E80a1lhhQ175VnkcJ/X1HI6lsyV8fNMc3GF7JTAP0";
   };
 
@@ -31,6 +32,8 @@ with lib; {
     systemPackages = with pkgs; [
       wayland-utils
     ];
-    variables = {"WLR_RENDERER_ALLOW_SOFTWARE" = "1";};
+    variables = {
+      "WLR_RENDERER_ALLOW_SOFTWARE" = "1";
+    };
   };
 }

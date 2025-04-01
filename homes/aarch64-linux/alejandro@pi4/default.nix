@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   aa = {
     apps = {
       bat.enable = true;

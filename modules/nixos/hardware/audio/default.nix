@@ -3,17 +3,19 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.aa.hardware.audio;
-in {
+in
+{
   options.aa.hardware.audio = {
     enable = mkEnableOption "audio";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [pamixer];
+    environment.systemPackages = with pkgs; [ pamixer ];
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;

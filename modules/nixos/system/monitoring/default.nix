@@ -3,11 +3,13 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.aa.system.monitoring;
-in {
+in
+{
   options.aa.system.monitoring = {
     enable = mkEnableOption "monitoring";
   };

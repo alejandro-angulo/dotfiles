@@ -3,11 +3,13 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.${namespace}.suites.desktop;
-in {
+in
+{
   options.${namespace}.suites.desktop = {
     enable = mkEnableOption "common desktop configuration";
   };
@@ -19,7 +21,7 @@ in {
     # The following fixes an issue with using swaylcock as a home module
     # Workaround for https://github.com/NixOS/nixpkgs/issues/158025
     # This comment specifically: https://github.com/NixOS/nixpkgs/issues/158025#issuecomment-1344766809
-    security.pam.services.swaylock = {};
+    security.pam.services.swaylock = { };
 
     # Required for GUIs (like sway) to work correctly.
     hardware.graphics.enable = true;

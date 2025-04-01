@@ -9,18 +9,69 @@ let
     proxy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAf6Z7SZEOH3H51T/GPIc/B0OpbaydM5l2PP3nMnwpFl";
     git = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN8JLy/ipBfOet3/KT7rXOXHDjjmt+VqqQb3V+ILIuDN";
   };
-in {
-  "cf_dns_kilonull.age".publicKeys = [users.me machines.node machines.gospel machines.pi4 machines.proxy];
-  "gitea-runner-gospel.age".publicKeys = [users.me machines.gospel];
-  "hass_mqtt.age".publicKeys = [users.me machines.pi4 machines.node machines.gospel];
-  "hydra-aws-creds.age".publicKeys = [users.me machines.gospel];
-  "nextcloud_admin.age".publicKeys = [users.me machines.node machines.gospel];
-  "nextcloud_restic_env.age".publicKeys = [users.me machines.node];
-  "nextcloud_restic_password.age".publicKeys = [users.me machines.node];
-  "nextcloud_restic_repo.age".publicKeys = [users.me machines.node];
-  "tailscale_git_server.age".publicKeys = [users.me machines.git]; # This key expires, might have to update
-  "teslamate_db.age".publicKeys = [users.me machines.node machines.gospel];
-  "teslamate_encryption.age".publicKeys = [users.me machines.node machines.gospel];
-  "teslamate_mqtt.age".publicKeys = [users.me machines.pi4 machines.node machines.gospel];
-  "theengs_ble_mqtt.age".publicKeys = [users.me machines.pi4 machines.gospel];
+in
+{
+  "cf_dns_kilonull.age".publicKeys = [
+    users.me
+    machines.node
+    machines.gospel
+    machines.pi4
+    machines.proxy
+  ];
+  "gitea-runner-gospel.age".publicKeys = [
+    users.me
+    machines.gospel
+  ];
+  "hass_mqtt.age".publicKeys = [
+    users.me
+    machines.pi4
+    machines.node
+    machines.gospel
+  ];
+  "hydra-aws-creds.age".publicKeys = [
+    users.me
+    machines.gospel
+  ];
+  "nextcloud_admin.age".publicKeys = [
+    users.me
+    machines.node
+    machines.gospel
+  ];
+  "nextcloud_restic_env.age".publicKeys = [
+    users.me
+    machines.node
+  ];
+  "nextcloud_restic_password.age".publicKeys = [
+    users.me
+    machines.node
+  ];
+  "nextcloud_restic_repo.age".publicKeys = [
+    users.me
+    machines.node
+  ];
+  "tailscale_git_server.age".publicKeys = [
+    users.me
+    machines.git
+  ]; # This key expires, might have to update
+  "teslamate_db.age".publicKeys = [
+    users.me
+    machines.node
+    machines.gospel
+  ];
+  "teslamate_encryption.age".publicKeys = [
+    users.me
+    machines.node
+    machines.gospel
+  ];
+  "teslamate_mqtt.age".publicKeys = [
+    users.me
+    machines.pi4
+    machines.node
+    machines.gospel
+  ];
+  "theengs_ble_mqtt.age".publicKeys = [
+    users.me
+    machines.pi4
+    machines.gospel
+  ];
 }

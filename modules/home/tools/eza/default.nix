@@ -3,11 +3,13 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.${namespace}.tools.eza;
-in {
+in
+{
   options.${namespace}.tools.eza = {
     enable = mkEnableOption "eza";
   };

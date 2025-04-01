@@ -4,11 +4,13 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption mkDefault;
 
   cfg = config.${namespace}.tools.git;
-in {
+in
+{
   options.${namespace}.tools.git = {
     enable = mkEnableOption "git";
     userName = lib.options.mkOption {

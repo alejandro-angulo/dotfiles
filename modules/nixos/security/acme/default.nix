@@ -3,11 +3,18 @@
   lib,
   namespace,
   ...
-}: let
-  inherit (lib) mkOption mkEnableOption mkIf types;
+}:
+let
+  inherit (lib)
+    mkOption
+    mkEnableOption
+    mkIf
+    types
+    ;
 
   cfg = config.aa.security.acme;
-in {
+in
+{
   options.aa.security.acme = {
     enable = mkEnableOption "Automatic Certificate Management Environment (ACME)";
     useStaging = mkOption {
@@ -53,7 +60,7 @@ in {
         # own DNS to make `lego` happy (will resolve names to a public IP).
         dnsResolver = "1.1.1.1:53";
         credentialsFile = cfg.dnsCredentialsFile;
-        extraDomainNames = mkIf cfg.isWildcard [("*." + cfg.domainName)];
+        extraDomainNames = mkIf cfg.isWildcard [ ("*." + cfg.domainName) ];
       };
     };
   };

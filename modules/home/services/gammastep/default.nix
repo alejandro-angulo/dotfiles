@@ -3,11 +3,13 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.${namespace}.services.gammastep;
-in {
+in
+{
   options.${namespace}.services.gammastep = {
     enable = mkEnableOption "gammastep";
   };

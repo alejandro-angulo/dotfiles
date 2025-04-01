@@ -3,9 +3,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.services.hydra;
-in {
+in
+{
   options.${namespace}.services.hydra = with lib; {
     enable = mkEnableOption "hydra";
     hostname = mkOption {
@@ -72,7 +74,7 @@ in {
       enable = true;
       hydraURL = "https://${cfg.hostname}";
       notificationSender = "hydra@localhost";
-      buildMachinesFiles = [];
+      buildMachinesFiles = [ ];
       useSubstitutes = true;
       extraConfig = ''
         store_uri = s3://${cfg.s3Bucket}?compression=zstd&parallel-compression=true&write-nar-listing=1&ls-compression=br&log-compression=br&scheme=${cfg.s3Scheme}&endpoint=${cfg.s3Endpoint}&secret-key=${cfg.secretKeyPath}
@@ -103,7 +105,10 @@ in {
         "hydra"
         "hydra-www"
       ];
-      allowed-uris = ["github:" "git+https://git.alejandr0angul0.dev/"];
+      allowed-uris = [
+        "github:"
+        "git+https://git.alejandr0angul0.dev/"
+      ];
     };
   };
 }

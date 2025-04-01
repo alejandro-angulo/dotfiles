@@ -2,12 +2,14 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
 
   cfg = config.aa.services.prometheus;
   exporters = config.services.prometheus.exporters;
-in {
+in
+{
   options.aa.services.prometheus = with lib; {
     enable = mkEnableOption "prometheus";
     enableServer = mkOption {
@@ -28,7 +30,7 @@ in {
       exporters = {
         node = {
           enable = cfg.enableNodeExporter;
-          enabledCollectors = ["systemd"];
+          enabledCollectors = [ "systemd" ];
           port = 9002;
           openFirewall = true;
         };
@@ -52,7 +54,7 @@ in {
     };
 
     networking.firewall = mkIf cfg.enableServer {
-      allowedTCPPorts = [config.services.prometheus.port];
+      allowedTCPPorts = [ config.services.prometheus.port ];
     };
   };
 }

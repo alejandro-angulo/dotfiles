@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.aa.hardware.bluetooth;
-in {
+in
+{
   options.aa.hardware.bluetooth = {
     enable = mkEnableOption "bluetooth";
   };
