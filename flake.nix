@@ -52,7 +52,7 @@
         home-manager.nixosModules.home-manager
       ];
 
-      homes.modules = with inputs; [ catppuccin.homeManagerModules.catppuccin ];
+      homes.modules = with inputs; [ catppuccin.homeModules.catppuccin ];
 
       deploy.nodes = {
         node = {

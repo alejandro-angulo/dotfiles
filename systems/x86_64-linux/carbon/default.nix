@@ -60,7 +60,7 @@
     hugo
     nixos-generators
     vlc
-    signal-desktop
+    signal-desktop-bin
   ];
 
   programs.light.enable = true;

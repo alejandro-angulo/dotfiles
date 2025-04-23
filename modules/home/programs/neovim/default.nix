@@ -27,10 +27,6 @@ in
     lib.mkMerge [
       { home.packages = [ pkgs.neovim ]; }
       (lib.mkIf cfg.lazygit.enable {
-        programs.zsh.shellAliases = {
-          nvim = "${pkgs.neovim}/bin/nvim --listen /tmp/nvim-server.pipe";
-        };
-
         programs.lazygit.settings.os = {
           editCommand = "nvim";
           editCommandTemplate = ''

@@ -121,16 +121,26 @@ in
       apply = true;
     };
 
+    # TODO: configure xdg portal with home-manager (it's broken rn)
+    # see here: https://github.com/nix-community/home-manager/issues/6770
+    #
     # For screen sharing to work
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal-gtk
-      ];
-      config.common.default = "*";
-    };
-
+    # home.sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR = "";
+    # systemd.user.sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR = "";
+    # xdg.portal = {
+    #   enable = true;
+    #   extraPortals = with pkgs; [
+    #     xdg-desktop-portal-wlr
+    #     xdg-desktop-portal-gtk
+    #   ];
+    #   config = {
+    #     common = {
+    #       default = "gtk";
+    #       "org.freekdesktop.impl.portal.ScreenCast" = "wlr";
+    #       "org.freekdesktop.impl.portal.ScreenShot" = "wlr";
+    #     };
+    #   };
+    # };
     xdg.dataFile.${cfg.wallpaperPath}.source = ./wallpaper.jpg;
 
     catppuccin.sway.enable = true;
@@ -159,11 +169,18 @@ in
           ;
         workspaceAutoBackAndForth = true;
 
-        startup = mkIf cfg.clamshell.enable [
-          {
+        startup = lib.mkMerge [
+          (mkIf cfg.clamshell.enable {
             command = "${clamshell_script}/bin/clamshell";
             always = true;
-          }
+          })
+          # Trying to copy what arch linux does
+          [
+            # { command = "systemctl --user set-environment WAYLAND_DISPLAY=wayland-1 XDG_CURRENT_DESKTOP=sway"; }
+            {
+              command = "systemctl --user import-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP";
+            }
+          ]
         ];
 
         # Use catppuccin colors

@@ -54,6 +54,7 @@ in
         "met"
         "mqtt"
         "octoprint"
+        "roborock"
         "shelly"
         "zeroconf"
       ];

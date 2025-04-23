@@ -13,12 +13,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.k9s = {
+    programs.k9s.enable = true;
+    catppuccin.k9s = {
       enable = true;
-      catppuccin = {
-        enable = true;
-        transparent = true;
-      };
+      transparent = true;
     };
   };
 }

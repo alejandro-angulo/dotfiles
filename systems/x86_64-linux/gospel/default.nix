@@ -69,6 +69,8 @@
     ];
   };
 
+  services.sunshine.enable = true;
+
   services.udev.packages = [
     (pkgs.writeTextFile {
       name = "microbit-udev-rules";
@@ -163,7 +165,7 @@
     prusa-slicer
     esptool
     minicom
-    signal-desktop
+    signal-desktop-bin
     ncdu
 
     cntr
@@ -182,6 +184,26 @@
 
     tridactyl-native
   ];
+
+  # TODO: configure xdg portal with home-manager (it's broken rn)
+  # see here: https://github.com/nix-community/home-manager/issues/6770
+  #
+  xdg.portal = {
+    enable = true;
+    config = {
+      common = {
+        default = "wlr";
+      };
+    };
+    wlr.enable = true;
+    wlr.settings.screencast = {
+      chooser_type = "simple";
+      chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+    };
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk # Makes gtk apps happy
+    ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
