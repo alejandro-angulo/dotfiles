@@ -170,10 +170,12 @@ in
         workspaceAutoBackAndForth = true;
 
         startup = lib.mkMerge [
-          (mkIf cfg.clamshell.enable {
-            command = "${clamshell_script}/bin/clamshell";
-            always = true;
-          })
+          [
+            (mkIf cfg.clamshell.enable {
+              command = "${clamshell_script}/bin/clamshell";
+              always = true;
+            })
+          ]
           # Trying to copy what arch linux does
           [
             # { command = "systemctl --user set-environment WAYLAND_DISPLAY=wayland-1 XDG_CURRENT_DESKTOP=sway"; }
