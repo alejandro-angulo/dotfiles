@@ -25,7 +25,7 @@ in
         export PATH=~/.local/bin:$PATH
         export EDITOR=nvim
       '';
-      initExtra = ''
+      initContent = ''
         bindkey -v
         bindkey '^A' beginning-of-line
         bindkey '^E' end-of-line
