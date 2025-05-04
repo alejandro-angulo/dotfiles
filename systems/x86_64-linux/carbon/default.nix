@@ -8,7 +8,6 @@
 
   aa = {
     nix.enable = true;
-    nix.useSelfhostedCache = false;
 
     archetypes.workstation.enable = true;
 
