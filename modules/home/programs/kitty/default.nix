@@ -30,6 +30,7 @@ in
       };
       settings = {
         background_opacity = "0.95";
+        enable_audio_bell = "false";
       };
       keybindings = lib.mkMerge [
         (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
