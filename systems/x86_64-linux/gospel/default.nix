@@ -14,6 +14,7 @@
 
   aa = {
     nix.enable = true;
+    nix.remoteBuilder.enable = true;
 
     archetypes = {
       workstation.enable = true;
