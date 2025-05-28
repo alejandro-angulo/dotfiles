@@ -25,7 +25,23 @@ in
     };
 
     useSelfhostedCache = mkEnableOption "use self-hosted nix cache (currently hosted on gospel)";
-    remoteBuilder.enable = mkEnableOption "set up as a remote builder";
+
+    remoteBuilder = {
+      enable = mkEnableOption "set up as a remote builder";
+      client = {
+        enable = mkEnableOption "set up to use configured remote builders";
+        sshKeyPath = mkOption {
+          type = types.str;
+          # NOTE: By default, only root user has read access.
+          # This means only builds initiated by root will be able to make use
+          # of distributed builds.
+          # TODO: Allow my normal user to make use of distributed builds.
+          default = "/etc/ssh/ssh_host_ed25519_key";
+          description = "Path to ssh key to use to connect to remote builders";
+        };
+      };
+
+    };
   };
 
   config = mkIf cfg.enable (
@@ -79,6 +95,7 @@ in
         users.users.remotebuild = {
           isNormalUser = true;
           createHome = false;
+          home = "/var/empty";
           group = "remotebuild";
 
           # All the keys from ./remote_client_keys should be trusted
@@ -95,6 +112,24 @@ in
         users.groups.remotebuild = { };
 
         nix.settings.trusted-users = [ "remotebuild" ];
+      })
+      (lib.mkIf cfg.remoteBuilder.client.enable {
+        nix.distributedBuilds = true;
+        nix.settings.builders-use-substitutes = true;
+
+        nix.buildMachines = [
+          {
+            hostName = "gospel";
+            sshUser = "remotebuild";
+            sshKey = cfg.remoteBuilder.client.sshKeyPath;
+            system = "x86_64-linux";
+            supportedFeatures = [
+              "nixos-test"
+              "big-parallel"
+              "kvm"
+            ];
+          }
+        ];
       })
     ]
   );

@@ -7,8 +7,11 @@
   ];
 
   aa = {
-    nix.enable = true;
-    nix.useSelfhostedCache = true;
+    nix = {
+      enable = true;
+      useSelfhostedCache = true;
+      remoteBuilder.client.enable = true;
+    };
 
     archetypes.workstation.enable = true;
 
