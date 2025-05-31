@@ -56,6 +56,10 @@
       s3Bucket = "nix-store";
       s3Endpoint = "minio.kilonull.com";
     };
+    services.sunshine = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+    };
 
     hardware.audio.enable = true;
     hardware.bluetooth.enable = true;
@@ -69,8 +73,6 @@
       "libvirtd"
     ];
   };
-
-  services.sunshine.enable = true;
 
   services.udev.packages = [
     (pkgs.writeTextFile {
