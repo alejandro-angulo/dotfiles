@@ -118,6 +118,7 @@ in
           locations."/" = {
             proxyPass = "http://${server_settings.http_addr}:${toString server_settings.http_port}";
             proxyWebsockets = true;
+            recommendedProxySettings = true;
           };
         }
         // lib.optionalAttrs (cfg.acmeCertName != "") {
