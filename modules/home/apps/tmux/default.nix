@@ -101,6 +101,17 @@ in
           } {
             display-popup -h 90% -w 90% -E "tmux new-session -A -s $(tmux display-message -p '#S')-lg ${pkgs.lazygit}/bin/lazygit"
           }
+        ''
+        + lib.strings.optionalString config.programs.btop.enable ''
+          # Open btop in a popup
+          # Spins up a new session named `btop` (hitting the shortcut
+          # toggles between attaching and detaching)
+          # NOTE: This overrides the default C-t shortcut (shows time by default)
+          bind C-t if-shell "[[ $(tmux display-message -p '#S') == btop ]]" {
+            detach-client
+          } {
+            display-popup -h 90% -w 90% -E "tmux new-session -A -s btop ${pkgs.btop}/bin/btop"
+          }
         '';
     };
 
