@@ -81,12 +81,7 @@
     nssmdns4 = true;
   };
 
-  security.pam.sshAgentAuth = {
-    enable = true;
-    # Addresses issue 31611
-    # See: https://github.com/NixOS/nixpkgs/issues/31611
-    authorizedKeysFiles = lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ];
-  };
+  security.pam.sshAgentAuth.enable = true;
   security.pam.services.${config.aa.user.name}.sshAgentAuth = true;
 
   boot.loader.systemd-boot.enable = true;
