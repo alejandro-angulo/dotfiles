@@ -37,6 +37,10 @@
       enable = true;
       enableServer = true;
     };
+    services.postgresql.upgradeScript = {
+      enable = false;
+      newVersion = pkgs.postgresql_17;
+    };
     services.loki.enable = true;
     services.promtail.enable = true;
     services.teslamate = {
@@ -107,6 +111,8 @@
       }
     ];
   };
+
+  services.postgresql.package = pkgs.postgresql_17;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
