@@ -49,10 +49,6 @@ in
     users.me
     machines.node
   ];
-  "tailscale_git_server.age".publicKeys = [
-    users.me
-    machines.git
-  ]; # This key expires, might have to update
   "teslamate_db.age".publicKeys = [
     users.me
     machines.node
