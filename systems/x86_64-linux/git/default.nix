@@ -20,13 +20,7 @@ in
       domain = domain;
     };
 
-    services = {
-      openssh.enable = true;
-      tailscale = {
-        enable = true;
-        configureClientRouting = true;
-      };
-    };
+    services.openssh.enable = true;
   };
 
   nix.settings.auto-optimise-store = true;
