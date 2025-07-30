@@ -65,6 +65,16 @@
           };
         };
 
+        gospel = {
+          hostname = "gospel";
+          profiles.system = {
+            user = "root";
+            sshUser = "alejandro";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.node;
+            sshOpts = [ "-A" ];
+          };
+        };
+
         git = {
           hostname = "git.alejandr0angul0.dev";
           profiles.system = {
