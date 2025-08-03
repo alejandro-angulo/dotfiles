@@ -24,19 +24,33 @@ in
       default = [ default-key ];
       description = "The public keys to authorize";
     };
-  };
-
-  config = mkIf cfg.enable {
-    services.openssh = {
-      enable = true;
-      settings = {
-        PasswordAuthentication = false;
-        PermitRootLogin = mkDefault (if format == "install-iso" then "yes" else "no");
-      };
-    };
-
-    aa.user.extraOptions = {
-      openssh.authorizedKeys.keys = cfg.authorizedKeys;
+    passwordlessSudo = lib.mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable passwordless sudo (use ssh key)";
     };
   };
+
+  config = mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        services.openssh = {
+          enable = true;
+          settings = {
+            PasswordAuthentication = false;
+            PermitRootLogin = mkDefault (if format == "install-iso" then "yes" else "no");
+          };
+        };
+
+        aa.user.extraOptions = {
+          openssh.authorizedKeys.keys = cfg.authorizedKeys;
+        };
+      }
+      (lib.mkIf cfg.passwordlessSudo {
+        security.pam.rssh.enable = true;
+        security.pam.services.sudo.rssh = true;
+
+      })
+    ]
+  );
 }
