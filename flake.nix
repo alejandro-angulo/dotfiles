@@ -28,6 +28,9 @@
     nixvim.url = "git+https://git.alejandr0angul0.dev/alejandro-angulo/nixvim-config?ref=main";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
+    devenv.url = "github:cachix/devenv";
+    devenv.inputs.nixpkgs.follows = "nixpkgs";
+
     zsh-syntax-highlighting.url = "github:zsh-users/zsh-syntax-highlighting/master";
     zsh-syntax-highlighting.flake = false;
 
@@ -53,6 +56,14 @@
       ];
 
       homes.modules = with inputs; [ catppuccin.homeModules.catppuccin ];
+
+      outputs-builder = channels: {
+        devShells.default = inputs.devenv.lib.mkShell {
+          inherit inputs;
+          pkgs = channels.nixpkgs;
+          modules = [ ./devenv.nix ];
+        };
+      };
 
       deploy.nodes = {
         node = {

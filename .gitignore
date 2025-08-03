@@ -8,4 +8,8 @@
 # build artifacts
 result
 
+# devenv artifacts
+.direnv
+.devenv
+
 tmp
