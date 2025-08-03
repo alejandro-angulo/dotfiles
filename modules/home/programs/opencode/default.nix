@@ -2,10 +2,19 @@
   config,
   lib,
   namespace,
+  pkgs,
   ...
 }:
 let
   cfg = config.${namespace}.programs.opencode;
+
+  context7 = pkgs.writeShellApplication {
+    name = "context7-mcp";
+    runtimeInputs = [ pkgs.nodejs_24 ];
+    text = ''
+      npx -y @upstash/context7-mcp
+    '';
+  };
 in
 {
   options.${namespace}.programs.opencode = {
@@ -19,8 +28,10 @@ in
         theme = "catppuccin";
         mcp = {
           context7 = {
-            type = "remote";
-            url = "https://mcp.context7.com/mcp";
+            type = "local";
+            command = [
+              "${context7}/bin/context7-mcp"
+            ];
             enabled = true;
           };
         };
