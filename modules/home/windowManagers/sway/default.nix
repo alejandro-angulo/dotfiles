@@ -112,10 +112,7 @@ in
       enable = true;
       accent = "dark";
     };
-    catppuccin.gtk = {
-      enable = true;
-      icon.enable = true;
-    };
+    catppuccin.gtk.icon.enable = true;
     catppuccin.kvantum = {
       enable = true;
       apply = true;
