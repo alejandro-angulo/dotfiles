@@ -50,6 +50,7 @@ window#waybar.hidden {
     background-color: rgba(0, 0, 0, 1)
 }
 
+#workspaces button.active,
 #workspaces button.focused {
     color: @yellow;
 }

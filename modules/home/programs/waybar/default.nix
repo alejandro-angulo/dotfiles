@@ -31,7 +31,7 @@ in
 
     programs.waybar = {
       enable = true;
-      systemd.enable = true;
+      # systemd.enable = true;
 
       style = builtins.readFile ./waybar_style.css;
 
@@ -40,7 +40,10 @@ in
           layer = "top";
           position = "bottom";
           height = 20;
-          modules-left = [ "sway/workspaces" ];
+          modules-left = [
+            "sway/workspaces"
+            "hyprland/workspaces"
+          ];
           modules-center = [ "clock" ];
           modules-right = [
             "idle_inhibitor"
@@ -55,6 +58,22 @@ in
             "tray"
           ];
 
+          "hyprland/workspaces" = {
+            disable-scroll = false;
+            all-outputs = true;
+            format = "{icon}";
+            format-icons = {
+              "1" = "q";
+              "2" = "w";
+              "3" = "e";
+              "4" = "r";
+              "5" = "t";
+              "6" = "y";
+              "7" = "u";
+              "8" = "i";
+              "9" = "o";
+            };
+          };
           "sway/workspaces" = {
             disable-scroll = false;
             all-outputs = true;
