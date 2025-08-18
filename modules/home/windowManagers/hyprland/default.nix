@@ -62,11 +62,13 @@ in
         kitty.enable = true;
         fuzzel.enable = true;
         waybar.enable = true;
+        hyprlock.enable = true;
       };
       services = {
         gammastep.enable = true;
         playerctld.enable = true;
         swaync.enable = true;
+        hypridle.enable = true;
       };
     };
 
@@ -153,6 +155,7 @@ in
         exec-once = [
           "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
           "${pkgs.swaynotificationcenter}/bin/swaync"
+          "${pkgs.waybar}/bin/waybar"
           "hyprpaper"
         ];
 
@@ -213,6 +216,9 @@ in
           # Notifications
           "$mod SHIFT, n, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw"
           "$mod SHIFT, d, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -d -sw"
+
+          "$mod SHIFT, x, exec, hyprctl dispatch exit"
+          "$mod, x, exec, ${pkgs.hyprlock}/bin/hyprlock"
 
           # Scratchpad
           "$mod SHIFT, minus, movetoworkspace, special:magic"
