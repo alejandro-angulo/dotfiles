@@ -6,7 +6,12 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    ;
 
   cfg = config.${namespace}.programs.hyprlock;
 in
@@ -24,7 +29,7 @@ in
 
     settings = mkOption {
       type = types.attrs;
-      default = {};
+      default = { };
       description = ''
         Additional hyprlock configuration settings
       '';
@@ -35,7 +40,7 @@ in
     home.packages = [ pkgs.hyprlock ];
 
     catppuccin.hyprlock.enable = true;
-    
+
     programs.hyprlock = {
       enable = true;
       settings = lib.mkMerge [
@@ -72,27 +77,6 @@ in
               brightness = 0.8172;
               vibrancy = 0.1696;
               vibrancy_darkness = 0.05;
-            }
-          ];
-
-          # Input field for password
-          input-field = [
-            {
-              monitor = "";
-              size = "300, 50";
-              outline_thickness = 2;
-              dots_size = 0.2;
-              dots_spacing = 0.2;
-              dots_center = true;
-              outer_color = "$lavender";
-              inner_color = "$surface0";
-              font_color = "$text";
-              fade_on_empty = false;
-              placeholder_text = "<span foreground=\"##$textAlpha\">Password...</span>";
-              hide_input = false;
-              position = "0, -120";
-              halign = "center";
-              valign = "center";
             }
           ];
 
