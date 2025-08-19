@@ -7,7 +7,7 @@
 }:
 stdenv.mkDerivation rec {
   pname = "catppuccin-swaync";
-  version = "0.2.3";
+  version = "1.0.0";
 
   src = fetchurl {
     url = "https://github.com/catppuccin/swaync/releases/download/v${version}/${flavor}.css";
