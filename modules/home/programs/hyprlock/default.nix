@@ -19,11 +19,11 @@ in
   options.${namespace}.programs.hyprlock = {
     enable = mkEnableOption "hyprlock";
 
-    backgroundPath = mkOption {
+    wallpaperPath = mkOption {
       type = types.str;
-      default = "screenshot";
+      default = "hyprland/wallpaper.jpg";
       description = ''
-        Path to background image or "screenshot" to use desktop screenshot
+        Path to wallpaper, relative to xdg.dataHome
       '';
     };
 
@@ -68,7 +68,7 @@ in
           background = [
             {
               monitor = "";
-              path = cfg.backgroundPath;
+              path = "${config.xdg.dataHome}/${cfg.wallpaperPath}";
               color = "rgba(17, 17, 17, 1.0)";
               blur_passes = 2;
               blur_size = 7;
