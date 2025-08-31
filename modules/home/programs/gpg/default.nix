@@ -35,7 +35,14 @@ in
     services.gpg-agent = mkIf (system == "x86_64-linux") {
       enable = true;
       pinentry.package =
-        if config.${namespace}.windowManagers.sway.enable then pkgs.pinentry-qt else pkgs.pinentry-curses;
+        if
+          (
+            config.${namespace}.windowManagers.sway.enable || config.${namespace}.windowManagers.hyprland.enable
+          )
+        then
+          pkgs.pinentry-qt
+        else
+          pkgs.pinentry-curses;
       enableZshIntegration = true;
       enableSshSupport = true;
       sshKeys = [
