@@ -42,6 +42,13 @@ in
         Timeout in seconds before suspending the system
       '';
     };
+    suspendEnable = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        Whether or not to automatically suspend
+      '';
+    };
 
     brightnessTimeout = mkOption {
       type = types.int;
@@ -99,10 +106,10 @@ in
             on-resume = "hyprctl dispatch dpms on && ${pkgs.brightnessctl}/bin/brightnessctl -r";
           }
           # Suspend system
-          {
+          (lib.mkIf cfg.suspendEnable {
             timeout = cfg.suspendTimeout;
             on-timeout = "systemctl suspend";
-          }
+          })
         ];
       };
     };

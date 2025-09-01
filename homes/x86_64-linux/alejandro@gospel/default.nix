@@ -11,4 +11,5 @@
     monitor = [ "HDMI-A-1,preferred,auto,1.25" ];
   };
   aa.windowManagers.sway.enable = lib.mkForce false;
+  aa.services.hypridle.suspendEnable = false;
 }
