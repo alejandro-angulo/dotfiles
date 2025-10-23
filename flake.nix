@@ -81,7 +81,7 @@
           profiles.system = {
             user = "root";
             sshUser = "alejandro";
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.node;
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.gospel;
             sshOpts = [ "-A" ];
           };
         };

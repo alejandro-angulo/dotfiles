@@ -20,7 +20,7 @@ in
     enable = mkEnableOption "manage nix configuration.";
     package = mkOption {
       type = types.package;
-      default = pkgs.nixVersions.latest;
+      default = pkgs.nixVersions.nix_2_31;
       description = "Which nix package to use.";
     };
 

@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   aa = {
     apps = {
@@ -22,6 +22,6 @@
 
   # misc utils without custom config
   programs = {
-    fzf.enable = true;
+    fzf.enable = lib.mkForce false;
   };
 }

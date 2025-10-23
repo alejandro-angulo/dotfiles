@@ -66,6 +66,7 @@
     signal-desktop-bin
   ];
 
+  programs.adb.enable = true;
   programs.light.enable = true;
 
   # This value determines the NixOS release from which the default

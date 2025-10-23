@@ -36,35 +36,48 @@ in
     };
 
     catppuccin.delta.enable = true;
-    programs.git = {
-      delta = {
-        enable = true;
-        options = {
-          line-numbers = true;
-          navigate = true;
-        };
-      };
-
+    programs.delta = {
       enable = true;
-      userName = cfg.userName;
-      userEmail = cfg.userEmail;
+      enableGitIntegration = true;
+      options = {
+        line-numbers = true;
+        navigate = true;
+      };
+    };
 
-      aliases = {
-        # Prettier log
-        lol = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-        # Find log and grab its hash
-        lof = ''
-          !${pkgs.git}/bin/git log --pretty=oneline \
-          | ${pkgs.fzf}/bin/fzf --scheme history \
-          | ${pkgs.gawk}/bin/awk '{print $1}'
-        '';
-        # Push up a new branch with the same as local
-        pushup = "push -u origin HEAD";
+    programs.git = {
+      enable = true;
+      settings = {
+        alias = {
+          # Prettier log
+          lol = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+          # Find log and grab its hash
+          lof = ''
+            !${pkgs.git}/bin/git log --pretty=oneline \
+            | ${pkgs.fzf}/bin/fzf --scheme history \
+            | ${pkgs.gawk}/bin/awk '{print $1}'
+          '';
+          # Push up a new branch with the same as local
+          pushup = "push -u origin HEAD";
+        };
+
+        user = {
+          name = cfg.userName;
+          email = cfg.userEmail;
+        };
+
+        init = {
+          defaultBranch = "main";
+        };
+
+        pull = {
+          rebase = true;
+        };
       };
 
       signing = {
         key = cfg.signingKey;
-        signByDefault = mkDefault true;
+        signByDefault = mkDefault false;
       };
 
       ignores = [
@@ -83,16 +96,6 @@ in
         ".envrc"
         ".direnv"
       ];
-
-      extraConfig = {
-        init = {
-          defaultBranch = "main";
-        };
-
-        pull = {
-          rebase = true;
-        };
-      };
     };
 
     catppuccin.lazygit.enable = true;

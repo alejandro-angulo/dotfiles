@@ -2,6 +2,8 @@ let
   # Remember to pass '--identity identities/me.txt` when using this key
   users.me = "age1yubikey1qdwgvfqrcqmyw56ux7azuvqr6f8nanszu27nztvxmn4utmplgxctzt90g25";
 
+  tmp = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICJ7IsNxP/wa3X8isEp8Js7yVgk3gX2ud7EClvZClDpS";
+
   machines = {
     gospel = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGDzjXVoQEfO9JIcFbp56EvQ0oBdr9Cmhxp4z0ih+ZEZ";
     node = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIETLBnc8kJokmFiA28BaSYpeE7flY1W0SM5C1pWv/tOv";
@@ -69,5 +71,15 @@ in
     users.me
     machines.pi4
     machines.gospel
+  ];
+  "zigbee2mqtt_mqtt.age".publicKeys = [
+    users.me
+    tmp
+    machines.pi4
+  ];
+  "zigbee2mqtt_creds.age".publicKeys = [
+    users.me
+    tmp
+    machines.node
   ];
 }
