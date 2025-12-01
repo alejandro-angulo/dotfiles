@@ -54,7 +54,7 @@ in
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud31;
+      package = pkgs.nextcloud32;
       hostName = "nextcloud.kilonull.com";
       https = true;
       database.createLocally = true;

@@ -35,14 +35,17 @@ in
         version = 4;
         mqtt = {
           base_topic = "zigbee2mqtt";
-          server = "mqtt://192.168.113.13:1833";
+          server = "mqtt://192.168.113.42:1883";
           # TODO: Write secret.yaml file
           user = "!secret.yaml user";
           password = "!secret.yaml password";
         };
         serial = {
-          port = "tcp://192.168.113.130:6638";
-          adapter = "zstack";
+          port = "tcp://192.168.113.90:6638";
+          baudrate = 115200;
+          adapter = "ember";
+          disable_led = false;
+          advanced.transmit_power = 20;
         };
         advanced = {
           channel = 11;
@@ -64,7 +67,11 @@ in
       enable = true;
       recommendedProxySettings = true;
       virtualHosts."zigbee2mqtt.kilonull.com" = {
-        locations."/".proxyPass = "http://127.0.0.1:8080";
+        locations."/" = {
+          recommendedProxySettings = true;
+          proxyWebsockets = true;
+          proxyPass = "http://127.0.0.1:8080";
+        };
       }
       // lib.optionalAttrs (cfg.acmeCertName != "") {
         forceSSL = true;

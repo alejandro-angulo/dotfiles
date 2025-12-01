@@ -26,7 +26,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     nixvim.url = "git+https://git.alejandr0angul0.dev/alejandro-angulo/nixvim-config?ref=main";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     devenv.url = "github:cachix/devenv";
     devenv.inputs.nixpkgs.follows = "nixpkgs";

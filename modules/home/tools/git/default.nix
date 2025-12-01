@@ -104,10 +104,12 @@ in
       settings = {
         quitOnTopLevelReturn = true;
         gui.nerdFontsVersion = "3";
-        git.paging = {
-          colorArg = "always";
-          pager = "${pkgs.delta}/bin/delta --dark --paging=never";
-        };
+        git.pagers = [
+          {
+            colorArg = "always";
+            pager = "${pkgs.delta}/bin/delta --dark --paging=never";
+          }
+        ];
       };
     };
   };

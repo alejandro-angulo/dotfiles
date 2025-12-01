@@ -27,6 +27,7 @@ in
               acl = [
                 "readwrite home/#"
                 "readwrite homeassistant/#"
+                "readwrite zigbee2mqtt/#"
                 "read teslamate/#"
               ];
               passwordFile = config.age.secrets.hass_mqtt.path;
@@ -44,6 +45,7 @@ in
             };
             zigbee2mqtt = {
               acl = [
+                # "readwrite" "home/#"
                 "readwrite zigbee2mqtt/#"
                 "readwrite homeassistant/#"
               ];

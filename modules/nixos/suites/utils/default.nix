@@ -22,7 +22,7 @@ in
         bind # for dig
         curl
         deploy-rs
-        du-dust
+        dust
         fd
         file
         gnupg

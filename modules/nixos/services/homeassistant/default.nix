@@ -49,6 +49,7 @@ in
         "smud"
 
         "cast"
+        "ecobee"
         "homekit_controller"
         "hue"
         "met"
@@ -56,7 +57,9 @@ in
         "octoprint"
         "roborock"
         "shelly"
+        "smlight"
         "zeroconf"
+        "zha"
       ];
 
       customComponents = with pkgs.home-assistant-custom-components; [
@@ -78,18 +81,17 @@ in
 
     services.nginx = {
       enable = true;
-      virtualHosts."hass.kilonull.com" =
-        {
-          locations."/" = {
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
-            proxyPass = "http://127.0.0.1:${toString hass_cfg.config.http.server_port}";
-          };
-        }
-        // lib.optionalAttrs (cfg.acmeCertName != "") {
-          forceSSL = true;
-          useACMEHost = cfg.acmeCertName;
+      virtualHosts."hass.kilonull.com" = {
+        locations."/" = {
+          recommendedProxySettings = true;
+          proxyWebsockets = true;
+          proxyPass = "http://127.0.0.1:${toString hass_cfg.config.http.server_port}";
         };
+      }
+      // lib.optionalAttrs (cfg.acmeCertName != "") {
+        forceSSL = true;
+        useACMEHost = cfg.acmeCertName;
+      };
     };
 
     services.postgresql = {
