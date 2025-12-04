@@ -17,7 +17,7 @@
 
   aa = {
     nix.enable = true;
-    nix.useSelfhostedCache = true;
+    nix.useSelfhostedCache = false;
 
     services.tailscale = {
       enable = true;

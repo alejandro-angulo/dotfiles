@@ -76,6 +76,7 @@ in
         recorder.db_url = "postgresql://@/hass";
 
         "automation ui" = "!include automations.yaml";
+        "scene ui" = "!include scenes.yaml";
       };
     };
 

@@ -49,9 +49,6 @@ in
         };
         advanced = {
           channel = 11;
-          network_key = "GENERATE";
-          pan_id = "GENERATE";
-          ext_pan_id = "GENERATE";
         };
         frontend = {
           enabled = true;
@@ -60,6 +57,7 @@ in
         homeassistant = {
           enabled = true;
         };
+        availability.enabled = true;
       };
     };
 

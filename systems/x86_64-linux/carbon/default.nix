@@ -9,8 +9,8 @@
   aa = {
     nix = {
       enable = true;
-      useSelfhostedCache = true;
-      remoteBuilder.client.enable = true;
+      useSelfhostedCache = false;
+      remoteBuilder.client.enable = false;
     };
 
     archetypes.workstation.enable = true;
@@ -27,6 +27,10 @@
 
     system.zfs.enable = true;
     apps.yubikey.enable = true;
+
+    user.extraGroups = [
+      "dialout"
+    ];
   };
 
   networking = {
@@ -64,6 +68,10 @@
     nixos-generators
     vlc
     signal-desktop-bin
+  ];
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
   ];
 
   programs.adb.enable = true;
