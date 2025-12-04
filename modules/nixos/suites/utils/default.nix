@@ -16,8 +16,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages =
-      (with pkgs; [
+    environment.systemPackages = (
+      with pkgs;
+      [
         bat
         bind # for dig
         curl
@@ -34,12 +35,13 @@ in
         pre-commit
         progress
         python3
+        ragenix
         ripgrep
         sqlite
         tcpdump
         usbutils
         wget
-      ])
-      ++ [ inputs.agenix.packages.x86_64-linux.default ];
+      ]
+    );
   };
 }
