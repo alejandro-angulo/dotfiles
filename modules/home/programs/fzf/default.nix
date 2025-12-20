@@ -9,20 +9,22 @@ let
   cfg = config.${namespace}.programs.fzf;
   colors =
     lib.attrsets.mapAttrs
-      (_: color: inputs.catppuccin-nix-palette.lib.palette.mocha.colors.${color}.hex)
+      (
+        _: color: inputs.catppuccin-nix-palette.lib.palette.${config.catppuccin.flavor}.colors.${color}.hex
+      )
       {
         "bg+" = "surface0";
         bg = "base";
         spinner = "rosewater";
-        hl = "mauve";
+        hl = config.catppuccin.accent;
         fg = "text";
-        header = "mauve";
-        info = "mauve";
-        pointer = "mauve";
-        marker = "mauve";
+        header = config.catppuccin.accent;
+        info = config.catppuccin.accent;
+        pointer = config.catppuccin.accent;
+        marker = config.catppuccin.accent;
         "fg+" = "text";
-        prompt = "mauve";
-        "hl+" = "mauve";
+        prompt = config.catppuccin.accent;
+        "hl+" = config.catppuccin.accent;
       };
 in
 {
