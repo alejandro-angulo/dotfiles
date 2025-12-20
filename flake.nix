@@ -36,6 +36,8 @@
 
     powerlevel10k.url = "github:romkatv/powerlevel10k/master";
     powerlevel10k.flake = false;
+
+    catppuccin-nix-palette.url = "git+https://git.alejandr0angul0.dev/alejandro-angulo/catppuccin-nix-palette?ref=main";
   };
 
   outputs =
