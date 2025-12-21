@@ -24,7 +24,7 @@
   boot.kernelModules = [ "kvm-intel" ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/6119992c-19b7-42e6-8480-8bedccc23fc7 ";
+    device = "/dev/disk/by-uuid/6119992c-19b7-42e6-8480-8bedccc23fc7";
     fsType = "bcachefs";
   };
 
