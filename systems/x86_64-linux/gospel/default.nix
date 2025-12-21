@@ -34,12 +34,6 @@
     };
 
     services.openssh.enable = true;
-    services.nix-serve = {
-      enable = true;
-      domain_name = "kilonull.com";
-      subdomain_name = "cache";
-      acmeCertName = "kilonull.com";
-    };
     services.printing.enable = true;
     services.tailscale = {
       enable = true;
@@ -64,7 +58,6 @@
     hardware.bluetooth.enable = true;
     hardware.logitech.enable = true;
 
-    system.zfs.enable = true;
     system.monitoring.enable = true;
 
     user.extraGroups = [
