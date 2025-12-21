@@ -24,44 +24,13 @@
   boot.kernelModules = [ "kvm-intel" ];
 
   fileSystems."/" = {
-    device = "rpool/nixos/root";
-    fsType = "zfs";
-    options = [
-      "zfsutil"
-      "X-mount.mkdir"
-    ];
-  };
-
-  fileSystems."/home" = {
-    device = "rpool/nixos/home";
-    fsType = "zfs";
-    options = [
-      "zfsutil"
-      "X-mount.mkdir"
-    ];
-  };
-
-  fileSystems."/var/lib" = {
-    device = "rpool/nixos/var/lib";
-    fsType = "zfs";
-    options = [
-      "zfsutil"
-      "X-mount.mkdir"
-    ];
-  };
-
-  fileSystems."/var/log" = {
-    device = "rpool/nixos/var/log";
-    fsType = "zfs";
-    options = [
-      "zfsutil"
-      "X-mount.mkdir"
-    ];
+    device = "nixos";
+    fsType = "bcachefs";
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/3C7C-03C4";
-    fsType = "vfat";
+    fsType = "fat32";
   };
 
   swapDevices = [ ];

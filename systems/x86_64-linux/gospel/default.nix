@@ -6,7 +6,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./zfs.nix
   ];
 
   age.secrets.cf_dns_kilonull.file = ../../../secrets/cf_dns_kilonull.age;
@@ -119,6 +118,9 @@
 
   programs.virt-manager.enable = true;
 
+  boot.loader.systemd-boot.enable = true;
+  boot.supportedFilesystems = [ "bcachefs" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
     "armv6l-linux"
