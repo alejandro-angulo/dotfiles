@@ -13,7 +13,6 @@ in
   config = lib.mkIf cfg.enable {
     age.secrets = {
       hass_mqtt.file = ../../../../secrets/hass_mqtt.age;
-      theengs_ble_mqtt.file = ../../../../secrets/theengs_ble_mqtt.age;
       teslamate_mqtt.file = ../../../../secrets/teslamate_mqtt.age;
       zigbee2mqtt_mqtt.file = ../../../../secrets/zigbee2mqtt_mqtt.age;
     };
@@ -31,13 +30,6 @@ in
                 "read teslamate/#"
               ];
               passwordFile = config.age.secrets.hass_mqtt.path;
-            };
-            theengs_ble_gateway = {
-              acl = [
-                "readwrite home/#"
-                "readwrite homeassistant/#"
-              ];
-              passwordFile = config.age.secrets.theengs_ble_mqtt.path;
             };
             teslamate = {
               acl = [ "readwrite teslamate/#" ];

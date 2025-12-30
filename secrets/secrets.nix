@@ -67,11 +67,6 @@ in
     machines.node
     machines.gospel
   ];
-  "theengs_ble_mqtt.age".publicKeys = [
-    users.me
-    machines.pi4
-    machines.gospel
-  ];
   "zigbee2mqtt_mqtt.age".publicKeys = [
     users.me
     tmp
