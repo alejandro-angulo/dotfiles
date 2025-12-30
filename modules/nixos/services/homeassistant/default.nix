@@ -55,6 +55,7 @@ in
         "met"
         "mqtt"
         "octoprint"
+        "reolink"
         "roborock"
         "shelly"
         "smlight"
