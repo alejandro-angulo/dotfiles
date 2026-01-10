@@ -178,8 +178,8 @@ in
           network = {
             format-wifi = " ";
             format-ethernet = "{ifname}: {ipaddr}/{cidr} 󰈀 ";
-            format-linked = "{ifname} (No IP)  ";
-            format-disconnected = "睊 ";
+            format-linked = "{ifname} (No IP)";
+            format-disconnected = "󰖪 ";
             format-alt = "{ifname}: {ipaddr}/{cidr}";
             tooltip-format = "{essid} {signalStrength}%";
           };
