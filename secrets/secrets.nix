@@ -72,6 +72,10 @@ in
     machines.pi4
     machines.gospel
   ];
+  "frigate_env.age".publicKeys = [
+    users.me
+    machines.gospel
+  ];
   "zigbee2mqtt_mqtt.age".publicKeys = [
     users.me
     tmp

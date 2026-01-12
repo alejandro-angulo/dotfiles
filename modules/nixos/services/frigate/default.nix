@@ -45,82 +45,90 @@ in
     };
   };
 
-  config =
-    let
-      setEnvVars = ''
-        export FRIGATE_MQTT_PASSWORD=$(cat ${config.age.secrets.frigate_mqtt.path})
-      '';
-    in
-    lib.mkIf cfg.enable {
-      age.secrets.frigate_mqtt.file = ../../../../secrets/frigate_mqtt.age;
+  config = lib.mkIf cfg.enable {
+    age.secrets.frigate_env = {
+      file = ../../../../secrets/frigate_env.age;
+      owner = "frigate";
+    };
 
-      systemd.services.frigate.preStart = setEnvVars;
-      services.frigate.preCheckConfig = setEnvVars;
+    # systemd.services.frigate.preStart = setEnvVars;
+    # systemd.services.frigate.serviceConfig = {
+    #   EnvironmentFile = config.age.secrets.frigate_env.path;
+    # };
+    services.frigate.preCheckConfig = ''
+      ls ${config.age.secrets.frigate_env.path} 
+      source ${config.age.secrets.frigate_env.path}
+    '';
 
-      services.frigate = {
-        enable = true;
-        hostname = cfg.hostname;
-        settings = {
-          # Basic Frigate configuration
-          mqtt = {
-            enabled = true;
-            host = "192.168.113.42";
-            port = 1883;
-            user = "frigate";
-            password = "{FRIGATE_MQTT_PASSWORD}";
-          };
+    services.frigate = {
+      enable = true;
+      hostname = cfg.hostname;
+      settings = {
+        # Basic Frigate configuration
+        mqtt = {
+          enabled = true;
+          host = "192.168.113.42";
+          port = 1883;
+          user = "frigate";
+          password = "{FRIGATE_MQTT_PASSWORD}";
+        };
 
-          # TLS terminated at reverse proxy (nginx)
-          tls.enabled = false;
+        # TLS terminated at reverse proxy (nginx)
+        tls.enabled = false;
 
-          go2rtc.streams = {
-            video_doorbell = [
-              "ffmpeg:http://reolink_ip/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=username&password=password#video=copy#audio=copy#audio=opus"
-              "rtsp://username:password@reolink_ip/Preview_01_sub"
-            ];
-            video_doorbell_sub = [
-              "ffmpeg:http://reolink_ip/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=username&password=password"
-              "rtsp://username:password@reolink_ip/Preview_01_sub"
-            ];
-          };
-          go2rtc.webrtc.candidates = [
-            "192.168.113.69:8555"
-            # "gospel:8555"
+        go2rtc.streams = {
+          video_doorbell = [
+            "ffmpeg:http://reolink_ip/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=username&password=password#video=copy#audio=copy#audio=opus"
+            "rtsp://username:password@reolink_ip/Preview_01_sub"
           ];
-
-          cameras = {
-            video_doorbell.ffmpeg.inputs = [
-              {
-
-                path = "rtsp://127.0.0.1:8554/video_doorbell";
-                input_args = "preset-rtsp-restream";
-                roles = [ "record" ];
-              }
-
-              {
-                path = "rtsp://127.0.0.1:8554/video_doorbell_sub";
-                input_args = "preset-rtsp-restream";
-                roles = [ "detect" ];
-              }
-            ];
-          };
+          video_doorbell_sub = [
+            "ffmpeg:http://reolink_ip/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=username&password=password"
+            "rtsp://username:password@reolink_ip/Preview_01_sub"
+          ];
         };
-      };
-
-      services.nginx = {
-        enable = true;
-        virtualHosts.${cfg.hostname} = lib.mkIf (cfg.acmeCertName != "") {
-          forceSSL = true;
-          useACMEHost = cfg.acmeCertName;
-        };
-      };
-
-      networking.firewall = lib.mkIf cfg.openFirewall {
-        allowedTCPPorts = [
-          80
-          443
-          855
+        go2rtc.webrtc.candidates = [
+          "192.168.113.69:8555"
+          # "gospel:8555"
         ];
+
+        cameras = {
+          video_doorbell.ffmpeg.inputs = [
+            {
+
+              path = "rtsp://127.0.0.1:8554/video_doorbell";
+              input_args = "preset-rtsp-restream";
+              roles = [ "record" ];
+            }
+
+            {
+              path = "rtsp://127.0.0.1:8554/video_doorbell_sub";
+              input_args = "preset-rtsp-restream";
+              roles = [ "detect" ];
+            }
+          ];
+        };
       };
     };
+
+    services.nginx = {
+      enable = true;
+      virtualHosts.${cfg.hostname} = {
+        locations."/ws" = {
+          proxyWebsockets = true;
+        };
+      }
+      // lib.optionalAttrs (cfg.acmeCertName != "") {
+        forceSSL = true;
+        useACMEHost = cfg.acmeCertName;
+      };
+    };
+
+    networking.firewall = lib.mkIf cfg.openFirewall {
+      allowedTCPPorts = [
+        80
+        443
+        855
+      ];
+    };
+  };
 }
