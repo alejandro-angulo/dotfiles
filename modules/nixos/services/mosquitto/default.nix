@@ -15,6 +15,7 @@ in
       hass_mqtt.file = ../../../../secrets/hass_mqtt.age;
       teslamate_mqtt.file = ../../../../secrets/teslamate_mqtt.age;
       zigbee2mqtt_mqtt.file = ../../../../secrets/zigbee2mqtt_mqtt.age;
+      frigate_mqtt.file = ../../../../secrets/frigate_mqtt.age;
     };
 
     services.mosquitto = {
@@ -42,6 +43,10 @@ in
                 "readwrite homeassistant/#"
               ];
               passwordFile = config.age.secrets.zigbee2mqtt_mqtt.path;
+            };
+            frigate = {
+              acl = [ "readwrite frigate/#" ];
+              passwordFile = config.age.secrets.frigate_mqtt.path;
             };
           };
         }
