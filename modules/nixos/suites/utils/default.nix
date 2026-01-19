@@ -31,7 +31,7 @@ in
         jq
         killall
         lsof
-        nixfmt-rfc-style
+        nixfmt
         pre-commit
         progress
         python3

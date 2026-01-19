@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   packages = [
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
     pkgs.nixd
     pkgs.deploy-rs
     pkgs.git
@@ -16,6 +16,6 @@
       enable = true;
       excludes = [ ".*\\.png$" ];
     };
-    nixfmt-rfc-style.enable = true;
+    nixfmt.enable = true;
   };
 }

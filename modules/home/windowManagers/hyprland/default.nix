@@ -245,7 +245,7 @@ in
       settings = {
         ipc = "on";
         splash = false;
-        splash_offset = 2.0;
+        splash_offset = 2;
 
         preload = [
           "${config.xdg.dataHome}/${cfg.wallpaperPath}"

@@ -64,6 +64,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    android-tools
     sanoid
     # Below 3 installed for sanoid
     pv
@@ -85,7 +86,6 @@
     "/share/xdg-desktop-portal"
   ];
 
-  programs.adb.enable = true;
   programs.light.enable = true;
 
   # This value determines the NixOS release from which the default

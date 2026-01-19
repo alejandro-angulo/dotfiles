@@ -19,6 +19,7 @@ in
   config = mkIf cfg.enable {
     programs.zsh = {
       enable = true;
+      dotDir = "${config.xdg.configHome}/zsh";
       autosuggestion.enable = true;
       enableCompletion = true;
       envExtra = ''

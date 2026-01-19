@@ -2,10 +2,20 @@
   config,
   lib,
   namespace,
+  inputs,
+  pkgs,
   ...
 }:
 let
   cfg = config.${namespace}.services.hydra;
+
+  pkgs-stable = import inputs.nixpkgs-stable {
+    inherit (pkgs) system;
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = pkgs.config.permittedInsecurePackages or [ ];
+    };
+  };
 in
 {
   options.${namespace}.services.hydra = with lib; {
@@ -72,6 +82,7 @@ in
 
     services.hydra = {
       enable = true;
+      package = pkgs-stable.hydra; # Use older Hydra version from nixpkgs stable
       hydraURL = "https://${cfg.hostname}";
       notificationSender = "hydra@localhost";
       buildMachinesFiles = [ ];
@@ -88,16 +99,15 @@ in
     services.nginx = {
       enable = true;
       recommendedProxySettings = true;
-      virtualHosts."hydra.kilonull.com" =
-        {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:${toString config.services.hydra.port}";
-          };
-        }
-        // lib.optionalAttrs (cfg.acmeCertName != "") {
-          forceSSL = true;
-          useACMEHost = cfg.acmeCertName;
+      virtualHosts."hydra.kilonull.com" = {
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString config.services.hydra.port}";
         };
+      }
+      // lib.optionalAttrs (cfg.acmeCertName != "") {
+        forceSSL = true;
+        useACMEHost = cfg.acmeCertName;
+      };
     };
 
     nix.settings = {

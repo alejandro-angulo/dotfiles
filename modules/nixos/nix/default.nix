@@ -49,7 +49,7 @@ in
       {
         environment.systemPackages = with pkgs; [
           nix-prefetch
-          nixfmt-rfc-style
+          nixfmt
         ];
 
         nix =

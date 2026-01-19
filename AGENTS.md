@@ -13,7 +13,7 @@
 - **Deploy**: `nix run github:serokell/deploy-rs -- .#<hostname>` (e.g., `.#gospel`)
 
 ## Code Style Guidelines
-- **Formatter**: Use nixfmt-rfc-style for Nix code formatting (managed by devenv pre-commit hooks)
+- **Formatter**: Use nixfmt for Nix code formatting (managed by devenv pre-commit hooks)
 - **Pre-commit**: Hooks run automatically on commit via devenv (trailing whitespace, YAML validation, etc.)
 - **Imports**: Group function parameters in curly braces, use `...` for extensibility
 - **Naming**: Use camelCase for variables, kebab-case for hostnames/services

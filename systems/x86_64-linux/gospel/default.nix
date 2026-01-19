@@ -159,7 +159,6 @@
     nix-index
 
     vlc
-    xfce.thunar
     prusa-slicer
     esptool
     minicom

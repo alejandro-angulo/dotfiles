@@ -16,11 +16,12 @@ in
   };
 
   config = mkIf cfg.enable {
+    catppuccin.rofi.enable = true;
+
     programs.rofi = {
       enable = true;
       # TODO: How to ensure this font is installed?
       font = "Hack Nerd Font 10";
-      catppuccin.enable = true;
       plugins = [ pkgs.rofi-emoji ];
       extraConfig = {
         show-icons = true;
