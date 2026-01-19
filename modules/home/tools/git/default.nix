@@ -45,6 +45,18 @@ in
       };
     };
 
+    programs.gh = {
+      enable = true;
+      gitCredentialHelper = {
+        enable = true;
+        hosts = [
+          "https://github.com"
+          "https://gist.github.com"
+          "https://github.gatech.edu"
+        ];
+      };
+    };
+
     programs.git = {
       enable = true;
       settings = {
