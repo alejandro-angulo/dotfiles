@@ -33,6 +33,17 @@
     ];
   };
 
+  virtualisation = {
+    docker = {
+      enable = true;
+      storageDriver = "overlay2";
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
+    };
+  };
+
   networking = {
     hostName = "carbon";
     networkmanager.enable = true; # Enables wireless support via wpa_supplicant.
