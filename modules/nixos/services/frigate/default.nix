@@ -46,19 +46,42 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    age.secrets.frigate_mqtt = {
+      file = ../../../../secrets/frigate_env.age;
+    };
     age.secrets.frigate_env = {
       file = ../../../../secrets/frigate_env.age;
       owner = "frigate";
     };
 
-    # systemd.services.frigate.preStart = setEnvVars;
-    # systemd.services.frigate.serviceConfig = {
-    #   EnvironmentFile = config.age.secrets.frigate_env.path;
-    # };
+    systemd.services.frigate.serviceConfig = {
+      EnvironmentFile = config.age.secrets.frigate_env.path;
+    };
     services.frigate.preCheckConfig = ''
-      ls ${config.age.secrets.frigate_env.path} 
-      source ${config.age.secrets.frigate_env.path}
+      export FRIGATE_MQTT_PASSWORD="dummy value"
+      export FRIGATE_VIDEO_DOORBELL_USERNAME="dummy value"
+      export FRIGATE_VIDEO_DOORBELL_PASSWORD="dummy value"
     '';
+
+    services.go2rtc = {
+      enable = true;
+      settings = {
+        webrtc.candidates = [
+          "192.168.113.69:8555"
+          # "gospel:8555"
+        ];
+        streams = {
+          video_doorbell = [
+            "ffmpeg:http://192.168.113.91/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password=nUmPFE3*dDOVJ$O1#video=copy#audio=copy#audio=opus"
+            "rtsp://admin:nUmPFE3*dDOVJ$O1@192.168.113.91/Preview_01_sub"
+          ];
+          video_doorbell_sub = [
+            "ffmpeg:http://192.168.113.91/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password=nUmPFE3*dDOVJ$O1"
+            "rtsp://admin:nUmPFE3*dDOVJ$O1@192.168.113.91/Preview_01_sub"
+          ];
+        };
+      };
+    };
 
     services.frigate = {
       enable = true;
@@ -76,16 +99,16 @@ in
         # TLS terminated at reverse proxy (nginx)
         tls.enabled = false;
 
-        go2rtc.streams = {
-          video_doorbell = [
-            "ffmpeg:http://reolink_ip/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=username&password=password#video=copy#audio=copy#audio=opus"
-            "rtsp://username:password@reolink_ip/Preview_01_sub"
-          ];
-          video_doorbell_sub = [
-            "ffmpeg:http://reolink_ip/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=username&password=password"
-            "rtsp://username:password@reolink_ip/Preview_01_sub"
-          ];
-        };
+        # go2rtc.streams = {
+        #   video_doorbell = [
+        #     "ffmpeg:http://192.168.113.91/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={FRIGATE_VIDEO_DOORBELL_USERNAME}&password={FRIGATE_VIDEO_DOORBELL_PASSWORD}#video=copy#audio=copy#audio=opus"
+        #     "rtsp://{FRIGATE_VIDEO_DOORBELL_USERNAME}:{FRIGATE_VIDEO_DOORBELL_PASSWORD}@192.168.113.91/Preview_01_sub"
+        #   ];
+        #   video_doorbell_sub = [
+        #     "ffmpeg:http://192.168.113.91/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={FRIGATE_VIDEO_DOORBELL_USERNAME}&password={FRIGATE_VIDEO_DOORBELL_PASSWORD}"
+        #     "rtsp://{FRIGATE_VIDEO_DOORBELL_USERNAME}:{FRIGATE_VIDEO_DOORBELL_PASSWORD}@192.168.113.91/Preview_01_sub"
+        #   ];
+        # };
         go2rtc.webrtc.candidates = [
           "192.168.113.69:8555"
           # "gospel:8555"
@@ -127,7 +150,9 @@ in
       allowedTCPPorts = [
         80
         443
-        855
+        1984
+        8555
+        8554
       ];
     };
   };
