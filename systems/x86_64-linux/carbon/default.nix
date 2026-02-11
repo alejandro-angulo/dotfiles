@@ -30,6 +30,7 @@
 
     user.extraGroups = [
       "dialout"
+      "video"
     ];
   };
 
