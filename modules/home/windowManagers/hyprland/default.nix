@@ -156,7 +156,7 @@ in
           "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
           "${pkgs.swaynotificationcenter}/bin/swaync"
           "${pkgs.waybar}/bin/waybar"
-          "hyprpaper"
+          "${pkgs.hyprpaper}/bin/hyprpaper"
         ];
 
         # Keybindings
@@ -243,16 +243,13 @@ in
     services.hyprpaper = {
       enable = true;
       settings = {
-        ipc = "on";
+        ipc = true;
         splash = false;
-        splash_offset = 2;
-
-        preload = [
-          "${config.xdg.dataHome}/${cfg.wallpaperPath}"
-        ];
-
         wallpaper = [
-          ",${config.xdg.dataHome}/${cfg.wallpaperPath}"
+          {
+            path = "${config.xdg.dataHome}/${cfg.wallpaperPath}";
+            monitor = "";
+          }
         ];
       };
     };
