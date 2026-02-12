@@ -115,6 +115,9 @@ in
           allow_tearing = false;
         };
 
+        # Prevent giving focus to a window just by hovering over it.
+        input.follow_mouse = false;
+
         # Decoration
         decoration = {
           rounding = 10;
