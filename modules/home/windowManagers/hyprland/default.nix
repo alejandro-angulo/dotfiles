@@ -37,7 +37,7 @@ in
 
     wallpaperPath = mkOption {
       type = types.str;
-      default = "hyprland/wallpaper.jpg";
+      default = "hyprland/wallpaper.png";
       description = ''
         Path to wallpaper, relative to xdg.dataHome
       '';
@@ -90,7 +90,7 @@ in
       apply = true;
     };
 
-    xdg.dataFile.${cfg.wallpaperPath}.source = ./wallpaper.jpg;
+    xdg.dataFile.${cfg.wallpaperPath}.source = ./wallpaper.png;
 
     catppuccin.hyprland.enable = true;
     wayland.windowManager.hyprland = {

@@ -21,7 +21,7 @@ in
 
     wallpaperPath = mkOption {
       type = types.str;
-      default = "hyprland/wallpaper.jpg";
+      default = "hyprland/wallpaper.png";
       description = ''
         Path to wallpaper, relative to xdg.dataHome
       '';
@@ -57,11 +57,6 @@ in
             pam = {
               enabled = true;
               module = "hyprlock";
-            };
-            fingerprint = {
-              enabled = false;
-              ready_message = "(Scan fingerprint to unlock)";
-              present_message = "Scanning fingerprint";
             };
           };
 
