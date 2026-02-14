@@ -65,6 +65,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    pavucontrol
     android-tools
     sanoid
     # Below 3 installed for sanoid
