@@ -56,6 +56,7 @@
       systems.modules.nixos = with inputs; [
         agenix.nixosModules.default
         home-manager.nixosModules.home-manager
+        catppuccin.nixosModules.catppuccin
       ];
 
       homes.modules = with inputs; [ catppuccin.homeModules.catppuccin ];
