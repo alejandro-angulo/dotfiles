@@ -87,6 +87,7 @@
         name = config.networking.hostName;
         url = "https://git.alejandr0angul0.dev";
         tokenFile = config.age.secrets.gitea-runner-gospel.path;
+        hostPackages = [ pkgs.nix ];
         labels = [
           "nix-builder:host"
 
