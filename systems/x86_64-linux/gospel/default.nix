@@ -88,6 +88,8 @@
         url = "https://git.alejandr0angul0.dev";
         tokenFile = config.age.secrets.gitea-runner-gospel.path;
         labels = [
+          "nix-builder:host"
+
           "ubuntu-latest:docker://node:16-bullseye"
           "ubuntu-22.04:docker://node:16-bullseye"
           "ubuntu-20.04:docker://node:16-bullseye"
@@ -96,6 +98,15 @@
       };
     };
   };
+  # Allow the Forgejo Actions runner user to talk to nix-daemon when
+  # running jobs directly on the host.
+  nix.settings.trusted-users = [
+    config.systemd.services."gitea-runner-gospel".serviceConfig.User
+  ];
+  nix.settings.allowed-users = [
+    config.systemd.services."gitea-runner-gospel".serviceConfig.User
+  ];
+
   virtualisation = {
     libvirtd.enable = true;
 
