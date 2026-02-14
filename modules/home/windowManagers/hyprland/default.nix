@@ -148,9 +148,9 @@ in
         };
 
         # Window rules
-        windowrulev2 = [
-          "suppressevent maximize, class:.*"
-          "idleinhibit fullscreen, class:.*"
+        windowrule = [
+          "suppress_event maximize, match:class .*"
+          "idle_inhibit fullscreen, match:class .*"
         ];
 
         # Startup
