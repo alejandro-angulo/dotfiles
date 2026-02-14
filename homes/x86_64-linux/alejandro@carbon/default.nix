@@ -1,8 +1,34 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
+let
+
+  internal_display_settings = "eDP-1,preferred,auto,1.6";
+  clamshell_script = pkgs.writeShellScriptBin "clamshell" ''
+    if ${pkgs.hyprland}/bin/hyprctl monitors | ${pkgs.ripgrep}/bin/rg -q '\sDP-'; then
+        echo "Detected external monitor..."
+        if [[ "$1" == "open" ]]; then
+            ${pkgs.hyprland}/bin/hyprctl keyword monitor ${internal_display_settings}
+        else
+            ${pkgs.hyprland}/bin/hyprctl keyword monitor "eDP-1,disable"
+        fi
+    fi
+  '';
+in
 {
   aa.isHeadless = false;
   aa.windowManagers.sway.clamshell.enable = true;
   aa.programs.opencode.enable = true;
-  aa.windowManagers.hyprland.enable = true;
+  aa.windowManagers.hyprland = {
+    enable = true;
+    monitor = [
+      "eDP-1,preferred,auto,1.6"
+      "desc:Dell Inc. DELL U4025QW BH2F734,3440x1440,auto,1"
+      ",preferred,auto,1"
+    ];
+  };
   aa.windowManagers.sway.enable = lib.mkForce false;
+
+  wayland.windowManager.hyprland.settings.bindl = [
+    ", switch:off:Lid Switch, exec, ${clamshell_script}/bin/clamshell open"
+    ", switch:on:Lid Switch, exec, ${clamshell_script}/bin/clamshell close"
+  ];
 }

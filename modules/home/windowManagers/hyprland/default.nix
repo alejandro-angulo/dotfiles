@@ -24,18 +24,6 @@ let
   emoji_picker = "${pkgs.bemoji}/bin/bemoji -t";
   terminal = "${pkgs.kitty}/bin/kitty";
 
-  internal_display_settings = "eDP-1,preferred,auto,1.6";
-  clamshell_script = pkgs.writeShellScriptBin "clamshell" ''
-    if ${pkgs.hyprland}/bin/hyprctl monitors | ${pkgs.ripgrep}/bin/rg -q '\sDP-'; then
-        echo "Detected external monitor..."
-        if [[ "$1" == "open" ]]; then
-            ${pkgs.hyprland}/bin/hyprctl keyword monitor ${internal_display_settings}
-        else
-            ${pkgs.hyprland}/bin/hyprctl keyword monitor "eDP-1,disable"
-        fi
-    fi
-  '';
-
   generate_grim_command = target: ''
     exec mkdir -p ~/screenshots \
     && ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" \
@@ -58,7 +46,6 @@ in
     monitor = mkOption {
       type = types.listOf types.str;
       default = [
-        "eDP-1,preferred,auto,1.6"
         ",preferred,auto,1"
       ];
       description = ''
@@ -253,8 +240,6 @@ in
           ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
           ", XF86MonBrightnessDown, exec, ${pkgs.light}/bin/light -U 5"
           ", XF86MonBrightnessUp, exec, ${pkgs.light}/bin/light -A 5"
-          ", switch:off:Lid Switch, exec, ${clamshell_script}/bin/clamshell open"
-          ", switch:on:Lid Switch, exec, ${clamshell_script}/bin/clamshell close"
         ];
       };
     };
