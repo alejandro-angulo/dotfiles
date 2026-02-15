@@ -93,6 +93,7 @@
         tokenFile = config.age.secrets.gitea-runner-gospel.path;
         hostPackages = with pkgs; [
           nix
+          attic-client
           bash
           coreutils
           curl
