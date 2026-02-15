@@ -65,6 +65,9 @@ in
     services.nginx = {
       enable = true;
       virtualHosts."attic.kilonull.com" = {
+        extraConfig = ''
+          client_max_body_size 512M;
+        '';
         locations."/" = {
           proxyPass = "http://localhost:8080";
         };
