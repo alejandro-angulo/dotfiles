@@ -38,6 +38,7 @@ in
         allowed_hosts = "attic.kilonull.com";
         api_endpoint = "https://attic.kilonull.com/";
         listen = "[::]:8080";
+        garbage_collection.retention_period = "30d";
       };
     };
 
@@ -46,11 +47,11 @@ in
       virtualHosts."attic.kilonull.com" = {
         locations."/" = {
           proxyPass = "http://localhost:8080";
-        }
-        // lib.optionalAttrs (cfg.acmeCertName != "") {
-          forceSSL = true;
-          useACMEHost = cfg.acmeCertName;
         };
+      }
+      // lib.optionalAttrs (cfg.acmeCertName != "") {
+        forceSSL = true;
+        useACMEHost = cfg.acmeCertName;
       };
     };
   };
