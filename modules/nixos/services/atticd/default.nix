@@ -35,10 +35,10 @@ in
       # openssl genrsa -traditional 4096 | base64 -w0
       environmentFile = config.age.secrets.atticd.path;
       settings = {
-        allowed_hosts = "attic.kilonull.com";
-        api_endpoint = "https://attic.kilonull.com/";
+        allowed-hosts = [ "attic.kilonull.com" ];
+        api-endpoint = "https://attic.kilonull.com/";
         listen = "[::]:8080";
-        garbage_collection.retention_period = "30d";
+        garbage-collection.retention-period = "30d";
       };
     };
 
