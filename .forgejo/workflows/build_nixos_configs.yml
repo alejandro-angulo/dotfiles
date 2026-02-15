@@ -1,0 +1,19 @@
+name: Buill NixOS Configurations
+on: [push]
+
+jobs:
+  Explore-Forgejo-Actions:
+    runs-on: nix-builder
+    strategy:
+      matrix:
+        system:
+          - "carbon"
+          - "git"
+          - "gospel"
+          - "node"
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: |
+          echo 'Building configuration for ${{ matrix.system }}'
+          nix build .#nixosConfigurations.${{ matrix.system }}.config.system.build.toplevel
