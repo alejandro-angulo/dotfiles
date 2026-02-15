@@ -20,4 +20,4 @@ jobs:
       - name: Push build to attic
         run: |
           attic login gospel https://attic.kilonull.com ${{ secrets.ATTIC_PUSH_SECRET }}
-          attic push gospel ./result
+          attic push gospel:nixosConfigs ./result
