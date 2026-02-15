@@ -33,6 +33,10 @@
       dnsCredentialsFile = config.age.secrets.cf_dns_kilonull.path;
     };
 
+    services.atticd = {
+      enable = true;
+      acmeCertName = "attic.kilonull.com";
+    };
     services.openssh.enable = true;
     services.printing.enable = true;
     services.tailscale = {
