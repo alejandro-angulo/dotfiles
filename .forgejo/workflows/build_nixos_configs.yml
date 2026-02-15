@@ -17,3 +17,7 @@ jobs:
       - run: |
           echo 'Building configuration for ${{ matrix.system }}'
           nix build .#nixosConfigurations.${{ matrix.system }}.config.system.build.toplevel
+      - name: Push build to attic
+        run: |
+          attic login gospel https://attic.kilonull.com ${{ secrets.ATTIC_PUSH_SECRET }}
+          attic push gospel ./result
