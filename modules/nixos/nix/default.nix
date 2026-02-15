@@ -13,7 +13,6 @@ let
     ;
 
   cfg = config.aa.nix;
-  selfHostedCacheHost = "https://cache.kilonull.com/";
 in
 {
   options.aa.nix = {
@@ -72,13 +71,12 @@ in
                 if cfg.useSelfhostedCache then
                   [
                     # TESTING
-                    "https://minio.kilonull.com/nix-store"
-                    selfHostedCacheHost
+                    "https://attic.kilonull.com/nixosConfigs"
                   ]
                 else
                   [ ];
               trusted-public-keys = mkIf cfg.useSelfhostedCache [
-                "gospelCache:9cbn8Wm54BbwpPS0TXw+15wrYZBpfOJt4Fzfbfcq/pc="
+                "nixosConfigs:mjWq+JcnAqwT20OZSsrh9od6LTNn8U3cYdaXhqhDqP0="
               ];
             };
 

@@ -9,7 +9,7 @@
   aa = {
     nix = {
       enable = true;
-      useSelfhostedCache = false;
+      useSelfhostedCache = true;
       remoteBuilder.client.enable = false;
     };
 
