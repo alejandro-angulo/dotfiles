@@ -5,6 +5,7 @@
   ...
 }:
 let
+  attic_cfg = config.services.atticd;
   cfg = config.${namespace}.services.atticd;
 in
 {
@@ -22,6 +23,7 @@ in
 
   config = lib.mkIf cfg.enable {
     age.secrets.atticd.file = ../../../../secrets/atticd.age;
+
     services.atticd = {
       enable = true;
       # ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64: The base64-encoded RSA PEM PKCS1 of the RS256 JWT secret. Generate it with openssl genrsa -traditional 4096 | base64 -w0.
@@ -39,7 +41,25 @@ in
         api-endpoint = "https://attic.kilonull.com/";
         listen = "[::]:8080";
         garbage-collection.retention-period = "30d";
+        database.url = "postgresql://atticd/?host=/run/postgresql";
       };
+    };
+
+    services.postgresql = {
+      enable = true;
+      ensureDatabases = [ "atticd" ];
+      ensureUsers = [
+        {
+          name = attic_cfg.user;
+          ensureDBOwnership = true;
+        }
+      ];
+      identMap = ''
+        attic attic attic
+      '';
+      authentication = ''
+        local all attic peer map=attic
+      '';
     };
 
     services.nginx = {
