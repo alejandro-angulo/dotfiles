@@ -158,6 +158,10 @@
         prefixLength = 24;
       }
     ];
+    firewall.allowedTCPPorts = [
+      80
+      443
+    ];
   };
   programs.winbox = {
     enable = true;
