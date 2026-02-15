@@ -35,7 +35,7 @@
 
     services.atticd = {
       enable = true;
-      acmeCertName = "attic.kilonull.com";
+      acmeCertName = "kilonull.com";
     };
     services.openssh.enable = true;
     services.printing.enable = true;
