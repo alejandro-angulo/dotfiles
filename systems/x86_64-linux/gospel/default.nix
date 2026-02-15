@@ -90,7 +90,6 @@
         hostPackages = with pkgs; [
           nix
           bash
-          sh
           coreutils
           curl
           gawk
