@@ -66,7 +66,7 @@ in
       enable = true;
       virtualHosts."attic.kilonull.com" = {
         extraConfig = ''
-          client_max_body_size 512M;
+          client_max_body_size 0;
         '';
         locations."/" = {
           proxyPass = "http://localhost:8080";
