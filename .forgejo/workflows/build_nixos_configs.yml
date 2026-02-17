@@ -2,8 +2,12 @@ name: Buill NixOS Configurations
 on: [push]
 
 jobs:
-  Build-NixOS-Configurations:
-    runs-on: nix-builder
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: node:25
+      volumes:
+        - "/nix:/nix"
     strategy:
       matrix:
         system:
@@ -19,5 +23,5 @@ jobs:
           nix build .#nixosConfigurations.${{ matrix.system }}.config.system.build.toplevel
       - name: Push build to attic
         run: |
-          attic login gospel https://attic.kilonull.com ${{ secrets.ATTIC_PUSH_SECRET }}
-          attic push gospel:nixosConfigs ./result
+          nix run nixpkgs#attic-client -- login gospel https://attic.kilonull.com ${{ secrets.ATTIC_PUSH_SECRET }}
+          nix run nixpkgs#attic-client -- push gospel:nixosConfigs ./result
