@@ -26,6 +26,10 @@ in
       enable = true;
       settings = {
         theme = "catppuccin";
+        keybinds = {
+          app_exit = "ctrl+d,<leader>q";
+          session_interrupt = "ctrl+c";
+        };
         mcp = {
           context7 = {
             type = "local";
