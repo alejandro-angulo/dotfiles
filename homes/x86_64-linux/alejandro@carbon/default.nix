@@ -31,4 +31,7 @@ in
     ", switch:off:Lid Switch, exec, ${clamshell_script}/bin/clamshell open"
     ", switch:on:Lid Switch, exec, ${clamshell_script}/bin/clamshell close"
   ];
+
+  catppuccin.zathura.enable = true;
+  programs.zathura.enable = true;
 }
