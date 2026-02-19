@@ -13,6 +13,11 @@ let
   };
 in
 {
+  "atticd.age".publicKeys = [
+    users.me
+    machines.gospel
+    tmp
+  ];
   "cf_dns_kilonull.age".publicKeys = [
     users.me
     machines.node

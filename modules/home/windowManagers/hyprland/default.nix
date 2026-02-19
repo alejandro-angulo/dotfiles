@@ -24,6 +24,14 @@ let
   emoji_picker = "${pkgs.bemoji}/bin/bemoji -t";
   terminal = "${pkgs.kitty}/bin/kitty";
 
+  layout_toggle_script = pkgs.writeShellScriptBin "layout-toggle" ''
+    current_layout="$(${pkgs.hyprland}/bin/hyprctl getoption general:layout -j | ${pkgs.jq}/bin/jq -r .str)"
+    case "$current_layout" in 
+        master) ${pkgs.hyprland}/bin/hyprctl -q keyword general:layout dwindle ;;
+        dwindle) ${pkgs.hyprland}/bin/hyprctl -q keyword general:layout master ;;
+    esac
+  '';
+
   generate_grim_command = target: ''
     exec mkdir -p ~/screenshots \
     && ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" \
@@ -147,6 +155,11 @@ in
           preserve_split = true;
         };
 
+        # Master layout
+        master = {
+          orientation = "center";
+        };
+
         # Window rules
         windowrule = [
           "suppress_event maximize, match:class .*"
@@ -208,6 +221,7 @@ in
           "$mod SHIFT, o, movetoworkspace, 9"
 
           # Layout
+          "$mod, g, exec, ${layout_toggle_script}/bin/layout-toggle"
           "$mod, v, togglesplit"
           "$mod, f, fullscreen"
           "$mod SHIFT, f, togglefloating"

@@ -33,6 +33,10 @@
       dnsCredentialsFile = config.age.secrets.cf_dns_kilonull.path;
     };
 
+    services.atticd = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+    };
     services.openssh.enable = true;
     services.printing.enable = true;
     services.tailscale = {
@@ -87,7 +91,21 @@
         name = config.networking.hostName;
         url = "https://git.alejandr0angul0.dev";
         tokenFile = config.age.secrets.gitea-runner-gospel.path;
+        hostPackages = with pkgs; [
+          nix
+          attic-client
+          bash
+          coreutils
+          curl
+          gawk
+          gitMinimal
+          gnused
+          nodejs
+          wget
+        ];
         labels = [
+          "nix-builder:host"
+
           "ubuntu-latest:docker://node:16-bullseye"
           "ubuntu-22.04:docker://node:16-bullseye"
           "ubuntu-20.04:docker://node:16-bullseye"
@@ -96,6 +114,15 @@
       };
     };
   };
+  # Allow the Forgejo Actions runner user to talk to nix-daemon when
+  # running jobs directly on the host.
+  nix.settings.trusted-users = [
+    config.systemd.services."gitea-runner-gospel".serviceConfig.User
+  ];
+  nix.settings.allowed-users = [
+    config.systemd.services."gitea-runner-gospel".serviceConfig.User
+  ];
+
   virtualisation = {
     libvirtd.enable = true;
 
@@ -131,6 +158,10 @@
         address = "192.168.113.69"; # nice
         prefixLength = 24;
       }
+    ];
+    firewall.allowedTCPPorts = [
+      80
+      443
     ];
   };
   programs.winbox = {
