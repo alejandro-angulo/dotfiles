@@ -4,7 +4,6 @@ let
   internal_display_settings = "eDP-1,preferred,auto,1.6";
   clamshell_script = pkgs.writeShellScriptBin "clamshell" ''
     if ${pkgs.hyprland}/bin/hyprctl monitors | ${pkgs.ripgrep}/bin/rg -q '\sDP-'; then
-        echo "Detected external monitor..."
         if [[ "$1" == "open" ]]; then
             ${pkgs.hyprland}/bin/hyprctl keyword monitor ${internal_display_settings}
         else
@@ -25,6 +24,7 @@ in
       ",preferred,auto,1"
     ];
   };
+  aa.services.hypridle.suspendInhibitWhenPluggedIn = true;
   aa.windowManagers.sway.enable = lib.mkForce false;
 
   wayland.windowManager.hyprland.settings.bindl = [

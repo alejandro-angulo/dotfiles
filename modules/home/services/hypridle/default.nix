@@ -14,6 +14,18 @@ let
     ;
 
   cfg = config.${namespace}.services.hypridle;
+
+  # Script that suspends only when on battery power.
+  # When plugged in, uses systemd-inhibit to block suspend.
+  suspendScript = pkgs.writeShellScript "hypridle-suspend" ''
+    if [ "$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/AC/online)" = "1" ]; then
+      # Plugged in - inhibit suspend
+      ${pkgs.systemd}/bin/systemd-inhibit --what=sleep --who=hypridle --why="AC power connected" --mode=block ${pkgs.coreutils}/bin/sleep infinity &
+    else
+      # On battery - suspend
+      ${pkgs.systemd}/bin/systemctl suspend
+    fi
+  '';
 in
 {
   options.${namespace}.services.hypridle = {
@@ -47,6 +59,14 @@ in
       default = true;
       description = ''
         Whether or not to automatically suspend
+      '';
+    };
+    suspendInhibitWhenPluggedIn = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        Whether to inhibit suspend when AC power is connected.
+        Useful for laptops that should only suspend on battery.
       '';
     };
 
@@ -108,7 +128,11 @@ in
           # Suspend system
           (lib.mkIf cfg.suspendEnable {
             timeout = cfg.suspendTimeout;
-            on-timeout = "systemctl suspend";
+            on-timeout =
+              if cfg.suspendInhibitWhenPluggedIn then
+                "${suspendScript}"
+              else
+                "${pkgs.systemd}/bin/systemctl suspend";
           })
         ];
       };
