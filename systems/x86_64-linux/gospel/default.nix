@@ -112,6 +112,15 @@
           "ubuntu-20.04:docker://node:16-bullseye"
           "ubuntu-18.04:docker://node:16-buster"
         ];
+        settings.container = {
+          options = ''
+            ;
+            -e PATH=:${pkgs.nix}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+            -e NIX_PATH=nixpkgs=flake:nixpkgs:/nix/var/nix/profiles/per-user/root/channels
+            -e NIX_REMOTE=daemon
+          '';
+          valid_volumes = [ "/nix" ];
+        };
       };
     };
   };
