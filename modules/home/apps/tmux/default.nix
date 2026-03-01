@@ -111,6 +111,16 @@ in
         } {
           display-popup -h 90% -w 90% -E "tmux new-session -A -s btop ${pkgs.btop}/bin/btop"
         }
+      ''
+      + lib.strings.optionalString config.programs.yazi.enable ''
+        # Open yazi in a popup
+        # Spins up a new session with a '-yazi' suffix (hitting the shortcut
+        # toggles between attaching and detaching)
+        bind C-g if-shell "[[ $(tmux display-message -p '#S') == *-yazi ]]" {
+          detach-client
+        } {
+          display-popup -h 90% -w 90% -E "tmux new-session -A -s $(tmux display-message -p '#S')-yazi ${pkgs.yazi}/bin/yazi"
+        }
       '';
     };
 
