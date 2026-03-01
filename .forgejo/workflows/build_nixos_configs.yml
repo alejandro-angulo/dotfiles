@@ -1,4 +1,4 @@
-name: Buill NixOS Configurations
+name: Build NixOS Configurations
 on: [push]
 
 jobs:
