@@ -45,20 +45,19 @@ in
 
       nginx = {
         enable = true;
-        virtualHosts."${cfg.subdomain_name}.${cfg.domain_name}" =
-          {
-            serverAliases = [ "${cfg.subdomain_name}" ];
-            locations."/".extraConfig = ''
-              proxy_pass http://localhost:${toString config.services.nix-serve.port};
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            '';
-          }
-          // lib.optionalAttrs (cfg.acmeCertName != "") {
-            forceSSL = true;
-            useACMEHost = cfg.acmeCertName;
-          };
+        virtualHosts."${cfg.subdomain_name}.${cfg.domain_name}" = {
+          serverAliases = [ "${cfg.subdomain_name}" ];
+          locations."/".extraConfig = ''
+            proxy_pass http://localhost:${toString config.services.nix-serve.port};
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          '';
+        }
+        // lib.optionalAttrs (cfg.acmeCertName != "") {
+          forceSSL = true;
+          useACMEHost = cfg.acmeCertName;
+        };
       };
     };
 

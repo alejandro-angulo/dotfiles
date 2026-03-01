@@ -38,16 +38,15 @@ in
     services.nginx = {
       enable = true;
       recommendedProxySettings = true;
-      virtualHosts."adguardhome.kilonull.com" =
-        {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:3000";
-          };
-        }
-        // lib.optionalAttrs (cfg.acmeCertName != "") {
-          forceSSL = true;
-          useACMEHost = cfg.acmeCertName;
+      virtualHosts."adguardhome.kilonull.com" = {
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3000";
         };
+      }
+      // lib.optionalAttrs (cfg.acmeCertName != "") {
+        forceSSL = true;
+        useACMEHost = cfg.acmeCertName;
+      };
     };
 
     networking.firewall = {

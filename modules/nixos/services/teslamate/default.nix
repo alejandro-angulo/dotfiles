@@ -147,19 +147,18 @@ in
 
     services.nginx = {
       enable = true;
-      virtualHosts."teslamate.kilonull.com" =
-        {
-          locations."/" = {
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
-            # TODO: Make port configurable.
-            proxyPass = "http://127.0.0.1:4000";
-          };
-        }
-        // lib.optionalAttrs (cfg.acmeCertName != "") {
-          forceSSL = true;
-          useACMEHost = cfg.acmeCertName;
+      virtualHosts."teslamate.kilonull.com" = {
+        locations."/" = {
+          recommendedProxySettings = true;
+          proxyWebsockets = true;
+          # TODO: Make port configurable.
+          proxyPass = "http://127.0.0.1:4000";
         };
+      }
+      // lib.optionalAttrs (cfg.acmeCertName != "") {
+        forceSSL = true;
+        useACMEHost = cfg.acmeCertName;
+      };
     };
 
     networking.firewall.allowedTCPPorts = [ 4000 ];

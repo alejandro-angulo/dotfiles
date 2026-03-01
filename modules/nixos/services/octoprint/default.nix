@@ -25,20 +25,19 @@ in
     services.nginx = {
       enable = true;
       recommendedProxySettings = true;
-      virtualHosts."octoprint.kilonull.com" =
-        {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:${toString config.services.octoprint.port}";
-            proxyWebsockets = true;
-            extraConfig = ''
-              client_max_body_size 512m;
-            '';
-          };
-        }
-        // lib.optionalAttrs (cfg.acmeCertName != "") {
-          forceSSL = true;
-          useACMEHost = cfg.acmeCertName;
+      virtualHosts."octoprint.kilonull.com" = {
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString config.services.octoprint.port}";
+          proxyWebsockets = true;
+          extraConfig = ''
+            client_max_body_size 512m;
+          '';
         };
+      }
+      // lib.optionalAttrs (cfg.acmeCertName != "") {
+        forceSSL = true;
+        useACMEHost = cfg.acmeCertName;
+      };
     };
 
     networking.firewall.allowedTCPPorts = [

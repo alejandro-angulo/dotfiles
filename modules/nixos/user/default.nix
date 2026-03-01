@@ -58,6 +58,7 @@ in
       shell = pkgs.zsh;
 
       extraGroups = [ "wheel" ] ++ cfg.extraGroups;
-    } // cfg.extraOptions;
+    }
+    // cfg.extraOptions;
   };
 }

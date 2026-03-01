@@ -30,23 +30,22 @@ in
 
     services.nginx = {
       enable = true;
-      virtualHosts."sunshine.kilonull.com" =
-        {
-          locations."/" = {
-            recommendedProxySettings = true;
-            # NOTE: Sunshine is a little weird since it requires multiple
-            # ports. You configure it with a base port and the web UI +1 from
-            # the base port.
-            proxyPass = "https://127.0.0.1:${toString (config.services.sunshine.settings.port + 1)}";
-            extraConfig = ''
-              proxy_ssl_verify off;
-            '';
-          };
-        }
-        // lib.optionalAttrs (cfg.acmeCertName != "") {
-          forceSSL = true;
-          useACMEHost = cfg.acmeCertName;
+      virtualHosts."sunshine.kilonull.com" = {
+        locations."/" = {
+          recommendedProxySettings = true;
+          # NOTE: Sunshine is a little weird since it requires multiple
+          # ports. You configure it with a base port and the web UI +1 from
+          # the base port.
+          proxyPass = "https://127.0.0.1:${toString (config.services.sunshine.settings.port + 1)}";
+          extraConfig = ''
+            proxy_ssl_verify off;
+          '';
         };
+      }
+      // lib.optionalAttrs (cfg.acmeCertName != "") {
+        forceSSL = true;
+        useACMEHost = cfg.acmeCertName;
+      };
     };
   };
 }
