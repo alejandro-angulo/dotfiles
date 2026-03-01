@@ -27,4 +27,4 @@ jobs:
           nix --extra-experimental-features nix-command --extra-experimental-features flakes run nixpkgs#attic-client \
             -- login gospel https://attic.kilonull.com ${{ secrets.ATTIC_PUSH_SECRET }}
           nix --extra-experimental-features nix-command --extra-experimental-features flakes run nixpkgs#attic-client \
-            -- push gospel:nixosConfigs ./result
+            -- push --ignore-upstream-cache-filter gospel:nixosConfigs ./result
