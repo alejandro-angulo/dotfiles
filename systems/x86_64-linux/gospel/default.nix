@@ -47,7 +47,8 @@
     services.prometheus.enable = true;
     services.promtail.enable = true;
     services.hydra = {
-      enable = true;
+      # Intentionally disabled for now
+      enable = false;
       acmeCertName = "kilonull.com";
       secretKeyPath = "/var/gospelCache";
       s3Bucket = "nix-store";
