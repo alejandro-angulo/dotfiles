@@ -82,6 +82,7 @@
     nixos-generators
     vlc
     signal-desktop-bin
+    zoom-us
   ];
   environment.pathsToLink = [
     "/share/applications"
