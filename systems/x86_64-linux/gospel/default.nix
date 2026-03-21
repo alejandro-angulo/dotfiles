@@ -202,7 +202,7 @@
     prusa-slicer
     esptool
     minicom
-    signal-desktop-bin
+    signal-desktop
     ncdu
 
     cntr

@@ -252,8 +252,8 @@ in
           ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
           ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
           ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-          ", XF86MonBrightnessDown, exec, ${pkgs.light}/bin/light -U 5"
-          ", XF86MonBrightnessUp, exec, ${pkgs.light}/bin/light -A 5"
+          ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5"
+          ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5-"
         ];
       };
     };

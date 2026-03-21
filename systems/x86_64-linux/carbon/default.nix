@@ -82,15 +82,13 @@
     hugo
     nixos-generators
     vlc
-    signal-desktop-bin
+    signal-desktop
     zoom-us
   ];
   environment.pathsToLink = [
     "/share/applications"
     "/share/xdg-desktop-portal"
   ];
-
-  programs.light.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

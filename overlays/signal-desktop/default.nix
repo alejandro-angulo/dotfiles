@@ -1,6 +1,6 @@
 { ... }:
 (final: prev: {
-  signal-desktop-bin = prev.signal-desktop-bin.overrideAttrs (oldAttrs: {
+  signal-desktop = prev.signal-desktop.overrideAttrs (oldAttrs: {
     nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ prev.makeWrapper ];
     postInstall = oldAttrs.postInstall or "" + ''
       wrapProgram $out/bin/signal-desktop \

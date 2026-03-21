@@ -320,8 +320,8 @@ in
           "${modifier}+Left" = "exec 'playerctl previous'";
 
           # Backlight keys
-          "XF86MonBrightnessDown" = "exec '${pkgs.light}/bin/light -U 5'";
-          "XF86MonBrightnessUp" = "exec '${pkgs.light}/bin/light -A 5'";
+          "XF86MonBrightnessDown" = "exec '${pkgs.brightnessctl}/bin/brightnessctl set 5+'";
+          "XF86MonBrightnessUp" = "exec '${pkgs.brightnessctl}/bin/brightnessctl set 5-'";
 
           # Navigation
 
