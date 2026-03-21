@@ -75,6 +75,7 @@
 
     wireguard-tools
 
+    chromium
     prusa-slicer
     traceroute
     gnumake
