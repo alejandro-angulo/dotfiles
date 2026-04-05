@@ -16,12 +16,8 @@ let
   cfg = config.${namespace}.services.hypridle;
 
   # Script that suspends only when on battery power.
-  # When plugged in, uses systemd-inhibit to block suspend.
   suspendScript = pkgs.writeShellScript "hypridle-suspend" ''
-    if [ "$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/AC/online)" = "1" ]; then
-      # Plugged in - inhibit suspend
-      ${pkgs.systemd}/bin/systemd-inhibit --what=sleep --who=hypridle --why="AC power connected" --mode=block ${pkgs.coreutils}/bin/sleep infinity &
-    else
+    if [ "$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/AC/online)" != "1" ]; then
       # On battery - suspend
       ${pkgs.systemd}/bin/systemctl suspend
     fi
