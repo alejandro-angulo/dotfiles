@@ -30,6 +30,6 @@ in
       };
     };
 
-    xdg.configFile."swaync/style.css".source = "${pkgs.aa.catppuccin-swaync}/catppuccin.css";
+#    xdg.configFile."swaync/style.css".source = "${pkgs.aa.catppuccin-swaync}/catppuccin.css";
   };
 }
