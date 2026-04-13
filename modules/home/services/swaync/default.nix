@@ -16,7 +16,18 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.libnotify ];
+    home.packages = [
+      pkgs.libnotify
+      pkgs.dconf
+    ];
+
+    gtk = {
+      enable = true;
+      iconTheme = {
+        name = lib.mkForce "Adwaita";
+        package = lib.mkForce pkgs.adwaita-icon-theme;
+      };
+    };
 
     services.swaync = {
       enable = true;
@@ -30,6 +41,6 @@ in
       };
     };
 
-#    xdg.configFile."swaync/style.css".source = "${pkgs.aa.catppuccin-swaync}/catppuccin.css";
+    # xdg.configFile."swaync/style.css".source = "${pkgs.aa.catppuccin-swaync}/catppuccin.css";
   };
 }

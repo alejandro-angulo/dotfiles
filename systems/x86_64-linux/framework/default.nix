@@ -45,6 +45,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   services.fwupd.enable = true;
+  services.gvfs.enable = true;
 
   virtualisation = {
     docker = {
