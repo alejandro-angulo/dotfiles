@@ -255,6 +255,8 @@ in
           ", XF86MonBrightnessDown, exec, ${pkgs.swayosd}/bin/swayosd-client --brightness lower"
           ", XF86MonBrightnessUp, exec, ${pkgs.swayosd}/bin/swayosd-client --brightness raise"
         ];
+
+        gesture = "3, horizontal, workspace";
       };
     };
 
