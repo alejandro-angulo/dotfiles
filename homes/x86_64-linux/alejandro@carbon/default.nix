@@ -20,7 +20,7 @@ in
     enable = true;
     monitor = [
       "eDP-1,preferred,auto,1.6"
-      "desc:Dell Inc. DELL U4025QW BH2F734,3440x1440,auto,1"
+      "desc:Dell Inc. DELL U4025QW BH2F734,preferred,auto,1.25"
       ",preferred,auto,1"
     ];
   };
