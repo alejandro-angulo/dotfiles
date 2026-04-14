@@ -12,6 +12,7 @@ jobs:
       matrix:
         system:
           - "carbon"
+          - "framework"
           - "git"
           - "gospel"
           - "node"

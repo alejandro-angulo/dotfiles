@@ -25,10 +25,8 @@
     agenix.inputs.darwin.follows = "";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim.url = "git+https://git.alejandr0angul0.dev/alejandro-angulo/nixvim-config?ref=main";
-    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     devenv.url = "github:cachix/devenv";
     devenv.inputs.nixpkgs.follows = "nixpkgs";
@@ -145,9 +143,10 @@
       hydraJobs =
         let
           systems_to_build = [
+            "carbon"
+            "framework"
             "gospel"
             "node"
-            "carbon"
           ];
         in
         {
