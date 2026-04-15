@@ -275,6 +275,46 @@ in
       };
     };
 
-    services.swayosd.enable = true;
+    xdg.configFile."swayosd/style.css".text = ''
+      window#osd {
+        border-radius: 999px;
+        border: none;
+        background: rgba(30, 30, 46, 0.8); }
+        window#osd #container {
+          margin: 16px; }
+        window#osd image,
+        window#osd label {
+          color: #cdd6f4; }
+        window#osd progressbar:disabled,
+        window#osd image:disabled {
+          opacity: 0.5; }
+        window#osd progressbar,
+        window#osd segmentedprogress {
+          min-height: 6px;
+          border-radius: 999px;
+          background: transparent;
+          border: none; }
+        window#osd trough,
+        window#osd segment {
+          min-height: inherit;
+          border-radius: inherit;
+          border: none;
+          background: rgba(49, 50, 68, 0.8); }
+        window#osd progress,
+        window#osd segment.active {
+          min-height: inherit;
+          border-radius: inherit;
+          border: none;
+          background: #9399b2; }
+        window#osd segment {
+          margin-left: 8px; }
+          window#osd segment:first-child {
+            margin-left: 0; }
+    '';
+
+    services.swayosd = {
+      enable = true;
+      stylePath = "${config.xdg.configHome}/${config.xdg.configFile."swayosd/style.css".target}";
+    };
   };
 }
