@@ -31,6 +31,8 @@
     devenv.url = "github:cachix/devenv";
     devenv.inputs.nixpkgs.follows = "nixpkgs";
 
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
     zsh-syntax-highlighting.url = "github:zsh-users/zsh-syntax-highlighting/master";
     zsh-syntax-highlighting.flake = false;
 
@@ -58,7 +60,10 @@
         catppuccin.nixosModules.catppuccin
       ];
 
-      homes.modules = with inputs; [ catppuccin.homeModules.catppuccin ];
+      homes.modules = with inputs; [
+        catppuccin.homeModules.catppuccin
+        spicetify-nix.homeManagerModules.spicetify
+      ];
 
       outputs-builder = channels: {
         devShells.default = inputs.devenv.lib.mkShell {

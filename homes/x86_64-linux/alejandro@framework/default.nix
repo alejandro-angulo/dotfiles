@@ -32,6 +32,8 @@ in
     ", switch:on:Lid Switch, exec, ${clamshell_script}/bin/clamshell close"
   ];
 
+  aa.programs.spicetify.enable = true;
+
   catppuccin.zathura.enable = true;
   programs.zathura.enable = true;
 }
