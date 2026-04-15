@@ -23,6 +23,7 @@ in
 
     gtk = {
       enable = true;
+      gtk4.theme = null;
       iconTheme = {
         name = lib.mkForce "Adwaita";
         package = lib.mkForce pkgs.adwaita-icon-theme;

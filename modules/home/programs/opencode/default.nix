@@ -24,12 +24,14 @@ in
   config = lib.mkIf cfg.enable {
     programs.opencode = {
       enable = true;
-      settings = {
+      tui = {
         theme = "catppuccin";
         keybinds = {
           app_exit = "ctrl+d,<leader>q";
           session_interrupt = "ctrl+c";
         };
+      };
+      settings = {
         mcp = {
           context7 = {
             type = "local";
