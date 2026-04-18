@@ -73,13 +73,14 @@
   # See: https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = false;
 
+  services.tlp.enable = false;
+  services.power-profiles-daemon.enable = false;
+  services.tuned.enable = true;
   # services.tlp.settings = {
   #   USB_DENYLIST = "0000:1111 2222:3333 4444:5555";
   # };
   # Still need to run `nix run nixpkgs#bolt -- enroll DEVICE_UUID`
   services.hardware.bolt.enable = true;
-
-  services.power-profiles-daemon.enable = lib.mkForce false;
 
   time.timeZone = "America/Los_Angeles";
 
