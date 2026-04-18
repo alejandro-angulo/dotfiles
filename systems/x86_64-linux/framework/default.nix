@@ -46,6 +46,12 @@
 
   services.fwupd.enable = true;
   services.gvfs.enable = true;
+  services.logind.settings.Login = {
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitch = "suspend";
+    KillUserProcesses = false;
+  };
 
   virtualisation = {
     docker = {

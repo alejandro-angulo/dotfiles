@@ -15,10 +15,11 @@ let
 
   cfg = config.${namespace}.services.hypridle;
 
-  # Script that suspends only when on battery power.
+  # Script that suspends only when not docked (no external monitors).
   suspendScript = pkgs.writeShellScript "hypridle-suspend" ''
-    if [ "$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/AC/online)" != "1" ]; then
-      # On battery - suspend
+    mon_count=$(${pkgs.hyprland}/bin/hyprctl monitors all 2>/dev/null | ${pkgs.gnugrep}/bin/grep -c '^Monitor' || echo "0")
+    # If only 1 monitor (builtin), suspend. If 2+ monitors, assume docked - don't suspend.
+    if [ "$mon_count" -le 1 ]; then
       ${pkgs.systemd}/bin/systemctl suspend
     fi
   '';
