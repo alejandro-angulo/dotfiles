@@ -90,6 +90,7 @@ in
       signing = {
         key = cfg.signingKey;
         signByDefault = mkDefault false;
+        format = null;
       };
 
       ignores = [
