@@ -105,7 +105,7 @@ in
     virtualisation.oci-containers = {
       backend = "docker";
       containers."teslamate" = {
-        image = "teslamate/teslamate:1.32";
+        image = "teslamate/teslamate:3.0";
         environmentFiles = [ "/var/lib/teslamate/env" ];
         environment = {
           # TODO: Make this configurable
