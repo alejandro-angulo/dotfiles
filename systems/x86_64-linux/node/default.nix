@@ -13,6 +13,10 @@
   age.secrets = {
     cf_dns_kilonull.file = ../../../secrets/cf_dns_kilonull.age;
     teslamate_db.file = ../../../secrets/teslamate_db.age;
+    grafana = {
+      file = ../../../secrets/grafana.age;
+      owner = "grafana";
+    };
   };
 
   aa = {
@@ -32,6 +36,7 @@
     services.grafana = {
       enable = true;
       acmeCertName = "kilonull.com";
+      secretKeyPath = config.age.secrets.grafana.path;
     };
     services.prometheus = {
       enable = true;

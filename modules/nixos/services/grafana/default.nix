@@ -28,6 +28,12 @@ in
         certificate.
       '';
     };
+    secretKeyPath = mkOption {
+      type = types.path;
+      description = ''
+        The path to grafana's secret key
+      '';
+    };
   };
   config = mkIf cfg.enable {
     age.secrets = {
@@ -39,6 +45,9 @@ in
 
     services.grafana = {
       enable = true;
+
+      settings.security.secret_key = "$__file{${cfg.secretKeyPath}}";
+
       settings.server = {
         domain = "grafana.kilonull.com";
         http_port = 2342;

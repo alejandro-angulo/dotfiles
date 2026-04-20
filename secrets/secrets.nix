@@ -29,6 +29,10 @@ in
     users.me
     machines.gospel
   ];
+  "grafana.age".publicKeys = [
+    users.me
+    machines.node
+  ];
   "hass_mqtt.age".publicKeys = [
     users.me
     machines.pi4
