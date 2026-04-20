@@ -15,6 +15,7 @@ in
     services.forgejo = {
       enable = true;
       domain = domain;
+      anubis.enable = true;
     };
 
     services.openssh.enable = true;
