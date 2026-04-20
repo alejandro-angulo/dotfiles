@@ -17,8 +17,12 @@ stdenv.mkDerivation rec {
   dontBuild = true;
 
   installPhase = ''
+    runHook preInstall
     mkdir -p "$out"
     cp "$src"/grafana/dashboards.yml "$out"
     cp -r "$src"/grafana/dashboards "$out"
+    substituteInPlace "$out"/dashboards.yml \
+        --replace 'path: ' "path: $out"
+    runHook postInstall
   '';
 }

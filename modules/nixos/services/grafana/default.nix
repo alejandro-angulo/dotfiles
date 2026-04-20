@@ -78,45 +78,18 @@ in
               access = "proxy";
               url = "localhost:5432";
               user = "teslamate";
-              database = "teslamate";
               secureJsonData = {
                 password = "$__file{${config.age.secrets.teslamate_db_for_grafana.path}}";
               };
               jsonData = {
-                # TODO: Automate this somehow?
-                postgresVersion = "1400";
+                database = "teslamate";
                 sslmode = "disable";
               };
             }
           ];
         };
 
-        dashboards = {
-          settings.providers = [
-            {
-              name = "teslamate";
-              orgId = 1;
-              folder = "TeslaMate";
-              folderUid = "Nr4ofiDZk";
-              type = "file";
-              disableDeletion = false;
-              editable = true;
-              updateIntervalSeconds = 86400;
-              options.path = "${grafana_dashboards}/dashboards";
-            }
-            {
-              name = "teslamate_internal";
-              orgId = 1;
-              folder = "TeslaMate/Internal";
-              folderUid = "Nr5ofiDZk";
-              type = "file";
-              disableDeletion = false;
-              editable = true;
-              updateIntervalSeconds = 86400;
-              options.path = "${grafana_dashboards}/dashboards/internal";
-            }
-          ];
-        };
+        dashboards.path = "${grafana_dashboards}/dashboards.yml";
       };
     };
 
