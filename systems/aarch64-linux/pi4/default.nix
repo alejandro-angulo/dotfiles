@@ -36,7 +36,7 @@
       acmeCertName = "kilonull.com";
     };
     services.prometheus.enable = true;
-    services.promtail.enable = true;
+    services.grafana-alloy.enable = true;
     services.mosquitto.enable = true;
 
     security.acme = {

@@ -45,7 +45,7 @@
       configureServerRouting = true;
     };
     services.prometheus.enable = true;
-    services.promtail.enable = true;
+    services.grafana-alloy.enable = true;
     services.hydra = {
       # Intentionally disabled for now
       enable = false;

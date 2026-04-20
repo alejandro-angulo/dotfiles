@@ -42,7 +42,7 @@
       newVersion = pkgs.postgresql_17;
     };
     services.loki.enable = true;
-    services.promtail.enable = true;
+    services.grafana-alloy.enable = true;
     services.teslamate = {
       enable = true;
       database = {
