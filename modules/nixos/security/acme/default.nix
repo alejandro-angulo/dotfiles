@@ -59,7 +59,7 @@ in
         # to determine the correct zone to apply changes in. Use cloudflare's
         # own DNS to make `lego` happy (will resolve names to a public IP).
         dnsResolver = "1.1.1.1:53";
-        credentialsFile = cfg.dnsCredentialsFile;
+        environmentFile = cfg.dnsCredentialsFile;
         extraDomainNames = mkIf cfg.isWildcard [ ("*." + cfg.domainName) ];
       };
     };
