@@ -24,6 +24,8 @@ in
       enableCompletion = true;
       envExtra = ''
         export PATH=~/.local/bin:$PATH
+      ''
+      + lib.optionalString config.${namespace}.programs.neovim.enable ''
         export EDITOR=nvim
       '';
       initContent = ''
@@ -34,7 +36,7 @@ in
       '';
 
       shellAliases = {
-        view = "${pkgs.neovim}/bin/nvim -R $1";
+        view = lib.mkIf config.${namespace}.programs.neovim.enable "${pkgs.neovim}/bin/nvim -R $1";
         l = "ls -la";
       };
 
