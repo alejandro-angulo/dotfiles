@@ -18,7 +18,6 @@ in
       awscli2
       direnv
       git
-      minio-client
       pre-commit
       vim
     ];

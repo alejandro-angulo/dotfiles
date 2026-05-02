@@ -46,14 +46,6 @@
     };
     services.prometheus.enable = true;
     services.grafana-alloy.enable = true;
-    services.hydra = {
-      # Intentionally disabled for now
-      enable = false;
-      acmeCertName = "kilonull.com";
-      secretKeyPath = "/var/gospelCache";
-      s3Bucket = "nix-store";
-      s3Endpoint = "minio.kilonull.com";
-    };
     services.sunshine = {
       enable = true;
       acmeCertName = "kilonull.com";

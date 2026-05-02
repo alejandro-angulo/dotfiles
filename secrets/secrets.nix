@@ -39,10 +39,6 @@ in
     machines.node
     machines.gospel
   ];
-  "hydra-aws-creds.age".publicKeys = [
-    users.me
-    machines.gospel
-  ];
   "nextcloud_admin.age".publicKeys = [
     users.me
     machines.node

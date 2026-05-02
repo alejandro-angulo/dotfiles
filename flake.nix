@@ -144,23 +144,5 @@
       # TODO: Re-enable this when I figure out how to prevent needing to build
       # dependencies for architectures other than the host machine
       # checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib;
-
-      hydraJobs =
-        let
-          systems_to_build = [
-            "carbon"
-            "framework"
-            "gospel"
-            "node"
-          ];
-        in
-        {
-          # Only have a builder for x86_64-linux atm
-          packages = inputs.self.packages.x86_64-linux;
-
-          systems = inputs.nixpkgs.lib.attrsets.genAttrs systems_to_build (
-            name: inputs.self.nixosConfigurations."${name}".config.system.build.toplevel
-          );
-        };
     };
 }

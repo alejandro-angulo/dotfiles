@@ -62,11 +62,6 @@
       acmeCertName = "kilonull.com";
     };
 
-    services.minio = {
-      enable = true;
-      acmeCertName = "kilonull.com";
-    };
-
     services.zigbee2mqtt = {
       enable = true;
       acmeCertName = "kilonull.com";
