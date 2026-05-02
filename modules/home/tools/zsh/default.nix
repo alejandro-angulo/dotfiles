@@ -10,6 +10,7 @@ let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.${namespace}.tools.zsh;
+  isNvimEnabled = config.${namespace}.programs.neovim.enable;
 in
 {
   options.${namespace}.tools.zsh = {
@@ -25,7 +26,7 @@ in
       envExtra = ''
         export PATH=~/.local/bin:$PATH
       ''
-      + lib.optionalString config.${namespace}.programs.neovim.enable ''
+      + lib.optionalString isNvimEnabled ''
         export EDITOR=nvim
       '';
       initContent = ''
@@ -36,7 +37,7 @@ in
       '';
 
       shellAliases = {
-        view = lib.mkIf config.${namespace}.programs.neovim.enable "${pkgs.neovim}/bin/nvim -R $1";
+        view = lib.mkIf isNvimEnabled "${pkgs.neovim}/bin/nvim -R $1";
         l = "ls -la";
       };
 
