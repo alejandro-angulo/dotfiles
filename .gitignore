@@ -11,5 +11,7 @@ result
 # devenv artifacts
 .direnv
 .devenv
+# pre-commit hooks are managed by devenv (this is just a symlink)
+.pre-commit-config.yaml
 
 tmp
