@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  format,
   ...
 }:
 let
@@ -9,7 +8,6 @@ let
     mkIf
     mkEnableOption
     mkOption
-    mkDefault
     types
     ;
 
@@ -38,7 +36,6 @@ in
           enable = true;
           settings = {
             PasswordAuthentication = false;
-            PermitRootLogin = mkDefault (if format == "install-iso" then "yes" else "no");
           };
         };
 
