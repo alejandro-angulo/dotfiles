@@ -20,7 +20,7 @@ in
     enable = true;
     monitor = [
       internal_display_settings
-      "desc:Dell Inc. DELL U4025QW BH2F734,5120x2160@120,auto,2"
+      "desc:Dell Inc. DELL U4025QW BH2F734,5120x2160@120,auto,1.6"
       ",preferred,auto,1"
     ];
   };
