@@ -17,6 +17,7 @@ in
   config = mkIf cfg.enable {
     programs.firefox = {
       enable = true;
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
     };
 
     xdg.mimeApps.defaultApplications = {
