@@ -78,30 +78,6 @@ in
 {
   den.schema.user.classes = lib.mkDefault [ "homeManager" ];
 
-  den.base.conf =
-    { lib, ... }:
-    {
-      options.aa = {
-        namespace = lib.mkOption {
-          type = lib.types.str;
-          default = namespace;
-          description = "Lower-level module option namespace used by this repository.";
-        };
-
-        userName = lib.mkOption {
-          type = lib.types.str;
-          default = username;
-          description = "Default primary user name used by this repository.";
-        };
-
-        homeDirectory = lib.mkOption {
-          type = lib.types.str;
-          default = homeDirectory;
-          description = "Default primary user home directory used by this repository.";
-        };
-      };
-    };
-
   den.default = {
     includes = [
       den.provides.define-user
