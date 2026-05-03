@@ -8,6 +8,10 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
+    den.url = "github:vic/den";
+
+    import-tree.url = "github:vic/import-tree";
+
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -180,14 +184,28 @@
         };
 
       helpers = import ./lib/helpers/default.nix { inherit lib; };
+
+      denConfig =
+        (lib.evalModules {
+          modules = [
+            (inputs.import-tree ./den)
+            inputs.den.flakeOutputs.flake
+          ];
+          specialArgs = { inherit inputs; };
+        }).config;
+
+      inherit (denConfig.den.hosts.x86_64-linux) igloo;
+      inherit (denConfig.den.hosts.x86_64-linux) iceberg;
     in
     flake-parts.lib.mkFlake { inherit inputs; } (
       { config, ... }:
       {
-        systems = [
-          "x86_64-linux"
-          "aarch64-linux"
-        ];
+        systems =
+          assert denConfig.den.aspects ? phase1-smoke;
+          [
+            "x86_64-linux"
+            "aarch64-linux"
+          ];
 
         perSystem =
           { system, pkgs, ... }:
@@ -236,6 +254,12 @@
           homeModules = localHomeModules;
 
           nixosConfigurations = {
+            igloo = lib.nixosSystem {
+              modules = [ igloo.mainModule ];
+            };
+            iceberg = lib.nixosSystem {
+              modules = [ iceberg.mainModule ];
+            };
             carbon = mkNixosConfiguration {
               system = "x86_64-linux";
               hostPath = ./systems/x86_64-linux/carbon;
