@@ -27,6 +27,7 @@ in
       tui = {
         theme = "catppuccin";
         keybinds = {
+          leader = "`";
           app_exit = "ctrl+d,<leader>q";
           session_interrupt = "ctrl+c";
         };
