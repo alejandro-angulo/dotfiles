@@ -90,12 +90,16 @@ in
       _module.args = specialArgs;
     };
 
-    homeManager = {
-      imports = commonHomeModules;
-      home.username = lib.mkDefault username;
-      home.homeDirectory = lib.mkDefault homeDirectory;
-      _module.args = specialArgs;
-    };
+    homeManager =
+      { pkgs, ... }:
+      {
+        imports = commonHomeModules;
+        home.username = lib.mkDefault username;
+        home.homeDirectory = lib.mkDefault homeDirectory;
+        _module.args = specialArgs // {
+          system = pkgs.stdenv.hostPlatform.system;
+        };
+      };
   };
 
   den.ctx.hm-host.nixos.home-manager = {

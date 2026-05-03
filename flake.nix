@@ -300,10 +300,7 @@
               system = "x86_64-linux";
               homePath = ./homes/x86_64-linux + "/alejandro@gospel";
             };
-            "alejandro@minimal" = mkHomeConfiguration {
-              system = "x86_64-linux";
-              homePath = ./homes/x86_64-linux + "/alejandro@minimal";
-            };
+            "alejandro@minimal" = denConfig.flake.homeConfigurations."alejandro@minimal";
             "alejandro@node" = mkHomeConfiguration {
               system = "x86_64-linux";
               homePath = ./homes/x86_64-linux + "/alejandro@node";
