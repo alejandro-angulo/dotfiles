@@ -193,9 +193,6 @@
           ];
           specialArgs = { inherit inputs; };
         }).config;
-
-      inherit (denConfig.den.hosts.x86_64-linux) igloo;
-      inherit (denConfig.den.hosts.x86_64-linux) iceberg;
     in
     flake-parts.lib.mkFlake { inherit inputs; } (
       { config, ... }:
@@ -254,12 +251,6 @@
           homeModules = localHomeModules;
 
           nixosConfigurations = {
-            igloo = lib.nixosSystem {
-              modules = [ igloo.mainModule ];
-            };
-            iceberg = lib.nixosSystem {
-              modules = [ iceberg.mainModule ];
-            };
             carbon = mkNixosConfiguration {
               system = "x86_64-linux";
               hostPath = ./systems/x86_64-linux/carbon;
