@@ -286,15 +286,8 @@
               system = "x86_64-linux";
               homePath = ./homes/x86_64-linux + "/alejandro@carbon";
             };
-            # "alejandro@framework" = mkHomeConfiguration {
-            #   system = "x86_64-linux";
-            #   homePath = ./homes/x86_64-linux + "/alejandro@framework";
-            # };
             "alejandro@framework" = denConfig.flake.homeConfigurations."alejandro@framework";
-            "alejandro@git" = mkHomeConfiguration {
-              system = "x86_64-linux";
-              homePath = ./homes/x86_64-linux + "/alejandro@git";
-            };
+            "alejandro@git" = denConfig.flake.homeConfigurations."alejandro@git";
             "alejandro@gospel" = mkHomeConfiguration {
               system = "x86_64-linux";
               homePath = ./homes/x86_64-linux + "/alejandro@gospel";
