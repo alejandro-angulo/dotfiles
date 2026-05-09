@@ -17,5 +17,18 @@ in
       );
 
     users.alejandro = { };
+
+    # Deploy metadata for deploy-rs
+    deploy = {
+      enable = true;
+      hostname = "gospel";
+      user = "root";
+      sshUser = "alejandro";
+      sshOpts = [ "-A" ];
+      remoteBuild = false;
+    };
+
+    # Domain extraction metadata
+    extractDomains = true;
   };
 }

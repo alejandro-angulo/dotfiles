@@ -17,5 +17,15 @@ in
       );
 
     users.alejandro = { };
+
+    # Deploy metadata for deploy-rs
+    deploy = {
+      enable = true;
+      hostname = "git.alejandr0angul0.dev";
+      user = "root";
+      sshUser = "alejandro";
+      sshOpts = [ "-A" ];
+      remoteBuild = false;
+    };
   };
 }

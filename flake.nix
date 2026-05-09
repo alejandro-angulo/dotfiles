@@ -246,70 +246,9 @@
             "alejandro@pi4" = denConfig.flake.homeConfigurations."alejandro@pi4";
           };
 
-          deploy.nodes = {
-            node = {
-              hostname = "node";
-              profiles.system = {
-                user = "root";
-                sshUser = "alejandro";
-                path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos config.flake.nixosConfigurations.node;
-                sshOpts = [ "-A" ];
-              };
-            };
-
-            gospel = {
-              hostname = "gospel";
-              profiles.system = {
-                user = "root";
-                sshUser = "alejandro";
-                path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos config.flake.nixosConfigurations.gospel;
-                sshOpts = [ "-A" ];
-              };
-            };
-
-            git = {
-              hostname = "git.alejandr0angul0.dev";
-              profiles.system = {
-                user = "root";
-                sshUser = "alejandro";
-                path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos config.flake.nixosConfigurations.git;
-                sshOpts = [ "-A" ];
-              };
-            };
-
-            pi4 =
-              let
-                system = "aarch64-linux";
-                pkgs = import inputs.nixpkgs { inherit system; };
-                deployPkgs = import inputs.nixpkgs {
-                  inherit system;
-                  overlays = [
-                    inputs.deploy-rs.overlays.default
-                    (self: super: {
-                      deploy-rs = {
-                        inherit (pkgs) deploy-rs;
-                        lib = inputs.deploy-rs.lib;
-                      };
-                    })
-                  ];
-                };
-              in
-              {
-                hostname = "pi4";
-                profiles.system = {
-                  user = "root";
-                  sshUser = "alejandro";
-                  path = deployPkgs.deploy-rs.lib.aarch64-linux.activate.nixos config.flake.nixosConfigurations.pi4;
-                  remoteBuild = true;
-                };
-              };
-          };
-
-          domains = helpers.getDomainsPerHost [
-            "gospel"
-            "node"
-            "pi4"
-          ] config.flake.nixosConfigurations;
+          # Deploy nodes and domains are now produced by Den (phase 8)
+          deploy.nodes = denConfig.flake.deploy.nodes;
+          domains = denConfig.flake.domains;
         };
       }
     );
