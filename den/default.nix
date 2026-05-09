@@ -2,6 +2,7 @@
   imports = [
     ./den.nix
     ./defaults.nix
+    ./outputs
     ./aspects/direnv.nix
     ./aspects/eza.nix
     ./aspects/fzf.nix

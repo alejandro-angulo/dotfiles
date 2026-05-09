@@ -212,15 +212,6 @@
               config = nixpkgsConfig;
               overlays = [ defaultOverlay ];
             };
-
-            packages = packageDefinitions pkgs;
-
-            devShells.default = inputs.devenv.lib.mkShell {
-              inherit inputs pkgs;
-              modules = [
-                ./devenv.nix
-              ];
-            };
           };
 
         flake = {
@@ -228,79 +219,31 @@
 
           inherit denConfig;
 
-          overlays = {
-            default = defaultOverlay;
-            neovim = neovimOverlay;
-            signal-desktop = signalDesktopOverlay;
-            "package/catppuccin-swaync" = final: prev: {
-              ${namespace} = (prev.${namespace} or { }) // {
-                catppuccin-swaync = (packageDefinitions final).catppuccin-swaync;
-              };
-            };
-            "package/catppuccin-waybar" = final: prev: {
-              ${namespace} = (prev.${namespace} or { }) // {
-                catppuccin-waybar = (packageDefinitions final).catppuccin-waybar;
-              };
-            };
-            "package/teslamate-grafana-dashboards" = final: prev: {
-              ${namespace} = (prev.${namespace} or { }) // {
-                teslamate-grafana-dashboards = (packageDefinitions final).teslamate-grafana-dashboards;
-              };
-            };
-          };
+          # Packages, overlays, and devShells are now produced by Den (phase 7)
+          packages = denConfig.flake.packages;
+          overlays = denConfig.flake.overlays;
+          devShells = denConfig.flake.devShells;
 
           nixosModules = localNixosModules;
           homeModules = localHomeModules;
 
           nixosConfigurations = {
-            carbon = mkNixosConfiguration {
-              system = "x86_64-linux";
-              hostPath = ./systems/x86_64-linux/carbon;
-              homePath = ./homes/x86_64-linux + "/alejandro@carbon";
-            };
-            framework = mkNixosConfiguration {
-              system = "x86_64-linux";
-              hostPath = ./systems/x86_64-linux/framework;
-              homePath = ./homes/x86_64-linux + "/alejandro@framework";
-            };
+            carbon = denConfig.flake.nixosConfigurations.carbon;
+            framework = denConfig.flake.nixosConfigurations.framework;
             git = denConfig.flake.nixosConfigurations.git;
-            gospel = mkNixosConfiguration {
-              system = "x86_64-linux";
-              hostPath = ./systems/x86_64-linux/gospel;
-              homePath = ./homes/x86_64-linux + "/alejandro@gospel";
-            };
-            node = mkNixosConfiguration {
-              system = "x86_64-linux";
-              hostPath = ./systems/x86_64-linux/node;
-              homePath = ./homes/x86_64-linux + "/alejandro@node";
-            };
-            pi4 = mkNixosConfiguration {
-              system = "aarch64-linux";
-              hostPath = ./systems/aarch64-linux/pi4;
-              homePath = ./homes/aarch64-linux + "/alejandro@pi4";
-            };
+            gospel = denConfig.flake.nixosConfigurations.gospel;
+            node = denConfig.flake.nixosConfigurations.node;
+            pi4 = denConfig.flake.nixosConfigurations.pi4;
           };
 
           homeConfigurations = {
-            "alejandro@carbon" = mkHomeConfiguration {
-              system = "x86_64-linux";
-              homePath = ./homes/x86_64-linux + "/alejandro@carbon";
-            };
+            "alejandro@carbon" = denConfig.flake.homeConfigurations."alejandro@carbon";
             "alejandro@framework" = denConfig.flake.homeConfigurations."alejandro@framework";
             "alejandro@git" = denConfig.flake.homeConfigurations."alejandro@git";
-            "alejandro@gospel" = mkHomeConfiguration {
-              system = "x86_64-linux";
-              homePath = ./homes/x86_64-linux + "/alejandro@gospel";
-            };
+            "alejandro@gospel" = denConfig.flake.homeConfigurations."alejandro@gospel";
             "alejandro@minimal" = denConfig.flake.homeConfigurations."alejandro@minimal";
-            "alejandro@node" = mkHomeConfiguration {
-              system = "x86_64-linux";
-              homePath = ./homes/x86_64-linux + "/alejandro@node";
-            };
-            "alejandro@pi4" = mkHomeConfiguration {
-              system = "aarch64-linux";
-              homePath = ./homes/aarch64-linux + "/alejandro@pi4";
-            };
+            "alejandro@node" = denConfig.flake.homeConfigurations."alejandro@node";
+            "alejandro@pi4" = denConfig.flake.homeConfigurations."alejandro@pi4";
           };
 
           deploy.nodes = {
