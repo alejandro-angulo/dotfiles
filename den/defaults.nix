@@ -105,7 +105,6 @@ in
   den.ctx.hm-host.nixos.home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    sharedModules = commonHomeModules;
     extraSpecialArgs = specialArgs;
   };
 

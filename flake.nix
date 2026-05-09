@@ -261,11 +261,7 @@
               hostPath = ./systems/x86_64-linux/framework;
               homePath = ./homes/x86_64-linux + "/alejandro@framework";
             };
-            git = mkNixosConfiguration {
-              system = "x86_64-linux";
-              hostPath = ./systems/x86_64-linux/git;
-              homePath = ./homes/x86_64-linux + "/alejandro@git";
-            };
+            git = denConfig.flake.nixosConfigurations.git;
             gospel = mkNixosConfiguration {
               system = "x86_64-linux";
               hostPath = ./systems/x86_64-linux/gospel;
