@@ -5,32 +5,11 @@
   ...
 }:
 let
-  namespace = "aa";
+  pkgsLib = import ./_lib/pkgs.nix { inherit inputs lib; };
+  inherit (pkgsLib) namespace nixpkgsConfig defaultOverlay;
+
   username = "alejandro";
   homeDirectory = "/home/${username}";
-
-  nixpkgsConfig = {
-    android_sdk.accept_license = true;
-    allowUnfree = true;
-  };
-
-  packageDefinitions = pkgs: {
-    catppuccin-swaync = pkgs.callPackage ../packages/catppuccin-swaync { };
-    catppuccin-waybar = pkgs.callPackage ../packages/catppuccin-waybar { };
-    teslamate-grafana-dashboards = pkgs.callPackage ../packages/teslamate-grafana-dashboards { };
-  };
-
-  packageOverlay = final: prev: {
-    ${namespace} = (prev.${namespace} or { }) // packageDefinitions final;
-  };
-
-  neovimOverlay = import ../overlays/neovim { inherit (inputs) nixvim; };
-  signalDesktopOverlay = import ../overlays/signal-desktop { };
-  defaultOverlay = lib.composeManyExtensions [
-    packageOverlay
-    neovimOverlay
-    signalDesktopOverlay
-  ];
 
   collectDefaultModules =
     root:
@@ -88,18 +67,16 @@ in
       nixpkgs.config = nixpkgsConfig;
       nixpkgs.overlays = [ defaultOverlay ];
       _module.args = specialArgs;
+      system.stateVersion = lib.mkDefault "24.05";
     };
 
-    homeManager =
-      { pkgs, ... }:
-      {
-        imports = commonHomeModules;
-        home.username = lib.mkDefault username;
-        home.homeDirectory = lib.mkDefault homeDirectory;
-        _module.args = specialArgs // {
-          system = pkgs.stdenv.hostPlatform.system;
-        };
-      };
+    homeManager = {
+      imports = commonHomeModules;
+      home.username = lib.mkDefault username;
+      home.homeDirectory = lib.mkDefault homeDirectory;
+      home.stateVersion = lib.mkDefault "24.05";
+      _module.args = specialArgs;
+    };
   };
 
   den.ctx.hm-host.nixos.home-manager = {

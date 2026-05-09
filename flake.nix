@@ -226,6 +226,8 @@
         flake = {
           lib = lib // helpers;
 
+          inherit denConfig;
+
           overlays = {
             default = defaultOverlay;
             neovim = neovimOverlay;
@@ -284,10 +286,11 @@
               system = "x86_64-linux";
               homePath = ./homes/x86_64-linux + "/alejandro@carbon";
             };
-            "alejandro@framework" = mkHomeConfiguration {
-              system = "x86_64-linux";
-              homePath = ./homes/x86_64-linux + "/alejandro@framework";
-            };
+            # "alejandro@framework" = mkHomeConfiguration {
+            #   system = "x86_64-linux";
+            #   homePath = ./homes/x86_64-linux + "/alejandro@framework";
+            # };
+            "alejandro@framework" = denConfig.flake.homeConfigurations."alejandro@framework";
             "alejandro@git" = mkHomeConfiguration {
               system = "x86_64-linux";
               homePath = ./homes/x86_64-linux + "/alejandro@git";

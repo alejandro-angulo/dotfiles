@@ -1,0 +1,22 @@
+{
+  imports = [
+    ./den.nix
+    ./defaults.nix
+    ./aspects/direnv.nix
+    ./aspects/eza.nix
+    ./aspects/fzf.nix
+    ./aspects/openssh.nix
+    ./aspects/zoxide.nix
+    ./aspects/tailscale.nix
+    ./aspects/fonts.nix
+    ./aspects/minimal-home.nix
+    ./aspects/framework-home.nix
+    ./aspects/framework.nix
+    ./aspects/phase1-smoke.nix
+    ./homes/minimal.nix
+    ./homes/framework.nix
+    ./hosts/git.nix
+    ./hosts/framework.nix
+    ./aspects/git.nix
+  ];
+}
