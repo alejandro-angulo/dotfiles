@@ -13,7 +13,6 @@
     };
 
     tools = {
-      direnv.enable = true;
       eza.enable = true;
       git.enable = true;
       zsh.enable = true;

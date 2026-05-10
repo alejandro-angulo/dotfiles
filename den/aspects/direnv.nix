@@ -1,5 +1,8 @@
 {
   den.aspects.direnv.homeManager = {
-    imports = [ ../../modules/home/tools/direnv ];
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 }
