@@ -55,6 +55,9 @@ let
     ]);
 in
 {
+  # enable hm for all users
+  den.schema.user.classes = lib.mkDefault [ "homeManager" ];
+
   den.default = {
     includes = [
       den.provides.define-user
