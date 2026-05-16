@@ -73,6 +73,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "$DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
 
       # Need to setup system-wide flake support. Just specifying it on the
       # command line doesn't work when `deploy-rs` runs
