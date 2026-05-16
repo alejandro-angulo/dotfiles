@@ -67,6 +67,13 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      # Need to setup system-wide flake support. Just specifying it on the
+      # command line doesn't work when `deploy-rs` runs
+      - name: Setup flakes support
+        run: |
+          mkdir -p /etc/nix
+          echo 'experimental-features = nix-command flakes' > /etc/nix/nix.conf
+
       - name: Setup deploy key
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
@@ -76,13 +83,6 @@ jobs:
           base64 -d <<< "$DEPLOY_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           echo "$(nix run nixpkgs#jq -- -r '."${{ matrix.system }}"' <<< "$HOSTKEYS")" >> ~/.ssh/known_hosts
-
-      # Need to setup system-wide flake support. Just specifying it on the
-      # command line doesn't work when `deploy-rs` runs
-      - name: Setup flakes support
-        run: |
-          mkdir -p /etc/nix
-          echo 'experimental-features = nix-command flakes' > /etc/nix/nix.conf
 
       - name: Deploy ${{ matrix.system }}
         run: |
