@@ -83,4 +83,4 @@ jobs:
 
       - name: Deploy ${{ matrix.system }}
         run: |
-          nix run nixpkgs#deploy-rs -- .#${{ matrix.system }}
+          nix run nixpkgs#deploy-rs -- -s .#${{ matrix.system }}
