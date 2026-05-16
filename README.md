@@ -10,11 +10,3 @@ longer managing dotfiles with a tool like stow.
 
 To apply a system configuration, run `nixos-rebuild switch`. See `nixos-rebuild
 --help` for more information.
-
-## Inspiration
-
-Heavily inspired by Jake Hamilton's configuration:
-https://github.com/jakehamilton/config
-
-Check out the companion flake tour video as well:
-https://www.youtube.com/watch?v=ARjAsEJ9WVY
