@@ -13,6 +13,7 @@ let
 
   cfg = config.aa.services.openssh;
   default-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmPdQcM0KCQ3YunF1gwN+B+i1Q8KrIfiUvNtgFQjTy2";
+  gospel-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBPA7bvtNIQqEvHYLrlcJdMQbYXdgpTPaDnHP1SZf6tz";
 in
 {
   options.aa.services.openssh = {
@@ -27,6 +28,7 @@ in
       default = true;
       description = "Enable passwordless sudo (use ssh key)";
     };
+    allowCD = lib.mkEnableOption "continous deployment";
   };
 
   config = mkIf cfg.enable (
@@ -40,7 +42,7 @@ in
         };
 
         aa.user.extraOptions = {
-          openssh.authorizedKeys.keys = cfg.authorizedKeys;
+          openssh.authorizedKeys.keys = cfg.authorizedKeys ++ lib.optional cfg.allowCD gospel-key;
         };
       }
       (lib.mkIf cfg.passwordlessSudo {

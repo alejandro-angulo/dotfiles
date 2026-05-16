@@ -18,7 +18,10 @@ in
       anubis.enable = true;
     };
 
-    services.openssh.enable = true;
+    services.openssh = {
+      enable = true;
+      allowCD = true;
+    };
   };
 
   nix.settings.auto-optimise-store = true;
