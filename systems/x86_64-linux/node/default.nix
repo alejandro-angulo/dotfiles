@@ -28,7 +28,10 @@
       configureClientRouting = true;
       configureServerRouting = true;
     };
-    services.openssh.enable = true;
+    services.openssh = {
+      enable = true;
+      allowCD = true;
+    };
     services.nextcloud = {
       enable = true;
       acmeCertName = "kilonull.com";
