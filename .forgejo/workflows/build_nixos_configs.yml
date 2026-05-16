@@ -74,6 +74,13 @@ jobs:
           mkdir -p ~/.ssh
           echo "$DEPLOY_KEY" > ~/.ssh/id_ed25519
 
+      # Need to setup system-wide flake support. Just specifying it on the
+      # command line doesn't work when `deploy-rs` runs
+      - name: Setup flakes support
+        run: |
+          mkdir -p /etc/nix
+          echo 'experimental-features = nix-command flakes' > /etc/nix/nix.conf
+
       - name: Deploy ${{ matrix.system }}
         run: |
-          nix --extra-experimental-features 'nix-command flakes' run nixpkgs#deploy-rs -- .#${{ matrix.system }}
+          nix run nixpkgs#deploy-rs -- .#${{ matrix.system }}
