@@ -301,7 +301,7 @@
 
           deploy.nodes = {
             node = {
-              hostname = "node";
+              hostname = "192.168.113.13";
               profiles.system = {
                 user = "root";
                 sshUser = "alejandro";
@@ -311,7 +311,7 @@
             };
 
             gospel = {
-              hostname = "gospel";
+              hostname = "192.168.113.69";
               profiles.system = {
                 user = "root";
                 sshUser = "alejandro";
@@ -348,7 +348,7 @@
                 };
               in
               {
-                hostname = "pi4";
+                hostname = "192.168.113.42";
                 profiles.system = {
                   user = "root";
                   sshUser = "alejandro";
