@@ -55,6 +55,7 @@ jobs:
       matrix:
         system:
           - "git"
+          - "node"
     steps:
       - name: Check build status
         run: |
