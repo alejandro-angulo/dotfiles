@@ -83,4 +83,4 @@ jobs:
 
       - name: Deploy ${{ matrix.system }}
         run: |
-          nix run nixpkgs#deploy-rs -- -s .#${{ matrix.system }}
+          nix run nixpkgs#deploy-rs -- -s --ssh-opts "-i ~/.ssh/id_ed25519" .#${{ matrix.system }}
