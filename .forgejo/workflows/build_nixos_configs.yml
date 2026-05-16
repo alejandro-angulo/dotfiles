@@ -76,5 +76,4 @@ jobs:
 
       - name: Deploy ${{ matrix.system }}
         run: |
-          nix --extra-experimental-features 'nix-command flakes' develop --impure --command \
-            deploy .#${{ matrix.system }}
+          nix --extra-experimental-features 'nix-command flakes' run nixpks#deploy-rs -- .#${{ matrix.system }}
