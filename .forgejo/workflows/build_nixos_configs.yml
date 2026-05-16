@@ -75,7 +75,7 @@ jobs:
           mkdir -p ~/.ssh
           base64 -d <<< "$DEPLOY_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          echo "${{ matrix.system }}.alejandr0angul0.dev $(jq -r '."${{ matrix.system }}"' <<< "$HOSTKEYS")" >> ~/.ssh/known_hosts
+          echo "$(nix run nixpkgs#jq -- -r '."${{ matrix.system }}"' <<< "$HOSTKEYS")" >> ~/.ssh/known_hosts
 
       # Need to setup system-wide flake support. Just specifying it on the
       # command line doesn't work when `deploy-rs` runs
