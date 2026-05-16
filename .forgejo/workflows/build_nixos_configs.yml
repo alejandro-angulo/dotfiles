@@ -83,7 +83,10 @@ jobs:
           mkdir -p ~/.ssh
           base64 -d <<< "$DEPLOY_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          echo "$(nix run nixpkgs#jq -- -r '."${{ matrix.system }}"' <<< "$HOSTKEYS")" >> ~/.ssh/known_hosts
+          HOSTKEY="$(nix run nixpkgs#jq -- -r '."${{ matrix.system }}"' <<< "$HOSTKEYS")"
+          echo "Adding key to known hosts:"
+          echo "  $HOSTKEY"
+          echo "$HOSTKEY" >> ~/.ssh/known_hosts
 
       - name: Deploy ${{ matrix.system }}
         run: |
