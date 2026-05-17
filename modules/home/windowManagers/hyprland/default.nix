@@ -26,7 +26,7 @@ let
 
   layout_toggle_script = pkgs.writeShellScriptBin "layout-toggle" ''
     current_layout="$(${pkgs.hyprland}/bin/hyprctl getoption general:layout -j | ${pkgs.jq}/bin/jq -r .str)"
-    case "$current_layout" in 
+    case "$current_layout" in
         master) ${pkgs.hyprland}/bin/hyprctl -q keyword general:layout dwindle ;;
         dwindle) ${pkgs.hyprland}/bin/hyprctl -q keyword general:layout master ;;
     esac
@@ -103,6 +103,7 @@ in
     catppuccin.hyprland.enable = true;
     wayland.windowManager.hyprland = {
       enable = true;
+      configType = "lua";
       systemd.variables = [ "--all" ];
 
       settings = {
