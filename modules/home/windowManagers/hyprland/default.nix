@@ -103,7 +103,8 @@ in
     catppuccin.hyprland.enable = true;
     wayland.windowManager.hyprland = {
       enable = true;
-      configType = "lua";
+      # TODO: Need to update to using lua
+      configType = "hyprlang";
       systemd.variables = [ "--all" ];
 
       settings = {
