@@ -1,6 +1,8 @@
 { lib, ... }:
 {
   aa = {
+    installDefaults = false;
+
     apps = {
       bat.enable = true;
       btop.enable = true;
