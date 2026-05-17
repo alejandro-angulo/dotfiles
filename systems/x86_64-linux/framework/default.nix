@@ -1,14 +1,10 @@
 {
   inputs,
   pkgs,
-  lib,
   ...
 }:
 {
   imports = [
-    # Include the results of the hardware scan.
-    # ./hardware-configuration-zfs.nix
-    # ./zfs.nix
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
@@ -31,7 +27,6 @@
     hardware.audio.enable = true;
     hardware.bluetooth.enable = true;
 
-    # system.zfs.enable = true;
     apps.yubikey.enable = true;
 
     user.extraGroups = [
