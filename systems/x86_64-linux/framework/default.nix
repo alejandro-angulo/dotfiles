@@ -32,6 +32,7 @@
     user.extraGroups = [
       "dialout"
       "video"
+      "vboxusers"
     ];
   };
 
@@ -49,6 +50,9 @@
   };
 
   virtualisation = {
+    virtualbox.host.enable = true;
+    virtualbox.host.enableExtensionPack = true;
+
     docker = {
       enable = true;
       storageDriver = "overlay2";
