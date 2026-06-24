@@ -153,7 +153,6 @@ in
 
         # Dwindle layout
         dwindle = {
-          pseudotile = true;
           preserve_split = true;
         };
 
@@ -224,11 +223,8 @@ in
 
           # Layout
           "$mod, g, exec, ${layout_toggle_script}/bin/layout-toggle"
-          "$mod, v, togglesplit"
           "$mod, f, fullscreen"
           "$mod SHIFT, f, togglefloating"
-          # "$mod, space, focusmode, toggle"
-          # "$mod, a, focusparent"
 
           # Screenshots
           "$mod, period, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" ~/screenshots/\"$(date -u --iso-8601=seconds)\".png && ${pkgs.libnotify}/bin/notify-send \"Screenshot saved\""
