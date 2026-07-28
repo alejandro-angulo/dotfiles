@@ -70,8 +70,8 @@ in
               substituters =
                 if cfg.useSelfhostedCache then
                   [
-                    # TESTING
-                    "https://attic.kilonull.com/nixosConfigs"
+                    # TODO: Set priority on attic itself?
+                    "https://attic.kilonull.com/nixosConfigs?priority=30"
                   ]
                 else
                   [ ];
