@@ -19,17 +19,44 @@ in
   aa.windowManagers.hyprland = {
     enable = true;
     monitor = [
-      internal_display_settings
-      "desc:Dell Inc. DELL U4025QW BH2F734,5120x2160@120,auto,1.6"
-      ",preferred,auto,1"
+      {
+        output = "eDP-1";
+        mode = "preferred";
+        position = "auto";
+        scale = 2;
+      }
+      {
+        output = "desc:Dell Inc. DELL U4025QW BH2F734";
+        mode = "5120x2160@120";
+        position = "auto";
+        scale = 1.6;
+      }
+      {
+        output = "";
+        mode = "preferred";
+        position = "auto";
+        scale = 1;
+      }
     ];
   };
   aa.services.hypridle.suspendInhibitWhenPluggedIn = true;
   aa.windowManagers.sway.enable = lib.mkForce false;
 
-  wayland.windowManager.hyprland.settings.bindl = [
-    ", switch:off:Lid Switch, exec, ${clamshell_script}/bin/clamshell open"
-    ", switch:on:Lid Switch, exec, ${clamshell_script}/bin/clamshell close"
+  wayland.windowManager.hyprland.settings.bind = [
+    {
+      _args = [
+        "switch:off:Lid Switch"
+        (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("${clamshell_script}/bin/clamshell open")'')
+        { locked = true; }
+      ];
+    }
+    {
+      _args = [
+        "switch:on:Lid Switch"
+        (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("${clamshell_script}/bin/clamshell close")'')
+        { locked = true; }
+      ];
+    }
   ];
 
   aa.programs.spicetify.enable = true;

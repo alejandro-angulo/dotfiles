@@ -52,12 +52,26 @@ in
     };
 
     monitor = mkOption {
-      type = types.listOf types.str;
+      type = types.listOf (types.attrsOf types.anything);
       default = [
-        ",preferred,auto,1"
+        {
+          output = "";
+          mode = "preferred";
+          position = "auto";
+          scale = 1;
+        }
+      ];
+      example = [
+        {
+          output = "DP-1";
+          mode = "1920x1080@144";
+          position = "0x0";
+          scale = 1;
+        }
       ];
       description = ''
-        Monitor configuration for Hyprland
+        Monitor configuration for Hyprland. Each entry is rendered as an
+        `hl.monitor(...)` call, see `HL.MonitorSpec` in Hyprland's Lua API.
       '';
     };
   };
@@ -100,162 +114,276 @@ in
 
     xdg.dataFile.${cfg.wallpaperPath}.source = ./wallpaper.png;
 
-    catppuccin.hyprland.enable = true;
+    # The catppuccin hyprland module requires the global `catppuccin.enable`.
+    # `autoEnable` is set to keep every other port opt-in (otherwise setting
+    # the global enable would default-enable all catppuccin ports).
+    catppuccin.enable = true;
+    # catppuccin.autoEnable = false;
+    # catppuccin.hyprland.enable = true;
     wayland.windowManager.hyprland = {
       enable = true;
-      # TODO: Need to update to using lua
-      configType = "hyprlang";
+      configType = "lua";
       systemd.variables = [ "--all" ];
 
-      settings = {
-        "$mod" = modifier;
+      settings =
+        let
+          inherit (lib.generators) mkLuaInline;
 
-        # Monitor configuration
-        monitor = cfg.monitor;
+          # hl.bind(mod .. " + <key>", <dispatcher>)
+          mkModBind = key: dispatcher: {
+            _args = [
+              (mkLuaInline ''mod .. " + ${key}"'')
+              (mkLuaInline dispatcher)
+            ];
+          };
 
-        # General settings
-        general = {
-          gaps_in = 5;
-          gaps_out = 20;
-          border_size = 2;
-          "col.active_border" = "$lavender";
-          "col.inactive_border" = "$overlay0";
-          layout = "dwindle";
-          allow_tearing = false;
-        };
+          # hl.bind("<key>", <dispatcher>, { locked = true })
+          mkLockedBind = key: dispatcher: {
+            _args = [
+              key
+              (mkLuaInline dispatcher)
+              { locked = true; }
+            ];
+          };
+        in
+        {
+          # `local mod = "SUPER"`, referenced by the bindings below
+          mod._var = modifier;
 
-        # Prevent giving focus to a window just by hovering over it.
-        input.follow_mouse = false;
+          # Monitor configuration
+          monitor = cfg.monitor;
 
-        # Decoration
-        decoration = {
-          rounding = 10;
-          blur = {
-            enabled = true;
-            size = 3;
-            passes = 1;
+          # General settings (rendered as a single `hl.config(...)` call)
+          config = {
+            general = {
+              gaps_in = 5;
+              gaps_out = 20;
+              border_size = 2;
+              col = {
+                active_border = mkLuaInline "colors.lavender";
+                inactive_border = mkLuaInline "colors.overlay0";
+              };
+              layout = "dwindle";
+              allow_tearing = false;
+            };
+
+            # Prevent giving focus to a window just by hovering over it.
+            input.follow_mouse = false;
+
+            # Decoration
+            decoration = {
+              rounding = 10;
+              blur = {
+                enabled = true;
+                size = 3;
+                passes = 1;
+              };
+            };
+
+            # Animations
+            animations.enabled = true;
+
+            # Dwindle layout
+            dwindle.preserve_split = true;
+
+            # Master layout
+            master.orientation = "center";
+          };
+
+          # Animation curve, rendered before `hl.animation(...)` calls
+          # ("curve" is in the default `importantPrefixes`)
+          curve = {
+            _args = [
+              "myBezier"
+              {
+                type = "bezier";
+                points = [
+                  [
+                    0.05
+                    0.9
+                  ]
+                  [
+                    0.1
+                    1.05
+                  ]
+                ];
+              }
+            ];
+          };
+
+          animation = [
+            {
+              leaf = "windows";
+              enabled = true;
+              speed = 7;
+              bezier = "myBezier";
+            }
+            {
+              leaf = "windowsOut";
+              enabled = true;
+              speed = 7;
+              bezier = "default";
+              style = "popin 80%";
+            }
+            {
+              leaf = "border";
+              enabled = true;
+              speed = 10;
+              bezier = "default";
+            }
+            {
+              leaf = "borderangle";
+              enabled = true;
+              speed = 8;
+              bezier = "default";
+            }
+            {
+              leaf = "fade";
+              enabled = true;
+              speed = 7;
+              bezier = "default";
+            }
+            {
+              leaf = "workspaces";
+              enabled = true;
+              speed = 6;
+              bezier = "default";
+            }
+          ];
+
+          # Window rules
+          window_rule = [
+            {
+              suppress_event = "maximize";
+              match.class = ".*";
+            }
+            {
+              idle_inhibit = "fullscreen";
+              match.class = ".*";
+            }
+          ];
+
+          # Startup
+          on = {
+            _args = [
+              "hyprland.start"
+              (mkLuaInline ''
+                function()
+                  hl.exec_cmd("${pkgs.swaynotificationcenter}/bin/swaync")
+                  hl.exec_cmd("${pkgs.waybar}/bin/waybar")
+                  hl.exec_cmd("${pkgs.hyprpaper}/bin/hyprpaper")
+                end
+              '')
+            ];
+          };
+
+          # Keybindings
+          bind = [
+            # Applications
+            (mkModBind "Return" ''hl.dsp.exec_cmd("${terminal}")'')
+            (mkModBind "c" "hl.dsp.window.close()")
+            (mkModBind "p" ''hl.dsp.exec_cmd("${menu}")'')
+            (mkModBind "d" ''hl.dsp.exec_cmd("${emoji_picker}")'')
+            (mkModBind "z" ''hl.dsp.exec_cmd("hyprctl reload")'')
+
+            # Move workspace across monitors
+            (mkModBind "semicolon" ''hl.dsp.workspace.move({ monitor = "+1" })'')
+
+            # Focus
+            (mkModBind "${left}" ''hl.dsp.focus({ direction = "left" })'')
+            (mkModBind "${down}" ''hl.dsp.focus({ direction = "down" })'')
+            (mkModBind "${up}" ''hl.dsp.focus({ direction = "up" })'')
+            (mkModBind "${right}" ''hl.dsp.focus({ direction = "right" })'')
+
+            # Move windows
+            (mkModBind "SHIFT + ${left}" ''hl.dsp.window.move({ direction = "left" })'')
+            (mkModBind "SHIFT + ${down}" ''hl.dsp.window.move({ direction = "down" })'')
+            (mkModBind "SHIFT + ${up}" ''hl.dsp.window.move({ direction = "up" })'')
+            (mkModBind "SHIFT + ${right}" ''hl.dsp.window.move({ direction = "right" })'')
+
+            # Workspaces (qwertyuio)
+            (mkModBind "q" "hl.dsp.focus({ workspace = 1 })")
+            (mkModBind "w" "hl.dsp.focus({ workspace = 2 })")
+            (mkModBind "e" "hl.dsp.focus({ workspace = 3 })")
+            (mkModBind "r" "hl.dsp.focus({ workspace = 4 })")
+            (mkModBind "t" "hl.dsp.focus({ workspace = 5 })")
+            (mkModBind "y" "hl.dsp.focus({ workspace = 6 })")
+            (mkModBind "u" "hl.dsp.focus({ workspace = 7 })")
+            (mkModBind "i" "hl.dsp.focus({ workspace = 8 })")
+            (mkModBind "o" "hl.dsp.focus({ workspace = 9 })")
+
+            # Move to workspaces
+            (mkModBind "SHIFT + q" ''hl.dsp.window.move({ workspace = "1", follow = true })'')
+            (mkModBind "SHIFT + w" ''hl.dsp.window.move({ workspace = "2", follow = true })'')
+            (mkModBind "SHIFT + e" ''hl.dsp.window.move({ workspace = "3", follow = true })'')
+            (mkModBind "SHIFT + r" ''hl.dsp.window.move({ workspace = "4", follow = true })'')
+            (mkModBind "SHIFT + t" ''hl.dsp.window.move({ workspace = "5", follow = true })'')
+            (mkModBind "SHIFT + y" ''hl.dsp.window.move({ workspace = "6", follow = true })'')
+            (mkModBind "SHIFT + u" ''hl.dsp.window.move({ workspace = "7", follow = true })'')
+            (mkModBind "SHIFT + i" ''hl.dsp.window.move({ workspace = "8", follow = true })'')
+            (mkModBind "SHIFT + o" ''hl.dsp.window.move({ workspace = "9", follow = true })'')
+
+            # Layout
+            (mkModBind "g" ''hl.dsp.exec_cmd("${layout_toggle_script}/bin/layout-toggle")'')
+            (mkModBind "f" "hl.dsp.window.fullscreen()")
+            (mkModBind "SHIFT + f" ''hl.dsp.window.float({ action = "toggle" })'')
+
+            # Screenshots
+            (mkModBind "period" ''
+              hl.dsp.exec_cmd([[${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" ~/screenshots/"$(date -u --iso-8601=seconds)".png && ${pkgs.libnotify}/bin/notify-send "Screenshot saved"]])
+            '')
+            (mkModBind "SHIFT + period" ''
+              hl.dsp.exec_cmd([[${pkgs.grim}/bin/grim ~/screenshots/"$(date -u --iso-8601=seconds)".png && ${pkgs.libnotify}/bin/notify-send "Screenshot saved"]])
+            '')
+
+            # Notifications
+            (mkModBind "SHIFT + n" ''
+              hl.dsp.exec_cmd("${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw")
+            '')
+            (mkModBind "SHIFT + d" ''
+              hl.dsp.exec_cmd("${pkgs.swaynotificationcenter}/bin/swaync-client -d -sw")
+            '')
+
+            (mkModBind "SHIFT + x" "hl.dsp.exit()")
+            (mkModBind "x" ''hl.dsp.exec_cmd("${pkgs.hyprlock}/bin/hyprlock")'')
+
+            # Scratchpad
+            (mkModBind "SHIFT + minus" ''hl.dsp.window.move({ workspace = "special:magic" })'')
+            (mkModBind "minus" ''hl.dsp.workspace.toggle_special("magic")'')
+
+            # Media keys
+            (mkLockedBind "XF86AudioRaiseVolume" ''
+              hl.dsp.exec_cmd("${pkgs.swayosd}/bin/swayosd-client --output-volume 5")
+            '')
+            (mkLockedBind "XF86AudioLowerVolume" ''
+              hl.dsp.exec_cmd("${pkgs.swayosd}/bin/swayosd-client --output-volume -5")
+            '')
+            (mkLockedBind "XF86AudioMute" ''
+              hl.dsp.exec_cmd("${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle")
+            '')
+            (mkLockedBind "XF86AudioPrev" ''
+              hl.dsp.exec_cmd("${pkgs.swayosd}/bin/swayosd-client --playerctl previous")
+            '')
+            (mkLockedBind "XF86AudioNext" ''
+              hl.dsp.exec_cmd("${pkgs.swayosd}/bin/swayosd-client --playerctl next")
+            '')
+            (mkLockedBind "XF86AudioPlay" ''
+              hl.dsp.exec_cmd("${pkgs.swayosd}/bin/swayosd-client --playerctl play-pause")
+            '')
+            (mkLockedBind "XF86MonBrightnessDown" ''
+              hl.dsp.exec_cmd("${pkgs.swayosd}/bin/swayosd-client --brightness lower")
+            '')
+            (mkLockedBind "XF86MonBrightnessUp" ''
+              hl.dsp.exec_cmd("${pkgs.swayosd}/bin/swayosd-client --brightness raise")
+            '')
+          ];
+
+          gesture = {
+            fingers = 3;
+            direction = "horizontal";
+            action = "workspace";
           };
         };
-
-        # Animations
-        animations = {
-          enabled = true;
-          bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-          animation = [
-            "windows, 1, 7, myBezier"
-            "windowsOut, 1, 7, default, popin 80%"
-            "border, 1, 10, default"
-            "borderangle, 1, 8, default"
-            "fade, 1, 7, default"
-            "workspaces, 1, 6, default"
-          ];
-        };
-
-        # Dwindle layout
-        dwindle = {
-          preserve_split = true;
-        };
-
-        # Master layout
-        master = {
-          orientation = "center";
-        };
-
-        # Window rules
-        windowrule = [
-          "suppress_event maximize, match:class .*"
-          "idle_inhibit fullscreen, match:class .*"
-        ];
-
-        # Startup
-        exec-once = [
-          "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-          "${pkgs.swaynotificationcenter}/bin/swaync"
-          "${pkgs.waybar}/bin/waybar"
-          "${pkgs.hyprpaper}/bin/hyprpaper"
-        ];
-
-        # Keybindings
-        bind = [
-          # Applications
-          "$mod, Return, exec, ${terminal}"
-          "$mod, c, killactive"
-          "$mod, p, exec, ${menu}"
-          "$mod, d, exec, ${emoji_picker}"
-          "$mod, z, exec, hyprctl reload"
-
-          # Move workspace across monitors
-          "$mod, semicolon, movecurrentworkspacetomonitor, +1"
-
-          # Focus
-          "$mod, ${left}, movefocus, l"
-          "$mod, ${down}, movefocus, d"
-          "$mod, ${up}, movefocus, u"
-          "$mod, ${right}, movefocus, r"
-
-          # Move windows
-          "$mod SHIFT, ${left}, movewindow, l"
-          "$mod SHIFT, ${down}, movewindow, d"
-          "$mod SHIFT, ${up}, movewindow, u"
-          "$mod SHIFT, ${right}, movewindow, r"
-
-          # Workspaces (qwertyuio)
-          "$mod, q, workspace, 1"
-          "$mod, w, workspace, 2"
-          "$mod, e, workspace, 3"
-          "$mod, r, workspace, 4"
-          "$mod, t, workspace, 5"
-          "$mod, y, workspace, 6"
-          "$mod, u, workspace, 7"
-          "$mod, i, workspace, 8"
-          "$mod, o, workspace, 9"
-
-          # Move to workspaces
-          "$mod SHIFT, q, movetoworkspace, 1"
-          "$mod SHIFT, w, movetoworkspace, 2"
-          "$mod SHIFT, e, movetoworkspace, 3"
-          "$mod SHIFT, r, movetoworkspace, 4"
-          "$mod SHIFT, t, movetoworkspace, 5"
-          "$mod SHIFT, y, movetoworkspace, 6"
-          "$mod SHIFT, u, movetoworkspace, 7"
-          "$mod SHIFT, i, movetoworkspace, 8"
-          "$mod SHIFT, o, movetoworkspace, 9"
-
-          # Layout
-          "$mod, g, exec, ${layout_toggle_script}/bin/layout-toggle"
-          "$mod, f, fullscreen"
-          "$mod SHIFT, f, togglefloating"
-
-          # Screenshots
-          "$mod, period, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" ~/screenshots/\"$(date -u --iso-8601=seconds)\".png && ${pkgs.libnotify}/bin/notify-send \"Screenshot saved\""
-          "$mod SHIFT, period, exec, ${pkgs.grim}/bin/grim ~/screenshots/\"$(date -u --iso-8601=seconds)\".png && ${pkgs.libnotify}/bin/notify-send \"Screenshot saved\""
-
-          # Notifications
-          "$mod SHIFT, n, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw"
-          "$mod SHIFT, d, exec, ${pkgs.swaynotificationcenter}/bin/swaync-client -d -sw"
-
-          "$mod SHIFT, x, exec, hyprctl dispatch exit"
-          "$mod, x, exec, ${pkgs.hyprlock}/bin/hyprlock"
-
-          # Scratchpad
-          "$mod SHIFT, minus, movetoworkspace, special:magic"
-          "$mod, minus, togglespecialworkspace, magic"
-        ];
-
-        # Media keys
-        bindl = [
-          ", XF86AudioRaiseVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume 5"
-          ", XF86AudioLowerVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume -5"
-          ", XF86AudioMute, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle"
-          ", XF86AudioPrev, exec, ${pkgs.swayosd}/bin/swayosd-client --playerctl previous"
-          ", XF86AudioNext, exec, ${pkgs.swayosd}/bin/swayosd-client --playerctl next"
-          ", XF86AudioPlay, exec, ${pkgs.swayosd}/bin/swayosd-client --playerctl play-pause"
-          ", XF86MonBrightnessDown, exec, ${pkgs.swayosd}/bin/swayosd-client --brightness lower"
-          ", XF86MonBrightnessUp, exec, ${pkgs.swayosd}/bin/swayosd-client --brightness raise"
-        ];
-
-        gesture = "3, horizontal, workspace";
-      };
     };
 
     # Hyprpaper configuration for wallpaper

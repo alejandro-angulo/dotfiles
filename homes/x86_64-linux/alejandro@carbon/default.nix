@@ -19,9 +19,24 @@ in
   aa.windowManagers.hyprland = {
     enable = true;
     monitor = [
-      "eDP-1,preferred,auto,1.6"
-      "desc:Dell Inc. DELL U4025QW BH2F734,preferred,auto,1.25"
-      ",preferred,auto,1"
+      {
+        output = "eDP-1";
+        mode = "preferred";
+        position = "auto";
+        scale = 1.6;
+      }
+      {
+        output = "desc:Dell Inc. DELL U4025QW BH2F734";
+        mode = "preferred";
+        position = "auto";
+        scale = 1.25;
+      }
+      {
+        output = "";
+        mode = "preferred";
+        position = "auto";
+        scale = 1;
+      }
     ];
   };
   aa.services.hypridle.suspendInhibitWhenPluggedIn = true;
@@ -29,9 +44,21 @@ in
 
   aa.programs.spicetify.enable = true;
 
-  wayland.windowManager.hyprland.settings.bindl = [
-    ", switch:off:Lid Switch, exec, ${clamshell_script}/bin/clamshell open"
-    ", switch:on:Lid Switch, exec, ${clamshell_script}/bin/clamshell close"
+  wayland.windowManager.hyprland.settings.bind = [
+    {
+      _args = [
+        "switch:off:Lid Switch"
+        (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("${clamshell_script}/bin/clamshell open")'')
+        { locked = true; }
+      ];
+    }
+    {
+      _args = [
+        "switch:on:Lid Switch"
+        (lib.generators.mkLuaInline ''hl.dsp.exec_cmd("${clamshell_script}/bin/clamshell close")'')
+        { locked = true; }
+      ];
+    }
   ];
 
   catppuccin.zathura.enable = true;

@@ -8,7 +8,14 @@
   };
   aa.windowManagers.hyprland = {
     enable = true;
-    monitor = [ "HDMI-A-1,preferred,auto,1.25" ];
+    monitor = [
+      {
+        output = "HDMI-A-1";
+        mode = "preferred";
+        position = "auto";
+        scale = 1.25;
+      }
+    ];
   };
   aa.windowManagers.sway.enable = lib.mkForce false;
   aa.services.hypridle.suspendEnable = false;
