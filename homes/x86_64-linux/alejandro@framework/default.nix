@@ -1,13 +1,12 @@
 { lib, pkgs, ... }:
 let
 
-  internal_display_settings = "eDP-1,preferred,auto,2";
   clamshell_script = pkgs.writeShellScriptBin "clamshell" ''
     if ${pkgs.hyprland}/bin/hyprctl monitors | ${pkgs.ripgrep}/bin/rg -q '\sDP-'; then
         if [[ "$1" == "open" ]]; then
-            ${pkgs.hyprland}/bin/hyprctl keyword monitor ${internal_display_settings}
+            ${pkgs.hyprland}/bin/hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = false, mode = "preferred", position = "auto", scale = 2 })'
         else
-            ${pkgs.hyprland}/bin/hyprctl keyword monitor "eDP-1,disable"
+            ${pkgs.hyprland}/bin/hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true })'
         fi
     fi
   '';
