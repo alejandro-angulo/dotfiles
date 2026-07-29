@@ -93,7 +93,7 @@ in
         general = {
           lock_cmd = "pidof hyprlock || ${cfg.lockCommand}";
           before_sleep_cmd = "loginctl lock-session";
-          after_sleep_cmd = "hyprctl dispatch dpms on";
+          after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch 'hl.dsp.dpms({action = \"on\" })'";
           ignore_dbus_inhibit = false;
           ignore_systemd_inhibit = false;
         };
@@ -119,8 +119,8 @@ in
           # Turn off display
           {
             timeout = cfg.displayTimeout;
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on && ${pkgs.brightnessctl}/bin/brightnessctl -r";
+            on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch 'hl.dsp.dpms({action = \"off\" })'";
+            on-resume = "${pkgs.hyprland}/bin/hyprctl dispatch 'hl.dsp.dpms({action = \"on\" })' && ${pkgs.brightnessctl}/bin/brightnessctl -r";
           }
           # Suspend system
           (lib.mkIf cfg.suspendEnable {
