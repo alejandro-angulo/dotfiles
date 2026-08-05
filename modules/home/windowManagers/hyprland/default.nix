@@ -111,15 +111,10 @@ in
       enable = true;
       apply = true;
     };
+    catppuccin.hyprland.enable = true;
 
     xdg.dataFile.${cfg.wallpaperPath}.source = ./wallpaper.png;
 
-    # The catppuccin hyprland module requires the global `catppuccin.enable`.
-    # `autoEnable` is set to keep every other port opt-in (otherwise setting
-    # the global enable would default-enable all catppuccin ports).
-    catppuccin.enable = true;
-    # catppuccin.autoEnable = false;
-    # catppuccin.hyprland.enable = true;
     wayland.windowManager.hyprland = {
       enable = true;
       configType = "lua";

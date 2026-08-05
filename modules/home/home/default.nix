@@ -21,6 +21,7 @@
   };
 
   config = lib.mkMerge [
+    { catppuccin.enable = true; }
     (lib.mkIf (!config.${namespace}.isHeadless) {
       ${namespace} = {
         programs.firefox.enable = true;
