@@ -67,16 +67,15 @@ in
               allowed-users = users;
 
               builders-use-substitutes = cfg.useSelfhostedCache;
-              substituters =
-                if cfg.useSelfhostedCache then
-                  [
-                    # TODO: Set priority on attic itself?
-                    "https://attic.kilonull.com/nixosConfigs?priority=30"
-                  ]
-                else
-                  [ ];
+              substituters = lib.mkIf cfg.useSelfhostedCache [
+                # Set a priority <40 so we prefer these before we try
+                # cache.nixos.org
+                "https://attic.kilonull.com/nixosConfigs?priority=30"
+                "https://attic.kilonull.com/nixvimConfigs?priority=30"
+              ];
               trusted-public-keys = mkIf cfg.useSelfhostedCache [
                 "nixosConfigs:mjWq+JcnAqwT20OZSsrh9od6LTNn8U3cYdaXhqhDqP0="
+                "nixvimConfigs:SD1B4lBzzlkEnpLYD12lXqS8VrvFpQ2JeXsMD3xJr8A="
               ];
             };
 
