@@ -40,7 +40,7 @@ in
         api-endpoint = "https://attic.kilonull.com/";
         listen = "[::]:8080";
         garbage-collection.retention-period = "30d";
-        database.url = "postgresql://atticd/?host=/run/postgresql";
+        database.url = "postgresql://${attic_cfg.user}@atticd/?host=/run/postgresql";
       };
     };
 
@@ -53,12 +53,6 @@ in
           ensureDBOwnership = true;
         }
       ];
-      identMap = ''
-        attic attic attic
-      '';
-      authentication = ''
-        local all attic peer map=attic
-      '';
     };
 
     services.nginx = {
