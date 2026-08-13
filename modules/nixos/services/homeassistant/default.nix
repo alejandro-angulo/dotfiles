@@ -14,7 +14,11 @@ let
     ;
 
   cfg = config.${namespace}.services.homeassistant;
-  hass_cfg = config.services.home-assistant;
+
+  # home assistant no longer allows configuring the port in the yaml config
+  # (what nixos relied on) so there's no option for this. This is the default
+  # port.
+  hass_port = 8123;
 in
 {
   options.${namespace}.services.homeassistant = {
@@ -87,7 +91,7 @@ in
         locations."/" = {
           recommendedProxySettings = true;
           proxyWebsockets = true;
-          proxyPass = "http://127.0.0.1:${toString hass_cfg.config.http.server_port}";
+          proxyPass = "http://127.0.0.1:${toString hass_port}";
         };
       }
       // lib.optionalAttrs (cfg.acmeCertName != "") {
