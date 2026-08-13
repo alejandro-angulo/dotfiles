@@ -47,6 +47,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    if: github.ref_name == 'main'
     container:
       image: node:25
       volumes:
