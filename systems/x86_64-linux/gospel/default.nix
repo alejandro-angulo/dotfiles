@@ -50,6 +50,10 @@
       enable = true;
       acmeCertName = "kilonull.com";
     };
+    services.frigate = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+    };
 
     hardware.audio.enable = true;
     hardware.bluetooth.enable = true;
