@@ -69,6 +69,7 @@ in
 
       customComponents = with pkgs.home-assistant-custom-components; [
         adaptive_lighting
+        frigate
       ];
 
       config = {
