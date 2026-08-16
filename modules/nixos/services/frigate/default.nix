@@ -21,10 +21,10 @@ let
     {
       video_doorbell = [
         "ffmpeg:http://192.168.113.91/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=${username}&password=${password}#video=copy#audio=opus"
-        "rtsp://${username}:${password}@192.168.113.91/Preview_01_sub"
+        "rtsp://${username}:${password}@192.168.113.91/Preview_01_main"
       ];
       video_doorbell_sub = [
-        "ffmpeg:http://192.168.113.91/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=${username}&password=${password}"
+        "ffmpeg:http://192.168.113.91/flv?port=1935&app=bcs&stream=channel0_sub.bcs&user=${username}&password=${password}"
         "rtsp://${username}:${password}@192.168.113.91/Preview_01_sub"
       ];
     };
@@ -192,6 +192,29 @@ in
                 roles = [ "detect" ];
               }
             ];
+          };
+        };
+
+        detect = {
+          enabled = true;
+        };
+        objects.track = [
+          "bird"
+          "cat"
+          "dog"
+          "person"
+        ];
+
+        record = {
+          enabled = true;
+          motion.days = 3;
+          alerts.retain = {
+            days = 30;
+            mode = "motion";
+          };
+          detections.retain = {
+            days = 30;
+            mode = "motion";
           };
         };
       };
