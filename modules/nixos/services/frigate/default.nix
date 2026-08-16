@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   namespace,
   ...
 }:
@@ -123,6 +124,25 @@ in
 
         # TLS terminated at reverse proxy (nginx)
         tls.enabled = false;
+
+        # OpenVINO detector running on the CPU (Intel i5-10600k); the AMD
+        # GPU handles video decode instead (see vaapiDriver on the host).
+        detectors.ov = {
+          type = "openvino";
+          device = "CPU";
+        };
+        model = {
+          model_type = "yolox";
+          width = 416;
+          height = 416;
+          input_tensor = "nchw";
+          input_dtype = "float_denorm";
+          path = "${pkgs.aa.frigate-yolox-tiny}/yolox_tiny.onnx";
+          labelmap_path = "${pkgs.aa.frigate-yolox-tiny}/coco-80.txt";
+        };
+
+        # GPU-accelerated video decoding (radeonsi via vaapiDriver)
+        ffmpeg.hwaccel_args = "preset-vaapi";
 
         go2rtc = {
           webrtc.candidates = webrtcCandidates;

@@ -67,6 +67,10 @@
     ];
   };
 
+  # Offload video decoding to the AMD GPU (detection runs on the CPU
+  # via OpenVINO, see modules/nixos/services/frigate).
+  services.frigate.vaapiDriver = "radeonsi";
+
   services.udev.packages = [
     (pkgs.writeTextFile {
       name = "microbit-udev-rules";
