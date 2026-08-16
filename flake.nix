@@ -58,6 +58,7 @@
       packageDefinitions = pkgs: {
         catppuccin-swaync = pkgs.callPackage ./packages/catppuccin-swaync { };
         catppuccin-waybar = pkgs.callPackage ./packages/catppuccin-waybar { };
+        frigate-ssdlite-openvino = pkgs.callPackage ./packages/frigate-ssdlite-openvino { };
         frigate-yolox-tiny = pkgs.callPackage ./packages/frigate-yolox-tiny { };
         teslamate-grafana-dashboards = pkgs.callPackage ./packages/teslamate-grafana-dashboards { };
       };

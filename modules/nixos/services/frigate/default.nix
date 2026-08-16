@@ -87,6 +87,18 @@ in
     systemd.services.frigate.serviceConfig = {
       EnvironmentFile = config.age.secrets.frigate_env.path;
     };
+    # RemoteObjectDetector attaches to SHM segments named after cameras;
+    # a stale segment from a previous model size breaks startup with
+    # "buffer is too small for requested array". Clear them before start.
+    systemd.services.frigate.serviceConfig.ExecStartPre = [
+      (pkgs.writeShellScript "frigate-clear-camera-shm" ''
+        ${lib.concatStringsSep "\n" (
+          map (name: "rm -f /dev/shm/${name} /dev/shm/out-${name}") (
+            lib.attrNames config.services.frigate.settings.cameras
+          )
+        )}
+      '')
+    ];
     systemd.services.go2rtc.serviceConfig = {
       EnvironmentFile = config.age.secrets.frigate_env.path;
     };
@@ -131,14 +143,29 @@ in
           type = "openvino";
           device = "CPU";
         };
+        # model = {
+        #   model_type = "yolox";
+        #   width = 416;
+        #   height = 416;
+        #   input_tensor = "nchw";
+        #   input_dtype = "float_denorm";
+        #   path = "${pkgs.aa.frigate-yolox-tiny}/yolox_tiny.onnx";
+        #   labelmap_path = "${pkgs.aa.frigate-yolox-tiny}/coco-80.txt";
+        # };
+
+        # SSDLite MobileNet v2, frigate's default/recommended OpenVINO
+        # model. Used instead of the yolox model above because the yolox
+        # OpenVINO path is broken in frigate 0.17.2
+        # (https://github.com/blakeblackshear/frigate/discussions/23845,
+        # fixed in 0.18) -- revisit after upgrading.
         model = {
-          model_type = "yolox";
-          width = 416;
-          height = 416;
-          input_tensor = "nchw";
-          input_dtype = "float_denorm";
-          path = "${pkgs.aa.frigate-yolox-tiny}/yolox_tiny.onnx";
-          labelmap_path = "${pkgs.aa.frigate-yolox-tiny}/coco-80.txt";
+          model_type = "ssd";
+          width = 300;
+          height = 300;
+          input_tensor = "nhwc";
+          input_pixel_format = "bgr";
+          path = "${pkgs.aa.frigate-ssdlite-openvino}/ssdlite_mobilenet_v2.xml";
+          labelmap_path = "${pkgs.aa.frigate-ssdlite-openvino}/coco_91cl_bkgr.txt";
         };
 
         # GPU-accelerated video decoding (radeonsi via vaapiDriver)
