@@ -179,6 +179,13 @@ in
         cameras = {
           video_doorbell.ffmpeg = {
             output_args.record = "preset-record-generic-audio-copy";
+            motion.mask = "0.312,0,0.312,0.057,0.661,0.059,0.661,0";
+            zones.walkway = {
+              "friendly_name" = "Walkway";
+              "coordinates" = "0.427,0.58,0.25,0.782,0.169,0.756,0.002,0.874,0.066,1,0.465,0.998,0.509,0.584";
+              "inertia" = 3;
+              "loitering_time" = 0;
+            };
             inputs = [
               {
                 path = "rtsp://127.0.0.1:8554/video_doorbell";
