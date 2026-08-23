@@ -33,6 +33,7 @@
       "dialout"
       "video"
       "vboxusers"
+      "wireshark"
     ];
   };
 
@@ -59,10 +60,10 @@
       };
     };
 
-    virtualbox = {
-      host.enable = true;
-    };
+    virtualbox.host.enable = true;
   };
+
+  programs.wireshark.enable = true;
 
   networking = {
     hostName = "framework";
