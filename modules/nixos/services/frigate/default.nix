@@ -177,8 +177,7 @@ in
         };
 
         cameras = {
-          video_doorbell.ffmpeg = {
-            output_args.record = "preset-record-generic-audio-copy";
+          video_doorbell = {
             motion.mask = "0.312,0,0.312,0.057,0.661,0.059,0.661,0";
             zones.walkway = {
               "friendly_name" = "Walkway";
@@ -186,19 +185,22 @@ in
               "inertia" = 3;
               "loitering_time" = 0;
             };
-            inputs = [
-              {
-                path = "rtsp://127.0.0.1:8554/video_doorbell";
-                input_args = "preset-rtsp-restream";
-                roles = [ "record" ];
-              }
+            ffmpeg = {
+              output_args.record = "preset-record-generic-audio-copy";
+              inputs = [
+                {
+                  path = "rtsp://127.0.0.1:8554/video_doorbell";
+                  input_args = "preset-rtsp-restream";
+                  roles = [ "record" ];
+                }
 
-              {
-                path = "rtsp://127.0.0.1:8554/video_doorbell_sub";
-                input_args = "preset-rtsp-restream";
-                roles = [ "detect" ];
-              }
-            ];
+                {
+                  path = "rtsp://127.0.0.1:8554/video_doorbell_sub";
+                  input_args = "preset-rtsp-restream";
+                  roles = [ "detect" ];
+                }
+              ];
+            };
           };
         };
 
