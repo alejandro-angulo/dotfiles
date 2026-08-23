@@ -58,6 +58,10 @@
         setSocketVariable = true;
       };
     };
+
+    virtualbox = {
+      host.enable = true;
+    };
   };
 
   networking = {
