@@ -28,7 +28,7 @@ in
                 "readwrite home/#"
                 "readwrite homeassistant/#"
                 "readwrite zigbee2mqtt/#"
-                "readwrite frigate/*"
+                "readwrite frigate/#"
                 "read teslamate/#"
               ];
               passwordFile = config.age.secrets.hass_mqtt.path;
