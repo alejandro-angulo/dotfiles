@@ -59,6 +59,7 @@ in
 
     programs.git = {
       enable = true;
+      lfs.enable = true;
       settings = {
         alias = {
           # Prettier log
