@@ -109,6 +109,9 @@
     vlc
     signal-desktop
     # zoom-us
+
+    john
+    wireshark
   ];
   environment.pathsToLink = [
     "/share/applications"
