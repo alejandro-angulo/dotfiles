@@ -36,13 +36,13 @@ in
       '';
     };
 
-    allowedClients = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
+    interface = mkOption {
+      type = types.str;
+      default = "eno1";
       description = ''
-        IP addresses or CIDR ranges allowed to reach the machine learning
-        port. This service has no authentication whatsoever, so it must never
-        be exposed publicly.
+        Network interface on which the machine learning port is opened. This
+        service has no authentication whatsoever, so it must only ever be
+        reachable on a trusted network.
       '';
     };
   };
@@ -56,7 +56,8 @@ in
 
     systemd.services.immich-machine-learning = {
       description = "Immich machine learning service";
-      after = [ "network.target" ];
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
       wantedBy = [ "multi-user.target" ];
       environment = {
         IMMICH_HOST = cfg.host;
@@ -77,10 +78,8 @@ in
       };
     };
 
-    # The port is not opened in `allowedTCPPorts`; only the explicitly
-    # configured clients may reach it.
-    networking.firewall.extraInputRules = lib.mkIf (cfg.allowedClients != [ ]) ''
-      ip saddr { ${lib.concatStringsSep ", " cfg.allowedClients} } tcp dport ${toString cfg.port} accept
-    '';
+    # The port is only opened on the trusted LAN interface; it is never
+    # exposed on other interfaces.
+    networking.firewall.interfaces.${cfg.interface}.allowedTCPPorts = [ cfg.port ];
   };
 }
