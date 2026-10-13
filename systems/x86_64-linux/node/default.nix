@@ -36,6 +36,13 @@
       enable = true;
       acmeCertName = "kilonull.com";
     };
+    services.immich = {
+      enable = true;
+      acmeCertName = "kilonull.com";
+      # Machine learning is offloaded to gospel (see the immich-ml service
+      # enabled there).
+      machineLearningUrl = "http://192.168.113.69:3003";
+    };
     services.grafana = {
       enable = true;
       acmeCertName = "kilonull.com";

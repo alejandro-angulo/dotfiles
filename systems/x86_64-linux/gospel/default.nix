@@ -46,6 +46,11 @@
     };
     services.prometheus.enable = true;
     services.grafana-alloy.enable = true;
+    services.immich-ml = {
+      enable = true;
+      host = "192.168.113.69";
+      allowedClients = [ "192.168.113.13" ];
+    };
     services.sunshine = {
       enable = true;
       acmeCertName = "kilonull.com";
