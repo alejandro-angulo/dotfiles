@@ -50,6 +50,7 @@
       enable = true;
       host = "192.168.113.69";
       interface = "eno1";
+      workers = 4;
     };
     services.sunshine = {
       enable = true;
