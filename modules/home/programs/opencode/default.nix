@@ -24,11 +24,17 @@ in
   config = lib.mkIf cfg.enable {
     programs.opencode = {
       enable = true;
-      tui = {
-        theme = "catppuccin";
+      cli = {
+        theme = {
+          name = "catppuccin";
+          mode = "system";
+        };
         keybinds = {
-          app_exit = "ctrl+d,<leader>q";
-          session_interrupt = "ctrl+c";
+          "app.exit" = [
+            "ctrl+d"
+            "<leader>q"
+          ];
+          "session.interrupt" = "ctrl+c";
         };
       };
       settings = {
