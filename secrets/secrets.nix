@@ -1,6 +1,8 @@
 let
   # Remember to pass '--identity identities/me.txt` when using this key
   users.me = "age1yubikey1qdwgvfqrcqmyw56ux7azuvqr6f8nanszu27nztvxmn4utmplgxctzt90g25";
+  users.keychain = "age1yubikey1q00cqxry7f4hn22xr6evgwc3wuznqc9pggxa4rv6z5wakjejhwnnjs7xep4";
+  # Remember to pass '--identity identities/keychain.txt` when using this key
 
   tmp = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICJ7IsNxP/wa3X8isEp8Js7yVgk3gX2ud7EClvZClDpS";
 
@@ -27,6 +29,11 @@ in
   ];
   "gitea-runner-gospel.age".publicKeys = [
     users.me
+    machines.gospel
+  ];
+  "forgejo-runner-gospel.age".publicKeys = [
+    users.me
+    users.keychain
     machines.gospel
   ];
   "grafana.age".publicKeys = [

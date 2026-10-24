@@ -9,7 +9,7 @@
   ];
 
   age.secrets.cf_dns_kilonull.file = ../../../secrets/cf_dns_kilonull.age;
-  age.secrets.gitea-runner-gospel.file = ../../../secrets/gitea-runner-gospel.age;
+  age.secrets.forgejo-runner-gospel.file = ../../../secrets/forgejo-runner-gospel.age;
 
   aa = {
     nix.enable = true;
@@ -94,9 +94,7 @@
     instances = {
       gospel = {
         enable = true;
-        name = config.networking.hostName;
-        url = "https://git.alejandr0angul0.dev";
-        tokenFile = config.age.secrets.gitea-runner-gospel.path;
+        secrets.server.connections.default.token_url = config.age.secrets.forgejo-runner-gospel.path;
         hostPackages = with pkgs; [
           nix
           attic-client
@@ -109,16 +107,22 @@
           nodejs
           wget
         ];
-        labels = [
-          "nix-builder:host"
-
-          "ubuntu-latest:docker://node:16-bullseye"
-          "ubuntu-22.04:docker://node:16-bullseye"
-          "ubuntu-20.04:docker://node:16-bullseye"
-          "ubuntu-18.04:docker://node:16-buster"
-        ];
         settings = {
-          runner.capacity = 8;
+          server.connections.default = {
+            url = "https://git.alejandr0angul0.dev";
+            uuid = "b136b5cc-4270-46fc-9d15-90c14fb95d30";
+          };
+          runner = {
+            labels = [
+              "nix-builder:host"
+
+              "ubuntu-latest:docker://node:16-bullseye"
+              "ubuntu-22.04:docker://node:16-bullseye"
+              "ubuntu-20.04:docker://node:16-bullseye"
+              "ubuntu-18.04:docker://node:16-buster"
+            ];
+            capacity = 8;
+          };
           container = {
             options = ''
               -e PATH=:${pkgs.nix}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -131,13 +135,13 @@
       };
     };
   };
-  # Allow the Forgejo Actions runner user to talk to nix-daemon when
-  # running jobs directly on the host.
+  # Allow the runner to talk to nix-daemon when running jobs directly on the
+  # host.
   nix.settings.trusted-users = [
-    config.systemd.services."gitea-runner-gospel".serviceConfig.User
+    "forgejo-runner-gospel"
   ];
   nix.settings.allowed-users = [
-    config.systemd.services."gitea-runner-gospel".serviceConfig.User
+    "forgejo-runner-gospel"
   ];
 
   virtualisation = {
