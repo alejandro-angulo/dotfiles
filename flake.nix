@@ -67,12 +67,12 @@
 
       neovimOverlay = import ./overlays/neovim { inherit (inputs) nixvim; };
       signalDesktopOverlay = import ./overlays/signal-desktop { };
-      virtualboxModuleSigningOverlay = import ./overlays/virtualbox-module-signing { };
+      kernelModuleSigningOverlay = import ./overlays/kernel-module-signing { };
       defaultOverlay = lib.composeManyExtensions [
         packageOverlay
         neovimOverlay
         signalDesktopOverlay
-        virtualboxModuleSigningOverlay
+        kernelModuleSigningOverlay
       ];
 
       collectDefaultModules =
