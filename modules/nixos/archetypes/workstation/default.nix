@@ -20,6 +20,12 @@ in
         development.enable = true;
         utils.enable = true;
       };
+
+      system.greetd.enable = true;
     };
+
+    # Registers the Hyprland session for the display manager and provides
+    # the portal/scheduler wrapper. See modules/home/windowManagers/hyprland.
+    programs.hyprland.enable = true;
   };
 }

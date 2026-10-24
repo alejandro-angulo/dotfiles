@@ -120,6 +120,11 @@ in
       configType = "lua";
       systemd.variables = [ "--all" ];
 
+      # NixOS `programs.hyprland` installs Hyprland and the xdg portal; see
+      # modules/nixos/archetypes/workstation.
+      package = null;
+      portalPackage = null;
+
       settings =
         let
           inherit (lib.generators) mkLuaInline;
