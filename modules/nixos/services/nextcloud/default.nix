@@ -73,9 +73,13 @@ in
       };
       config = {
         dbtype = "pgsql";
-        adminuser = "alejandro";
-        adminpassFile = secrets.nextcloud_admin.path;
       };
+      # NOTE: `services.nextcloud.config.adminuser`/`adminpassFile` were removed
+      # from the NixOS module (they only affected initial installation). The
+      # admin credential is still deployed as `age.secrets.nextcloud_admin`.
+      # On a fresh install, create the admin user manually:
+      #   nextcloud-occ user:add alejandro --password-from-env
+      #   nextcloud-occ group:adduser admin alejandro
     };
 
     # nextcloud module configures nginx, just need to specify SSL stuffs here
