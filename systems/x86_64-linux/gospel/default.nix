@@ -90,8 +90,7 @@
     })
   ];
 
-  services.gitea-actions-runner = {
-    package = pkgs.forgejo-runner;
+  services.forgejo-runner = {
     instances = {
       gospel = {
         enable = true;
