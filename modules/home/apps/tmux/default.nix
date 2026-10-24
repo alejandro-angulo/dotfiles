@@ -54,21 +54,6 @@ in
       terminal = "screen-256color";
 
       plugins = [
-        {
-          plugin = tmuxPlugins.resurrect;
-          extraConfig = ''
-            set -g @resurrect-capture-pane-contents 'on'
-            set -g @resurrect-strategy-nvim 'session'
-          '';
-        }
-
-        {
-          plugin = tmuxPlugins.continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-          '';
-        }
-
         tmuxPlugins.open
         tmuxPlugins.pain-control
         tmuxPlugins.tmux-fzf
