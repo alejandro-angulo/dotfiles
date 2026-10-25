@@ -143,29 +143,18 @@ in
           type = "openvino";
           device = "CPU";
         };
-        # model = {
-        #   model_type = "yolox";
-        #   width = 416;
-        #   height = 416;
-        #   input_tensor = "nchw";
-        #   input_dtype = "float_denorm";
-        #   path = "${pkgs.aa.frigate-yolox-tiny}/yolox_tiny.onnx";
-        #   labelmap_path = "${pkgs.aa.frigate-yolox-tiny}/coco-80.txt";
-        # };
-
-        # SSDLite MobileNet v2, frigate's default/recommended OpenVINO
-        # model. Used instead of the yolox model above because the yolox
-        # OpenVINO path is broken in frigate 0.17.2
-        # (https://github.com/blakeblackshear/frigate/discussions/23845,
-        # fixed in 0.18) -- revisit after upgrading.
+        # YOLOv9-t ONNX at 320x320, the model recommended for OpenVINO in
+        # frigate's docs, exported by packages/frigate-yolov9 following
+        # https://docs.frigate.video/configuration/object_detectors/#configuration-openvino
         model = {
-          model_type = "ssd";
-          width = 300;
-          height = 300;
-          input_tensor = "nhwc";
-          input_pixel_format = "bgr";
-          path = "${pkgs.aa.frigate-ssdlite-openvino}/ssdlite_mobilenet_v2.xml";
-          labelmap_path = "${pkgs.aa.frigate-ssdlite-openvino}/coco_91cl_bkgr.txt";
+          model_type = "yolo-generic";
+          width = 320;
+          height = 320;
+          input_tensor = "nchw";
+          input_dtype = "float";
+          input_pixel_format = "rgb";
+          path = "${pkgs.aa.frigate-yolov9}/yolov9-t-320.onnx";
+          labelmap_path = "${pkgs.aa.frigate-yolov9}/coco-80.txt";
         };
 
         # GPU-accelerated video decoding (radeonsi via vaapiDriver)
