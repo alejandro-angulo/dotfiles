@@ -63,7 +63,6 @@
 
     hardware.audio.enable = true;
     hardware.bluetooth.enable = true;
-    hardware.logitech.enable = true;
 
     system.monitoring.enable = true;
 
