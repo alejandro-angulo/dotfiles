@@ -6,7 +6,6 @@
 }:
 let
   cfg = config.aa.services.nextcloud;
-  secrets = config.age.secrets;
 
   mkNextcloudSecret = attrs: {
     name = attrs.name;
@@ -32,17 +31,17 @@ in
 
   config = lib.mkIf cfg.enable {
     age.secrets = builtins.listToAttrs (
-      builtins.map (attrs: mkNextcloudSecret attrs) [
+      map (attrs: mkNextcloudSecret attrs) [
         {
-          name = "restic/password";
+          name = "restic/nextcloud-password";
           path = ../../../../secrets/nextcloud_restic_password.age;
         }
         {
-          name = "restic/env";
+          name = "restic/nextcloud-env";
           path = ../../../../secrets/nextcloud_restic_env.age;
         }
         {
-          name = "restic/repo";
+          name = "restic/nextcloud-repo";
           path = ../../../../secrets/nextcloud_restic_repo.age;
         }
         {
@@ -90,26 +89,12 @@ in
           useACMEHost = cfg.acmeCertName;
         };
 
-    services.restic.backups = {
-      nextcloud = {
-        user = "nextcloud";
-        initialize = true;
-        paths = [ config.services.nextcloud.datadir ];
-        environmentFile = secrets."restic/env".path;
-        repositoryFile = secrets."restic/repo".path;
-        passwordFile = secrets."restic/password".path;
-        timerConfig = {
-          OnCalendar = "00:05";
-          Persistent = true;
-          RandomizedDelaySec = "5h";
-        };
-        pruneOpts = [
-          "--keep-daily 7"
-          "--keep-weekly 5"
-          "--keep-monthly 12"
-          "--keep-yearly 9001"
-        ];
-      };
+    aa.services.restic.jobs.nextcloud = {
+      user = "nextcloud";
+      paths = [ config.services.nextcloud.datadir ];
+      repositoryAgeSecret = "restic/nextcloud-repo";
+      passwordAgeSecret = "restic/nextcloud-password";
+      environmentAgeSecret = "restic/nextcloud-env";
     };
 
     networking.firewall.allowedTCPPorts = [
