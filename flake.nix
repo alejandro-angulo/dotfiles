@@ -5,6 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
 
+    # Temporary pin for the nginx security releases of 2026-11-18
+    # (CVE-2026-123007 et al., fixed in nginx 1.30.7/1.31.9). The
+    # nixpkgs-unstable channel snapshot this flake is locked to predates the
+    # bump and still ships 1.30.6. Drop this input and the nginx overlay once
+    # the pinned nixpkgs includes nginx 1.30.7.
+    nixpkgs-nginx.url = "github:NixOS/nixpkgs/a815e4179e5e6c79d3aff99f7ee8375a9412b97e";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
@@ -68,11 +75,13 @@
       neovimOverlay = import ./overlays/neovim { inherit (inputs) nixvim; };
       signalDesktopOverlay = import ./overlays/signal-desktop { };
       kernelModuleSigningOverlay = import ./overlays/kernel-module-signing { };
+      nginxOverlay = import ./overlays/nginx { inherit (inputs) nixpkgs-nginx; };
       defaultOverlay = lib.composeManyExtensions [
         packageOverlay
         neovimOverlay
         signalDesktopOverlay
         kernelModuleSigningOverlay
+        nginxOverlay
       ];
 
       collectDefaultModules =

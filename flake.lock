@@ -451,6 +451,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-nginx": {
+      "locked": {
+        "lastModified": 1795051868,
+        "narHash": "sha256-1uaImzREn/ro+2/C1sqCe6qL3xD4qicJfV8TceLRaQ8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a815e4179e5e6c79d3aff99f7ee8375a9412b97e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a815e4179e5e6c79d3aff99f7ee8375a9412b97e",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1782847189,
@@ -643,6 +659,7 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
+        "nixpkgs-nginx": "nixpkgs-nginx",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixvim": "nixvim",
         "powerlevel10k": "powerlevel10k",
